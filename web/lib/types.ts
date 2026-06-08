@@ -1,7 +1,43 @@
 /* View-model types for the NxB Sourcing dashboard. */
 
-export type View = "overview" | "trending" | "deepdive" | "map" | "suppliers" | "shortlist";
+export type View =
+  | "overview"
+  | "insights"
+  | "trending"
+  | "deepdive"
+  | "map"
+  | "suppliers"
+  | "shortlist";
 export type Go = (view: View, id?: string | null) => void;
+
+export type InsightAction = "PROCURE" | "WATCH" | "HOLD";
+
+export interface InsightEvidence {
+  category?: string;
+  market?: string;
+  demand?: { platform: string; momentum: number; growth: number; acceleration: number }[];
+  rising_sources?: number;
+  total_sources?: number;
+  max_acceleration?: number;
+  top_origins?: { origin: string; share: number; growth: number; emerging: boolean }[];
+  recommended_origins?: string[];
+  marketplace?: { platform: string; momentum: number; growth: number; acceleration: number }[];
+  competitors?: { competitor: string; origin: string }[];
+}
+
+/** A procurement recommendation produced by the orchestrator. */
+export interface Insight {
+  id: number;
+  category: string | null;
+  market: string;
+  action: InsightAction;
+  score: number;
+  confidence: number;
+  headline: string;
+  narrative: string;
+  narrator: string;
+  evidence: InsightEvidence;
+}
 
 /** [countryCode, share (0..1), growth (fraction), emerging? (1)] */
 export type Source = [string, number, number] | [string, number, number, number];
@@ -68,6 +104,8 @@ export interface Model {
   emergingOriginCount: number;
   surgingCount: number;
   topSurge: string | null;
+  insights: Insight[];
+  procureCount: number;
 }
 
 /* ---- minimal shape of web/lib/snapshot.json (pipeline export) ---- */
@@ -121,4 +159,5 @@ export interface Snapshot {
   categories: SnapCategory[];
   triggers: SnapTrigger[];
   competitors?: SnapCompetitor[];
+  insights?: Insight[];
 }

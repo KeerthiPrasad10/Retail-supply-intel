@@ -346,6 +346,25 @@ body { background: var(--nxb-surface-page); color: var(--nxb-text-primary); font
 .callout.warn { border-left-color: var(--nxb-status-medium); }
 .callout.warn svg { color: var(--nxb-status-medium); }
 
+/* ---------------- Procurement insights ---------------- */
+.ins-list { display: flex; flex-direction: column; gap: 14px; }
+.ins-card { display: flex; flex-direction: column; gap: 12px; }
+.ins-head { display: flex; align-items: center; gap: 10px; }
+.ins-cat { font-size: 16px; font-weight: 500; letter-spacing: -0.2px; }
+.ins-market { font-family: var(--font-mono); font-size: 11px; color: var(--nxb-text-muted); }
+.ins-score { margin-left: auto; font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1; display: flex; align-items: baseline; gap: 6px; }
+.ins-score-l { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--nxb-text-muted); }
+.ins-narrative { font-size: 14px; line-height: 1.55; color: var(--nxb-text-secondary); margin: 0; max-width: 760px; }
+.ins-origins { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ins-lbl { font-family: var(--font-mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--nxb-text-muted); }
+.ins-foot { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 12px; border-top: 0.5px solid var(--nxb-border-low); font-size: 12px; color: var(--nxb-text-muted); }
+.ins-conf { display: inline-flex; align-items: center; gap: 8px; }
+.ins-bar { width: 80px; height: 5px; border-radius: 9999px; background: var(--nxb-surface-3); overflow: hidden; }
+.ins-bar-fill { display: block; height: 100%; border-radius: 9999px; background: var(--nxb-status-low); }
+.ins-conf-v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.ins-platforms { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; }
+.ins-narrator { margin-left: auto; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--nxb-text-disabled); }
+
 /* ---------------- World map / supply chain ---------------- */
 .worldmap { width: 100%; background: var(--nxb-surface-page); border-radius: var(--radius-input); overflow: hidden; border: 0.5px solid var(--nxb-border-low); }
 .wm-svg { width: 100%; height: 100%; display: block; }

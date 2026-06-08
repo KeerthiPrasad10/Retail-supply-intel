@@ -38,6 +38,11 @@ class Settings(BaseSettings):
     # per-country interest. Unset -> the connector no-ops.
     apify_token: str | None = None
 
+    # Anthropic API key for LLM-written procurement insight narratives. Unset ->
+    # the orchestrator falls back to a deterministic narrative.
+    anthropic_api_key: str | None = None
+    insights_model: str = "claude-sonnet-4-6"
+
     # Network politeness / resilience.
     http_timeout: float = 30.0
     user_agent: str = "retail-supply-intel/0.1 (+https://github.com/KeerthiPrasad10/Retail-supply-intel)"
