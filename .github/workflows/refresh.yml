@@ -20,9 +20,11 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     env:
-      # Optional secrets — unset => SQLite + Comtrade preview endpoint.
+      # Optional secrets — unset => SQLite + Comtrade preview endpoint + the
+      # deterministic insight narrative (no LLM).
       RSI_DATABASE_URL: ${{ secrets.RSI_DATABASE_URL }}
       RSI_COMTRADE_API_KEY: ${{ secrets.RSI_COMTRADE_API_KEY }}
+      RSI_ANTHROPIC_API_KEY: ${{ secrets.RSI_ANTHROPIC_API_KEY }}
     steps:
       - uses: actions/checkout@v4
 
@@ -31,15 +33,16 @@ jobs:
 
       - name: Sync dependencies
         working-directory: pipelines
-        run: uv sync --extra postgres
+        run: uv sync --extra postgres --extra llm
 
-      - name: Run pipeline (Wikipedia + Comtrade)
+      - name: Run pipeline (free sources -> insights)
         working-directory: pipelines
         run: |
           uv run rsi db init
           uv run rsi ingest wikipedia comtrade --days 60
           uv run rsi score
           uv run rsi correlate
+          uv run rsi insights
           uv run rsi export
 
       - name: Commit refreshed snapshot
