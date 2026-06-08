@@ -47,17 +47,30 @@ npm run dev             # http://localhost:3000
 The dashboard renders the committed snapshot, so it works with zero backend
 setup. Point it at Supabase later via `web/.env.example`.
 
-## Using Supabase / Postgres
+## Deploy — Supabase + Vercel
+
+See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for the full walkthrough. In short:
+
+**Supabase (Postgres store):**
 
 ```bash
 cd pipelines
 uv sync --extra postgres
-export RSI_DATABASE_URL='postgresql+psycopg://postgres:[PW]@db.[PROJECT].supabase.co:5432/postgres'
+export RSI_DATABASE_URL='postgresql+psycopg://postgres:[PW]@db.[PROJECT-REF].supabase.co:5432/postgres'
 uv run rsi run
 ```
 
 Apply `supabase/migrations/0001_initial_schema.sql` to provision the schema (or
 let `rsi db init` create it).
+
+**Vercel (dashboard hosting):** import the repo, set the **Root Directory** to
+`web`, and add the `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+environment variables. The build prerenders from the committed snapshot, so it
+works even before Supabase is connected.
+
+Environment templates live in `.env.example` (pipelines, `RSI_*`) and
+`web/.env.example` (dashboard, `NEXT_PUBLIC_SUPABASE_*`). Copy them to `.env`
+and `web/.env.local` respectively and fill in your credentials.
 
 ## Layout
 

@@ -19,6 +19,9 @@ data/
 node_modules/
 .next/
 
+# Vercel
+.vercel/
+
 # OS / editor
 .DS_Store
 *.swp
