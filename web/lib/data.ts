@@ -1,7 +1,16 @@
 import "server-only";
 
 import snapshotJson from "./snapshot.json";
-import type { Country, Snapshot, SourceEntry, Trigger } from "./types";
+import type {
+  Competitor,
+  Country,
+  Flow,
+  LeadingIndicator,
+  Snapshot,
+  SourceEntry,
+  Supplier,
+  Trigger,
+} from "./types";
 
 /**
  * Data access for the dashboard.
@@ -27,6 +36,24 @@ export async function getTrends() {
 
 export async function getCategorySources(categoryId: number): Promise<SourceEntry[]> {
   return snapshot.sources[String(categoryId)] ?? [];
+}
+
+export async function getFlows(): Promise<Flow[]> {
+  return snapshot.flows ?? [];
+}
+
+export async function getCompetitors(): Promise<Competitor[]> {
+  return snapshot.competitors ?? [];
+}
+
+export async function getSuppliers(): Promise<Supplier[]> {
+  return snapshot.suppliers ?? [];
+}
+
+export async function getLeadingIndicators(): Promise<LeadingIndicator[]> {
+  return [...(snapshot.leading_indicators ?? [])].sort(
+    (a, b) => b.acceleration - a.acceleration,
+  );
 }
 
 export function countryName(snap: Snapshot, code: string | null): string {

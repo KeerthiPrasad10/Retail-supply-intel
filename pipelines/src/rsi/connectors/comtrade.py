@@ -22,8 +22,10 @@ from .base import http_client
 _PREVIEW = "https://comtradeapi.un.org/public/v1/preview/C/A/HS"
 _FULL = "https://comtradeapi.un.org/data/v1/get/C/A/HS"
 
-# Default reporters (importing markets) — kept small to respect preview limits.
-DEFAULT_REPORTERS = ["DE", "GB", "FR", "NL", "PL"]
+# Default reporters (importing markets). Covers Lidl's core EU markets plus every
+# top-10 competitor's home market (DE/GB/FR/ES/NL + US), so "what each Asian
+# origin exports to competitor X" is read off X's home-market import records.
+DEFAULT_REPORTERS = ["DE", "GB", "FR", "ES", "NL", "PL", "IT", "US"]
 DEFAULT_PERIODS = ["2022", "2023"]
 
 _ISO3_TO_A2 = {iso3: a2 for a2, iso3, _, _ in reference.COUNTRIES}

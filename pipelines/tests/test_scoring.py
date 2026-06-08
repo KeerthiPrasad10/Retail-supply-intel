@@ -1,8 +1,26 @@
-from rsi.trends import series_momentum
+from rsi.trends import series_acceleration, series_momentum
 
 
 def test_empty_series_is_zero():
     assert series_momentum([]) == (0.0, 0.0, 0.0)
+
+
+def test_acceleration_positive_when_growth_speeds_up():
+    # growth 0.2 then 0.67 -> accelerating
+    assert series_acceleration([10.0] * 6 + [12.0] * 6 + [20.0] * 6, window=6) > 0
+
+
+def test_acceleration_negative_when_growth_slows():
+    # growth 1.0 then 0.2 -> decelerating
+    assert series_acceleration([10.0] * 6 + [20.0] * 6 + [24.0] * 6, window=6) < 0
+
+
+def test_acceleration_flat_series_is_zero():
+    assert abs(series_acceleration([50.0] * 18, window=6)) < 1e-9
+
+
+def test_acceleration_short_series_is_zero():
+    assert series_acceleration([1.0, 2.0, 3.0], window=6) == 0.0
 
 
 def test_rising_series_has_positive_momentum():

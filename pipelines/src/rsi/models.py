@@ -114,6 +114,9 @@ class TrendScore(Base):
     momentum: Mapped[float] = mapped_column(Float, nullable=False)
     growth_rate: Mapped[float] = mapped_column(Float, default=0.0)
     volume: Mapped[float] = mapped_column(Float, default=0.0)
+    # Growth-of-growth: positive = demand is accelerating (leading indicator of
+    # what is about to trend). Computed by the scoring step.
+    acceleration: Mapped[float] = mapped_column(Float, default=0.0)
     rank: Mapped[int | None] = mapped_column(Integer)
 
 
