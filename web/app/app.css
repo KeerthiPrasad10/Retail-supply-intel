@@ -28,8 +28,8 @@ body { background: var(--nxb-surface-page); color: var(--nxb-text-primary); font
 .sf-name { font-size: 13px; font-weight: 500; }
 .sf-sub { font-family: var(--font-mono); font-size: 10px; color: var(--nxb-text-muted); }
 
-.page { display: flex; flex-direction: column; min-width: 0; }
-.scroller { flex: 1; overflow-y: auto; }
+.page { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.scroller { flex: 1; overflow-y: auto; min-height: 0; }
 
 /* ---------------- Topbar ---------------- */
 .topbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 28px; border-bottom: 0.5px solid var(--nxb-border-low); position: sticky; top: 0; z-index: 30; backdrop-filter: blur(10px); background: color-mix(in srgb, var(--nxb-surface-page) 85%, transparent); }
