@@ -43,8 +43,9 @@ ranked, explainable **triggers**.
 | `pipelines/src/rsi/models.py` | SQLAlchemy ORM — **single source of truth** for the schema. |
 | `pipelines/src/rsi/connectors/` | One module per data source; all degrade gracefully. |
 | `supabase/migrations/`     | Postgres DDL, *generated* from the models. |
-| `web/`                     | Next.js + Tailwind dashboard. |
+| `web/`                     | Next.js dashboard (NxB Sourcing design system, plain CSS). |
 | `web/lib/snapshot.json`    | Read-optimised export the dashboard renders (MVP data path). |
+| `web/lib/model.ts`         | Adapts the snapshot into the dashboard view-model. |
 
 ## Data model
 
@@ -82,9 +83,10 @@ Four layers (see `models.py` / `supabase/migrations/0001_initial_schema.sql`):
 
 The SQLAlchemy models run unchanged on **SQLite** (zero-config local dev,
 `data/rsi.db`) and **Postgres/Supabase** (set `RSI_DATABASE_URL`). The dashboard
-reads the committed snapshot today; when Supabase is provisioned, `web/lib/data.ts`
-gains a live-query branch behind `NEXT_PUBLIC_SUPABASE_URL` without touching any
-component.
+reads the committed snapshot today: `web/app/page.tsx` (server) imports it,
+`web/lib/model.ts` adapts it into the view-model, and the client shell renders
+it. When Supabase is provisioned, swap the import in `page.tsx` for a live query
+behind `NEXT_PUBLIC_SUPABASE_URL` — no component changes.
 
 ## Data-source feasibility (important)
 

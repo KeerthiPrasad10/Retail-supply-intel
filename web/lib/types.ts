@@ -1,94 +1,77 @@
-export interface Country {
-  code: string;
+/* View-model types for the NxB Sourcing dashboard. */
+
+export type View = "overview" | "trending" | "deepdive" | "map" | "suppliers" | "shortlist";
+export type Go = (view: View, id?: string | null) => void;
+
+/** [countryCode, share (0..1), growth (fraction), emerging? (1)] */
+export type Source = [string, number, number] | [string, number, number, number];
+
+export type Tier = "SURGING" | "RISING" | "WATCH";
+
+export interface TrendCompetitor {
   name: string;
-  region: string | null;
-  lat: number | null;
-  lon: number | null;
-  is_origin: boolean;
+  note: string;
 }
 
-export interface Category {
-  id: number;
-  name: string;
-  hs_code: string | null;
-}
-
-export interface TrendRow {
-  term: string;
-  platform: string;
-  category_id: number | null;
-  category: string | null;
-  country_code: string | null;
-  country: string;
+export interface Trend {
+  id: string;
+  cat: string;
+  market: string;
+  marketCode: string | null;
   momentum: number;
   growth: number;
-  volume: number;
-  acceleration: number;
-  rank: number | null;
+  score: number; // 0..100 opportunity score
+  tier: Tier;
+  focus: string | null;
+  sources: Source[];
+  emerging: Source[];
+  competitors: TrendCompetitor[];
+  why: string;
 }
 
-export interface SourceEntry {
+export interface Supplier {
+  id: string;
+  name: string;
+  cc: string;
+  cats: string[];
+  match: number;
+  certs: string[];
+  moq: string;
+  lead: string;
+  capacity: string;
+  price: number;
+  est: number;
+  verified: boolean;
+  note: string;
+}
+
+export interface SupplierMatch extends Supplier {
+  onTrendOrigin: boolean;
+  isEmerging: boolean;
+}
+
+export interface Model {
+  generatedAt: string;
+  snapshotLabel: string;
+  trends: Trend[];
+  nameByCode: Record<string, string>;
+  geo: Record<string, [number, number]>; // [lat, lon]
+  regionByCode: Record<string, string>;
+  hsByCat: Record<string, string>;
+  emergingOriginCount: number;
+  surgingCount: number;
+  topSurge: string | null;
+}
+
+/* ---- minimal shape of web/lib/snapshot.json (pipeline export) ---- */
+export interface SnapSourceEntry {
   partner_code: string;
   value: number;
   share: number;
   growth: number;
   emerging: boolean;
 }
-
-/** One Asian-origin → buyer-market trade edge (latest period). */
-export interface Flow {
-  market_code: string;
-  market: string;
-  origin_code: string;
-  origin: string;
-  category_id: number | null;
-  category: string | null;
-  value: number;
-  period: string;
-  growth: number;
-  emerging: boolean;
-}
-
-export interface CompetitorSourcingLink {
-  category_id: number | null;
-  category: string | null;
-  partner_code: string | null;
-  partner: string | null;
-  source: string | null;
-}
-
-export interface Competitor {
-  id: number;
-  name: string;
-  home_country: string | null;
-  home_market: string | null;
-  sourcing: CompetitorSourcingLink[];
-}
-
-export interface Supplier {
-  id: number;
-  name: string;
-  country_code: string | null;
-  country: string | null;
-  category_id: number | null;
-  category: string | null;
-  source: string | null;
-}
-
-export interface LeadingIndicator {
-  term: string;
-  platform: string;
-  category_id: number | null;
-  category: string | null;
-  country_code: string | null;
-  country: string;
-  acceleration: number;
-  momentum: number;
-  growth: number;
-  volume: number;
-}
-
-export interface Trigger {
+export interface SnapTrigger {
   id: number;
   score: number;
   market_code: string | null;
@@ -98,26 +81,37 @@ export interface Trigger {
   focus_partner: string | null;
   focus_partner_name: string | null;
   rationale: string;
-  status: string;
-  created_at: string | null;
   payload: {
-    top_sources?: SourceEntry[];
-    emerging_suppliers?: SourceEntry[];
+    top_sources?: SnapSourceEntry[];
+    emerging_suppliers?: SnapSourceEntry[];
     competitors?: string[];
     demand_momentum?: number;
     demand_growth?: number;
   };
 }
-
+export interface SnapCountry {
+  code: string;
+  name: string;
+  region: string | null;
+  lat?: number;
+  lon?: number;
+}
+export interface SnapCategory {
+  id: number;
+  name: string;
+  hs_code: string | null;
+}
+export interface SnapCompetitor {
+  id: number;
+  name: string;
+  home_country: string | null;
+  home_market?: string | null;
+  sourcing?: { category_id: number | null; category: string | null; partner: string | null }[];
+}
 export interface Snapshot {
   generated_at: string;
-  countries: Country[];
-  categories: Category[];
-  trends: TrendRow[];
-  sources: Record<string, SourceEntry[]>;
-  triggers: Trigger[];
-  flows: Flow[];
-  competitors: Competitor[];
-  suppliers: Supplier[];
-  leading_indicators: LeadingIndicator[];
+  countries: SnapCountry[];
+  categories: SnapCategory[];
+  triggers: SnapTrigger[];
+  competitors?: SnapCompetitor[];
 }
