@@ -233,3 +233,18 @@ class Insight(Base):
     narrator: Mapped[str] = mapped_column(String(16), default="rule")  # rule|llm
     evidence: Mapped[dict] = mapped_column(JSON, default=dict)
     status: Mapped[str] = mapped_column(String(16), default="new")
+
+
+class Snapshot(Base):
+    """Published read-model the dashboard consumes (the `rsi export` output).
+
+    One row per export; the web reads the most recent. Keeping the aggregation
+    in Python (``build_snapshot``) and storing the result here avoids
+    re-implementing it in the frontend when reading from Supabase.
+    """
+
+    __tablename__ = "snapshots"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow)
+    data: Mapped[dict] = mapped_column(JSON, nullable=False)
