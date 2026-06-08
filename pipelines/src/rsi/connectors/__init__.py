@@ -1,5 +1,6 @@
 """Ingestion connectors for demand and supply signals."""
 
+from .aliexpress import AliExpressTrendsConnector
 from .amazon import AmazonBestsellersConnector
 from .base import Connector
 from .comtrade import ComtradeConnector
@@ -17,6 +18,7 @@ CONNECTORS: dict[str, type[Connector]] = {
     InstagramTrendsConnector.name: InstagramTrendsConnector,
     PinterestTrendsConnector.name: PinterestTrendsConnector,
     AmazonBestsellersConnector.name: AmazonBestsellersConnector,
+    AliExpressTrendsConnector.name: AliExpressTrendsConnector,
 }
 
 # Connectors run by a bare `rsi ingest` (free sources). Opt-in connectors (the
@@ -37,4 +39,5 @@ __all__ = [
     "InstagramTrendsConnector",
     "PinterestTrendsConnector",
     "AmazonBestsellersConnector",
+    "AliExpressTrendsConnector",
 ]
