@@ -98,3 +98,104 @@ ISO3_TO_M49: dict[str, str] = {
     "MEX": "484", "BRA": "076", "MAR": "504",
 }
 M49_TO_ISO3: dict[str, str] = {v: k for k, v in ISO3_TO_M49.items()}
+
+# Approximate country centroids (lat, lon) for the flow map.
+CENTROIDS: dict[str, tuple[float, float]] = {
+    "DE": (51.0, 9.0), "GB": (54.0, -2.0), "FR": (46.0, 2.0), "IT": (42.8, 12.8),
+    "ES": (40.0, -4.0), "NL": (52.2, 5.3), "PL": (52.0, 19.0), "AT": (47.5, 14.5),
+    "BE": (50.6, 4.6), "IE": (53.2, -8.0), "PT": (39.5, -8.0), "SE": (62.0, 15.0),
+    "DK": (56.0, 10.0), "FI": (64.0, 26.0), "CZ": (49.8, 15.5), "RO": (46.0, 25.0),
+    "HU": (47.2, 19.5), "GR": (39.0, 22.0), "US": (39.0, -98.0), "CN": (35.0, 105.0),
+    "VN": (16.0, 108.0), "IN": (22.0, 79.0), "TR": (39.0, 35.0), "BD": (24.0, 90.0),
+    "ID": (-2.0, 118.0), "TH": (15.0, 101.0), "KH": (12.5, 105.0), "PK": (30.0, 70.0),
+    "JP": (36.0, 138.0), "KR": (36.5, 128.0), "MX": (23.0, -102.0), "BR": (-10.0, -55.0),
+    "MA": (32.0, -6.0),
+}
+
+# Asian sourcing origins (the LKA supplier base) — used to scope export-side flows.
+ASIAN_ORIGINS: list[str] = [
+    "CN", "VN", "IN", "TR", "BD", "ID", "TH", "KH", "PK", "JP", "KR",
+]
+
+# Top-10 Lidl competitors (retailers). Kaufland is excluded — it is part of the
+# Schwarz Group / LKA ("us"), not a competitor. (name, home_country)
+COMPETITORS: list[tuple[str, str | None]] = [
+    ("Aldi", "DE"),
+    ("Tesco", "GB"),
+    ("Carrefour", "FR"),
+    ("Rewe", "DE"),
+    ("Edeka", "DE"),
+    ("Auchan", "FR"),
+    ("Mercadona", "ES"),
+    ("Ahold Delhaize", "NL"),
+    ("Sainsbury's", "GB"),
+    ("Walmart", "US"),
+]
+
+# Best-effort Asian suppliers per category — RESEARCHED, NOT customs-verified.
+# (supplier_name, country_code, category_name)
+SUPPLIERS: list[tuple[str, str, str]] = [
+    ("Cosmax", "KR", "Beauty & Cosmetics"),
+    ("Kolmar Korea", "KR", "Beauty & Cosmetics"),
+    ("Yixin Cosmetics", "CN", "Beauty & Cosmetics"),
+    ("Aiya", "JP", "Tea & Matcha"),
+    ("Marukyu Koyamaen", "JP", "Tea & Matcha"),
+    ("Zhejiang Tea Group", "CN", "Tea & Matcha"),
+    ("Trung Nguyen", "VN", "Coffee"),
+    ("Vinacafe", "VN", "Coffee"),
+    ("Santos Jaya Abadi", "ID", "Coffee"),
+    ("Pou Chen", "VN", "Footwear"),
+    ("Feng Tay", "VN", "Footwear"),
+    ("Lai Yih", "VN", "Footwear"),
+    ("Crystal International", "CN", "Knitwear & Apparel"),
+    ("Shenzhou International", "CN", "Knitwear & Apparel"),
+    ("Beximco", "BD", "Knitwear & Apparel"),
+    ("DBL Group", "BD", "Knitwear & Apparel"),
+    ("Pop Mart", "CN", "Toys & Collectibles"),
+    ("Goldlok Toys", "CN", "Toys & Collectibles"),
+    ("Winning Crown", "CN", "Toys & Collectibles"),
+    ("Midea", "CN", "Small Kitchen Appliances"),
+    ("Joyoung", "CN", "Small Kitchen Appliances"),
+    ("Guangdong Xinbao", "CN", "Small Kitchen Appliances"),
+    ("Haers", "CN", "Drinkware & Tumblers"),
+    ("Sup Drinkware", "CN", "Drinkware & Tumblers"),
+    ("Quanzhou Yongchun", "CN", "Candles & Home Fragrance"),
+    ("Hosley", "IN", "Candles & Home Fragrance"),
+    ("Goertek", "CN", "Audio & Earbuds"),
+    ("Luxshare", "CN", "Audio & Earbuds"),
+    ("AAC Technologies", "CN", "Audio & Earbuds"),
+    ("Charoen Pokphand Foods", "TH", "Pet Care"),
+    ("Gambol Pet", "CN", "Pet Care"),
+]
+
+# Best-effort competitor sourcing links — RESEARCHED, NOT customs-verified.
+# (competitor_name, category_name, origin_country_code)
+COMPETITOR_SOURCING: list[tuple[str, str, str]] = [
+    ("Aldi", "Footwear", "VN"),
+    ("Aldi", "Knitwear & Apparel", "BD"),
+    ("Aldi", "Small Kitchen Appliances", "CN"),
+    ("Aldi", "Audio & Earbuds", "CN"),
+    ("Tesco", "Knitwear & Apparel", "BD"),
+    ("Tesco", "Footwear", "CN"),
+    ("Tesco", "Toys & Collectibles", "CN"),
+    ("Tesco", "Drinkware & Tumblers", "CN"),
+    ("Carrefour", "Knitwear & Apparel", "TR"),
+    ("Carrefour", "Footwear", "VN"),
+    ("Carrefour", "Candles & Home Fragrance", "IN"),
+    ("Rewe", "Coffee", "VN"),
+    ("Rewe", "Tea & Matcha", "CN"),
+    ("Rewe", "Pet Care", "TH"),
+    ("Edeka", "Small Kitchen Appliances", "CN"),
+    ("Edeka", "Beauty & Cosmetics", "KR"),
+    ("Auchan", "Footwear", "ID"),
+    ("Auchan", "Knitwear & Apparel", "BD"),
+    ("Mercadona", "Footwear", "VN"),
+    ("Mercadona", "Knitwear & Apparel", "TR"),
+    ("Ahold Delhaize", "Toys & Collectibles", "CN"),
+    ("Ahold Delhaize", "Audio & Earbuds", "CN"),
+    ("Sainsbury's", "Knitwear & Apparel", "BD"),
+    ("Sainsbury's", "Tea & Matcha", "IN"),
+    ("Walmart", "Small Kitchen Appliances", "CN"),
+    ("Walmart", "Toys & Collectibles", "CN"),
+    ("Walmart", "Footwear", "VN"),
+]

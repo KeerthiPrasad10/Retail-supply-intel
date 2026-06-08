@@ -93,20 +93,15 @@ def correlate(
 
 @app.command("seed-competitors")
 def seed_competitors() -> None:
-    """Seed competitor reference rows (sourcing links are a Phase-2 data hook)."""
-    from sqlalchemy import select
+    """(Re)seed competitor + supplier + sourcing reference data (idempotent)."""
+    from sqlalchemy import func, select
 
     from .models import Competitor
 
-    names = ["Aldi", "Tesco", "Carrefour", "Rewe", "Edeka", "Sainsbury's", "Mercadona"]
     with session_scope() as session:
-        existing = {c for c in session.scalars(select(Competitor.name))}
-        added = 0
-        for n in names:
-            if n not in existing:
-                session.add(Competitor(name=n))
-                added += 1
-    typer.secho(f"added {added} competitors", fg=typer.colors.GREEN)
+        seed_reference(session)
+        n = session.scalar(select(func.count()).select_from(Competitor))
+    typer.secho(f"{n} competitors seeded", fg=typer.colors.GREEN)
 
 
 @app.command()

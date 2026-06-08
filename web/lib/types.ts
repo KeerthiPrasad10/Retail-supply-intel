@@ -2,6 +2,9 @@ export interface Country {
   code: string;
   name: string;
   region: string | null;
+  lat: number | null;
+  lon: number | null;
+  is_origin: boolean;
 }
 
 export interface Category {
@@ -20,6 +23,7 @@ export interface TrendRow {
   momentum: number;
   growth: number;
   volume: number;
+  acceleration: number;
   rank: number | null;
 }
 
@@ -29,6 +33,59 @@ export interface SourceEntry {
   share: number;
   growth: number;
   emerging: boolean;
+}
+
+/** One Asian-origin → buyer-market trade edge (latest period). */
+export interface Flow {
+  market_code: string;
+  market: string;
+  origin_code: string;
+  origin: string;
+  category_id: number | null;
+  category: string | null;
+  value: number;
+  period: string;
+  growth: number;
+  emerging: boolean;
+}
+
+export interface CompetitorSourcingLink {
+  category_id: number | null;
+  category: string | null;
+  partner_code: string | null;
+  partner: string | null;
+  source: string | null;
+}
+
+export interface Competitor {
+  id: number;
+  name: string;
+  home_country: string | null;
+  home_market: string | null;
+  sourcing: CompetitorSourcingLink[];
+}
+
+export interface Supplier {
+  id: number;
+  name: string;
+  country_code: string | null;
+  country: string | null;
+  category_id: number | null;
+  category: string | null;
+  source: string | null;
+}
+
+export interface LeadingIndicator {
+  term: string;
+  platform: string;
+  category_id: number | null;
+  category: string | null;
+  country_code: string | null;
+  country: string;
+  acceleration: number;
+  momentum: number;
+  growth: number;
+  volume: number;
 }
 
 export interface Trigger {
@@ -59,4 +116,8 @@ export interface Snapshot {
   trends: TrendRow[];
   sources: Record<string, SourceEntry[]>;
   triggers: Trigger[];
+  flows: Flow[];
+  competitors: Competitor[];
+  suppliers: Supplier[];
+  leading_indicators: LeadingIndicator[];
 }

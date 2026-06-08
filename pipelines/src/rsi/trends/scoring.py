@@ -44,6 +44,29 @@ def series_momentum(values: list[float], window: int = 14) -> tuple[float, float
     return momentum, growth, recent_mean
 
 
+def series_acceleration(values: list[float], window: int = 14) -> float:
+    """Leading indicator: change in growth between the two most recent windows.
+
+    Splits the tail of the series into three equal windows (w1 oldest → w3
+    newest) and returns ``growth(w3 vs w2) - growth(w2 vs w1)``. Positive means
+    demand growth is *accelerating* — an early signal of an emerging trend,
+    often before raw momentum is high.
+    """
+    if len(values) < 6:
+        return 0.0
+    w = max(1, min(window, len(values) // 3))
+    w3 = values[-w:]
+    w2 = values[-2 * w : -w]
+    w1 = values[-3 * w : -2 * w]
+    if not (w1 and w2 and w3):
+        return 0.0
+
+    m1, m2, m3 = (sum(x) / len(x) for x in (w1, w2, w3))
+    growth_recent = (m3 - m2) / (abs(m2) + _EPS)
+    growth_prior = (m2 - m1) / (abs(m1) + _EPS)
+    return growth_recent - growth_prior
+
+
 def compute_scores(session: Session, window: int = 14, as_of: datetime | None = None) -> int:
     """Recompute :class:`TrendScore` rows from observations. Returns rows written."""
     as_of = as_of or datetime.now(tz=UTC)
@@ -68,6 +91,7 @@ def compute_scores(session: Session, window: int = 14, as_of: datetime | None = 
         points.sort(key=lambda p: p[0])
         values = [v for _, v in points]
         momentum, growth, volume = series_momentum(values, window=window)
+        acceleration = series_acceleration(values, window=window)
         computed.append(
             TrendScore(
                 trend_id=trend_id,
@@ -76,6 +100,7 @@ def compute_scores(session: Session, window: int = 14, as_of: datetime | None = 
                 momentum=momentum,
                 growth_rate=growth,
                 volume=volume,
+                acceleration=acceleration,
             )
         )
 
