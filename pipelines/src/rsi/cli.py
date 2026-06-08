@@ -118,15 +118,20 @@ def insights(no_llm: bool = typer.Option(False, help="Skip the Claude narrative 
 @app.command()
 def export(
     out: Path = typer.Option(DEFAULT_SNAPSHOT_PATH, help="Snapshot output path"),
+    publish: bool = typer.Option(True, help="Also store the snapshot row in the database"),
 ) -> None:
-    """Write the JSON snapshot consumed by the web dashboard."""
+    """Write the JSON snapshot for the dashboard (file + a `snapshots` DB row)."""
+    from .models import Snapshot
+
     with session_scope() as session:
         snap = build_snapshot(session)
+        if publish:
+            session.add(Snapshot(data=snap))  # read-model row the web can query
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(snap, indent=2, default=str))
     typer.secho(
-        f"wrote snapshot ({len(snap['trends'])} trends, {len(snap['triggers'])} triggers) "
-        f"-> {out}",
+        f"wrote snapshot ({len(snap['trends'])} trends, {len(snap['triggers'])} triggers, "
+        f"{len(snap.get('insights', []))} insights) -> {out}",
         fg=typer.colors.GREEN,
     )
 
