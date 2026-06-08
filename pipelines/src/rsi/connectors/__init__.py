@@ -28,10 +28,26 @@ DEFAULT_CONNECTORS: list[str] = [
     name for name, cls in CONNECTORS.items() if getattr(cls, "default", True)
 ]
 
+# Presentation metadata for the dashboard's "signal sources" panel. ``kind`` is
+# which side of the demand×supply model the feed informs; ``label`` is the
+# human name. Order here is the order the panel lists them (core feeds first,
+# then the opt-in social/marketplace ones).
+SOURCE_META: dict[str, dict[str, str]] = {
+    "wikipedia": {"label": "Wikipedia", "kind": "demand"},
+    "google_trends": {"label": "Google Trends", "kind": "demand"},
+    "comtrade": {"label": "UN Comtrade", "kind": "supply"},
+    "tiktok": {"label": "TikTok", "kind": "demand"},
+    "instagram": {"label": "Instagram", "kind": "demand"},
+    "pinterest": {"label": "Pinterest", "kind": "demand"},
+    "amazon": {"label": "Amazon", "kind": "demand"},
+    "aliexpress": {"label": "AliExpress", "kind": "demand"},
+}
+
 __all__ = [
     "Connector",
     "CONNECTORS",
     "DEFAULT_CONNECTORS",
+    "SOURCE_META",
     "WikipediaConnector",
     "GoogleTrendsConnector",
     "ComtradeConnector",

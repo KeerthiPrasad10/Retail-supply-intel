@@ -44,6 +44,22 @@ export type Source = [string, number, number] | [string, number, number, number]
 
 export type Tier = "SURGING" | "RISING" | "WATCH";
 
+export type SourceKind = "demand" | "supply";
+/** ok = produced rows · empty = ran, no new data · error = run failed ·
+ *  idle = no recorded run (e.g. an opt-in feed that hasn't been ingested). */
+export type SourceState = "ok" | "empty" | "error" | "idle";
+
+/** A signal feed (ingestion connector) and its last-run telemetry. */
+export interface SignalSource {
+  name: string;
+  label: string;
+  kind: SourceKind;
+  isDefault: boolean;
+  lastRunAt: string | null;
+  status: SourceState;
+  rows: number;
+}
+
 export interface TrendCompetitor {
   name: string;
   note: string;
@@ -106,6 +122,7 @@ export interface Model {
   topSurge: string | null;
   insights: Insight[];
   procureCount: number;
+  signalSources: SignalSource[];
 }
 
 /* ---- minimal shape of web/lib/snapshot.json (pipeline export) ---- */
@@ -153,6 +170,15 @@ export interface SnapCompetitor {
   home_market?: string | null;
   sourcing?: { category_id: number | null; category: string | null; partner: string | null }[];
 }
+export interface SnapSignalSource {
+  name: string;
+  label: string;
+  kind: SourceKind;
+  default: boolean;
+  last_run_at: string | null;
+  status: SourceState;
+  rows: number;
+}
 export interface Snapshot {
   generated_at: string;
   countries: SnapCountry[];
@@ -160,4 +186,5 @@ export interface Snapshot {
   triggers: SnapTrigger[];
   competitors?: SnapCompetitor[];
   insights?: Insight[];
+  signal_sources?: SnapSignalSource[];
 }

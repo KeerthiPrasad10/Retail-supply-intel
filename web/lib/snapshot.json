@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-08T12:15:02.880013+00:00",
+  "generated_at": "2026-06-08T20:05:37.175407+00:00",
   "countries": [
     {
       "code": "AT",
@@ -1363,6 +1363,80 @@
       "volume": 238871.0,
       "acceleration": -0.2336,
       "rank": 22
+    }
+  ],
+  "signal_sources": [
+    {
+      "name": "wikipedia",
+      "label": "Wikipedia",
+      "kind": "demand",
+      "default": true,
+      "last_run_at": "2026-06-08T11:59:42.023612",
+      "status": "ok",
+      "rows": 37
+    },
+    {
+      "name": "google_trends",
+      "label": "Google Trends",
+      "kind": "demand",
+      "default": true,
+      "last_run_at": "2026-06-08T12:02:32.591972",
+      "status": "ok",
+      "rows": 32
+    },
+    {
+      "name": "comtrade",
+      "label": "UN Comtrade",
+      "kind": "supply",
+      "default": true,
+      "last_run_at": "2026-06-08T12:13:04.371609",
+      "status": "ok",
+      "rows": 3510
+    },
+    {
+      "name": "tiktok",
+      "label": "TikTok",
+      "kind": "demand",
+      "default": false,
+      "last_run_at": "2026-06-08T12:13:04.371609",
+      "status": "ok",
+      "rows": 11
+    },
+    {
+      "name": "instagram",
+      "label": "Instagram",
+      "kind": "demand",
+      "default": false,
+      "last_run_at": null,
+      "status": "idle",
+      "rows": 0
+    },
+    {
+      "name": "pinterest",
+      "label": "Pinterest",
+      "kind": "demand",
+      "default": false,
+      "last_run_at": null,
+      "status": "idle",
+      "rows": 0
+    },
+    {
+      "name": "amazon",
+      "label": "Amazon",
+      "kind": "demand",
+      "default": false,
+      "last_run_at": null,
+      "status": "idle",
+      "rows": 0
+    },
+    {
+      "name": "aliexpress",
+      "label": "AliExpress",
+      "kind": "demand",
+      "default": false,
+      "last_run_at": null,
+      "status": "idle",
+      "rows": 0
     }
   ],
   "sources": {
