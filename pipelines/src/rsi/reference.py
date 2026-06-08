@@ -166,6 +166,21 @@ SUPPLIERS: list[tuple[str, str, str]] = [
     ("AAC Technologies", "CN", "Audio & Earbuds"),
     ("Charoen Pokphand Foods", "TH", "Pet Care"),
     ("Gambol Pet", "CN", "Pet Care"),
+    # Expanded via web research (Exa) — still best-effort / unverified.
+    ("TBS Group", "VN", "Footwear"),
+    ("Gia Dinh Group", "VN", "Footwear"),
+    ("Mescot", "CN", "Footwear"),
+    ("Interstoff Apparels", "BD", "Knitwear & Apparel"),
+    ("NR Group", "BD", "Knitwear & Apparel"),
+    ("A-One Toys", "CN", "Toys & Collectibles"),
+    ("D King Group", "CN", "Toys & Collectibles"),
+    ("KingStar", "CN", "Drinkware & Tumblers"),
+    ("Ansheng Technology", "CN", "Drinkware & Tumblers"),
+    ("Saehan Cosmetics", "KR", "Beauty & Cosmetics"),
+    ("MIC Exports", "IN", "Candles & Home Fragrance"),
+    ("Qingdao Aroma Home", "CN", "Candles & Home Fragrance"),
+    ("i-Tail (Thai Union)", "TH", "Pet Care"),
+    ("Asian Alliance International", "TH", "Pet Care"),
 ]
 
 # Best-effort competitor sourcing links — RESEARCHED, NOT customs-verified.

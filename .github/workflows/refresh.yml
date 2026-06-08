@@ -1,0 +1,55 @@
+name: Refresh data snapshot
+
+# Re-ingests free demand + trade-flow sources, recomputes scores/triggers, and
+# commits the updated dashboard snapshot (which triggers a Vercel redeploy).
+# If the RSI_DATABASE_URL secret is set, the same run also writes to Supabase.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Mondays 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      # Optional secrets — unset => SQLite + Comtrade preview endpoint.
+      RSI_DATABASE_URL: ${{ secrets.RSI_DATABASE_URL }}
+      RSI_COMTRADE_API_KEY: ${{ secrets.RSI_COMTRADE_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Sync dependencies
+        working-directory: pipelines
+        run: uv sync --extra postgres
+
+      - name: Run pipeline (Wikipedia + Comtrade)
+        working-directory: pipelines
+        run: |
+          uv run rsi db init
+          uv run rsi ingest wikipedia comtrade --days 60
+          uv run rsi score
+          uv run rsi correlate
+          uv run rsi export
+
+      - name: Commit refreshed snapshot
+        run: |
+          if git diff --quiet -- web/lib/snapshot.json; then
+            echo "Snapshot unchanged — nothing to commit."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add web/lib/snapshot.json
+            git commit -m "chore(data): scheduled snapshot refresh"
+            git push
+          fi

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-08T07:45:54.892249+00:00",
+  "generated_at": "2026-06-08T08:16:02.413688+00:00",
   "countries": [
     {
       "code": "AT",
@@ -9817,6 +9817,15 @@
   ],
   "suppliers": [
     {
+      "id": 37,
+      "name": "A-One Toys",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 6,
+      "category": "Toys & Collectibles",
+      "source": "research"
+    },
+    {
       "id": 29,
       "name": "AAC Technologies",
       "country_code": "CN",
@@ -9832,6 +9841,24 @@
       "country": "Japan",
       "category_id": 2,
       "category": "Tea & Matcha",
+      "source": "research"
+    },
+    {
+      "id": 40,
+      "name": "Ansheng Technology",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 8,
+      "category": "Drinkware & Tumblers",
+      "source": "research"
+    },
+    {
+      "id": 45,
+      "name": "Asian Alliance International",
+      "country_code": "TH",
+      "country": "Thailand",
+      "category_id": 11,
+      "category": "Pet Care",
       "source": "research"
     },
     {
@@ -9871,6 +9898,15 @@
       "source": "research"
     },
     {
+      "id": 38,
+      "name": "D King Group",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 6,
+      "category": "Toys & Collectibles",
+      "source": "research"
+    },
+    {
       "id": 16,
       "name": "DBL Group",
       "country_code": "BD",
@@ -9895,6 +9931,15 @@
       "country": "China",
       "category_id": 11,
       "category": "Pet Care",
+      "source": "research"
+    },
+    {
+      "id": 33,
+      "name": "Gia Dinh Group",
+      "country_code": "VN",
+      "country": "Vietnam",
+      "category_id": 4,
+      "category": "Footwear",
       "source": "research"
     },
     {
@@ -9943,12 +9988,30 @@
       "source": "research"
     },
     {
+      "id": 35,
+      "name": "Interstoff Apparels",
+      "country_code": "BD",
+      "country": "Bangladesh",
+      "category_id": 5,
+      "category": "Knitwear & Apparel",
+      "source": "research"
+    },
+    {
       "id": 21,
       "name": "Joyoung",
       "country_code": "CN",
       "country": "China",
       "category_id": 7,
       "category": "Small Kitchen Appliances",
+      "source": "research"
+    },
+    {
+      "id": 39,
+      "name": "KingStar",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 8,
+      "category": "Drinkware & Tumblers",
       "source": "research"
     },
     {
@@ -9979,6 +10042,15 @@
       "source": "research"
     },
     {
+      "id": 42,
+      "name": "MIC Exports",
+      "country_code": "IN",
+      "country": "India",
+      "category_id": 9,
+      "category": "Candles & Home Fragrance",
+      "source": "research"
+    },
+    {
       "id": 5,
       "name": "Marukyu Koyamaen",
       "country_code": "JP",
@@ -9988,12 +10060,30 @@
       "source": "research"
     },
     {
+      "id": 34,
+      "name": "Mescot",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 4,
+      "category": "Footwear",
+      "source": "research"
+    },
+    {
       "id": 20,
       "name": "Midea",
       "country_code": "CN",
       "country": "China",
       "category_id": 7,
       "category": "Small Kitchen Appliances",
+      "source": "research"
+    },
+    {
+      "id": 36,
+      "name": "NR Group",
+      "country_code": "BD",
+      "country": "Bangladesh",
+      "category_id": 5,
+      "category": "Knitwear & Apparel",
       "source": "research"
     },
     {
@@ -10015,12 +10105,30 @@
       "source": "research"
     },
     {
+      "id": 43,
+      "name": "Qingdao Aroma Home",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 9,
+      "category": "Candles & Home Fragrance",
+      "source": "research"
+    },
+    {
       "id": 25,
       "name": "Quanzhou Yongchun",
       "country_code": "CN",
       "country": "China",
       "category_id": 9,
       "category": "Candles & Home Fragrance",
+      "source": "research"
+    },
+    {
+      "id": 41,
+      "name": "Saehan Cosmetics",
+      "country_code": "KR",
+      "country": "South Korea",
+      "category_id": 1,
+      "category": "Beauty & Cosmetics",
       "source": "research"
     },
     {
@@ -10048,6 +10156,15 @@
       "country": "China",
       "category_id": 8,
       "category": "Drinkware & Tumblers",
+      "source": "research"
+    },
+    {
+      "id": 32,
+      "name": "TBS Group",
+      "country_code": "VN",
+      "country": "Vietnam",
+      "category_id": 4,
+      "category": "Footwear",
       "source": "research"
     },
     {
@@ -10093,6 +10210,15 @@
       "country": "China",
       "category_id": 2,
       "category": "Tea & Matcha",
+      "source": "research"
+    },
+    {
+      "id": 44,
+      "name": "i-Tail (Thai Union)",
+      "country_code": "TH",
+      "country": "Thailand",
+      "category_id": 11,
+      "category": "Pet Care",
       "source": "research"
     }
   ],
