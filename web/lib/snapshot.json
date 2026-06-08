@@ -1,0 +1,4282 @@
+{
+  "generated_at": "2026-06-08T04:31:57.491058+00:00",
+  "countries": [
+    {
+      "code": "AT",
+      "name": "Austria",
+      "region": "Europe"
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh",
+      "region": "Asia"
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "region": "Europe"
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
+      "region": "Americas"
+    },
+    {
+      "code": "KH",
+      "name": "Cambodia",
+      "region": "Asia"
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "region": "Asia"
+    },
+    {
+      "code": "CZ",
+      "name": "Czechia",
+      "region": "Europe"
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "region": "Europe"
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "region": "Europe"
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "region": "Europe"
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "region": "Europe"
+    },
+    {
+      "code": "GR",
+      "name": "Greece",
+      "region": "Europe"
+    },
+    {
+      "code": "HU",
+      "name": "Hungary",
+      "region": "Europe"
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "region": "Asia"
+    },
+    {
+      "code": "ID",
+      "name": "Indonesia",
+      "region": "Asia"
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "region": "Europe"
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "region": "Europe"
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "region": "Asia"
+    },
+    {
+      "code": "MX",
+      "name": "Mexico",
+      "region": "Americas"
+    },
+    {
+      "code": "MA",
+      "name": "Morocco",
+      "region": "Africa"
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "region": "Europe"
+    },
+    {
+      "code": "PK",
+      "name": "Pakistan",
+      "region": "Asia"
+    },
+    {
+      "code": "PL",
+      "name": "Poland",
+      "region": "Europe"
+    },
+    {
+      "code": "PT",
+      "name": "Portugal",
+      "region": "Europe"
+    },
+    {
+      "code": "RO",
+      "name": "Romania",
+      "region": "Europe"
+    },
+    {
+      "code": "KR",
+      "name": "South Korea",
+      "region": "Asia"
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "region": "Europe"
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "region": "Europe"
+    },
+    {
+      "code": "TH",
+      "name": "Thailand",
+      "region": "Asia"
+    },
+    {
+      "code": "TR",
+      "name": "Turkey",
+      "region": "Asia"
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "region": "Europe"
+    },
+    {
+      "code": "US",
+      "name": "United States",
+      "region": "Americas"
+    },
+    {
+      "code": "VN",
+      "name": "Vietnam",
+      "region": "Asia"
+    }
+  ],
+  "categories": [
+    {
+      "id": 10,
+      "name": "Audio & Earbuds",
+      "hs_code": "8518"
+    },
+    {
+      "id": 1,
+      "name": "Beauty & Cosmetics",
+      "hs_code": "3304"
+    },
+    {
+      "id": 9,
+      "name": "Candles & Home Fragrance",
+      "hs_code": "3406"
+    },
+    {
+      "id": 3,
+      "name": "Coffee",
+      "hs_code": "0901"
+    },
+    {
+      "id": 8,
+      "name": "Drinkware & Tumblers",
+      "hs_code": "9617"
+    },
+    {
+      "id": 4,
+      "name": "Footwear",
+      "hs_code": "6404"
+    },
+    {
+      "id": 5,
+      "name": "Knitwear & Apparel",
+      "hs_code": "6110"
+    },
+    {
+      "id": 11,
+      "name": "Pet Care",
+      "hs_code": "2309"
+    },
+    {
+      "id": 7,
+      "name": "Small Kitchen Appliances",
+      "hs_code": "8516"
+    },
+    {
+      "id": 2,
+      "name": "Tea & Matcha",
+      "hs_code": "0902"
+    },
+    {
+      "id": 6,
+      "name": "Toys & Collectibles",
+      "hs_code": "9503"
+    }
+  ],
+  "trends": [
+    {
+      "term": "Coffee (fr)",
+      "platform": "wikipedia",
+      "category_id": 3,
+      "category": "Coffee",
+      "country_code": "FR",
+      "country": "France",
+      "momentum": 12.5625,
+      "growth": 5.08,
+      "volume": 10.86,
+      "rank": 1
+    },
+    {
+      "term": "Drinkware & Tumblers (en)",
+      "platform": "wikipedia",
+      "category_id": 8,
+      "category": "Drinkware & Tumblers",
+      "country_code": null,
+      "country": "Global",
+      "momentum": 0.88,
+      "growth": 0.1551,
+      "volume": 290.5,
+      "rank": 1
+    },
+    {
+      "term": "Coffee (en)",
+      "platform": "wikipedia",
+      "category_id": 3,
+      "category": "Coffee",
+      "country_code": null,
+      "country": "Global",
+      "momentum": 0.6268,
+      "growth": 0.0788,
+      "volume": 2842.14,
+      "rank": 2
+    },
+    {
+      "term": "Knitwear & Apparel (nl)",
+      "platform": "wikipedia",
+      "category_id": 5,
+      "category": "Knitwear & Apparel",
+      "country_code": "NL",
+      "country": "Netherlands",
+      "momentum": 0.6045,
+      "growth": 0.3,
+      "volume": 6.5,
+      "rank": 1
+    },
+    {
+      "term": "Coffee (it)",
+      "platform": "wikipedia",
+      "category_id": 3,
+      "category": "Coffee",
+      "country_code": "IT",
+      "country": "Italy",
+      "momentum": 0.5558,
+      "growth": 0.5294,
+      "volume": 1.86,
+      "rank": 1
+    },
+    {
+      "term": "Footwear (nl)",
+      "platform": "wikipedia",
+      "category_id": 4,
+      "category": "Footwear",
+      "country_code": "NL",
+      "country": "Netherlands",
+      "momentum": 0.3261,
+      "growth": 0.2692,
+      "volume": 2.36,
+      "rank": 2
+    },
+    {
+      "term": "Tea & Matcha (nl)",
+      "platform": "wikipedia",
+      "category_id": 2,
+      "category": "Tea & Matcha",
+      "country_code": "NL",
+      "country": "Netherlands",
+      "momentum": 0.2958,
+      "growth": 0.0524,
+      "volume": 281.07,
+      "rank": 3
+    },
+    {
+      "term": "Footwear (de)",
+      "platform": "wikipedia",
+      "category_id": 4,
+      "category": "Footwear",
+      "country_code": "DE",
+      "country": "Germany",
+      "momentum": 0.2783,
+      "growth": 0.1778,
+      "volume": 3.79,
+      "rank": 1
+    },
+    {
+      "term": "Coffee (pl)",
+      "platform": "wikipedia",
+      "category_id": 3,
+      "category": "Coffee",
+      "country_code": "PL",
+      "country": "Poland",
+      "momentum": 0.27,
+      "growth": 0.2778,
+      "volume": 1.64,
+      "rank": 1
+    },
+    {
+      "term": "Candles & Home Fragrance (en)",
+      "platform": "wikipedia",
+      "category_id": 9,
+      "category": "Candles & Home Fragrance",
+      "country_code": null,
+      "country": "Global",
+      "momentum": 0.2,
+      "growth": 0.033,
+      "volume": 427.0,
+      "rank": 3
+    },
+    {
+      "term": "Audio & Earbuds (en)",
+      "platform": "wikipedia",
+      "category_id": 10,
+      "category": "Audio & Earbuds",
+      "country_code": null,
+      "country": "Global",
+      "momentum": 0.1766,
+      "growth": 0.0284,
+      "volume": 501.93,
+      "rank": 4
+    },
+    {
+      "term": "Footwear (en)",
+      "platform": "wikipedia",
+      "category_id": 4,
+      "category": "Footwear",
+      "country_code": null,
+      "country": "Global",
+      "momentum": 0.1127,
+      "growth": 0.0185,
+      "volume": 440.29,
+      "rank": 5
+    },
+    {
+      "term": "Beauty & Cosmetics (en)",
+      "platform": "wikipedia",
+      "category_id": 1,
+      "category": "Beauty & Cosmetics",
+      "country_code": null,
+      "country": "Global",
+      "momentum": 0.0112,
+      "growth": 0.0017,
+      "volume": 666.5,
+      "rank": 6
+    },
+    {
+      "term": "Knitwear & Apparel (de)",
+      "platform": "wikipedia",
+      "category_id": 5,
+      "category": "Knitwear & Apparel",
+      "country_code": "DE",
+      "country": "Germany",
+      "momentum": 0.0,
+      "growth": 0.0,
+      "volume": 1.71,
+      "rank": 2
+    },
+    {
+      "term": "Knitwear & Apparel (it)",
+      "platform": "wikipedia",
+      "category_id": 5,
+      "category": "Knitwear & Apparel",
+      "country_code": "IT",
+      "country": "Italy",
+      "momentum": 0.0,
+      "growth": 0.0,
+      "volume": 1.0,
+      "rank": 2
+    },
+    {
+      "term": "Candles & Home Fragrance (es)",
+      "platform": "wikipedia",
+      "category_id": 9,
+      "category": "Candles & Home Fragrance",
+      "country_code": "ES",
+      "country": "Spain",
+      "momentum": 0.0,
+      "growth": 0.0,
+      "volume": 1.38,
+      "rank": 1
+    },
+    {
+      "term": "Candles & Home Fragrance (nl)",
+      "platform": "wikipedia",
+      "category_id": 9,
+      "category": "Candles & Home Fragrance",
+      "country_code": "NL",
+      "country": "Netherlands",
+      "momentum": 0.0,
+      "growth": 0.0,
+      "volume": 1.43,
+      "rank": 4
+    },
+    {
+      "term": "Pet Care (it)",
+      "platform": "wikipedia",
+      "category_id": 11,
+      "category": "Pet Care",
+      "country_code": "IT",
+      "country": "Italy",
+      "momentum": 0.0,
+      "growth": 0.0,
+      "volume": 1.0,
+      "rank": 3
+    },
+    {
+      "term": "Candles & Home Fragrance (it)",
+      "platform": "wikipedia",
+      "category_id": 9,
+      "category": "Candles & Home Fragrance",
+      "country_code": "IT",
+      "country": "Italy",
+      "momentum": -0.0442,
+      "growth": -0.0556,
+      "volume": 1.21,
+      "rank": 4
+    },
+    {
+      "term": "Tea & Matcha (en)",
+      "platform": "wikipedia",
+      "category_id": 2,
+      "category": "Tea & Matcha",
+      "country_code": null,
+      "country": "Global",
+      "momentum": -0.1079,
+      "growth": -0.0137,
+      "volume": 2691.5,
+      "rank": 7
+    },
+    {
+      "term": "Knitwear & Apparel (es)",
+      "platform": "wikipedia",
+      "category_id": 5,
+      "category": "Knitwear & Apparel",
+      "country_code": "ES",
+      "country": "Spain",
+      "momentum": -0.1169,
+      "growth": -0.1364,
+      "volume": 1.36,
+      "rank": 2
+    },
+    {
+      "term": "Pet Care (fr)",
+      "platform": "wikipedia",
+      "category_id": 11,
+      "category": "Pet Care",
+      "country_code": "FR",
+      "country": "France",
+      "momentum": -0.1386,
+      "growth": -0.2,
+      "volume": 1.0,
+      "rank": 2
+    },
+    {
+      "term": "Small Kitchen Appliances (en)",
+      "platform": "wikipedia",
+      "category_id": 7,
+      "category": "Small Kitchen Appliances",
+      "country_code": null,
+      "country": "Global",
+      "momentum": -0.1579,
+      "growth": -0.0329,
+      "volume": 119.5,
+      "rank": 8
+    },
+    {
+      "term": "Tea & Matcha (es)",
+      "platform": "wikipedia",
+      "category_id": 2,
+      "category": "Tea & Matcha",
+      "country_code": "ES",
+      "country": "Spain",
+      "momentum": -0.1653,
+      "growth": -0.1111,
+      "volume": 3.43,
+      "rank": 3
+    },
+    {
+      "term": "Footwear (es)",
+      "platform": "wikipedia",
+      "category_id": 4,
+      "category": "Footwear",
+      "country_code": "ES",
+      "country": "Spain",
+      "momentum": -0.1749,
+      "growth": -0.1852,
+      "volume": 1.57,
+      "rank": 4
+    },
+    {
+      "term": "Small Kitchen Appliances (fr)",
+      "platform": "wikipedia",
+      "category_id": 7,
+      "category": "Small Kitchen Appliances",
+      "country_code": "FR",
+      "country": "France",
+      "momentum": -0.2742,
+      "growth": -0.2903,
+      "volume": 1.57,
+      "rank": 3
+    },
+    {
+      "term": "Candles & Home Fragrance (fr)",
+      "platform": "wikipedia",
+      "category_id": 9,
+      "category": "Candles & Home Fragrance",
+      "country_code": "FR",
+      "country": "France",
+      "momentum": -0.2742,
+      "growth": -0.2903,
+      "volume": 1.57,
+      "rank": 4
+    },
+    {
+      "term": "Footwear (it)",
+      "platform": "wikipedia",
+      "category_id": 4,
+      "category": "Footwear",
+      "country_code": "IT",
+      "country": "Italy",
+      "momentum": -0.3182,
+      "growth": -0.25,
+      "volume": 2.57,
+      "rank": 5
+    },
+    {
+      "term": "Coffee (de)",
+      "platform": "wikipedia",
+      "category_id": 3,
+      "category": "Coffee",
+      "country_code": "DE",
+      "country": "Germany",
+      "momentum": -0.3306,
+      "growth": -0.3077,
+      "volume": 1.93,
+      "rank": 3
+    },
+    {
+      "term": "Toys & Collectibles (en)",
+      "platform": "wikipedia",
+      "category_id": 6,
+      "category": "Toys & Collectibles",
+      "country_code": null,
+      "country": "Global",
+      "momentum": -0.3502,
+      "growth": -0.0605,
+      "volume": 326.29,
+      "rank": 9
+    },
+    {
+      "term": "Tea & Matcha (fr)",
+      "platform": "wikipedia",
+      "category_id": 2,
+      "category": "Tea & Matcha",
+      "country_code": "FR",
+      "country": "France",
+      "momentum": -0.3896,
+      "growth": -0.0594,
+      "volume": 706.14,
+      "rank": 5
+    },
+    {
+      "term": "Tea & Matcha (pl)",
+      "platform": "wikipedia",
+      "category_id": 2,
+      "category": "Tea & Matcha",
+      "country_code": "PL",
+      "country": "Poland",
+      "momentum": -0.466,
+      "growth": -0.0866,
+      "volume": 216.21,
+      "rank": 2
+    },
+    {
+      "term": "Tea & Matcha (de)",
+      "platform": "wikipedia",
+      "category_id": 2,
+      "category": "Tea & Matcha",
+      "country_code": "DE",
+      "country": "Germany",
+      "momentum": -0.5387,
+      "growth": -0.0753,
+      "volume": 1283.29,
+      "rank": 4
+    },
+    {
+      "term": "Knitwear & Apparel (en)",
+      "platform": "wikipedia",
+      "category_id": 5,
+      "category": "Knitwear & Apparel",
+      "country_code": null,
+      "country": "Global",
+      "momentum": -0.5922,
+      "growth": -0.1091,
+      "volume": 226.21,
+      "rank": 10
+    },
+    {
+      "term": "Pet Care (en)",
+      "platform": "wikipedia",
+      "category_id": 11,
+      "category": "Pet Care",
+      "country_code": null,
+      "country": "Global",
+      "momentum": -0.6426,
+      "growth": -0.1386,
+      "volume": 102.07,
+      "rank": 11
+    },
+    {
+      "term": "Footwear (fr)",
+      "platform": "wikipedia",
+      "category_id": 4,
+      "category": "Footwear",
+      "country_code": "FR",
+      "country": "France",
+      "momentum": -0.6602,
+      "growth": -0.1689,
+      "volume": 48.86,
+      "rank": 6
+    },
+    {
+      "term": "Tea & Matcha (it)",
+      "platform": "wikipedia",
+      "category_id": 2,
+      "category": "Tea & Matcha",
+      "country_code": "IT",
+      "country": "Italy",
+      "momentum": -1.1094,
+      "growth": -0.1789,
+      "volume": 492.0,
+      "rank": 6
+    }
+  ],
+  "sources": {
+    "10": [
+      {
+        "partner_code": "CN",
+        "value": 938344341.447,
+        "share": 0.44334081237145845,
+        "growth": -0.10358119784498851,
+        "emerging": false
+      },
+      {
+        "partner_code": "DE",
+        "value": 254639496.096,
+        "share": 0.12030986501924344,
+        "growth": -0.06361181359816628,
+        "emerging": false
+      },
+      {
+        "partner_code": "DK",
+        "value": 174647132.452,
+        "share": 0.08251576543874616,
+        "growth": 0.12066116252386651,
+        "emerging": false
+      },
+      {
+        "partner_code": "VN",
+        "value": 107688186.00999999,
+        "share": 0.0508795820038296,
+        "growth": 0.057687792257859236,
+        "emerging": false
+      },
+      {
+        "partner_code": "BE",
+        "value": 88207363.81,
+        "share": 0.04167545175192915,
+        "growth": 0.28948846418667307,
+        "emerging": true
+      },
+      {
+        "partner_code": "US",
+        "value": 80961200.54100001,
+        "share": 0.03825184725158046,
+        "growth": 0.3611539811720776,
+        "emerging": true
+      },
+      {
+        "partner_code": "CZ",
+        "value": 72563801.097,
+        "share": 0.034284316648081986,
+        "growth": -0.38138102527247886,
+        "emerging": false
+      },
+      {
+        "partner_code": "GB",
+        "value": 71683435.035,
+        "share": 0.03386836891133806,
+        "growth": -0.06431527681536132,
+        "emerging": false
+      },
+      {
+        "partner_code": "IE",
+        "value": 48271282.323,
+        "share": 0.022806797647747738,
+        "growth": 0.10815032229269957,
+        "emerging": false
+      },
+      {
+        "partner_code": "FR",
+        "value": 45304272.253,
+        "share": 0.021404970411575935,
+        "growth": 0.1333908430697183,
+        "emerging": false
+      },
+      {
+        "partner_code": "SE",
+        "value": 40254245.072,
+        "share": 0.01901897728087729,
+        "growth": 0.6327657105733813,
+        "emerging": true
+      },
+      {
+        "partner_code": "RO",
+        "value": 38617779.306,
+        "share": 0.018245794100598584,
+        "growth": 0.614143192291256,
+        "emerging": true
+      },
+      {
+        "partner_code": "PL",
+        "value": 22477129.861,
+        "share": 0.01061979976027527,
+        "growth": 0.2962033016052253,
+        "emerging": true
+      },
+      {
+        "partner_code": "HU",
+        "value": 20139495.643,
+        "share": 0.009515334578935466,
+        "growth": -0.07390925645618744,
+        "emerging": false
+      },
+      {
+        "partner_code": "JP",
+        "value": 19321581.191,
+        "share": 0.009128893438318733,
+        "growth": 0.136546104750109,
+        "emerging": false
+      },
+      {
+        "partner_code": "ID",
+        "value": 19270719.667999998,
+        "share": 0.009104862826176395,
+        "growth": -0.37962790880462083,
+        "emerging": false
+      },
+      {
+        "partner_code": "NL",
+        "value": 17789321.0,
+        "share": 0.008404944406138466,
+        "growth": -0.44697854405585297,
+        "emerging": false
+      },
+      {
+        "partner_code": "MX",
+        "value": 14446873.022,
+        "share": 0.0068257335168920505,
+        "growth": -0.05030574636916187,
+        "emerging": false
+      },
+      {
+        "partner_code": "ES",
+        "value": 11852260.628,
+        "share": 0.005599853511294994,
+        "growth": -0.31910610138520473,
+        "emerging": false
+      },
+      {
+        "partner_code": "TH",
+        "value": 9374245.41,
+        "share": 0.00442906233017824,
+        "growth": -0.5693075516013059,
+        "emerging": false
+      },
+      {
+        "partner_code": "AT",
+        "value": 5630427.693,
+        "share": 0.002660215740805816,
+        "growth": -0.04693424823593409,
+        "emerging": false
+      },
+      {
+        "partner_code": "FI",
+        "value": 4432235.535,
+        "share": 0.002094104281247518,
+        "growth": 0.03331177799889844,
+        "emerging": false
+      },
+      {
+        "partner_code": "TR",
+        "value": 3528013.482,
+        "share": 0.0016668852723674497,
+        "growth": 2.0649107593613776,
+        "emerging": true
+      },
+      {
+        "partner_code": "KR",
+        "value": 3071532.386,
+        "share": 0.001451211035316291,
+        "growth": -0.7318155612036602,
+        "emerging": false
+      },
+      {
+        "partner_code": "IN",
+        "value": 1447633.677,
+        "share": 0.000683965429351621,
+        "growth": 0.10380262940089165,
+        "emerging": false
+      },
+      {
+        "partner_code": "PT",
+        "value": 911784.047,
+        "share": 0.0004307918343504478,
+        "growth": -0.7149827788178398,
+        "emerging": false
+      },
+      {
+        "partner_code": "GR",
+        "value": 881037.7,
+        "share": 0.00041626506645262625,
+        "growth": -0.948594386094733,
+        "emerging": false
+      },
+      {
+        "partner_code": "MA",
+        "value": 686697.324,
+        "share": 0.00032444480776214305,
+        "growth": 9.794422510999956,
+        "emerging": true
+      },
+      {
+        "partner_code": "PK",
+        "value": 48449.394,
+        "share": 2.289095031120629e-05,
+        "growth": 25.367404582271416,
+        "emerging": true
+      },
+      {
+        "partner_code": "BR",
+        "value": 30956.169,
+        "share": 1.4625902780214434e-05,
+        "growth": -0.7364203336723596,
+        "emerging": false
+      },
+      {
+        "partner_code": "BD",
+        "value": 4308.551,
+        "share": 2.035666882733315e-06,
+        "growth": -0.9771712862019323,
+        "emerging": false
+      },
+      {
+        "partner_code": "KH",
+        "value": 3240.0,
+        "share": 1.530807155365212e-06,
+        "growth": -0.8211244810746664,
+        "emerging": false
+      }
+    ],
+    "1": [
+      {
+        "partner_code": "DE",
+        "value": 585959815.608,
+        "share": 0.2321233346851357,
+        "growth": -0.25475911056348327,
+        "emerging": false
+      },
+      {
+        "partner_code": "BE",
+        "value": 447211403.072,
+        "share": 0.17715925124076667,
+        "growth": 0.020534296912096194,
+        "emerging": false
+      },
+      {
+        "partner_code": "FR",
+        "value": 333575851.943,
+        "share": 0.1321434287146484,
+        "growth": -0.29940422046958026,
+        "emerging": false
+      },
+      {
+        "partner_code": "US",
+        "value": 263459096.159,
+        "share": 0.10436723188961965,
+        "growth": 0.06460250228034234,
+        "emerging": false
+      },
+      {
+        "partner_code": "GB",
+        "value": 228132950.878,
+        "share": 0.09037305954916856,
+        "growth": -0.02424955239197223,
+        "emerging": false
+      },
+      {
+        "partner_code": "CN",
+        "value": 150378061.882,
+        "share": 0.05957107681747479,
+        "growth": -0.013514696648216336,
+        "emerging": false
+      },
+      {
+        "partner_code": "KR",
+        "value": 97727794.86,
+        "share": 0.038714091017982004,
+        "growth": 0.023175622258441584,
+        "emerging": false
+      },
+      {
+        "partner_code": "ES",
+        "value": 82441077.069,
+        "share": 0.03265837897848722,
+        "growth": -0.361523709022493,
+        "emerging": false
+      },
+      {
+        "partner_code": "PL",
+        "value": 73418261.481,
+        "share": 0.02908406212817147,
+        "growth": 0.5969089749778924,
+        "emerging": true
+      },
+      {
+        "partner_code": "NL",
+        "value": 57856892.0,
+        "share": 0.022919548999486703,
+        "growth": 0.032396158027638226,
+        "emerging": false
+      },
+      {
+        "partner_code": "CZ",
+        "value": 37342524.281,
+        "share": 0.014792944892769241,
+        "growth": -0.1248260129845913,
+        "emerging": false
+      },
+      {
+        "partner_code": "DK",
+        "value": 25142947.164,
+        "share": 0.009960179152326455,
+        "growth": 0.38773000477671776,
+        "emerging": true
+      },
+      {
+        "partner_code": "IE",
+        "value": 23635156.345,
+        "share": 0.009362879775148596,
+        "growth": -0.04504398663331938,
+        "emerging": false
+      },
+      {
+        "partner_code": "AT",
+        "value": 22699098.336,
+        "share": 0.008992067817194865,
+        "growth": 0.07068215928828991,
+        "emerging": false
+      },
+      {
+        "partner_code": "TR",
+        "value": 21156830.729000002,
+        "share": 0.00838111073382859,
+        "growth": -0.5635609430517036,
+        "emerging": false
+      },
+      {
+        "partner_code": "GR",
+        "value": 14663913.988,
+        "share": 0.0058089932513523965,
+        "growth": -0.41562470271565527,
+        "emerging": false
+      },
+      {
+        "partner_code": "IN",
+        "value": 11717638.576000001,
+        "share": 0.004641849608874733,
+        "growth": 0.18947647948686538,
+        "emerging": true
+      },
+      {
+        "partner_code": "SE",
+        "value": 11368901.872000001,
+        "share": 0.0045037003288330825,
+        "growth": -0.1361716182125403,
+        "emerging": false
+      },
+      {
+        "partner_code": "JP",
+        "value": 9652217.406,
+        "share": 0.0038236493897825592,
+        "growth": 0.616804322390603,
+        "emerging": true
+      },
+      {
+        "partner_code": "HU",
+        "value": 9065844.329,
+        "share": 0.0035913623448738685,
+        "growth": 0.4384315927412284,
+        "emerging": true
+      },
+      {
+        "partner_code": "TH",
+        "value": 4589485.566,
+        "share": 0.001818088315431357,
+        "growth": 0.25994492377567974,
+        "emerging": true
+      },
+      {
+        "partner_code": "PT",
+        "value": 3865449.774,
+        "share": 0.0015312672775483309,
+        "growth": -0.2948736629877551,
+        "emerging": false
+      },
+      {
+        "partner_code": "FI",
+        "value": 2537002.573,
+        "share": 0.0010050134525666768,
+        "growth": 0.13995387687486843,
+        "emerging": false
+      },
+      {
+        "partner_code": "RO",
+        "value": 2488123.518,
+        "share": 0.0009856504025065197,
+        "growth": -0.4227638613819247,
+        "emerging": false
+      },
+      {
+        "partner_code": "MX",
+        "value": 1870415.301,
+        "share": 0.000740950190353453,
+        "growth": -0.5116324947842913,
+        "emerging": false
+      },
+      {
+        "partner_code": "ID",
+        "value": 844316.409,
+        "share": 0.00033446925056302985,
+        "growth": -0.5183432031704821,
+        "emerging": false
+      },
+      {
+        "partner_code": "VN",
+        "value": 572587.51,
+        "share": 0.00022682600185193293,
+        "growth": -0.08325673759755475,
+        "emerging": false
+      },
+      {
+        "partner_code": "MA",
+        "value": 491635.795,
+        "share": 0.00019475762184743866,
+        "growth": -0.4813619442541943,
+        "emerging": false
+      },
+      {
+        "partner_code": "BR",
+        "value": 431959.127,
+        "share": 0.000171117183015154,
+        "growth": -0.44292382965518756,
+        "emerging": false
+      },
+      {
+        "partner_code": "PK",
+        "value": 47090.174,
+        "share": 1.8654399036632572e-05,
+        "growth": 0.989430497734322,
+        "emerging": true
+      },
+      {
+        "partner_code": "BD",
+        "value": 1901.568,
+        "share": 7.532910850423132e-07,
+        "growth": -0.8631875702923818,
+        "emerging": false
+      },
+      {
+        "partner_code": "KH",
+        "value": 634.364,
+        "share": 2.5129826851933877e-07,
+        "growth": -0.9703006031370316,
+        "emerging": false
+      }
+    ],
+    "9": [
+      {
+        "partner_code": "CN",
+        "value": 102015457.50299999,
+        "share": 0.2969646449891948,
+        "growth": -0.2096077040544647,
+        "emerging": false
+      },
+      {
+        "partner_code": "PL",
+        "value": 82940521.703,
+        "share": 0.24143794661731224,
+        "growth": -0.08130261012572995,
+        "emerging": false
+      },
+      {
+        "partner_code": "BE",
+        "value": 57305110.688,
+        "share": 0.16681385613575267,
+        "growth": -0.10863379578072845,
+        "emerging": false
+      },
+      {
+        "partner_code": "DE",
+        "value": 25638786.456,
+        "share": 0.07463391631249523,
+        "growth": -0.04191864307698451,
+        "emerging": false
+      },
+      {
+        "partner_code": "US",
+        "value": 18866412.061,
+        "share": 0.05491969057483244,
+        "growth": -0.17913916923399364,
+        "emerging": false
+      },
+      {
+        "partner_code": "CZ",
+        "value": 17420850.512000002,
+        "share": 0.05071169423078633,
+        "growth": -0.1213649023940675,
+        "emerging": false
+      },
+      {
+        "partner_code": "FR",
+        "value": 6495769.745,
+        "share": 0.018909035978187428,
+        "growth": 0.03012898767911758,
+        "emerging": false
+      },
+      {
+        "partner_code": "VN",
+        "value": 6024696.394,
+        "share": 0.017537752313263693,
+        "growth": -0.49027205177806044,
+        "emerging": false
+      },
+      {
+        "partner_code": "SE",
+        "value": 5630471.207,
+        "share": 0.01639017188213333,
+        "growth": -0.6398880197325321,
+        "emerging": false
+      },
+      {
+        "partner_code": "GB",
+        "value": 4622658.242000001,
+        "share": 0.013456451574522774,
+        "growth": -0.3507329348239059,
+        "emerging": false
+      },
+      {
+        "partner_code": "DK",
+        "value": 4074650.857,
+        "share": 0.01186121471021526,
+        "growth": -0.055314792688370064,
+        "emerging": false
+      },
+      {
+        "partner_code": "ES",
+        "value": 3989912.486,
+        "share": 0.0116145432657409,
+        "growth": 0.4831598147722785,
+        "emerging": true
+      },
+      {
+        "partner_code": "NL",
+        "value": 3148313.0,
+        "share": 0.009164666563715335,
+        "growth": -0.8603875334746318,
+        "emerging": false
+      },
+      {
+        "partner_code": "IN",
+        "value": 2840237.378,
+        "share": 0.008267865530260527,
+        "growth": 0.4585576537829363,
+        "emerging": true
+      },
+      {
+        "partner_code": "HU",
+        "value": 604232.436,
+        "share": 0.001758906691590533,
+        "growth": -0.7549090964898809,
+        "emerging": false
+      },
+      {
+        "partner_code": "TR",
+        "value": 551190.304,
+        "share": 0.001604502268139442,
+        "growth": -0.33809496481843804,
+        "emerging": false
+      },
+      {
+        "partner_code": "PT",
+        "value": 446928.925,
+        "share": 0.0013009997974485824,
+        "growth": -0.13977606457606695,
+        "emerging": false
+      },
+      {
+        "partner_code": "ID",
+        "value": 327670.212,
+        "share": 0.0009538404332230993,
+        "growth": -0.6458460581260219,
+        "emerging": false
+      },
+      {
+        "partner_code": "GR",
+        "value": 122589.799,
+        "share": 0.00035685607877866134,
+        "growth": -0.572445021742073,
+        "emerging": false
+      },
+      {
+        "partner_code": "TH",
+        "value": 87973.963,
+        "share": 0.0002560901781949984,
+        "growth": 0.03147682278553828,
+        "emerging": false
+      },
+      {
+        "partner_code": "AT",
+        "value": 80755.153,
+        "share": 0.00023507638870303436,
+        "growth": -0.49235020576672095,
+        "emerging": false
+      },
+      {
+        "partner_code": "KH",
+        "value": 75575.752,
+        "share": 0.00021999927179478098,
+        "growth": -0.2389502618891353,
+        "emerging": false
+      },
+      {
+        "partner_code": "RO",
+        "value": 72986.95300000001,
+        "share": 0.00021246333758637173,
+        "growth": -0.8497438975549788,
+        "emerging": false
+      },
+      {
+        "partner_code": "MX",
+        "value": 53383.003,
+        "share": 0.00015539669107385938,
+        "growth": -0.4842254672837487,
+        "emerging": false
+      },
+      {
+        "partner_code": "FI",
+        "value": 46000.735,
+        "share": 0.00013390707911215617,
+        "growth": -0.5243352947881289,
+        "emerging": false
+      },
+      {
+        "partner_code": "IE",
+        "value": 13081.152,
+        "share": 3.807893190711279e-05,
+        "growth": -0.9448229897494235,
+        "emerging": false
+      },
+      {
+        "partner_code": "KR",
+        "value": 12659.752,
+        "share": 3.6852246221810965e-05,
+        "growth": 0.5290262822543603,
+        "emerging": true
+      },
+      {
+        "partner_code": "JP",
+        "value": 9719.983,
+        "share": 2.8294646434449647e-05,
+        "growth": -0.9751289780955665,
+        "emerging": false
+      },
+      {
+        "partner_code": "BR",
+        "value": 6270.0,
+        "share": 1.825182545525021e-05,
+        "growth": 1.1673116175852967,
+        "emerging": true
+      },
+      {
+        "partner_code": "MA",
+        "value": 2132.103,
+        "share": 6.206502680799894e-06,
+        "growth": -0.9721875616235225,
+        "emerging": false
+      },
+      {
+        "partner_code": "PK",
+        "value": 268.0,
+        "share": 7.801418216917155e-07,
+        "growth": -0.9694079397582976,
+        "emerging": false
+      },
+      {
+        "partner_code": "BD",
+        "value": 16.081,
+        "share": 4.681142027844954e-08,
+        "growth": -0.9996996911362274,
+        "emerging": false
+      }
+    ],
+    "3": [
+      {
+        "partner_code": "DE",
+        "value": 721712494.95,
+        "share": 0.407614655111883,
+        "growth": -0.0026970363823728616,
+        "emerging": false
+      },
+      {
+        "partner_code": "BE",
+        "value": 258631599.744,
+        "share": 0.1460720592595376,
+        "growth": -0.4375321819120082,
+        "emerging": false
+      },
+      {
+        "partner_code": "BR",
+        "value": 257092983.999,
+        "share": 0.14520306734012883,
+        "growth": -0.2164888675411614,
+        "emerging": false
+      },
+      {
+        "partner_code": "VN",
+        "value": 179137821.342,
+        "share": 0.10117491629249427,
+        "growth": 0.31577786644133654,
+        "emerging": true
+      },
+      {
+        "partner_code": "FR",
+        "value": 88248743.937,
+        "share": 0.04984184363668143,
+        "growth": -0.2578401918019015,
+        "emerging": false
+      },
+      {
+        "partner_code": "PL",
+        "value": 84197257.514,
+        "share": 0.04755361216977848,
+        "growth": -0.1080868810156251,
+        "emerging": false
+      },
+      {
+        "partner_code": "CZ",
+        "value": 28600279.833,
+        "share": 0.01615309875027076,
+        "growth": 0.08030053976844723,
+        "emerging": false
+      },
+      {
+        "partner_code": "ES",
+        "value": 27854371.808,
+        "share": 0.015731818746830297,
+        "growth": -0.614043993473075,
+        "emerging": false
+      },
+      {
+        "partner_code": "NL",
+        "value": 27257499.0,
+        "share": 0.015394712065872201,
+        "growth": -0.1499756697767938,
+        "emerging": false
+      },
+      {
+        "partner_code": "ID",
+        "value": 20158247.068,
+        "share": 0.011385138796650878,
+        "growth": 0.8436680035864351,
+        "emerging": true
+      },
+      {
+        "partner_code": "GB",
+        "value": 16809008.601,
+        "share": 0.009493528644178408,
+        "growth": -0.5005119916615403,
+        "emerging": false
+      },
+      {
+        "partner_code": "PT",
+        "value": 10120141.368999999,
+        "share": 0.00571573578491837,
+        "growth": -0.37849996645414463,
+        "emerging": false
+      },
+      {
+        "partner_code": "IN",
+        "value": 9551888.93,
+        "share": 0.00539479354883374,
+        "growth": 0.5942407677001067,
+        "emerging": true
+      },
+      {
+        "partner_code": "CN",
+        "value": 9268619.942,
+        "share": 0.005234806584972858,
+        "growth": -0.6390312058038613,
+        "emerging": false
+      },
+      {
+        "partner_code": "AT",
+        "value": 8889786.515,
+        "share": 0.005020845959693459,
+        "growth": -0.09625650824952944,
+        "emerging": false
+      },
+      {
+        "partner_code": "SE",
+        "value": 6103272.115,
+        "share": 0.0034470556843858584,
+        "growth": -0.015357566895908382,
+        "emerging": false
+      },
+      {
+        "partner_code": "MX",
+        "value": 3713636.574,
+        "share": 0.002097417880269283,
+        "growth": -0.6882222948919694,
+        "emerging": false
+      },
+      {
+        "partner_code": "TR",
+        "value": 2854393.921,
+        "share": 0.0016121278234797318,
+        "growth": 0.6754134418555275,
+        "emerging": true
+      },
+      {
+        "partner_code": "HU",
+        "value": 2829768.05,
+        "share": 0.0015982194236879418,
+        "growth": -0.24895820425016138,
+        "emerging": false
+      },
+      {
+        "partner_code": "RO",
+        "value": 2651024.022,
+        "share": 0.0014972669172032419,
+        "growth": -0.18019104359167867,
+        "emerging": false
+      },
+      {
+        "partner_code": "DK",
+        "value": 1719002.058,
+        "share": 0.0009708719689782157,
+        "growth": -0.4018028198653504,
+        "emerging": false
+      },
+      {
+        "partner_code": "US",
+        "value": 1082496.746,
+        "share": 0.000611381319941114,
+        "growth": -0.43081348244911644,
+        "emerging": false
+      },
+      {
+        "partner_code": "JP",
+        "value": 1009986.01,
+        "share": 0.0005704281164793998,
+        "growth": -0.20950024277836105,
+        "emerging": false
+      },
+      {
+        "partner_code": "GR",
+        "value": 541635.7849999999,
+        "share": 0.0003059094656720949,
+        "growth": -0.12432589613571657,
+        "emerging": false
+      },
+      {
+        "partner_code": "TH",
+        "value": 258245.135,
+        "share": 0.0001458537885569507,
+        "growth": 0.045543997417415244,
+        "emerging": false
+      },
+      {
+        "partner_code": "FI",
+        "value": 195578.87900000002,
+        "share": 0.00011046063060925214,
+        "growth": -0.9675887027885198,
+        "emerging": false
+      },
+      {
+        "partner_code": "IE",
+        "value": 83299.676,
+        "share": 4.704666877912919e-05,
+        "growth": -0.9917262666341495,
+        "emerging": false
+      },
+      {
+        "partner_code": "KR",
+        "value": 1879.217,
+        "share": 1.0613594675099195e-06,
+        "growth": -0.9414974129681491,
+        "emerging": false
+      },
+      {
+        "partner_code": "MA",
+        "value": 443.32,
+        "share": 2.5038187667336845e-07,
+        "growth": -0.8134074562939417,
+        "emerging": false
+      },
+      {
+        "partner_code": "BD",
+        "value": 28.113,
+        "share": 1.587788888143645e-08,
+        "growth": -0.7794660997670168,
+        "emerging": false
+      }
+    ],
+    "8": [
+      {
+        "partner_code": "CN",
+        "value": 100153573.59200001,
+        "share": 0.706632091602891,
+        "growth": -0.12399004001438821,
+        "emerging": false
+      },
+      {
+        "partner_code": "DE",
+        "value": 20026912.783,
+        "share": 0.14129959382028842,
+        "growth": 0.14673557897608364,
+        "emerging": false
+      },
+      {
+        "partner_code": "BE",
+        "value": 3677780.642,
+        "share": 0.025948528188320896,
+        "growth": -0.2599888760197053,
+        "emerging": false
+      },
+      {
+        "partner_code": "PL",
+        "value": 3081883.722,
+        "share": 0.02174418607792659,
+        "growth": 4.0042788799536915,
+        "emerging": true
+      },
+      {
+        "partner_code": "FR",
+        "value": 1753608.732,
+        "share": 0.012372561074997268,
+        "growth": -0.279390853416027,
+        "emerging": false
+      },
+      {
+        "partner_code": "US",
+        "value": 1696883.001,
+        "share": 0.011972333499418928,
+        "growth": 0.36553975758094076,
+        "emerging": true
+      },
+      {
+        "partner_code": "ES",
+        "value": 1553453.879,
+        "share": 0.01096037140120657,
+        "growth": 2.7471911038062746,
+        "emerging": true
+      },
+      {
+        "partner_code": "GB",
+        "value": 1405060.408,
+        "share": 0.009913383410342518,
+        "growth": -0.1382198203300658,
+        "emerging": false
+      },
+      {
+        "partner_code": "DK",
+        "value": 1341482.0699999998,
+        "share": 0.009464807365072334,
+        "growth": 1.261959852722879,
+        "emerging": true
+      },
+      {
+        "partner_code": "RO",
+        "value": 1295317.507,
+        "share": 0.00913909395774536,
+        "growth": 3.159692268628698,
+        "emerging": true
+      },
+      {
+        "partner_code": "JP",
+        "value": 980882.475,
+        "share": 0.006920602131976599,
+        "growth": -0.5778799752532631,
+        "emerging": false
+      },
+      {
+        "partner_code": "NL",
+        "value": 894480.0,
+        "share": 0.006310990717833376,
+        "growth": -0.03304453967349571,
+        "emerging": false
+      },
+      {
+        "partner_code": "IN",
+        "value": 715835.279,
+        "share": 0.0050505654696210815,
+        "growth": 0.06628252923848219,
+        "emerging": false
+      },
+      {
+        "partner_code": "CZ",
+        "value": 553372.0700000001,
+        "share": 0.003904308645557465,
+        "growth": -0.8921989267377605,
+        "emerging": false
+      },
+      {
+        "partner_code": "BR",
+        "value": 514247.852,
+        "share": 0.0036282682906691615,
+        "growth": 27.700279704020602,
+        "emerging": true
+      },
+      {
+        "partner_code": "SE",
+        "value": 491234.182,
+        "share": 0.003465895674452722,
+        "growth": 0.6496579479836914,
+        "emerging": true
+      },
+      {
+        "partner_code": "VN",
+        "value": 286228.747,
+        "share": 0.0020194827894352892,
+        "growth": -0.03125129711967885,
+        "emerging": false
+      },
+      {
+        "partner_code": "TH",
+        "value": 284753.207,
+        "share": 0.002009072138281779,
+        "growth": 0.6782858851157381,
+        "emerging": true
+      },
+      {
+        "partner_code": "HU",
+        "value": 222676.99599999998,
+        "share": 0.0015710943283595157,
+        "growth": 7.073128565509183,
+        "emerging": true
+      },
+      {
+        "partner_code": "TR",
+        "value": 216028.126,
+        "share": 0.001524183322127872,
+        "growth": 0.5942775220734592,
+        "emerging": true
+      },
+      {
+        "partner_code": "PT",
+        "value": 197480.437,
+        "share": 0.0013933203703388323,
+        "growth": -0.7439731214274198,
+        "emerging": false
+      },
+      {
+        "partner_code": "IE",
+        "value": 144747.825,
+        "share": 0.0010212661881781257,
+        "growth": -0.07669564697332312,
+        "emerging": false
+      },
+      {
+        "partner_code": "MX",
+        "value": 63711.783,
+        "share": 0.00044951756453986036,
+        "growth": 28.26391351977016,
+        "emerging": true
+      },
+      {
+        "partner_code": "ID",
+        "value": 63013.179,
+        "share": 0.0004445885741102909,
+        "growth": -0.5815138066280764,
+        "emerging": false
+      },
+      {
+        "partner_code": "KR",
+        "value": 47314.889,
+        "share": 0.0003338295158017133,
+        "growth": -0.41305553140357515,
+        "emerging": false
+      },
+      {
+        "partner_code": "FI",
+        "value": 27519.724,
+        "share": 0.00019416501511642113,
+        "growth": 1.676282058451092,
+        "emerging": true
+      },
+      {
+        "partner_code": "AT",
+        "value": 23128.388,
+        "share": 0.0001631820074081576,
+        "growth": -0.7297177826763855,
+        "emerging": false
+      },
+      {
+        "partner_code": "GR",
+        "value": 13374.995,
+        "share": 9.436708399971807e-05,
+        "growth": 0.05003804083161787,
+        "emerging": false
+      },
+      {
+        "partner_code": "BD",
+        "value": 6315.0,
+        "share": 4.455539126991969e-05,
+        "growth": -0.26333812931512957,
+        "emerging": false
+      },
+      {
+        "partner_code": "PK",
+        "value": 1359.0,
+        "share": 9.58840486711336e-06,
+        "growth": 0.4108237902886738,
+        "emerging": true
+      },
+      {
+        "partner_code": "KH",
+        "value": 29.194,
+        "share": 2.0597784524687814e-07,
+        "growth": -0.7862748543149141,
+        "emerging": false
+      }
+    ],
+    "4": [
+      {
+        "partner_code": "CN",
+        "value": 705219891.431,
+        "share": 0.2748259127900699,
+        "growth": -0.15620102619976797,
+        "emerging": false
+      },
+      {
+        "partner_code": "VN",
+        "value": 607470428.021,
+        "share": 0.23673270834020477,
+        "growth": 0.10316533846471343,
+        "emerging": false
+      },
+      {
+        "partner_code": "BE",
+        "value": 311467105.184,
+        "share": 0.12137949103020827,
+        "growth": -0.26778658985357917,
+        "emerging": false
+      },
+      {
+        "partner_code": "DE",
+        "value": 302754945.78999996,
+        "share": 0.11798434125221464,
+        "growth": -0.18069780381163245,
+        "emerging": false
+      },
+      {
+        "partner_code": "ID",
+        "value": 144520108.49400002,
+        "share": 0.05631983898354001,
+        "growth": -0.02776362500628762,
+        "emerging": false
+      },
+      {
+        "partner_code": "FR",
+        "value": 84162169.034,
+        "share": 0.03279820267154827,
+        "growth": 0.06818847145022901,
+        "emerging": false
+      },
+      {
+        "partner_code": "KH",
+        "value": 72820824.744,
+        "share": 0.028378453123019464,
+        "growth": -0.11484493071754306,
+        "emerging": false
+      },
+      {
+        "partner_code": "GB",
+        "value": 60788236.117,
+        "share": 0.023689323969369888,
+        "growth": 0.28611903600306515,
+        "emerging": true
+      },
+      {
+        "partner_code": "BD",
+        "value": 36471485.164000005,
+        "share": 0.014213026777601171,
+        "growth": -0.21472349633402604,
+        "emerging": false
+      },
+      {
+        "partner_code": "PL",
+        "value": 35938731.715,
+        "share": 0.014005411458333323,
+        "growth": -0.18451382303835684,
+        "emerging": false
+      },
+      {
+        "partner_code": "US",
+        "value": 27590593.815,
+        "share": 0.010752121744951274,
+        "growth": -0.0410242935549652,
+        "emerging": false
+      },
+      {
+        "partner_code": "ES",
+        "value": 25696734.459,
+        "share": 0.01001408013192675,
+        "growth": -0.05809027562691631,
+        "emerging": false
+      },
+      {
+        "partner_code": "NL",
+        "value": 25037193.0,
+        "share": 0.009757055215733921,
+        "growth": 0.5138671739686896,
+        "emerging": true
+      },
+      {
+        "partner_code": "CZ",
+        "value": 23549817.668,
+        "share": 0.009177421418892377,
+        "growth": -0.2662079516543319,
+        "emerging": false
+      },
+      {
+        "partner_code": "PT",
+        "value": 20753817.705,
+        "share": 0.00808781340963267,
+        "growth": 0.2508297555488084,
+        "emerging": true
+      },
+      {
+        "partner_code": "IN",
+        "value": 20494665.625,
+        "share": 0.007986821211592249,
+        "growth": 0.450722693774183,
+        "emerging": true
+      },
+      {
+        "partner_code": "AT",
+        "value": 14299795.341,
+        "share": 0.005572665143246357,
+        "growth": -0.08164532355673683,
+        "emerging": false
+      },
+      {
+        "partner_code": "DK",
+        "value": 11794132.589,
+        "share": 0.004596202253685542,
+        "growth": -0.07306008100849343,
+        "emerging": false
+      },
+      {
+        "partner_code": "RO",
+        "value": 8323076.635,
+        "share": 0.0032435232772491662,
+        "growth": 0.19860182715161748,
+        "emerging": true
+      },
+      {
+        "partner_code": "TR",
+        "value": 4355238.138,
+        "share": 0.0016972469314006644,
+        "growth": -0.025132544730248254,
+        "emerging": false
+      },
+      {
+        "partner_code": "TH",
+        "value": 4337187.712,
+        "share": 0.0016902126363361372,
+        "growth": 0.03091458326983,
+        "emerging": false
+      },
+      {
+        "partner_code": "BR",
+        "value": 3293783.5609999998,
+        "share": 0.00128359549224842,
+        "growth": 0.5866284752075788,
+        "emerging": true
+      },
+      {
+        "partner_code": "SE",
+        "value": 2638361.557,
+        "share": 0.00102817593772268,
+        "growth": -0.5505966783533979,
+        "emerging": false
+      },
+      {
+        "partner_code": "HU",
+        "value": 2266331.437,
+        "share": 0.0008831948920137574,
+        "growth": -0.8475397755468401,
+        "emerging": false
+      },
+      {
+        "partner_code": "MA",
+        "value": 1751736.972,
+        "share": 0.000682656173127976,
+        "growth": 1.0538464591825274,
+        "emerging": true
+      },
+      {
+        "partner_code": "JP",
+        "value": 1508857.102,
+        "share": 0.0005880052950371182,
+        "growth": 0.7218421054610582,
+        "emerging": true
+      },
+      {
+        "partner_code": "KR",
+        "value": 1471573.843,
+        "share": 0.000573475918014482,
+        "growth": -0.27792482290186743,
+        "emerging": false
+      },
+      {
+        "partner_code": "PK",
+        "value": 1465914.588,
+        "share": 0.0005712704925294877,
+        "growth": 0.16086261723677137,
+        "emerging": true
+      },
+      {
+        "partner_code": "GR",
+        "value": 1172015.81,
+        "share": 0.0004567374214786425,
+        "growth": -0.13925724205949205,
+        "emerging": false
+      },
+      {
+        "partner_code": "FI",
+        "value": 960767.442,
+        "share": 0.00037441341691432574,
+        "growth": -0.18453888778312885,
+        "emerging": false
+      },
+      {
+        "partner_code": "IE",
+        "value": 906104.241,
+        "share": 0.0003531110340782881,
+        "growth": -0.31362463768805265,
+        "emerging": false
+      },
+      {
+        "partner_code": "MX",
+        "value": 778774.071,
+        "share": 0.00030349015607815497,
+        "growth": 1.0953057132101989,
+        "emerging": true
+      }
+    ],
+    "5": [
+      {
+        "partner_code": "CN",
+        "value": 757878172.0139999,
+        "share": 0.2178137326314071,
+        "growth": -0.17562430542024293,
+        "emerging": false
+      },
+      {
+        "partner_code": "BD",
+        "value": 598251742.693,
+        "share": 0.17193719246844774,
+        "growth": -0.16311966446298948,
+        "emerging": false
+      },
+      {
+        "partner_code": "DE",
+        "value": 470774980.741,
+        "share": 0.13530044744814448,
+        "growth": -0.16257954460979235,
+        "emerging": false
+      },
+      {
+        "partner_code": "TR",
+        "value": 430701832.422,
+        "share": 0.12378344862700394,
+        "growth": 0.21306369661571614,
+        "emerging": true
+      },
+      {
+        "partner_code": "KH",
+        "value": 163320151.951,
+        "share": 0.04693811383410415,
+        "growth": -0.11307383690083272,
+        "emerging": false
+      },
+      {
+        "partner_code": "VN",
+        "value": 141740166.921,
+        "share": 0.040736039063929405,
+        "growth": 0.13785824792287554,
+        "emerging": false
+      },
+      {
+        "partner_code": "PK",
+        "value": 108845104.238,
+        "share": 0.03128201775455729,
+        "growth": 0.15586675447990125,
+        "emerging": true
+      },
+      {
+        "partner_code": "BE",
+        "value": 100883148.956,
+        "share": 0.028993756576104014,
+        "growth": -0.1125299471591277,
+        "emerging": false
+      },
+      {
+        "partner_code": "GB",
+        "value": 92240667.592,
+        "share": 0.026509912609351743,
+        "growth": -0.10924192205064434,
+        "emerging": false
+      },
+      {
+        "partner_code": "DK",
+        "value": 90463035.107,
+        "share": 0.025999022098049957,
+        "growth": 0.7456182507396812,
+        "emerging": true
+      },
+      {
+        "partner_code": "IN",
+        "value": 87838867.695,
+        "share": 0.02524483795584344,
+        "growth": -0.0503290282381717,
+        "emerging": false
+      },
+      {
+        "partner_code": "PL",
+        "value": 85141892.706,
+        "share": 0.024469728959622367,
+        "growth": 0.1343504268155512,
+        "emerging": false
+      },
+      {
+        "partner_code": "FR",
+        "value": 70281295.6,
+        "share": 0.0201988022535692,
+        "growth": 0.19706388284238527,
+        "emerging": true
+      },
+      {
+        "partner_code": "PT",
+        "value": 61675572.695,
+        "share": 0.017725522645913448,
+        "growth": 0.1328933904595264,
+        "emerging": false
+      },
+      {
+        "partner_code": "ES",
+        "value": 56197223.706,
+        "share": 0.01615104842826895,
+        "growth": -0.04780427793780359,
+        "emerging": false
+      },
+      {
+        "partner_code": "ID",
+        "value": 27491429.614,
+        "share": 0.00790102040237719,
+        "growth": -0.4221275404016393,
+        "emerging": false
+      },
+      {
+        "partner_code": "MA",
+        "value": 24479558.629,
+        "share": 0.007035410485543533,
+        "growth": 0.5787634411021336,
+        "emerging": true
+      },
+      {
+        "partner_code": "NL",
+        "value": 20536073.0,
+        "share": 0.005902055078106181,
+        "growth": 0.10382418721077616,
+        "emerging": false
+      },
+      {
+        "partner_code": "US",
+        "value": 18142473.845,
+        "share": 0.005214136114840009,
+        "growth": -0.38730367223631096,
+        "emerging": false
+      },
+      {
+        "partner_code": "SE",
+        "value": 13836278.925,
+        "share": 0.00397653827444954,
+        "growth": -0.27407198113651804,
+        "emerging": false
+      },
+      {
+        "partner_code": "AT",
+        "value": 11051350.369,
+        "share": 0.0031761514757610706,
+        "growth": 0.1732536357968164,
+        "emerging": true
+      },
+      {
+        "partner_code": "RO",
+        "value": 8054310.476,
+        "share": 0.0023148040058836765,
+        "growth": 0.04224343579437857,
+        "emerging": false
+      },
+      {
+        "partner_code": "CZ",
+        "value": 7812210.877,
+        "share": 0.0022452247261603615,
+        "growth": -0.2158962077917731,
+        "emerging": false
+      },
+      {
+        "partner_code": "TH",
+        "value": 6532701.73,
+        "share": 0.0018774945637999797,
+        "growth": -0.13052965386884466,
+        "emerging": false
+      },
+      {
+        "partner_code": "MX",
+        "value": 5343492.904,
+        "share": 0.001535716659600769,
+        "growth": 0.22056608492513163,
+        "emerging": true
+      },
+      {
+        "partner_code": "JP",
+        "value": 4908350.137,
+        "share": 0.0014106568890363811,
+        "growth": 1.2905724263977618,
+        "emerging": true
+      },
+      {
+        "partner_code": "HU",
+        "value": 4853311.944,
+        "share": 0.0013948389453387014,
+        "growth": 0.8361776744993236,
+        "emerging": true
+      },
+      {
+        "partner_code": "KR",
+        "value": 4137823.551,
+        "share": 0.001189208009802405,
+        "growth": 1.4941574393136559,
+        "emerging": true
+      },
+      {
+        "partner_code": "IE",
+        "value": 2939778.329,
+        "share": 0.00084489053068622,
+        "growth": -0.5258471188298507,
+        "emerging": false
+      },
+      {
+        "partner_code": "FI",
+        "value": 1714002.169,
+        "share": 0.0004926031966009986,
+        "growth": -0.3236102366062659,
+        "emerging": false
+      },
+      {
+        "partner_code": "GR",
+        "value": 1242953.018,
+        "share": 0.00035722395278465867,
+        "growth": -0.33368331952592223,
+        "emerging": false
+      },
+      {
+        "partner_code": "BR",
+        "value": 168418.357,
+        "share": 4.840333491111712e-05,
+        "growth": 0.27179897508555334,
+        "emerging": true
+      }
+    ],
+    "11": [
+      {
+        "partner_code": "DE",
+        "value": 1190371713.134,
+        "share": 0.34628086543218267,
+        "growth": 0.09540390360929299,
+        "emerging": false
+      },
+      {
+        "partner_code": "BE",
+        "value": 521357315.344,
+        "share": 0.1516636025241275,
+        "growth": 0.14977098840319242,
+        "emerging": false
+      },
+      {
+        "partner_code": "FR",
+        "value": 322102937.605,
+        "share": 0.09370021377478072,
+        "growth": 0.0361557680304705,
+        "emerging": false
+      },
+      {
+        "partner_code": "CZ",
+        "value": 282567692.385,
+        "share": 0.08219935334706484,
+        "growth": 0.2436536966517324,
+        "emerging": true
+      },
+      {
+        "partner_code": "CN",
+        "value": 174269665.336,
+        "share": 0.05069529951467668,
+        "growth": -0.1263674550990423,
+        "emerging": false
+      },
+      {
+        "partner_code": "NL",
+        "value": 158869757.0,
+        "share": 0.04621544374582067,
+        "growth": 0.4538373210052167,
+        "emerging": true
+      },
+      {
+        "partner_code": "GB",
+        "value": 116840023.71599999,
+        "share": 0.033988933106425985,
+        "growth": -0.08433095810995087,
+        "emerging": false
+      },
+      {
+        "partner_code": "HU",
+        "value": 110386051.738,
+        "share": 0.0321114632561614,
+        "growth": -0.06544672458568364,
+        "emerging": false
+      },
+      {
+        "partner_code": "ES",
+        "value": 108089239.231,
+        "share": 0.03144331715197899,
+        "growth": 0.44350373246178004,
+        "emerging": true
+      },
+      {
+        "partner_code": "AT",
+        "value": 92272582.965,
+        "share": 0.0268422288031858,
+        "growth": -0.31037622249842123,
+        "emerging": false
+      },
+      {
+        "partner_code": "US",
+        "value": 81478849.912,
+        "share": 0.023702316134229386,
+        "growth": -0.19517990921363856,
+        "emerging": false
+      },
+      {
+        "partner_code": "PL",
+        "value": 80509476.271,
+        "share": 0.023420323929921317,
+        "growth": 0.13176044671809675,
+        "emerging": false
+      },
+      {
+        "partner_code": "TH",
+        "value": 61435009.936,
+        "share": 0.01787153388622066,
+        "growth": -0.11946812300046404,
+        "emerging": false
+      },
+      {
+        "partner_code": "DK",
+        "value": 54498449.617,
+        "share": 0.01585367838454556,
+        "growth": 0.15449931921568388,
+        "emerging": true
+      },
+      {
+        "partner_code": "SE",
+        "value": 24892759.934,
+        "share": 0.00724134012748566,
+        "growth": 0.041801085479981494,
+        "emerging": false
+      },
+      {
+        "partner_code": "IE",
+        "value": 17419396.055,
+        "share": 0.005067327688214586,
+        "growth": 0.2102821232953259,
+        "emerging": true
+      },
+      {
+        "partner_code": "PT",
+        "value": 9968310.903,
+        "share": 0.002899796163082489,
+        "growth": 1.4591844795346618,
+        "emerging": true
+      },
+      {
+        "partner_code": "IN",
+        "value": 6579755.104,
+        "share": 0.0019140603448533535,
+        "growth": -0.6755588637984061,
+        "emerging": false
+      },
+      {
+        "partner_code": "FI",
+        "value": 5125555.541,
+        "share": 0.0014910315735622668,
+        "growth": -0.10783213288340303,
+        "emerging": false
+      },
+      {
+        "partner_code": "BR",
+        "value": 4703571.535,
+        "share": 0.0013682758114890042,
+        "growth": 0.30885319569675296,
+        "emerging": true
+      },
+      {
+        "partner_code": "RO",
+        "value": 3309656.7120000003,
+        "share": 0.0009627839588840929,
+        "growth": 0.08402053145953087,
+        "emerging": false
+      },
+      {
+        "partner_code": "PK",
+        "value": 2892666.038,
+        "share": 0.0008414807643636981,
+        "growth": 0.7650235183160328,
+        "emerging": true
+      },
+      {
+        "partner_code": "GR",
+        "value": 1651417.3590000002,
+        "share": 0.00048039971544575505,
+        "growth": 1.2669197821501739,
+        "emerging": true
+      },
+      {
+        "partner_code": "JP",
+        "value": 1590578.933,
+        "share": 0.00046270172869559414,
+        "growth": -0.38601913059179777,
+        "emerging": false
+      },
+      {
+        "partner_code": "ID",
+        "value": 1413715.666,
+        "share": 0.00041125194667861425,
+        "growth": -0.6963312084000892,
+        "emerging": false
+      },
+      {
+        "partner_code": "TR",
+        "value": 1344455.659,
+        "share": 0.00039110410974736216,
+        "growth": -0.2208555488969782,
+        "emerging": false
+      },
+      {
+        "partner_code": "VN",
+        "value": 1087604.746,
+        "share": 0.0003163858049864744,
+        "growth": -0.3261537559789064,
+        "emerging": false
+      },
+      {
+        "partner_code": "KR",
+        "value": 331580.097,
+        "share": 9.645713324869794e-05,
+        "growth": -0.33395321652042287,
+        "emerging": false
+      },
+      {
+        "partner_code": "MX",
+        "value": 230077.222,
+        "share": 6.69297990462445e-05,
+        "growth": -0.8068404387429615,
+        "emerging": false
+      },
+      {
+        "partner_code": "MA",
+        "value": 230.31,
+        "share": 6.699751450554531e-08,
+        "growth": -0.663626339119449,
+        "emerging": false
+      },
+      {
+        "partner_code": "BD",
+        "value": 114.614,
+        "share": 3.33413795646675e-08,
+        "growth": 37.20466666666667,
+        "emerging": true
+      }
+    ],
+    "7": [
+      {
+        "partner_code": "CN",
+        "value": 1050833324.298,
+        "share": 0.36132268164723347,
+        "growth": -0.20976728870828779,
+        "emerging": false
+      },
+      {
+        "partner_code": "DE",
+        "value": 766989647.429,
+        "share": 0.26372475044017774,
+        "growth": -0.07576979555681172,
+        "emerging": false
+      },
+      {
+        "partner_code": "RO",
+        "value": 281281938.27,
+        "share": 0.09671709288677477,
+        "growth": -0.1479377846789624,
+        "emerging": false
+      },
+      {
+        "partner_code": "FR",
+        "value": 125757261.66,
+        "share": 0.04324087366563019,
+        "growth": 0.3413057738084689,
+        "emerging": true
+      },
+      {
+        "partner_code": "BE",
+        "value": 105399859.507,
+        "share": 0.03624110408541921,
+        "growth": -0.4253769438554435,
+        "emerging": false
+      },
+      {
+        "partner_code": "ES",
+        "value": 96051347.04800001,
+        "share": 0.03302667462929687,
+        "growth": -0.13265484821627246,
+        "emerging": false
+      },
+      {
+        "partner_code": "TR",
+        "value": 84052907.95,
+        "share": 0.02890108392882442,
+        "growth": -0.3543066193247605,
+        "emerging": false
+      },
+      {
+        "partner_code": "PL",
+        "value": 62066025.484,
+        "share": 0.021341027400368952,
+        "growth": 0.039846236739880934,
+        "emerging": false
+      },
+      {
+        "partner_code": "GB",
+        "value": 50685264.708,
+        "share": 0.01742782165433207,
+        "growth": 0.36846718475002227,
+        "emerging": true
+      },
+      {
+        "partner_code": "NL",
+        "value": 44898670.0,
+        "share": 0.01543813606942068,
+        "growth": 0.4615673748217476,
+        "emerging": true
+      },
+      {
+        "partner_code": "CZ",
+        "value": 41734851.162,
+        "share": 0.01435027610118464,
+        "growth": 0.3476160255694729,
+        "emerging": true
+      },
+      {
+        "partner_code": "US",
+        "value": 32104806.836,
+        "share": 0.011039043615693632,
+        "growth": 0.03825110771899482,
+        "emerging": false
+      },
+      {
+        "partner_code": "ID",
+        "value": 28145678.922,
+        "share": 0.009677721432818868,
+        "growth": -0.3310530068977498,
+        "emerging": false
+      },
+      {
+        "partner_code": "DK",
+        "value": 25214262.455,
+        "share": 0.008669771613955938,
+        "growth": 0.6984137361471213,
+        "emerging": true
+      },
+      {
+        "partner_code": "SE",
+        "value": 21311711.851,
+        "share": 0.007327903196865815,
+        "growth": 1.0706630679959015,
+        "emerging": true
+      },
+      {
+        "partner_code": "AT",
+        "value": 20696881.744,
+        "share": 0.007116497583928004,
+        "growth": -0.24101801223249938,
+        "emerging": false
+      },
+      {
+        "partner_code": "HU",
+        "value": 20012901.55,
+        "share": 0.006881315131891881,
+        "growth": -0.11568937707314603,
+        "emerging": false
+      },
+      {
+        "partner_code": "PT",
+        "value": 11839366.614,
+        "share": 0.004070894589142359,
+        "growth": -0.7043305157412305,
+        "emerging": false
+      },
+      {
+        "partner_code": "IE",
+        "value": 11015952.563,
+        "share": 0.003787768648868162,
+        "growth": -0.2386011755117734,
+        "emerging": false
+      },
+      {
+        "partner_code": "KR",
+        "value": 7921095.512,
+        "share": 0.0027236207739145383,
+        "growth": -0.6702162873759537,
+        "emerging": false
+      },
+      {
+        "partner_code": "FI",
+        "value": 6596778.809,
+        "share": 0.0022682624869113694,
+        "growth": 0.2965927825401845,
+        "emerging": true
+      },
+      {
+        "partner_code": "IN",
+        "value": 5476137.608,
+        "share": 0.0018829367891560235,
+        "growth": -0.30905411114329717,
+        "emerging": false
+      },
+      {
+        "partner_code": "JP",
+        "value": 2788729.49,
+        "share": 0.0009588877649922846,
+        "growth": -0.17263239318442167,
+        "emerging": false
+      },
+      {
+        "partner_code": "GR",
+        "value": 2516736.766,
+        "share": 0.0008653647122380629,
+        "growth": -0.1052591641186583,
+        "emerging": false
+      },
+      {
+        "partner_code": "TH",
+        "value": 1207768.867,
+        "share": 0.0004152840186392169,
+        "growth": 0.22567637761089596,
+        "emerging": true
+      },
+      {
+        "partner_code": "MX",
+        "value": 1120606.041,
+        "share": 0.0003853136082020427,
+        "growth": 0.25922733833753,
+        "emerging": true
+      },
+      {
+        "partner_code": "VN",
+        "value": 417555.303,
+        "share": 0.00014357386497689531,
+        "growth": -0.48821980167909373,
+        "emerging": false
+      },
+      {
+        "partner_code": "BR",
+        "value": 147675.77000000002,
+        "share": 5.07774201644831e-05,
+        "growth": 0.25471919157064893,
+        "emerging": true
+      },
+      {
+        "partner_code": "PK",
+        "value": 5149.8099999999995,
+        "share": 1.7707310152319278e-06,
+        "growth": -0.9534420125451555,
+        "emerging": false
+      },
+      {
+        "partner_code": "KH",
+        "value": 3075.67,
+        "share": 1.0575505235374477e-06,
+        "growth": -0.502368935947072,
+        "emerging": false
+      },
+      {
+        "partner_code": "MA",
+        "value": 1715.0,
+        "share": 5.896923752765164e-07,
+        "growth": -0.9254759360928558,
+        "emerging": false
+      },
+      {
+        "partner_code": "BD",
+        "value": 355.58299999999997,
+        "share": 1.2226506348568483e-07,
+        "growth": -0.9901203439095997,
+        "emerging": false
+      }
+    ],
+    "2": [
+      {
+        "partner_code": "DE",
+        "value": 36322847.717,
+        "share": 0.25447102687410106,
+        "growth": 0.061541980228823547,
+        "emerging": false
+      },
+      {
+        "partner_code": "IN",
+        "value": 24871940.251000002,
+        "share": 0.17424812683563462,
+        "growth": -0.06710894691399258,
+        "emerging": false
+      },
+      {
+        "partner_code": "PL",
+        "value": 22014156.589,
+        "share": 0.15422703298530827,
+        "growth": 0.2042053666222709,
+        "emerging": true
+      },
+      {
+        "partner_code": "CN",
+        "value": 18595670.079,
+        "share": 0.1302777606338504,
+        "growth": -0.29126312338182964,
+        "emerging": false
+      },
+      {
+        "partner_code": "GB",
+        "value": 8924125.916000001,
+        "share": 0.06252074461484046,
+        "growth": -0.12011436569232178,
+        "emerging": false
+      },
+      {
+        "partner_code": "FR",
+        "value": 6567786.237,
+        "share": 0.04601267282346815,
+        "growth": 0.08997613582215418,
+        "emerging": false
+      },
+      {
+        "partner_code": "BE",
+        "value": 5879077.567,
+        "share": 0.0411877096532492,
+        "growth": -0.5495864033652575,
+        "emerging": false
+      },
+      {
+        "partner_code": "ID",
+        "value": 4933842.872,
+        "share": 0.03456557348849301,
+        "growth": -0.5316730759807344,
+        "emerging": false
+      },
+      {
+        "partner_code": "JP",
+        "value": 3097294.034,
+        "share": 0.021699058386166207,
+        "growth": 0.051120803009813046,
+        "emerging": false
+      },
+      {
+        "partner_code": "US",
+        "value": 2730902.191,
+        "share": 0.01913218617248601,
+        "growth": 0.005359866644674119,
+        "emerging": false
+      },
+      {
+        "partner_code": "NL",
+        "value": 2421259.0,
+        "share": 0.016962884321698984,
+        "growth": 0.10173204301273672,
+        "emerging": false
+      },
+      {
+        "partner_code": "AT",
+        "value": 1732457.278,
+        "share": 0.012137269246701611,
+        "growth": -0.3390738419328987,
+        "emerging": false
+      },
+      {
+        "partner_code": "VN",
+        "value": 1049109.7,
+        "share": 0.007349864876856348,
+        "growth": -0.5362169937857126,
+        "emerging": false
+      },
+      {
+        "partner_code": "TR",
+        "value": 719064.027,
+        "share": 0.005037627081570388,
+        "growth": -0.22843173227286875,
+        "emerging": false
+      },
+      {
+        "partner_code": "CZ",
+        "value": 621299.806,
+        "share": 0.004352709370733169,
+        "growth": -0.6016600970984238,
+        "emerging": false
+      },
+      {
+        "partner_code": "ES",
+        "value": 577098.091,
+        "share": 0.004043040484271329,
+        "growth": 0.26453627104873995,
+        "emerging": true
+      },
+      {
+        "partner_code": "MA",
+        "value": 384906.465,
+        "share": 0.0026965821667442763,
+        "growth": -0.8031473287045863,
+        "emerging": false
+      },
+      {
+        "partner_code": "DK",
+        "value": 342967.263,
+        "share": 0.0024027640200402814,
+        "growth": 0.029593769706275728,
+        "emerging": false
+      },
+      {
+        "partner_code": "TH",
+        "value": 255779.025,
+        "share": 0.0017919396532927508,
+        "growth": -0.537285135350059,
+        "emerging": false
+      },
+      {
+        "partner_code": "PK",
+        "value": 151926.891,
+        "share": 0.0010643711711090678,
+        "growth": 0.5774748613807001,
+        "emerging": true
+      },
+      {
+        "partner_code": "BR",
+        "value": 126407.86,
+        "share": 0.0008855896484157706,
+        "growth": 0.8876544220714724,
+        "emerging": true
+      },
+      {
+        "partner_code": "SE",
+        "value": 121332.811,
+        "share": 0.0008500348114016576,
+        "growth": -0.5382293932190887,
+        "emerging": false
+      },
+      {
+        "partner_code": "GR",
+        "value": 81106.859,
+        "share": 0.0005682193713738803,
+        "growth": -0.9282539954615918,
+        "emerging": false
+      },
+      {
+        "partner_code": "KR",
+        "value": 47264.356,
+        "share": 0.00033112517222139365,
+        "growth": -0.9393911832249948,
+        "emerging": false
+      },
+      {
+        "partner_code": "IE",
+        "value": 44642.664,
+        "share": 0.00031275809206882685,
+        "growth": -0.8598441923977641,
+        "emerging": false
+      },
+      {
+        "partner_code": "FI",
+        "value": 38773.211,
+        "share": 0.00027163781031844453,
+        "growth": -0.7678794834298055,
+        "emerging": false
+      },
+      {
+        "partner_code": "HU",
+        "value": 29122.889,
+        "share": 0.00020402947277456886,
+        "growth": -0.8035095197042016,
+        "emerging": false
+      },
+      {
+        "partner_code": "BD",
+        "value": 24812.0,
+        "share": 0.00017382819673153314,
+        "growth": -0.6069329287883404,
+        "emerging": false
+      },
+      {
+        "partner_code": "PT",
+        "value": 15979.349,
+        "share": 0.00011194830814177928,
+        "growth": -0.9330505894545004,
+        "emerging": false
+      },
+      {
+        "partner_code": "RO",
+        "value": 15630.666,
+        "share": 0.00010950550074532025,
+        "growth": -0.9496641976993229,
+        "emerging": false
+      },
+      {
+        "partner_code": "MX",
+        "value": 54.063,
+        "share": 3.78755191032439e-07,
+        "growth": -0.8796755024370702,
+        "emerging": false
+      }
+    ],
+    "6": [
+      {
+        "partner_code": "CN",
+        "value": 1346475005.444,
+        "share": 0.46890218002492823,
+        "growth": -0.17501528587372672,
+        "emerging": false
+      },
+      {
+        "partner_code": "DE",
+        "value": 443304172.002,
+        "share": 0.1543781294308836,
+        "growth": -0.19263431836310957,
+        "emerging": false
+      },
+      {
+        "partner_code": "CZ",
+        "value": 282192764.148,
+        "share": 0.09827200784363972,
+        "growth": -0.007878588128082857,
+        "emerging": false
+      },
+      {
+        "partner_code": "HU",
+        "value": 135574294.65,
+        "share": 0.047212968721810335,
+        "growth": 0.2890563779806422,
+        "emerging": true
+      },
+      {
+        "partner_code": "VN",
+        "value": 115992189.19,
+        "share": 0.04039361306905222,
+        "growth": -0.23832186790878626,
+        "emerging": false
+      },
+      {
+        "partner_code": "BE",
+        "value": 112540806.374,
+        "share": 0.03919168884470368,
+        "growth": -0.008695102411236288,
+        "emerging": false
+      },
+      {
+        "partner_code": "GB",
+        "value": 95422893.846,
+        "share": 0.033230474214352296,
+        "growth": 0.1524608262345428,
+        "emerging": true
+      },
+      {
+        "partner_code": "FR",
+        "value": 65710468.132,
+        "share": 0.02288329277036464,
+        "growth": -0.1103497293521444,
+        "emerging": false
+      },
+      {
+        "partner_code": "DK",
+        "value": 45543113.091,
+        "share": 0.01586012731550843,
+        "growth": 0.129810264368756,
+        "emerging": false
+      },
+      {
+        "partner_code": "NL",
+        "value": 34679445.0,
+        "share": 0.012076917355916641,
+        "growth": -0.10275564972517878,
+        "emerging": false
+      },
+      {
+        "partner_code": "ID",
+        "value": 30398259.119000003,
+        "share": 0.01058601898455706,
+        "growth": -0.1969056203901358,
+        "emerging": false
+      },
+      {
+        "partner_code": "ES",
+        "value": 28451254.211,
+        "share": 0.009907985718295731,
+        "growth": -0.042021928548473815,
+        "emerging": false
+      },
+      {
+        "partner_code": "US",
+        "value": 26479043.942,
+        "share": 0.009221174829966835,
+        "growth": 0.4342219268504268,
+        "emerging": true
+      },
+      {
+        "partner_code": "IN",
+        "value": 23257266.652000003,
+        "share": 0.00809920941009062,
+        "growth": 0.07840498138618293,
+        "emerging": false
+      },
+      {
+        "partner_code": "PL",
+        "value": 18839929.283,
+        "share": 0.006560897065743263,
+        "growth": 0.0568068721707821,
+        "emerging": false
+      },
+      {
+        "partner_code": "SE",
+        "value": 15133562.772,
+        "share": 0.005270176235462267,
+        "growth": 0.030148516812210778,
+        "emerging": false
+      },
+      {
+        "partner_code": "AT",
+        "value": 10486176.030000001,
+        "share": 0.003651750519476424,
+        "growth": 0.7272289627304566,
+        "emerging": true
+      },
+      {
+        "partner_code": "TH",
+        "value": 8541969.724,
+        "share": 0.0029746918502729807,
+        "growth": 0.05247533800231589,
+        "emerging": false
+      },
+      {
+        "partner_code": "TR",
+        "value": 4907539.471,
+        "share": 0.0017090224082930356,
+        "growth": -0.554944750581963,
+        "emerging": false
+      },
+      {
+        "partner_code": "BD",
+        "value": 4423538.5309999995,
+        "share": 0.0015404718633645923,
+        "growth": -0.348692409358243,
+        "emerging": false
+      },
+      {
+        "partner_code": "FI",
+        "value": 4312996.371,
+        "share": 0.001501976191629808,
+        "growth": 2.790647179723826,
+        "emerging": true
+      },
+      {
+        "partner_code": "GR",
+        "value": 4029004.1610000003,
+        "share": 0.001403077537112871,
+        "growth": 0.5200968486092099,
+        "emerging": true
+      },
+      {
+        "partner_code": "MX",
+        "value": 3752850.513,
+        "share": 0.0013069086167500769,
+        "growth": -0.2862171248741431,
+        "emerging": false
+      },
+      {
+        "partner_code": "JP",
+        "value": 3749675.608,
+        "share": 0.0013058029743357336,
+        "growth": 0.2994992882686863,
+        "emerging": true
+      },
+      {
+        "partner_code": "PT",
+        "value": 2598863.301,
+        "share": 0.0009050392042174179,
+        "growth": -0.05705466947827827,
+        "emerging": false
+      },
+      {
+        "partner_code": "RO",
+        "value": 2506431.5779999997,
+        "share": 0.00087285038805453,
+        "growth": -0.25334482127967295,
+        "emerging": false
+      },
+      {
+        "partner_code": "KR",
+        "value": 660286.643,
+        "share": 0.00022994102756623226,
+        "growth": -0.40892312622365473,
+        "emerging": false
+      },
+      {
+        "partner_code": "KH",
+        "value": 579975.764,
+        "share": 0.0002019732256459875,
+        "growth": -0.24096699333597318,
+        "emerging": false
+      },
+      {
+        "partner_code": "IE",
+        "value": 570983.5160000001,
+        "share": 0.00019884172697465913,
+        "growth": -0.3444248680282558,
+        "emerging": false
+      },
+      {
+        "partner_code": "PK",
+        "value": 398310.709,
+        "share": 0.00013870941459903877,
+        "growth": -0.3492306924988875,
+        "emerging": false
+      },
+      {
+        "partner_code": "BR",
+        "value": 28467.268,
+        "share": 9.913562428254848e-06,
+        "growth": -0.7197154575986805,
+        "emerging": false
+      },
+      {
+        "partner_code": "MA",
+        "value": 6224.522,
+        "share": 2.1676540029428085e-06,
+        "growth": -0.9048144816413329,
+        "emerging": false
+      }
+    ]
+  },
+  "triggers": [
+    {
+      "id": 1,
+      "score": 17.8618,
+      "market_code": "FR",
+      "market": "France",
+      "category_id": 3,
+      "category": "Coffee",
+      "focus_partner": "VN",
+      "focus_partner_name": "Vietnam",
+      "rationale": "Demand for Coffee is rising in France (momentum 12.56, +508%). Top origins: Germany (41%, -0%), Belgium (15%, -44%), Brazil (15%, -22%), Vietnam (10%, +32%), France (5%, -26%). Emerging: Vietnam (10%, +32%), Indonesia (1%, +84%), India (1%, +59%), Turkey (0%, +68%).",
+      "status": "new",
+      "created_at": "2026-06-08T04:31:56.996699",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "DE",
+            "value": 721712494.95,
+            "share": 0.407614655111883,
+            "growth": -0.0026970363823728616,
+            "emerging": false
+          },
+          {
+            "partner_code": "BE",
+            "value": 258631599.744,
+            "share": 0.1460720592595376,
+            "growth": -0.4375321819120082,
+            "emerging": false
+          },
+          {
+            "partner_code": "BR",
+            "value": 257092983.999,
+            "share": 0.14520306734012883,
+            "growth": -0.2164888675411614,
+            "emerging": false
+          },
+          {
+            "partner_code": "VN",
+            "value": 179137821.342,
+            "share": 0.10117491629249427,
+            "growth": 0.31577786644133654,
+            "emerging": true
+          },
+          {
+            "partner_code": "FR",
+            "value": 88248743.937,
+            "share": 0.04984184363668143,
+            "growth": -0.2578401918019015,
+            "emerging": false
+          }
+        ],
+        "emerging_suppliers": [
+          {
+            "partner_code": "VN",
+            "value": 179137821.342,
+            "share": 0.10117491629249427,
+            "growth": 0.31577786644133654,
+            "emerging": true
+          },
+          {
+            "partner_code": "ID",
+            "value": 20158247.068,
+            "share": 0.011385138796650878,
+            "growth": 0.8436680035864351,
+            "emerging": true
+          },
+          {
+            "partner_code": "IN",
+            "value": 9551888.93,
+            "share": 0.00539479354883374,
+            "growth": 0.5942407677001067,
+            "emerging": true
+          },
+          {
+            "partner_code": "TR",
+            "value": 2854393.921,
+            "share": 0.0016121278234797318,
+            "growth": 0.6754134418555275,
+            "emerging": true
+          }
+        ],
+        "competitors": [],
+        "demand_momentum": 12.562486723370732,
+        "demand_growth": 5.079999997155199
+      }
+    },
+    {
+      "id": 2,
+      "score": 2.642,
+      "market_code": null,
+      "market": "Global",
+      "category_id": 8,
+      "category": "Drinkware & Tumblers",
+      "focus_partner": "PL",
+      "focus_partner_name": "Poland",
+      "rationale": "Demand for Drinkware & Tumblers is rising in Global (momentum 0.88, +16%). Top origins: China (71%, -12%), Germany (14%, +15%), Belgium (3%, -26%), Poland (2%, +400%), France (1%, -28%). Emerging: Poland (2%, +400%), United States (1%, +37%), Spain (1%, +275%), Denmark (1%, +126%), Romania (1%, +316%).",
+      "status": "new",
+      "created_at": "2026-06-08T04:31:56.996707",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "CN",
+            "value": 100153573.59200001,
+            "share": 0.706632091602891,
+            "growth": -0.12399004001438821,
+            "emerging": false
+          },
+          {
+            "partner_code": "DE",
+            "value": 20026912.783,
+            "share": 0.14129959382028842,
+            "growth": 0.14673557897608364,
+            "emerging": false
+          },
+          {
+            "partner_code": "BE",
+            "value": 3677780.642,
+            "share": 0.025948528188320896,
+            "growth": -0.2599888760197053,
+            "emerging": false
+          },
+          {
+            "partner_code": "PL",
+            "value": 3081883.722,
+            "share": 0.02174418607792659,
+            "growth": 4.0042788799536915,
+            "emerging": true
+          },
+          {
+            "partner_code": "FR",
+            "value": 1753608.732,
+            "share": 0.012372561074997268,
+            "growth": -0.279390853416027,
+            "emerging": false
+          }
+        ],
+        "emerging_suppliers": [
+          {
+            "partner_code": "PL",
+            "value": 3081883.722,
+            "share": 0.02174418607792659,
+            "growth": 4.0042788799536915,
+            "emerging": true
+          },
+          {
+            "partner_code": "US",
+            "value": 1696883.001,
+            "share": 0.011972333499418928,
+            "growth": 0.36553975758094076,
+            "emerging": true
+          },
+          {
+            "partner_code": "ES",
+            "value": 1553453.879,
+            "share": 0.01096037140120657,
+            "growth": 2.7471911038062746,
+            "emerging": true
+          },
+          {
+            "partner_code": "DK",
+            "value": 1341482.0699999998,
+            "share": 0.009464807365072334,
+            "growth": 1.261959852722879,
+            "emerging": true
+          },
+          {
+            "partner_code": "RO",
+            "value": 1295317.507,
+            "share": 0.00913909395774536,
+            "growth": 3.159692268628698,
+            "emerging": true
+          }
+        ],
+        "competitors": [],
+        "demand_momentum": 0.8800260843934445,
+        "demand_growth": 0.1550695825043536
+      }
+    },
+    {
+      "id": 3,
+      "score": 0.8912,
+      "market_code": null,
+      "market": "Global",
+      "category_id": 3,
+      "category": "Coffee",
+      "focus_partner": "VN",
+      "focus_partner_name": "Vietnam",
+      "rationale": "Demand for Coffee is rising in Global (momentum 0.63, +8%). Top origins: Germany (41%, -0%), Belgium (15%, -44%), Brazil (15%, -22%), Vietnam (10%, +32%), France (5%, -26%). Emerging: Vietnam (10%, +32%), Indonesia (1%, +84%), India (1%, +59%), Turkey (0%, +68%).",
+      "status": "new",
+      "created_at": "2026-06-08T04:31:56.996708",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "DE",
+            "value": 721712494.95,
+            "share": 0.407614655111883,
+            "growth": -0.0026970363823728616,
+            "emerging": false
+          },
+          {
+            "partner_code": "BE",
+            "value": 258631599.744,
+            "share": 0.1460720592595376,
+            "growth": -0.4375321819120082,
+            "emerging": false
+          },
+          {
+            "partner_code": "BR",
+            "value": 257092983.999,
+            "share": 0.14520306734012883,
+            "growth": -0.2164888675411614,
+            "emerging": false
+          },
+          {
+            "partner_code": "VN",
+            "value": 179137821.342,
+            "share": 0.10117491629249427,
+            "growth": 0.31577786644133654,
+            "emerging": true
+          },
+          {
+            "partner_code": "FR",
+            "value": 88248743.937,
+            "share": 0.04984184363668143,
+            "growth": -0.2578401918019015,
+            "emerging": false
+          }
+        ],
+        "emerging_suppliers": [
+          {
+            "partner_code": "VN",
+            "value": 179137821.342,
+            "share": 0.10117491629249427,
+            "growth": 0.31577786644133654,
+            "emerging": true
+          },
+          {
+            "partner_code": "ID",
+            "value": 20158247.068,
+            "share": 0.011385138796650878,
+            "growth": 0.8436680035864351,
+            "emerging": true
+          },
+          {
+            "partner_code": "IN",
+            "value": 9551888.93,
+            "share": 0.00539479354883374,
+            "growth": 0.5942407677001067,
+            "emerging": true
+          },
+          {
+            "partner_code": "TR",
+            "value": 2854393.921,
+            "share": 0.0016121278234797318,
+            "growth": 0.6754134418555275,
+            "emerging": true
+          }
+        ],
+        "competitors": [],
+        "demand_momentum": 0.6268036276591517,
+        "demand_growth": 0.07881679906729115
+      }
+    },
+    {
+      "id": 4,
+      "score": 0.8298,
+      "market_code": "NL",
+      "market": "Netherlands",
+      "category_id": 5,
+      "category": "Knitwear & Apparel",
+      "focus_partner": "TR",
+      "focus_partner_name": "Turkey",
+      "rationale": "Demand for Knitwear & Apparel is rising in Netherlands (momentum 0.60, +30%). Top origins: China (22%, -18%), Bangladesh (17%, -16%), Germany (14%, -16%), Turkey (12%, +21%), Cambodia (5%, -11%). Emerging: Turkey (12%, +21%), Pakistan (3%, +16%), Denmark (3%, +75%), France (2%, +20%), Morocco (1%, +58%).",
+      "status": "new",
+      "created_at": "2026-06-08T04:31:56.996709",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "CN",
+            "value": 757878172.0139999,
+            "share": 0.2178137326314071,
+            "growth": -0.17562430542024293,
+            "emerging": false
+          },
+          {
+            "partner_code": "BD",
+            "value": 598251742.693,
+            "share": 0.17193719246844774,
+            "growth": -0.16311966446298948,
+            "emerging": false
+          },
+          {
+            "partner_code": "DE",
+            "value": 470774980.741,
+            "share": 0.13530044744814448,
+            "growth": -0.16257954460979235,
+            "emerging": false
+          },
+          {
+            "partner_code": "TR",
+            "value": 430701832.422,
+            "share": 0.12378344862700394,
+            "growth": 0.21306369661571614,
+            "emerging": true
+          },
+          {
+            "partner_code": "KH",
+            "value": 163320151.951,
+            "share": 0.04693811383410415,
+            "growth": -0.11307383690083272,
+            "emerging": false
+          }
+        ],
+        "emerging_suppliers": [
+          {
+            "partner_code": "TR",
+            "value": 430701832.422,
+            "share": 0.12378344862700394,
+            "growth": 0.21306369661571614,
+            "emerging": true
+          },
+          {
+            "partner_code": "PK",
+            "value": 108845104.238,
+            "share": 0.03128201775455729,
+            "growth": 0.15586675447990125,
+            "emerging": true
+          },
+          {
+            "partner_code": "DK",
+            "value": 90463035.107,
+            "share": 0.025999022098049957,
+            "growth": 0.7456182507396812,
+            "emerging": true
+          },
+          {
+            "partner_code": "FR",
+            "value": 70281295.6,
+            "share": 0.0201988022535692,
+            "growth": 0.19706388284238527,
+            "emerging": true
+          },
+          {
+            "partner_code": "MA",
+            "value": 24479558.629,
+            "share": 0.007035410485543533,
+            "growth": 0.5787634411021336,
+            "emerging": true
+          }
+        ],
+        "competitors": [],
+        "demand_momentum": 0.6044709060417852,
+        "demand_growth": 0.29999999994
+      }
+    },
+    {
+      "id": 5,
+      "score": 0.7902,
+      "market_code": "IT",
+      "market": "Italy",
+      "category_id": 3,
+      "category": "Coffee",
+      "focus_partner": "VN",
+      "focus_partner_name": "Vietnam",
+      "rationale": "Demand for Coffee is rising in Italy (momentum 0.56, +53%). Top origins: Germany (41%, -0%), Belgium (15%, -44%), Brazil (15%, -22%), Vietnam (10%, +32%), France (5%, -26%). Emerging: Vietnam (10%, +32%), Indonesia (1%, +84%), India (1%, +59%), Turkey (0%, +68%).",
+      "status": "new",
+      "created_at": "2026-06-08T04:31:56.996712",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "DE",
+            "value": 721712494.95,
+            "share": 0.407614655111883,
+            "growth": -0.0026970363823728616,
+            "emerging": false
+          },
+          {
+            "partner_code": "BE",
+            "value": 258631599.744,
+            "share": 0.1460720592595376,
+            "growth": -0.4375321819120082,
+            "emerging": false
+          },
+          {
+            "partner_code": "BR",
+            "value": 257092983.999,
+            "share": 0.14520306734012883,
+            "growth": -0.2164888675411614,
+            "emerging": false
+          },
+          {
+            "partner_code": "VN",
+            "value": 179137821.342,
+            "share": 0.10117491629249427,
+            "growth": 0.31577786644133654,
+            "emerging": true
+          },
+          {
+            "partner_code": "FR",
+            "value": 88248743.937,
+            "share": 0.04984184363668143,
+            "growth": -0.2578401918019015,
+            "emerging": false
+          }
+        ],
+        "emerging_suppliers": [
+          {
+            "partner_code": "VN",
+            "value": 179137821.342,
+            "share": 0.10117491629249427,
+            "growth": 0.31577786644133654,
+            "emerging": true
+          },
+          {
+            "partner_code": "ID",
+            "value": 20158247.068,
+            "share": 0.011385138796650878,
+            "growth": 0.8436680035864351,
+            "emerging": true
+          },
+          {
+            "partner_code": "IN",
+            "value": 9551888.93,
+            "share": 0.00539479354883374,
+            "growth": 0.5942407677001067,
+            "emerging": true
+          },
+          {
+            "partner_code": "TR",
+            "value": 2854393.921,
+            "share": 0.0016121278234797318,
+            "growth": 0.6754134418555275,
+            "emerging": true
+          }
+        ],
+        "competitors": [],
+        "demand_momentum": 0.5557881831004158,
+        "demand_growth": 0.5294117642698963
+      }
+    },
+    {
+      "id": 6,
+      "score": 0.427,
+      "market_code": "NL",
+      "market": "Netherlands",
+      "category_id": 2,
+      "category": "Tea & Matcha",
+      "focus_partner": "PL",
+      "focus_partner_name": "Poland",
+      "rationale": "Demand for Tea & Matcha is rising in Netherlands (momentum 0.30, +5%). Top origins: Germany (25%, +6%), India (17%, -7%), Poland (15%, +20%), China (13%, -29%), United Kingdom (6%, -12%). Emerging: Poland (15%, +20%), Spain (0%, +26%), Pakistan (0%, +58%), Brazil (0%, +89%).",
+      "status": "new",
+      "created_at": "2026-06-08T04:31:56.996713",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "DE",
+            "value": 36322847.717,
+            "share": 0.25447102687410106,
+            "growth": 0.061541980228823547,
+            "emerging": false
+          },
+          {
+            "partner_code": "IN",
+            "value": 24871940.251000002,
+            "share": 0.17424812683563462,
+            "growth": -0.06710894691399258,
+            "emerging": false
+          },
+          {
+            "partner_code": "PL",
+            "value": 22014156.589,
+            "share": 0.15422703298530827,
+            "growth": 0.2042053666222709,
+            "emerging": true
+          },
+          {
+            "partner_code": "CN",
+            "value": 18595670.079,
+            "share": 0.1302777606338504,
+            "growth": -0.29126312338182964,
+            "emerging": false
+          },
+          {
+            "partner_code": "GB",
+            "value": 8924125.916000001,
+            "share": 0.06252074461484046,
+            "growth": -0.12011436569232178,
+            "emerging": false
+          }
+        ],
+        "emerging_suppliers": [
+          {
+            "partner_code": "PL",
+            "value": 22014156.589,
+            "share": 0.15422703298530827,
+            "growth": 0.2042053666222709,
+            "emerging": true
+          },
+          {
+            "partner_code": "ES",
+            "value": 577098.091,
+            "share": 0.004043040484271329,
+            "growth": 0.26453627104873995,
+            "emerging": true
+          },
+          {
+            "partner_code": "PK",
+            "value": 151926.891,
+            "share": 0.0010643711711090678,
+            "growth": 0.5774748613807001,
+            "emerging": true
+          },
+          {
+            "partner_code": "BR",
+            "value": 126407.86,
+            "share": 0.0008855896484157706,
+            "growth": 0.8876544220714724,
+            "emerging": true
+          }
+        ],
+        "competitors": [],
+        "demand_momentum": 0.29576448916915,
+        "demand_growth": 0.05242043327073178
+      }
+    },
+    {
+      "id": 7,
+      "score": 0.4098,
+      "market_code": "NL",
+      "market": "Netherlands",
+      "category_id": 4,
+      "category": "Footwear",
+      "focus_partner": "GB",
+      "focus_partner_name": "United Kingdom",
+      "rationale": "Demand for Footwear is rising in Netherlands (momentum 0.33, +27%). Top origins: China (27%, -16%), Vietnam (24%, +10%), Belgium (12%, -27%), Germany (12%, -18%), Indonesia (6%, -3%). Emerging: United Kingdom (2%, +29%), Netherlands (1%, +51%), Portugal (1%, +25%), India (1%, +45%), Romania (0%, +20%).",
+      "status": "new",
+      "created_at": "2026-06-08T04:31:56.996714",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "CN",
+            "value": 705219891.431,
+            "share": 0.2748259127900699,
+            "growth": -0.15620102619976797,
+            "emerging": false
+          },
+          {
+            "partner_code": "VN",
+            "value": 607470428.021,
+            "share": 0.23673270834020477,
+            "growth": 0.10316533846471343,
+            "emerging": false
+          },
+          {
+            "partner_code": "BE",
+            "value": 311467105.184,
+            "share": 0.12137949103020827,
+            "growth": -0.26778658985357917,
+            "emerging": false
+          },
+          {
+            "partner_code": "DE",
+            "value": 302754945.78999996,
+            "share": 0.11798434125221464,
+            "growth": -0.18069780381163245,
+            "emerging": false
+          },
+          {
+            "partner_code": "ID",
+            "value": 144520108.49400002,
+            "share": 0.05631983898354001,
+            "growth": -0.02776362500628762,
+            "emerging": false
+          }
+        ],
+        "emerging_suppliers": [
+          {
+            "partner_code": "GB",
+            "value": 60788236.117,
+            "share": 0.023689323969369888,
+            "growth": 0.28611903600306515,
+            "emerging": true
+          },
+          {
+            "partner_code": "NL",
+            "value": 25037193.0,
+            "share": 0.009757055215733921,
+            "growth": 0.5138671739686896,
+            "emerging": true
+          },
+          {
+            "partner_code": "PT",
+            "value": 20753817.705,
+            "share": 0.00808781340963267,
+            "growth": 0.2508297555488084,
+            "emerging": true
+          },
+          {
+            "partner_code": "IN",
+            "value": 20494665.625,
+            "share": 0.007986821211592249,
+            "growth": 0.450722693774183,
+            "emerging": true
+          },
+          {
+            "partner_code": "RO",
+            "value": 8323076.635,
+            "share": 0.0032435232772491662,
+            "growth": 0.19860182715161748,
+            "emerging": true
+          }
+        ],
+        "competitors": [],
+        "demand_momentum": 0.32606276538841233,
+        "demand_growth": 0.2692307690857988
+      }
+    },
+    {
+      "id": 8,
+      "score": 0.3838,
+      "market_code": "PL",
+      "market": "Poland",
+      "category_id": 3,
+      "category": "Coffee",
+      "focus_partner": "VN",
+      "focus_partner_name": "Vietnam",
+      "rationale": "Demand for Coffee is rising in Poland (momentum 0.27, +28%). Top origins: Germany (41%, -0%), Belgium (15%, -44%), Brazil (15%, -22%), Vietnam (10%, +32%), France (5%, -26%). Emerging: Vietnam (10%, +32%), Indonesia (1%, +84%), India (1%, +59%), Turkey (0%, +68%).",
+      "status": "new",
+      "created_at": "2026-06-08T04:31:56.996716",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "DE",
+            "value": 721712494.95,
+            "share": 0.407614655111883,
+            "growth": -0.0026970363823728616,
+            "emerging": false
+          },
+          {
+            "partner_code": "BE",
+            "value": 258631599.744,
+            "share": 0.1460720592595376,
+            "growth": -0.4375321819120082,
+            "emerging": false
+          },
+          {
+            "partner_code": "BR",
+            "value": 257092983.999,
+            "share": 0.14520306734012883,
+            "growth": -0.2164888675411614,
+            "emerging": false
+          },
+          {
+            "partner_code": "VN",
+            "value": 179137821.342,
+            "share": 0.10117491629249427,
+            "growth": 0.31577786644133654,
+            "emerging": true
+          },
+          {
+            "partner_code": "FR",
+            "value": 88248743.937,
+            "share": 0.04984184363668143,
+            "growth": -0.2578401918019015,
+            "emerging": false
+          }
+        ],
+        "emerging_suppliers": [
+          {
+            "partner_code": "VN",
+            "value": 179137821.342,
+            "share": 0.10117491629249427,
+            "growth": 0.31577786644133654,
+            "emerging": true
+          },
+          {
+            "partner_code": "ID",
+            "value": 20158247.068,
+            "share": 0.011385138796650878,
+            "growth": 0.8436680035864351,
+            "emerging": true
+          },
+          {
+            "partner_code": "IN",
+            "value": 9551888.93,
+            "share": 0.00539479354883374,
+            "growth": 0.5942407677001067,
+            "emerging": true
+          },
+          {
+            "partner_code": "TR",
+            "value": 2854393.921,
+            "share": 0.0016121278234797318,
+            "growth": 0.6754134418555275,
+            "emerging": true
+          }
+        ],
+        "competitors": [],
+        "demand_momentum": 0.2699612728536316,
+        "demand_growth": 0.2777777775617282
+      }
+    },
+    {
+      "id": 9,
+      "score": 0.3498,
+      "market_code": "DE",
+      "market": "Germany",
+      "category_id": 4,
+      "category": "Footwear",
+      "focus_partner": "GB",
+      "focus_partner_name": "United Kingdom",
+      "rationale": "Demand for Footwear is rising in Germany (momentum 0.28, +18%). Top origins: China (27%, -16%), Vietnam (24%, +10%), Belgium (12%, -27%), Germany (12%, -18%), Indonesia (6%, -3%). Emerging: United Kingdom (2%, +29%), Netherlands (1%, +51%), Portugal (1%, +25%), India (1%, +45%), Romania (0%, +20%).",
+      "status": "new",
+      "created_at": "2026-06-08T04:31:56.996717",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "CN",
+            "value": 705219891.431,
+            "share": 0.2748259127900699,
+            "growth": -0.15620102619976797,
+            "emerging": false
+          },
+          {
+            "partner_code": "VN",
+            "value": 607470428.021,
+            "share": 0.23673270834020477,
+            "growth": 0.10316533846471343,
+            "emerging": false
+          },
+          {
+            "partner_code": "BE",
+            "value": 311467105.184,
+            "share": 0.12137949103020827,
+            "growth": -0.26778658985357917,
+            "emerging": false
+          },
+          {
+            "partner_code": "DE",
+            "value": 302754945.78999996,
+            "share": 0.11798434125221464,
+            "growth": -0.18069780381163245,
+            "emerging": false
+          },
+          {
+            "partner_code": "ID",
+            "value": 144520108.49400002,
+            "share": 0.05631983898354001,
+            "growth": -0.02776362500628762,
+            "emerging": false
+          }
+        ],
+        "emerging_suppliers": [
+          {
+            "partner_code": "GB",
+            "value": 60788236.117,
+            "share": 0.023689323969369888,
+            "growth": 0.28611903600306515,
+            "emerging": true
+          },
+          {
+            "partner_code": "NL",
+            "value": 25037193.0,
+            "share": 0.009757055215733921,
+            "growth": 0.5138671739686896,
+            "emerging": true
+          },
+          {
+            "partner_code": "PT",
+            "value": 20753817.705,
+            "share": 0.00808781340963267,
+            "growth": 0.2508297555488084,
+            "emerging": true
+          },
+          {
+            "partner_code": "IN",
+            "value": 20494665.625,
+            "share": 0.007986821211592249,
+            "growth": 0.450722693774183,
+            "emerging": true
+          },
+          {
+            "partner_code": "RO",
+            "value": 8323076.635,
+            "share": 0.0032435232772491662,
+            "growth": 0.19860182715161748,
+            "emerging": true
+          }
+        ],
+        "competitors": [],
+        "demand_momentum": 0.27833516254019913,
+        "demand_growth": 0.17777777772246905
+      }
+    },
+    {
+      "id": 10,
+      "score": 0.3167,
+      "market_code": null,
+      "market": "Global",
+      "category_id": 9,
+      "category": "Candles & Home Fragrance",
+      "focus_partner": "ES",
+      "focus_partner_name": "Spain",
+      "rationale": "Demand for Candles & Home Fragrance is rising in Global (momentum 0.20, +3%). Top origins: China (30%, -21%), Poland (24%, -8%), Belgium (17%, -11%), Germany (7%, -4%), United States (5%, -18%). Emerging: Spain (1%, +48%), India (1%, +46%), South Korea (0%, +53%), Brazil (0%, +117%).",
+      "status": "new",
+      "created_at": "2026-06-08T04:31:56.996718",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "CN",
+            "value": 102015457.50299999,
+            "share": 0.2969646449891948,
+            "growth": -0.2096077040544647,
+            "emerging": false
+          },
+          {
+            "partner_code": "PL",
+            "value": 82940521.703,
+            "share": 0.24143794661731224,
+            "growth": -0.08130261012572995,
+            "emerging": false
+          },
+          {
+            "partner_code": "BE",
+            "value": 57305110.688,
+            "share": 0.16681385613575267,
+            "growth": -0.10863379578072845,
+            "emerging": false
+          },
+          {
+            "partner_code": "DE",
+            "value": 25638786.456,
+            "share": 0.07463391631249523,
+            "growth": -0.04191864307698451,
+            "emerging": false
+          },
+          {
+            "partner_code": "US",
+            "value": 18866412.061,
+            "share": 0.05491969057483244,
+            "growth": -0.17913916923399364,
+            "emerging": false
+          }
+        ],
+        "emerging_suppliers": [
+          {
+            "partner_code": "ES",
+            "value": 3989912.486,
+            "share": 0.0116145432657409,
+            "growth": 0.4831598147722785,
+            "emerging": true
+          },
+          {
+            "partner_code": "IN",
+            "value": 2840237.378,
+            "share": 0.008267865530260527,
+            "growth": 0.4585576537829363,
+            "emerging": true
+          },
+          {
+            "partner_code": "KR",
+            "value": 12659.752,
+            "share": 3.6852246221810965e-05,
+            "growth": 0.5290262822543603,
+            "emerging": true
+          },
+          {
+            "partner_code": "BR",
+            "value": 6270.0,
+            "share": 1.825182545525021e-05,
+            "growth": 1.1673116175852967,
+            "emerging": true
+          }
+        ],
+        "competitors": [],
+        "demand_momentum": 0.19998142912620107,
+        "demand_growth": 0.0330050112319921
+      }
+    },
+    {
+      "id": 11,
+      "score": 0.2325,
+      "market_code": null,
+      "market": "Global",
+      "category_id": 10,
+      "category": "Audio & Earbuds",
+      "focus_partner": "BE",
+      "focus_partner_name": "Belgium",
+      "rationale": "Demand for Audio & Earbuds is rising in Global (momentum 0.18, +3%). Top origins: China (44%, -10%), Germany (12%, -6%), Denmark (8%, +12%), Vietnam (5%, +6%), Belgium (4%, +29%). Emerging: Belgium (4%, +29%), United States (4%, +36%), Sweden (2%, +63%), Romania (2%, +61%), Poland (1%, +30%).",
+      "status": "new",
+      "created_at": "2026-06-08T04:31:56.996718",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "CN",
+            "value": 938344341.447,
+            "share": 0.44334081237145845,
+            "growth": -0.10358119784498851,
+            "emerging": false
+          },
+          {
+            "partner_code": "DE",
+            "value": 254639496.096,
+            "share": 0.12030986501924344,
+            "growth": -0.06361181359816628,
+            "emerging": false
+          },
+          {
+            "partner_code": "DK",
+            "value": 174647132.452,
+            "share": 0.08251576543874616,
+            "growth": 0.12066116252386651,
+            "emerging": false
+          },
+          {
+            "partner_code": "VN",
+            "value": 107688186.00999999,
+            "share": 0.0508795820038296,
+            "growth": 0.057687792257859236,
+            "emerging": false
+          },
+          {
+            "partner_code": "BE",
+            "value": 88207363.81,
+            "share": 0.04167545175192915,
+            "growth": 0.28948846418667307,
+            "emerging": true
+          }
+        ],
+        "emerging_suppliers": [
+          {
+            "partner_code": "BE",
+            "value": 88207363.81,
+            "share": 0.04167545175192915,
+            "growth": 0.28948846418667307,
+            "emerging": true
+          },
+          {
+            "partner_code": "US",
+            "value": 80961200.54100001,
+            "share": 0.03825184725158046,
+            "growth": 0.3611539811720776,
+            "emerging": true
+          },
+          {
+            "partner_code": "SE",
+            "value": 40254245.072,
+            "share": 0.01901897728087729,
+            "growth": 0.6327657105733813,
+            "emerging": true
+          },
+          {
+            "partner_code": "RO",
+            "value": 38617779.306,
+            "share": 0.018245794100598584,
+            "growth": 0.614143192291256,
+            "emerging": true
+          },
+          {
+            "partner_code": "PL",
+            "value": 22477129.861,
+            "share": 0.01061979976027527,
+            "growth": 0.2962033016052253,
+            "emerging": true
+          }
+        ],
+        "competitors": [],
+        "demand_momentum": 0.17660865535619524,
+        "demand_growth": 0.028391628859886286
+      }
+    },
+    {
+      "id": 12,
+      "score": 0.1417,
+      "market_code": null,
+      "market": "Global",
+      "category_id": 4,
+      "category": "Footwear",
+      "focus_partner": "GB",
+      "focus_partner_name": "United Kingdom",
+      "rationale": "Demand for Footwear is rising in Global (momentum 0.11, +2%). Top origins: China (27%, -16%), Vietnam (24%, +10%), Belgium (12%, -27%), Germany (12%, -18%), Indonesia (6%, -3%). Emerging: United Kingdom (2%, +29%), Netherlands (1%, +51%), Portugal (1%, +25%), India (1%, +45%), Romania (0%, +20%).",
+      "status": "new",
+      "created_at": "2026-06-08T04:31:56.996719",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "CN",
+            "value": 705219891.431,
+            "share": 0.2748259127900699,
+            "growth": -0.15620102619976797,
+            "emerging": false
+          },
+          {
+            "partner_code": "VN",
+            "value": 607470428.021,
+            "share": 0.23673270834020477,
+            "growth": 0.10316533846471343,
+            "emerging": false
+          },
+          {
+            "partner_code": "BE",
+            "value": 311467105.184,
+            "share": 0.12137949103020827,
+            "growth": -0.26778658985357917,
+            "emerging": false
+          },
+          {
+            "partner_code": "DE",
+            "value": 302754945.78999996,
+            "share": 0.11798434125221464,
+            "growth": -0.18069780381163245,
+            "emerging": false
+          },
+          {
+            "partner_code": "ID",
+            "value": 144520108.49400002,
+            "share": 0.05631983898354001,
+            "growth": -0.02776362500628762,
+            "emerging": false
+          }
+        ],
+        "emerging_suppliers": [
+          {
+            "partner_code": "GB",
+            "value": 60788236.117,
+            "share": 0.023689323969369888,
+            "growth": 0.28611903600306515,
+            "emerging": true
+          },
+          {
+            "partner_code": "NL",
+            "value": 25037193.0,
+            "share": 0.009757055215733921,
+            "growth": 0.5138671739686896,
+            "emerging": true
+          },
+          {
+            "partner_code": "PT",
+            "value": 20753817.705,
+            "share": 0.00808781340963267,
+            "growth": 0.2508297555488084,
+            "emerging": true
+          },
+          {
+            "partner_code": "IN",
+            "value": 20494665.625,
+            "share": 0.007986821211592249,
+            "growth": 0.450722693774183,
+            "emerging": true
+          },
+          {
+            "partner_code": "RO",
+            "value": 8323076.635,
+            "share": 0.0032435232772491662,
+            "growth": 0.19860182715161748,
+            "emerging": true
+          }
+        ],
+        "competitors": [],
+        "demand_momentum": 0.11269754872952882,
+        "demand_growth": 0.018506278916018
+      }
+    },
+    {
+      "id": 13,
+      "score": 0.0146,
+      "market_code": null,
+      "market": "Global",
+      "category_id": 1,
+      "category": "Beauty & Cosmetics",
+      "focus_partner": "PL",
+      "focus_partner_name": "Poland",
+      "rationale": "Demand for Beauty & Cosmetics is rising in Global (momentum 0.01, +0%). Top origins: Germany (23%, -25%), Belgium (18%, +2%), France (13%, -30%), United States (10%, +6%), United Kingdom (9%, -2%). Emerging: Poland (3%, +60%), Denmark (1%, +39%), India (0%, +19%), Japan (0%, +62%), Hungary (0%, +44%).",
+      "status": "new",
+      "created_at": "2026-06-08T04:31:56.996720",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "DE",
+            "value": 585959815.608,
+            "share": 0.2321233346851357,
+            "growth": -0.25475911056348327,
+            "emerging": false
+          },
+          {
+            "partner_code": "BE",
+            "value": 447211403.072,
+            "share": 0.17715925124076667,
+            "growth": 0.020534296912096194,
+            "emerging": false
+          },
+          {
+            "partner_code": "FR",
+            "value": 333575851.943,
+            "share": 0.1321434287146484,
+            "growth": -0.29940422046958026,
+            "emerging": false
+          },
+          {
+            "partner_code": "US",
+            "value": 263459096.159,
+            "share": 0.10436723188961965,
+            "growth": 0.06460250228034234,
+            "emerging": false
+          },
+          {
+            "partner_code": "GB",
+            "value": 228132950.878,
+            "share": 0.09037305954916856,
+            "growth": -0.02424955239197223,
+            "emerging": false
+          }
+        ],
+        "emerging_suppliers": [
+          {
+            "partner_code": "PL",
+            "value": 73418261.481,
+            "share": 0.02908406212817147,
+            "growth": 0.5969089749778924,
+            "emerging": true
+          },
+          {
+            "partner_code": "DK",
+            "value": 25142947.164,
+            "share": 0.009960179152326455,
+            "growth": 0.38773000477671776,
+            "emerging": true
+          },
+          {
+            "partner_code": "IN",
+            "value": 11717638.576000001,
+            "share": 0.004641849608874733,
+            "growth": 0.18947647948686538,
+            "emerging": true
+          },
+          {
+            "partner_code": "JP",
+            "value": 9652217.406,
+            "share": 0.0038236493897825592,
+            "growth": 0.616804322390603,
+            "emerging": true
+          },
+          {
+            "partner_code": "HU",
+            "value": 9065844.329,
+            "share": 0.0035913623448738685,
+            "growth": 0.4384315927412284,
+            "emerging": true
+          }
+        ],
+        "competitors": [],
+        "demand_momentum": 0.011170867444361902,
+        "demand_growth": 0.001717659688671551
+      }
+    }
+  ]
+}

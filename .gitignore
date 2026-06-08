@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+pipelines/.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Local data store (SQLite)
+data/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Node / Next (web has its own .gitignore too)
+node_modules/
+.next/
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
