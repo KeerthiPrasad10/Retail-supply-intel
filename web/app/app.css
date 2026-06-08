@@ -349,8 +349,9 @@ body { background: var(--nxb-surface-page); color: var(--nxb-text-primary); font
 /* ---------------- World map / supply chain ---------------- */
 .worldmap { width: 100%; background: var(--nxb-surface-page); border-radius: var(--radius-input); overflow: hidden; border: 0.5px solid var(--nxb-border-low); }
 .wm-svg { width: 100%; height: 100%; display: block; }
-.wm-land circle { fill: var(--nxb-text-disabled); opacity: .5; }
-.arc-base { fill: none; stroke-linecap: round; opacity: .85; }
+.wm-geo path { fill: var(--nxb-text-disabled); opacity: .26; stroke: var(--nxb-surface-1); stroke-width: 0.4; }
+.arc-halo { fill: none; stroke-linecap: round; stroke: var(--nxb-surface-page); opacity: .9; }
+.arc-base { fill: none; stroke-linecap: round; opacity: .9; }
 .arc.neu .arc-base { stroke: var(--nxb-viz-seq-4); }
 .arc.dim .arc-base { stroke: var(--nxb-text-disabled); opacity: .5; stroke-dasharray: 2 4; }
 .arc.em .arc-base { stroke: var(--nxb-status-low); }
@@ -362,8 +363,8 @@ body { background: var(--nxb-surface-page); color: var(--nxb-text-primary); font
   .arc-flow { animation: flowdash 1.8s linear infinite; }
 }
 @keyframes flowdash { to { stroke-dashoffset: -150; } }
-.node text { font-family: var(--font-mono); text-anchor: middle; }
-.nd-lbl { font-size: 8.5px; fill: var(--nxb-text-muted); }
+.node text { font-family: var(--font-mono); text-anchor: middle; paint-order: stroke; stroke: var(--nxb-surface-page); stroke-width: 2.5px; stroke-linejoin: round; }
+.nd-lbl { font-size: 9px; fill: var(--nxb-text-muted); }
 .nd-halo { fill: color-mix(in srgb, var(--nxb-text-muted) 18%, transparent); }
 .nd-dot { fill: var(--nxb-text-secondary); }
 .node.em .nd-halo { fill: var(--nxb-status-low-bg); }
