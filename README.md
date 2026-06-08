@@ -15,7 +15,9 @@ Each trigger answers: what's trending, where it's bought from, which origins are
 
 - **`pipelines/`** — Python (uv): ingestion connectors, momentum scoring, the
   demand×supply correlation engine, and a `rsi` CLI.
-- **`web/`** — Next.js + Tailwind dashboard (Overview / Triggers / Trends / Suppliers).
+- **`web/`** — Next.js dashboard in the **NxB Sourcing** design system: the
+  trending → suppliers buying flow (Overview, Trending, Deep-dive, supply-chain
+  Map, Suppliers directory, Shortlist + quote).
 - **`supabase/`** — Postgres schema (the production store). SQLite is used for
   zero-config local dev.
 

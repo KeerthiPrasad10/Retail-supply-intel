@@ -1,0 +1,148 @@
+/* NxB Design System — colors_and_type.css (from the design handoff).
+   Light mode is default. .dark on <html> swaps tokens.
+   Fonts are served from web/public/fonts. */
+
+/* ---------- FONTS ---------- */
+@font-face { font-family: "Suisse Intl"; src: url("/fonts/SuisseIntl-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Suisse Intl"; src: url("/fonts/SuisseIntl-Medium.otf") format("opentype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Suisse Intl"; src: url("/fonts/SuisseIntl-SemiBold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Suisse Intl"; src: url("/fonts/SuisseIntl-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+@font-face { font-family: "PP Supply Mono"; src: url("/fonts/PPSupplyMono-Ultralight.ttf") format("truetype"); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Supply Mono"; src: url("/fonts/PPSupplyMono-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Supply Mono"; src: url("/fonts/PPSupplyMono-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Supply Mono"; src: url("/fonts/PPSupplyMono-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+:root {
+  /* ===== Type families ===== */
+  --font-sans: "Suisse Intl", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "PP Supply Mono", "Suisse Int'l Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ===== Surfaces ===== */
+  --nxb-surface-page: #f2f2f2;
+  --nxb-surface-1: #fafafa;
+  --nxb-surface-2: #f2f2f2;
+  --nxb-surface-3: #e6e6e6;
+
+  /* ===== Text ===== */
+  --nxb-text-primary: #090909;
+  --nxb-text-secondary: #222222;
+  --nxb-text-muted: #6b6b6b;
+  --nxb-text-disabled: #afafaf;
+  --nxb-text-inverse: #fafafa;
+  --nxb-text-link: #7420ce;
+
+  /* ===== Borders ===== */
+  --nxb-border-low: rgba(0,0,0,0.05);
+  --nxb-border-medium: rgba(0,0,0,0.10);
+  --nxb-border-strong: rgba(0,0,0,0.20);
+  --nxb-border-focus: #000000;
+  --nxb-border-error: #b73030;
+
+  /* ===== Overlays ===== */
+  --nxb-overlay-subtle: rgba(0,0,0,0.03);
+  --nxb-overlay-light: rgba(0,0,0,0.05);
+  --nxb-overlay-medium: rgba(0,0,0,0.10);
+  --nxb-overlay-heavy: rgba(0,0,0,0.20);
+
+  /* ===== Status ===== */
+  --nxb-status-high: #b73030;
+  --nxb-status-high-bg: rgba(239,68,68,0.05);
+  --nxb-status-high-bg-hover: rgba(239,68,68,0.10);
+  --nxb-status-high-border: #b73030;
+
+  --nxb-status-medium: #b86d05;
+  --nxb-status-medium-bg: rgba(255,170,53,0.05);
+  --nxb-status-medium-bg-hover: rgba(255,170,53,0.10);
+  --nxb-status-medium-border: #b86d05;
+
+  --nxb-status-low: #187e43;
+  --nxb-status-low-bg: rgba(39,182,99,0.05);
+  --nxb-status-low-bg-hover: rgba(39,182,99,0.10);
+  --nxb-status-low-border: #187e43;
+
+  --nxb-status-ok: #0365d8;
+  --nxb-status-ok-bg: rgba(3,101,216,0.15);
+
+  /* ===== Action / buttons ===== */
+  --nxb-action-primary-from: #4f1795;
+  --nxb-action-primary-to: #8427e2;
+  --nxb-action-primary: #7420ce;
+  --nxb-action-primary-hover: #611cb2;
+  --nxb-action-primary-text: #ffffff;
+
+  --nxb-action-secondary: rgba(0,0,0,0.05);
+  --nxb-action-secondary-hover: rgba(0,0,0,0.10);
+  --nxb-action-secondary-text: #090909;
+
+  --nxb-action-inverse: #000000;
+  --nxb-action-inverse-hover: #1f1f1f;
+  --nxb-action-inverse-text: #fafafa;
+
+  --nxb-action-ghost: transparent;
+  --nxb-action-ghost-hover: rgba(0,0,0,0.05);
+  --nxb-action-ghost-text: #090909;
+
+  /* ===== Glass / backdrop ===== */
+  --nxb-glass-bg: rgba(255,255,255,0.55);
+  --nxb-glass-border: rgba(0,0,0,0.08);
+  --nxb-modal-bg: rgba(250,250,250,0.92);
+  --nxb-backdrop: rgba(0,0,0,0.40);
+
+  /* ===== Visualisation: sequential ===== */
+  --nxb-viz-seq-4: #9189A3;
+
+  /* ===== Radii ===== */
+  --radius-badge: 4px;
+  --radius-nav: 6px;
+  --radius-input: 8px;
+  --radius-card: 16px;
+  --radius-modal: 24px;
+  --radius-pill: 9999px;
+}
+
+.dark {
+  --nxb-surface-page: #090909;
+  --nxb-surface-1: #101011;
+  --nxb-surface-2: #17181b;
+  --nxb-surface-3: #1e1f22;
+
+  --nxb-text-primary: #f2f2f2;
+  --nxb-text-secondary: #c7c7c7;
+  --nxb-text-muted: #afafaf;
+  --nxb-text-disabled: #6b6b6b;
+  --nxb-text-inverse: #090909;
+  --nxb-text-link: #a867ee;
+
+  --nxb-border-low: rgba(255,255,255,0.05);
+  --nxb-border-medium: rgba(255,255,255,0.10);
+  --nxb-border-strong: rgba(255,255,255,0.20);
+  --nxb-border-focus: #ffffff;
+  --nxb-border-error: #ef4444;
+
+  --nxb-overlay-subtle: rgba(255,255,255,0.03);
+  --nxb-overlay-light: rgba(255,255,255,0.05);
+  --nxb-overlay-medium: rgba(255,255,255,0.10);
+  --nxb-overlay-heavy: rgba(255,255,255,0.20);
+
+  --nxb-status-high: #ef4444;
+  --nxb-status-medium: #ffaa35;
+  --nxb-status-low: #27b663;
+  --nxb-status-ok: #5aa6ff;
+
+  --nxb-action-secondary: rgba(255,255,255,0.05);
+  --nxb-action-secondary-hover: rgba(255,255,255,0.10);
+  --nxb-action-secondary-text: #f2f2f2;
+  --nxb-action-inverse: #ffffff;
+  --nxb-action-inverse-hover: #e5e5e5;
+  --nxb-action-inverse-text: #090909;
+  --nxb-action-ghost-hover: rgba(255,255,255,0.05);
+  --nxb-action-ghost-text: #f2f2f2;
+
+  --nxb-glass-bg: rgba(20,20,22,0.55);
+  --nxb-glass-border: rgba(255,255,255,0.08);
+  --nxb-modal-bg: rgba(16,16,17,0.92);
+  --nxb-backdrop: rgba(0,0,0,0.60);
+}
+
+html, body { background: var(--nxb-surface-page); color: var(--nxb-text-primary); font-family: var(--font-sans); }

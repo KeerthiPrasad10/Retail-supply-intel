@@ -12,7 +12,7 @@ countries → emerging ones → competitors sourcing there.* Read
 
 Two deployables:
 - `pipelines/` — Python (uv): connectors → scoring → correlation → snapshot, via the `rsi` CLI.
-- `web/` — Next.js + Tailwind dashboard.
+- `web/` — Next.js dashboard (NxB Sourcing design system, plain CSS).
 
 ## Commands
 
@@ -63,15 +63,19 @@ npm run lint
   `status='new'` triggers, leaving `actioned`/`dismissed` ones intact.
 
 - **The dashboard's data path is `web/lib/snapshot.json`** (written by
-  `rsi export`, committed to the repo) read via `web/lib/data.ts`. The data-layer
-  functions are async so a live Supabase branch (behind `NEXT_PUBLIC_SUPABASE_URL`)
-  can be added without changing components. Regenerate the snapshot after
-  pipeline changes that affect output.
+  `rsi export`, committed to the repo). The server entry `web/app/page.tsx`
+  imports it, `web/lib/model.ts` adapts it into the view-model, and the client
+  shell `web/components/Dashboard.tsx` renders it. To wire live Supabase, swap
+  the import in `page.tsx` for a query — no component changes. Regenerate the
+  snapshot after pipeline changes that affect output.
 
 ## Conventions
 
 - Python: ruff (`select = E,F,I,UP,B`, line length 100; `B008` ignored for
   Typer). Typed SQLAlchemy 2.0 ORM. Pure, testable logic (e.g.
   `series_momentum`) kept separate from DB-driven functions.
-- Web: server components by default; `"use client"` only where needed (e.g.
-  `Nav`). `@/*` path alias maps to `web/`.
+- Web: the dashboard is a single client SPA (`components/Dashboard.tsx` owns
+  view state — overview/trending/deep-dive/map/suppliers/shortlist); `page.tsx`
+  is the only server component (loads + adapts the snapshot). Styling is the
+  **NxB Sourcing** design system in plain CSS (`app/tokens.css` design tokens +
+  `app/app.css`), fonts in `web/public/fonts` — no Tailwind. `@/*` maps to `web/`.
