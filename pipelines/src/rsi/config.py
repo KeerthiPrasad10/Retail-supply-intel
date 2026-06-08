@@ -33,6 +33,11 @@ class Settings(BaseSettings):
     # endpoint (lower limits, recent periods only).
     comtrade_api_key: str | None = None
 
+    # Apify API token (https://console.apify.com/account/integrations). Enables
+    # the opt-in `apify` connector, which runs a Google-Trends actor for reliable
+    # per-country interest. Unset -> the connector no-ops.
+    apify_token: str | None = None
+
     # Network politeness / resilience.
     http_timeout: float = 30.0
     user_agent: str = "retail-supply-intel/0.1 (+https://github.com/KeerthiPrasad10/Retail-supply-intel)"
