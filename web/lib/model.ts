@@ -140,6 +140,8 @@ export function buildModel(snap: Snapshot): Model {
     ? `${top.cat} · ${top.market === "Global" ? "All markets" : top.market} ${fmtPct(top.growth)}`
     : null;
 
+  const insights = [...(snap.insights ?? [])].sort((a, b) => b.score - a.score);
+
   const snapshotLabel = (() => {
     const d = new Date(snap.generated_at);
     return isNaN(d.getTime())
@@ -158,5 +160,7 @@ export function buildModel(snap: Snapshot): Model {
     emergingOriginCount: emSet.size,
     surgingCount: surging.length,
     topSurge,
+    insights,
+    procureCount: insights.filter((i) => i.action === "PROCURE").length,
   };
 }

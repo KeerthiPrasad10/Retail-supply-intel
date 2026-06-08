@@ -9,6 +9,7 @@ import { Sidebar } from "./sidebar";
 import { SourceFooter } from "./source-footer";
 import { Topbar } from "./topbar";
 import { Overview } from "./views/overview";
+import { Insights } from "./views/insights";
 import { Trending, type FilterTier, type Layout } from "./views/trending";
 import { DeepDive } from "./views/deepdive";
 import { MapView } from "./views/mapview";
@@ -72,6 +73,7 @@ export function Dashboard({ model }: { model: Model }) {
 
   const crumbs: Record<View, string[]> = {
     overview: ["Lidl · Buying", "Overview"],
+    insights: ["Lidl · Buying", "Procurement insights"],
     trending: ["Lidl · Buying", "Trending"],
     deepdive: ["Trending", trend ? trend.cat : "—"],
     map: ["Lidl · Buying", "Supply-chain map"],
@@ -98,6 +100,7 @@ export function Dashboard({ model }: { model: Model }) {
           </Topbar>
           <div className="scroller" ref={scroller}>
             {view === "overview" && <Overview go={go} />}
+            {view === "insights" && <Insights />}
             {view === "trending" && (
               <Trending
                 go={go}

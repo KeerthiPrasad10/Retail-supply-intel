@@ -32,7 +32,7 @@ function NavItem({
 }
 
 export function Sidebar({ view, go, shortlistCount }: { view: View; go: Go; shortlistCount: number }) {
-  const { trends } = useModel();
+  const { trends, insights } = useModel();
   return (
     <aside className="sidebar">
       <div className="logo-mark">
@@ -40,6 +40,7 @@ export function Sidebar({ view, go, shortlistCount }: { view: View; go: Go; shor
       </div>
       <div className="nav-group">
         <NavItem id="overview" label="Overview" icon="grid" view={view} go={go} />
+        <NavItem id="insights" label="Insights" icon="spark" badge={insights.length} view={view} go={go} />
         <NavItem id="trending" label="Trending" icon="trending" badge={trends.length} view={view} go={go} />
         <NavItem id="map" label="Map" icon="globe" view={view} go={go} />
         <NavItem id="suppliers" label="Suppliers" icon="factory" badge={SUPPLIERS.length} view={view} go={go} />

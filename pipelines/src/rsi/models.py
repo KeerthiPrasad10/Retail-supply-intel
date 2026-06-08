@@ -207,3 +207,29 @@ class Trigger(Base):
     rationale: Mapped[str] = mapped_column(String(1024), default="")
     status: Mapped[str] = mapped_column(String(16), default="new")  # new|seen|actioned|dismissed
     payload: Mapped[dict] = mapped_column(JSON, default=dict)
+
+
+class Insight(Base):
+    """A procurement decision recommendation for the buying team.
+
+    Produced by the orchestrator: it fuses every signal for a (category, market)
+    — multi-platform demand momentum, marketplace + supply-side activity, trade
+    origins/emerging and competitor moves — into a ranked, explainable
+    recommendation ("procure X, source from Y, because …"). ``narrative`` is the
+    buyer-facing write-up (Claude when configured, deterministic fallback else).
+    """
+
+    __tablename__ = "insights"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow)
+    category_id: Mapped[int | None] = mapped_column(ForeignKey("product_categories.id"))
+    market_code: Mapped[str | None] = mapped_column(ForeignKey("countries.code"))
+    action: Mapped[str] = mapped_column(String(16), default="WATCH")  # PROCURE|WATCH|HOLD
+    score: Mapped[float] = mapped_column(Float, default=0.0)  # 0..100 opportunity
+    confidence: Mapped[float] = mapped_column(Float, default=0.0)  # 0..1 signal corroboration
+    headline: Mapped[str] = mapped_column(String(512), default="")
+    narrative: Mapped[str] = mapped_column(String(4096), default="")
+    narrator: Mapped[str] = mapped_column(String(16), default="rule")  # rule|llm
+    evidence: Mapped[dict] = mapped_column(JSON, default=dict)
+    status: Mapped[str] = mapped_column(String(16), default="new")

@@ -22,6 +22,7 @@ from .config import get_settings
 from .connectors import CONNECTORS, DEFAULT_CONNECTORS
 from .correlation import run_correlation
 from .db import init_db, session_scope
+from .insights import build_insights
 from .repository import seed_reference
 from .snapshot import DEFAULT_SNAPSHOT_PATH, build_snapshot
 from .trends import compute_scores
@@ -105,6 +106,16 @@ def seed_competitors() -> None:
 
 
 @app.command()
+def insights(no_llm: bool = typer.Option(False, help="Skip the Claude narrative layer")) -> None:
+    """Fuse all signals into ranked procurement recommendations for the buyers."""
+    with session_scope() as session:
+        n = build_insights(session, use_llm=not no_llm)
+    settings = get_settings()
+    narr = "Claude" if (settings.anthropic_api_key and not no_llm) else "deterministic"
+    typer.secho(f"generated {n} insights ({narr} narratives)", fg=typer.colors.GREEN)
+
+
+@app.command()
 def export(
     out: Path = typer.Option(DEFAULT_SNAPSHOT_PATH, help="Snapshot output path"),
 ) -> None:
@@ -135,15 +146,43 @@ def stats() -> None:
 
 @app.command()
 def run(days: int = typer.Option(60), window: int = typer.Option(14)) -> None:
-    """Full pipeline: db init → ingest → score → correlate → export."""
+    """Full pipeline: db init → ingest → score → correlate → insights → export."""
     init_db()
     with session_scope() as session:
         seed_reference(session)
     ingest(connectors=None, days=days)
     score(window=window)
     correlate(top_n=100, min_momentum=0.0)
+    insights(no_llm=False)
     export(out=DEFAULT_SNAPSHOT_PATH)
     typer.secho("pipeline complete", fg=typer.colors.GREEN, bold=True)
+
+
+@app.command()
+def orchestrate(
+    days: int = typer.Option(60, help="Lookback for time-series sources"),
+    window: int = typer.Option(14, help="Momentum window"),
+    apify: bool = typer.Option(False, help="Also run paid Apify connectors (needs the token)"),
+    no_llm: bool = typer.Option(False, help="Skip the Claude narrative layer"),
+) -> None:
+    """Orchestrate every source into procurement insights, then export.
+
+    Chains: db init → ingest (free, +Apify with --apify) → score → correlate →
+    insights → export. This is the end-to-end driver behind the dashboard.
+    """
+    init_db()
+    with session_scope() as session:
+        seed_reference(session)
+    ingest(connectors=None, days=days)  # free sources
+    if apify:
+        opt_in = [n for n, c in CONNECTORS.items() if not getattr(c, "default", True)]
+        typer.echo(f"  (apify) {', '.join(opt_in)}")
+        ingest(connectors=opt_in, days=days)
+    score(window=window)
+    correlate(top_n=100, min_momentum=0.0)
+    insights(no_llm=no_llm)
+    export(out=DEFAULT_SNAPSHOT_PATH)
+    typer.secho("orchestration complete", fg=typer.colors.GREEN, bold=True)
 
 
 if __name__ == "__main__":

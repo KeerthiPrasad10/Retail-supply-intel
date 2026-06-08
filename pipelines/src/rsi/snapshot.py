@@ -25,6 +25,7 @@ from .models import (
     Competitor,
     CompetitorSourcing,
     Country,
+    Insight,
     ProductCategory,
     Supplier,
     TradeFlow,
@@ -187,6 +188,31 @@ def _leading_indicators(session: Session, latest_as_of, cat_names: dict[int, str
     ]
 
 
+def _insights(
+    session: Session, cat_names: dict[int, str], country_names: dict[str, str]
+) -> list[dict]:
+    """Ranked procurement recommendations for the buying team."""
+    rows = session.scalars(select(Insight).order_by(Insight.score.desc()))
+    return [
+        {
+            "id": i.id,
+            "category_id": i.category_id,
+            "category": cat_names.get(i.category_id),
+            "market_code": i.market_code,
+            "market": country_names.get(i.market_code, "EU / all markets"),
+            "action": i.action,
+            "score": round(i.score, 2),
+            "confidence": round(i.confidence, 3),
+            "headline": i.headline,
+            "narrative": i.narrative,
+            "narrator": i.narrator,
+            "evidence": i.evidence,
+            "status": i.status,
+        }
+        for i in rows
+    ]
+
+
 def build_snapshot(session: Session, top_trends: int = 200) -> dict:
     country_names = dict(session.execute(select(Country.code, Country.name)).all())
     cat_names = dict(session.execute(select(ProductCategory.id, ProductCategory.name)).all())
@@ -268,4 +294,5 @@ def build_snapshot(session: Session, top_trends: int = 200) -> dict:
         "leading_indicators": _leading_indicators(
             session, latest_as_of, cat_names, country_names
         ),
+        "insights": _insights(session, cat_names, country_names),
     }

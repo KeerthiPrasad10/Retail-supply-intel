@@ -18,6 +18,14 @@ from sqlalchemy.orm import Session
 from ..models import TrendObservation, TrendScore
 
 _EPS = 1e-9
+# Cap relative growth at ±1000% so a near-zero baseline (e.g. a series that
+# starts at 0 interest) can't produce astronomical, meaningless momentum.
+_GROWTH_CLAMP = 10.0
+
+
+def _rel_growth(curr: float, prev: float) -> float:
+    g = (curr - prev) / (abs(prev) + _EPS)
+    return max(-_GROWTH_CLAMP, min(g, _GROWTH_CLAMP))
 
 
 def series_momentum(values: list[float], window: int = 14) -> tuple[float, float, float]:
@@ -39,7 +47,7 @@ def series_momentum(values: list[float], window: int = 14) -> tuple[float, float
 
     recent_mean = sum(recent) / len(recent)
     prior_mean = sum(prior) / len(prior)
-    growth = (recent_mean - prior_mean) / (abs(prior_mean) + _EPS)
+    growth = _rel_growth(recent_mean, prior_mean)
     momentum = growth * math.log1p(max(recent_mean, 0.0))
     return momentum, growth, recent_mean
 
@@ -62,9 +70,7 @@ def series_acceleration(values: list[float], window: int = 14) -> float:
         return 0.0
 
     m1, m2, m3 = (sum(x) / len(x) for x in (w1, w2, w3))
-    growth_recent = (m3 - m2) / (abs(m2) + _EPS)
-    growth_prior = (m2 - m1) / (abs(m1) + _EPS)
-    return growth_recent - growth_prior
+    return _rel_growth(m3, m2) - _rel_growth(m2, m1)
 
 
 def compute_scores(session: Session, window: int = 14, as_of: datetime | None = None) -> int:
