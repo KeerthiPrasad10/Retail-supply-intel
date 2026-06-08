@@ -24,22 +24,6 @@ CREATE TABLE product_categories (
 	FOREIGN KEY(parent_id) REFERENCES product_categories (id)
 );
 
-CREATE TABLE snapshots (
-	id SERIAL NOT NULL, 
-	created_at TIMESTAMP WITH TIME ZONE NOT NULL, 
-	data JSON NOT NULL, 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE source_status (
-	name VARCHAR(32) NOT NULL, 
-	last_run_at TIMESTAMP WITH TIME ZONE NOT NULL, 
-	status VARCHAR(16) NOT NULL, 
-	rows INTEGER NOT NULL, 
-	detail VARCHAR(256), 
-	PRIMARY KEY (name)
-);
-
 CREATE TABLE competitors (
 	id SERIAL NOT NULL, 
 	name VARCHAR(128) NOT NULL, 
@@ -47,24 +31,6 @@ CREATE TABLE competitors (
 	PRIMARY KEY (id), 
 	UNIQUE (name), 
 	FOREIGN KEY(home_country) REFERENCES countries (code)
-);
-
-CREATE TABLE insights (
-	id SERIAL NOT NULL, 
-	created_at TIMESTAMP WITH TIME ZONE NOT NULL, 
-	category_id INTEGER, 
-	market_code VARCHAR(2), 
-	action VARCHAR(16) NOT NULL, 
-	score FLOAT NOT NULL, 
-	confidence FLOAT NOT NULL, 
-	headline VARCHAR(512) NOT NULL, 
-	narrative VARCHAR(4096) NOT NULL, 
-	narrator VARCHAR(16) NOT NULL, 
-	evidence JSON NOT NULL, 
-	status VARCHAR(16) NOT NULL, 
-	PRIMARY KEY (id), 
-	FOREIGN KEY(category_id) REFERENCES product_categories (id), 
-	FOREIGN KEY(market_code) REFERENCES countries (code)
 );
 
 CREATE TABLE suppliers (
@@ -146,7 +112,6 @@ CREATE TABLE trend_scores (
 	momentum FLOAT NOT NULL, 
 	growth_rate FLOAT NOT NULL, 
 	volume FLOAT NOT NULL, 
-	acceleration FLOAT NOT NULL, 
 	rank INTEGER, 
 	PRIMARY KEY (id), 
 	CONSTRAINT uq_score UNIQUE (trend_id, country_code, as_of), 
@@ -173,3 +138,4 @@ CREATE TABLE triggers (
 	FOREIGN KEY(partner_code) REFERENCES countries (code), 
 	FOREIGN KEY(supplier_id) REFERENCES suppliers (id)
 );
+
