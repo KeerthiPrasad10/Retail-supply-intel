@@ -19,7 +19,7 @@ from pathlib import Path
 import typer
 
 from .config import get_settings
-from .connectors import CONNECTORS
+from .connectors import CONNECTORS, DEFAULT_CONNECTORS
 from .correlation import run_correlation
 from .db import init_db, session_scope
 from .repository import seed_reference
@@ -59,7 +59,7 @@ def ingest(
     days: int = typer.Option(60, help="Lookback window for time-series sources"),
 ) -> None:
     """Run ingestion connectors against their (free) data sources."""
-    names = connectors or list(CONNECTORS)
+    names = connectors or DEFAULT_CONNECTORS
     with session_scope() as session:
         seed_reference(session)
         for name in names:
