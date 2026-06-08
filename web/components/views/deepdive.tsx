@@ -7,6 +7,7 @@ import { Icons } from "../icons";
 import { useCname, useModel } from "../model-context";
 import { DemandSpark, FlagCode, GrowthPill, OriginBars, Tier } from "../primitives";
 import { WorldMap, MapLegend } from "../world-map";
+import { SummaryBlock } from "../summary-block";
 import { ScoreBlock } from "./shared";
 
 export function DeepDive({ trend: t, go, showMap }: { trend: Trend; go: Go; showMap: boolean }) {
@@ -53,7 +54,7 @@ export function DeepDive({ trend: t, go, showMap }: { trend: Trend; go: Go; show
 
       <div className="callout">
         <Icons.spark size={15} />
-        <p>{t.why}</p>
+        <SummaryBlock summary={t.summary} />
       </div>
 
       <div className="dd-grid">

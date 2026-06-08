@@ -13,6 +13,13 @@ export interface TrendCompetitor {
   note: string;
 }
 
+/** Structured opportunity summary: what changed, why, and the impact. */
+export interface TrendSummary {
+  change: string;
+  why: string;
+  impact: string;
+}
+
 export interface Trend {
   id: string;
   cat: string;
@@ -26,7 +33,7 @@ export interface Trend {
   sources: Source[];
   emerging: Source[];
   competitors: TrendCompetitor[];
-  why: string;
+  summary: TrendSummary;
 }
 
 export interface Supplier {

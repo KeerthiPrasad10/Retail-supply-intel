@@ -164,6 +164,15 @@ export function Suppliers({
         </div>
       </header>
 
+      <div className="callout warn">
+        <Icons.alert size={15} />
+        <p>
+          <b>Illustrative directory.</b> These supplier profiles model the Phase-3
+          supplier-resolution layer and are <b>not customs-verified</b>. Demand momentum and
+          trade-flow origins are real (Wikipedia + Google Trends · UN Comtrade).
+        </p>
+      </div>
+
       <div className="filter-row">
         <span className={cc("pill", !originFilter && "active")} onClick={() => setOrigin(null)}>
           All origins · {base.length}

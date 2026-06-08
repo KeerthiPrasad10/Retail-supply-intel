@@ -3,13 +3,52 @@
  * are all real; the opportunity score is a 0..100 rescale of the trigger score
  * and the tier is derived from momentum/growth. */
 
-import type { Model, Snapshot, Source, Tier, Trend } from "./types";
+import type { Model, Snapshot, Source, Tier, Trend, TrendSummary } from "./types";
 import { fmtPct } from "./util";
 
 function tierOf(momentum: number, growth: number): Tier {
   if (momentum >= 5) return "SURGING";
   if (growth >= 0.15 || momentum >= 0.4) return "RISING";
   return "WATCH";
+}
+
+/** Structured summary — what changed, why, and the sourcing impact. The full
+ * numeric breakdown lives in the structured UI, so each line stays one clause. */
+function synthSummary(o: {
+  cat: string;
+  market: string;
+  growth: number;
+  tier: Tier;
+  focusName: string | null;
+  focusGrowth: number | null;
+  leaderName: string | null;
+  leaderShare: number | null;
+  leaderFalling: boolean;
+  compName: string | null;
+}): TrendSummary {
+  const mkt = o.market === "Global" ? "all markets" : o.market;
+  const verb = o.tier === "SURGING" ? "surging" : o.tier === "RISING" ? "rising" : "holding steady";
+
+  const change = `${o.cat} demand is ${verb} in ${mkt} — ${fmtPct(o.growth)} vs the prior window.`;
+
+  let why: string;
+  if (o.focusName) {
+    why = `${o.focusName} is gaining import share`;
+    if (o.focusGrowth != null) why += ` (${fmtPct(o.focusGrowth)})`;
+    why += " as an emerging origin";
+    if (o.leaderName && o.leaderShare != null) {
+      why += o.leaderFalling
+        ? `, while the incumbent ${o.leaderName} (${o.leaderShare}%) is slipping.`
+        : `; ${o.leaderName} still leads at ${o.leaderShare}%.`;
+    } else why += ".";
+  } else {
+    why = "Supply is shifting across origin countries for this category.";
+  }
+
+  let impact = `Window to source ${o.cat} from ${o.focusName ?? "an emerging origin"} early`;
+  impact += o.compName ? ` — ${o.compName} is already sourcing there.` : ", ahead of the demand curve.";
+
+  return { change, why, impact };
 }
 
 function competitorNote(snap: Snapshot, name: string, categoryId: number | null): string {
@@ -48,15 +87,27 @@ export function buildModel(snap: Snapshot): Model {
       );
       const momentum = p.demand_momentum ?? 0;
       const growth = p.demand_growth ?? 0;
+      const tier = tierOf(momentum, growth);
+      const cat = t.category ?? "—";
+      const market = t.market ?? "Global";
+      const focusName = t.focus_partner ? (nameByCode[t.focus_partner] ?? t.focus_partner) : null;
+      const focusEntry =
+        sources.find((s) => s[0] === t.focus_partner) ||
+        emerging.find((s) => s[0] === t.focus_partner);
+      const compName = p.competitors && p.competitors[0] ? p.competitors[0] : null;
+      const leader = sources[0];
+      const leaderName = leader ? (nameByCode[leader[0]] ?? leader[0]) : null;
+      const leaderShare = leader ? Math.round(leader[1] * 100) : null;
+      const leaderFalling = leader ? leader[2] < 0 : false;
       return {
         id: "T-" + (1000 + t.id),
-        cat: t.category ?? "—",
-        market: t.market ?? "Global",
+        cat,
+        market,
         marketCode: t.market_code,
         momentum,
         growth,
         score: scale(t.score),
-        tier: tierOf(momentum, growth),
+        tier,
         focus: t.focus_partner,
         sources,
         emerging,
@@ -64,7 +115,18 @@ export function buildModel(snap: Snapshot): Model {
           name,
           note: competitorNote(snap, name, t.category_id),
         })),
-        why: t.rationale ?? "",
+        summary: synthSummary({
+          cat,
+          market,
+          growth,
+          tier,
+          focusName,
+          focusGrowth: focusEntry ? focusEntry[2] : null,
+          leaderName,
+          leaderShare,
+          leaderFalling,
+          compName,
+        }),
       };
     })
     .sort((a, b) => b.score - a.score);

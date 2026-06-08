@@ -6,6 +6,7 @@ import { SUPPLIERS } from "@/lib/suppliers";
 import { Icons } from "./icons";
 import { ModelProvider } from "./model-context";
 import { Sidebar } from "./sidebar";
+import { SourceFooter } from "./source-footer";
 import { Topbar } from "./topbar";
 import { Overview } from "./views/overview";
 import { Trending, type FilterTier, type Layout } from "./views/trending";
@@ -126,6 +127,7 @@ export function Dashboard({ model }: { model: Model }) {
                 requestQuote={requestQuote}
               />
             )}
+            <SourceFooter />
           </div>
         </main>
 

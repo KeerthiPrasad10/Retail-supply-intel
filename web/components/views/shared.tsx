@@ -5,6 +5,7 @@ import { cc } from "@/lib/util";
 import { Icons } from "../icons";
 import { useCname } from "../model-context";
 import { DemandSpark, FlagCode, GrowthPill, OriginBars, Tier } from "../primitives";
+import { SummaryBlock } from "../summary-block";
 
 export function StatTile({
   value,
@@ -56,7 +57,7 @@ export function TrendCard({ t, go, matches }: { t: Trend; go: Go; matches: numbe
           {t.cat} demand is {verb} — source from <span className="focus">{focusName}</span> before
           competitors lock it in
         </h3>
-        <p className="tcard-why">{t.why}</p>
+        <SummaryBlock summary={t.summary} />
         <div className="tcard-origins">
           <OriginBars sources={t.sources} limit={3} focus={t.focus} />
         </div>

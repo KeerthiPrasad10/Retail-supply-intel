@@ -53,6 +53,10 @@ export function SupplierDrawer({
               </div>
             </div>
           </div>
+          <p className="dp-loc" style={{ marginTop: 10 }}>
+            <Icons.alert size={13} />
+            Illustrative profile · not customs-verified
+          </p>
           <p className="dp-note">{s.note}</p>
           <div className="dp-cats">
             {s.cats.map((c) => (
