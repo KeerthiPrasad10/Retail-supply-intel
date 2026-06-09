@@ -38,6 +38,37 @@ def test_emerging_supplier_detection(db_ready):
         assert by_partner["CN"]["emerging"] is False
 
 
+def test_sources_scoped_to_asia_by_default(db_ready):
+    """LKA sources only from Asia: non-Asian customs partners are excluded, and
+    a noisy non-Asian re-export spike never becomes a recommended origin."""
+    with session_scope() as session:
+        cat = _beauty_id(session)
+        session.add_all(
+            [
+                # Real Asian origin (China), large and stable.
+                TradeFlow(reporter_code="DE", partner_code="CN", category_id=cat,
+                          hs_code="3304", period="2022", trade_value=100.0),
+                TradeFlow(reporter_code="DE", partner_code="CN", category_id=cat,
+                          hs_code="3304", period="2023", trade_value=110.0),
+                # Non-Asian re-export noise (Great Britain) surging off ~0 — the
+                # kind of partner that used to headline "source from UK".
+                TradeFlow(reporter_code="DE", partner_code="GB", category_id=cat,
+                          hs_code="3304", period="2022", trade_value=1.0),
+                TradeFlow(reporter_code="DE", partner_code="GB", category_id=cat,
+                          hs_code="3304", period="2023", trade_value=80.0),
+            ]
+        )
+
+    with session_scope() as session:
+        cat = _beauty_id(session)
+        codes = {s["partner_code"] for s in category_sources(session, cat)}
+        assert "GB" not in codes  # non-Asian partner excluded
+        assert "CN" in codes
+        # Explicit override still lets a caller widen the scope.
+        widened = {s["partner_code"] for s in category_sources(session, cat, origins=["CN", "GB"])}
+        assert {"CN", "GB"} <= widened
+
+
 def test_run_correlation_produces_ranked_triggers(db_ready):
     with session_scope() as session:
         cat = _beauty_id(session)

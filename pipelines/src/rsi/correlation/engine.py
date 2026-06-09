@@ -9,10 +9,12 @@ flows) and which competitors already buy there, then emits a ranked, explainable
 from __future__ import annotations
 
 from collections import defaultdict
+from collections.abc import Sequence
 
 from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session
 
+from .. import reference
 from ..models import (
     Competitor,
     CompetitorSourcing,
@@ -26,22 +28,40 @@ from ..models import (
 
 EMERGING_GROWTH = 0.15  # >=15% YoY import-value growth flags an emerging origin
 SUPPLY_WEIGHT = 0.5
+# An emerging origin must hold at least this share of (Asian) imports to be
+# *recommended* — otherwise a tiny re-export spike off a near-zero base would
+# headline the card ("source from <noise>") instead of a real sourcing origin.
+EMERGING_MIN_SHARE = 0.02
 
 
-def category_sources(session: Session, category_id: int) -> list[dict]:
+def category_sources(
+    session: Session,
+    category_id: int,
+    origins: Sequence[str] | None = None,
+) -> list[dict]:
     """Origin countries for a category, ranked by latest import value.
 
+    Scoped to LKA's Asian supplier base by default (``reference.ASIAN_ORIGINS``):
+    LKA sources *exclusively* from Asia, so non-Asian customs partners — which
+    are mostly intra-EU re-export noise — are irrelevant and are excluded.
+    Pass ``origins`` to override the scope.
+
     Each entry carries ``value`` (latest period, summed across reporters),
-    ``share`` of that period's total, ``growth`` vs the prior period, and an
-    ``emerging`` flag.
+    ``share`` of that period's total (within scope), ``growth`` vs the prior
+    period, and an ``emerging`` flag.
     """
+    allowed = list(origins) if origins is not None else list(reference.ASIAN_ORIGINS)
     rows = session.execute(
         select(
             TradeFlow.partner_code,
             TradeFlow.period,
             func.sum(TradeFlow.trade_value),
         )
-        .where(TradeFlow.category_id == category_id, TradeFlow.flow == "import")
+        .where(
+            TradeFlow.category_id == category_id,
+            TradeFlow.flow == "import",
+            TradeFlow.partner_code.in_(allowed),
+        )
         .group_by(TradeFlow.partner_code, TradeFlow.period)
     ).all()
     if not rows:
@@ -63,13 +83,17 @@ def category_sources(session: Session, category_id: int) -> list[dict]:
         if v_latest <= 0:
             continue
         growth = (v_latest - v_prev) / v_prev if v_prev > 0 else (1.0 if v_latest else 0.0)
+        share = v_latest / total_latest
+        emerging = share >= EMERGING_MIN_SHARE and (
+            (v_prev == 0 and v_latest > 0) or growth >= EMERGING_GROWTH
+        )
         out.append(
             {
                 "partner_code": partner,
                 "value": v_latest,
-                "share": v_latest / total_latest,
+                "share": share,
                 "growth": growth,
-                "emerging": (v_prev == 0 and v_latest > 0) or growth >= EMERGING_GROWTH,
+                "emerging": emerging,
             }
         )
     out.sort(key=lambda d: d["value"], reverse=True)
