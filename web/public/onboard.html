@@ -731,13 +731,18 @@ let LIVE_EXTRACT=false;
 fetch('/api/extract').then(r=>r.json()).then(j=>{LIVE_EXTRACT=!!(j&&j.configured);if(LIVE_EXTRACT&&view==='portal')render();}).catch(()=>{});
 function fileToB64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result));r.onerror=rej;r.readAsDataURL(file);});}
 async function callExtract(file,docType){
-  try{
-    const url=await fileToB64(file);const comma=url.indexOf(',');if(comma<0)return null;
-    const mediaType=url.slice(5,comma).split(';')[0]||file.type||'';
-    const resp=await fetch('/api/extract',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({filename:file.name,mediaType,dataBase64:url.slice(comma+1),docType:docType||undefined})});
-    if(!resp.ok)return null;const j=await resp.json();return (j&&j.ok&&Array.isArray(j.fields))?j:null;
-  }catch(e){return null;}
+  if(file.size>4*1024*1024)return {err:'File is '+(file.size/1048576).toFixed(1)+'MB — over the ~4MB upload limit. Use a smaller scan/photo.'};
+  let url;try{url=await fileToB64(file);}catch(e){return {err:'Could not read the file'};}
+  const comma=url.indexOf(',');if(comma<0)return {err:'Could not read the file'};
+  const mediaType=url.slice(5,comma).split(';')[0]||file.type||'';
+  let resp;
+  try{resp=await fetch('/api/extract',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({filename:file.name,mediaType,dataBase64:url.slice(comma+1),docType:docType||undefined})});}
+  catch(e){return {err:'Network error calling /api/extract'};}
+  let j=null;try{j=await resp.json();}catch(e){}
+  if(!resp.ok){console.warn('extract failed',resp.status,j);return {err:(j&&j.error)||('HTTP '+resp.status),status:resp.status};}
+  if(j&&j.ok&&Array.isArray(j.fields))return {fields:j.fields,docType:j.docType};
+  return {err:'Unexpected response from /api/extract',status:resp.status};
 }
 function applyExtracted(fields,docKey,srcNm){
   const docNm=(DOCS.find(d=>d.key===docKey)||{}).nm||srcNm||'document';let n=0;const just=[];
@@ -751,16 +756,19 @@ function applyExtracted(fields,docKey,srcNm){
 async function extractDoc(key,file){
   toast('Reading '+file.name+'…');
   const res=await callExtract(file,key);
-  if(res&&res.fields.length){const n=applyExtracted(res.fields,key,file.name);
-    toast(n+' field'+(n!==1?'s':'')+' read from '+((DOCS.find(d=>d.key===key)||{}).nm||'document')+' · live');}
-  else{runExtract(key);} // fallback: no key / unreadable / network
+  const docNm=(DOCS.find(d=>d.key===key)||{}).nm||'document';
+  if(res.fields&&res.fields.length){const n=applyExtracted(res.fields,key,file.name);
+    toast(n+' field'+(n!==1?'s':'')+' read from '+docNm+' · live');}
+  else if(res.fields){toast('Live parse found no fields in '+file.name+' — showing sample data');runExtract(key);}
+  else{toast('Live parse failed: '+(res.err||'unknown')+' — showing sample data');runExtract(key);} // fallback keeps the demo alive
 }
 // real upload of an unclassified file → open reasoning (lower confidence), else mock reasonFile
 async function extractUnknown(file){
   if(!LIVE_EXTRACT)return false;
   toast('Reading '+file.name+'…');
   const res=await callExtract(file,'');
-  if(!res||!res.fields.length)return false;
+  if(res.err){toast('Live parse failed: '+res.err);return false;}
+  if(!res.fields||!res.fields.length)return false;
   const just=[];res.fields.forEach(fd=>{const k=fd.fieldKey,f=FBYK[k];if(!f)return;
     if(cur.D[k]==null||cur.D[k]===''){cur.D[k]=fd.value;
       cur.meta[k]={conf:Math.min(typeof fd.confidence==='number'?fd.confidence:0.6,0.78),srcNm:file.name,doc:'reasoned',reasoned:true,status:'review'};just.push(k);}});
