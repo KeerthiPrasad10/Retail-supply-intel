@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Supplier Onboarding · IFS Nexus Black Supply · LKA</title>
+<style>
+@font-face{font-family:'Suisse Intl';src:url('fonts/SuisseIntl-Regular.otf') format('opentype');font-weight:400;font-display:swap;}
+@font-face{font-family:'Suisse Intl';src:url('fonts/SuisseIntl-Medium.otf') format('opentype');font-weight:500;font-display:swap;}
+@font-face{font-family:'Suisse Intl';src:url('fonts/SuisseIntl-SemiBold.otf') format('opentype');font-weight:600;font-display:swap;}
+@font-face{font-family:'PP Supply Mono';src:url('fonts/PPSupplyMono-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
+@font-face{font-family:'PP Supply Mono';src:url('fonts/PPSupplyMono-Medium.ttf') format('truetype');font-weight:500;font-display:swap;}
+:root{
+--font:'Suisse Intl','Inter',system-ui,-apple-system,sans-serif;
+--mono:'PP Supply Mono',ui-monospace,Menlo,Consolas,monospace;
+--page:#f2f2f2;--s1:#fafafa;--s2:#f2f2f2;--s3:#e6e6e6;
+--ink:#090909;--ink2:#222222;--muted:#6b6b6b;--faint:#afafaf;--inv:#fafafa;
+--line:rgba(0,0,0,0.08);--line2:rgba(0,0,0,0.14);--line3:rgba(0,0,0,0.20);
+--ov:rgba(0,0,0,0.03);--ov2:rgba(0,0,0,0.05);
+--blue:#0365d8;--blue-bg:rgba(3,101,216,0.10);
+--amber:#b86d05;--amber-bg:rgba(184,109,5,0.10);
+--green:#187e43;--green-bg:rgba(24,126,67,0.10);
+--red:#b73030;--red-bg:rgba(183,48,48,0.08);
+--grey-bg:rgba(0,0,0,0.05);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{font-family:var(--font);background:var(--page);color:var(--ink);-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.5;letter-spacing:-0.1px;}
+::selection{background:var(--ink);color:var(--page);}
+.app{display:grid;grid-template-columns:248px 1fr;height:100vh;overflow:hidden;}
+.sidebar{background:var(--s1);border-right:0.5px solid var(--line);display:flex;flex-direction:column;padding:16px 12px;gap:4px;overflow-y:auto;}
+.brand{font-family:var(--mono);font-weight:500;font-size:16px;letter-spacing:-0.5px;padding:6px 10px 14px;}
+.brand .sl{color:var(--muted);}
+.vswitch{display:flex;flex-direction:column;gap:4px;background:var(--s3);border-radius:10px;padding:4px;margin-bottom:8px;}
+.vswitch .vbtn{display:flex;align-items:center;gap:8px;padding:8px 10px;border:0;background:none;border-radius:7px;font-family:var(--font);font-size:13px;font-weight:500;color:var(--ink2);cursor:pointer;text-align:left;}
+.vswitch .vbtn .ic{width:16px;height:16px;flex:0 0 16px;opacity:.7;}
+.vswitch .vbtn.on{background:var(--s1);color:var(--ink);box-shadow:0 1px 0 rgba(0,0,0,0.04);}
+.vswitch .vbtn .who{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-left:auto;}
+.navsec{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);padding:14px 10px 4px;}
+.navitem{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;font-size:13px;color:var(--ink2);cursor:pointer;border:0;background:none;width:100%;text-align:left;font-family:var(--font);}
+.navitem:hover{background:var(--ov2);}
+.navitem.on{background:var(--s3);color:var(--ink);font-weight:500;}
+.navitem .ic{width:16px;height:16px;flex:0 0 16px;opacity:.6;}
+.navitem.on .ic{opacity:.9;}
+.navitem .num{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--muted);background:var(--s3);border-radius:5px;padding:1px 6px;}
+.sidefoot{margin-top:auto;padding:12px 10px 4px;border-top:0.5px solid var(--line);display:flex;align-items:center;gap:10px;}
+.avatar{width:28px;height:28px;border-radius:9999px;background:var(--s3);display:grid;place-items:center;font-weight:500;font-size:11px;color:var(--ink2);}
+.sidefoot .nm{font-size:12px;font-weight:500;}.sidefoot .rl{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;}
+.main{display:flex;flex-direction:column;min-width:0;min-height:0;height:100vh;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:13px 28px;border-bottom:0.5px solid var(--line);background:color-mix(in srgb,var(--page) 86%,transparent);backdrop-filter:blur(10px);position:sticky;top:0;z-index:20;}
+.crumbs{font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;gap:8px;align-items:center;}
+.crumbs b{color:var(--ink);font-weight:500;}
+.sysstat{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.04em;color:var(--green);display:inline-flex;align-items:center;gap:6px;}
+.sysstat .dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+.content{flex:1;min-height:0;overflow-y:auto;padding:32px 28px 80px;}
+.wrap{max-width:1080px;margin:0 auto;}
+.wrap.narrow{max-width:760px;}
+h1{font-size:28px;font-weight:500;letter-spacing:-0.6px;line-height:1.15;}
+h2{font-size:18px;font-weight:500;letter-spacing:-0.3px;}
+.sub{font-size:14px;color:var(--ink2);margin-top:6px;max-width:64ch;}
+.eyemono{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);}
+.row{display:flex;align-items:center;gap:12px;}
+.spread{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.mt8{margin-top:8px;}.mt16{margin-top:16px;}.mt24{margin-top:24px;}.mt32{margin-top:32px;}
+.btn{font-family:var(--font);font-weight:500;font-size:13px;border-radius:9999px;padding:9px 16px;cursor:pointer;border:0.5px solid transparent;line-height:1.2;display:inline-flex;align-items:center;gap:7px;letter-spacing:-0.1px;transition:120ms ease;}
+.btn .ic{width:15px;height:15px;}
+.btn.primary{background:var(--ink);color:var(--inv);}
+.btn.primary:hover{opacity:.88;}
+.btn.secondary{background:var(--ov2);color:var(--ink);}
+.btn.secondary:hover{background:rgba(0,0,0,0.09);}
+.btn.ghost{background:none;color:var(--ink2);border-color:var(--line2);}
+.btn.ghost:hover{background:var(--ov2);}
+.btn.approve{background:none;color:var(--green);border-color:var(--green);}
+.btn.approve:hover{background:var(--green-bg);}
+.btn.reject{background:none;color:var(--red);border-color:rgba(183,48,48,0.4);}
+.btn.reject:hover{background:var(--red-bg);}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+.btn.sm{padding:6px 12px;font-size:12px;}
+.badge{font-family:var(--mono);font-weight:500;font-size:10px;text-transform:uppercase;letter-spacing:0.04em;border-radius:9999px;padding:3px 9px;display:inline-flex;align-items:center;gap:6px;border:0.5px solid transparent;white-space:nowrap;}
+.badge .dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+.badge.review{background:var(--blue-bg);color:var(--blue);}
+.badge.pending{background:var(--amber-bg);color:var(--amber);}
+.badge.active{background:var(--green-bg);color:var(--green);}
+.badge.draft{background:var(--grey-bg);color:var(--muted);}
+.badge.rejected{background:var(--red-bg);color:var(--red);}
+.card{background:var(--s1);border:0.5px solid var(--line);border-radius:16px;padding:18px 20px;}
+.card+.card{margin-top:12px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr;}}
+.stat{background:var(--s1);border:0.5px solid var(--line);border-radius:14px;padding:16px 18px;}
+.stat .v{font-size:30px;font-weight:500;letter-spacing:-0.6px;line-height:1;}
+.stat .k{font-size:12px;color:var(--muted);margin-top:8px;}
+.stat .v.green{color:var(--green);}.stat .v.amber{color:var(--amber);}.stat .v.blue{color:var(--blue);}
+.suprow{background:var(--s1);border:0.5px solid var(--line);border-radius:16px;padding:16px 20px;display:grid;grid-template-columns:1fr auto;gap:10px 16px;align-items:center;cursor:pointer;transition:120ms ease;}
+.suprow+.suprow{margin-top:10px;}
+.suprow:hover{background:var(--ov);border-color:var(--line2);}
+.suprow.new{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-bg);}
+.suprow .meta{font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.suprow .nm{font-size:16px;font-weight:500;margin-top:3px;}
+.suprow .tags{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap;}
+.suprow .rt{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+.vem{font-family:var(--mono);font-size:11px;color:var(--ink2);display:inline-flex;align-items:center;gap:6px;}
+.vem b{font-size:14px;}
+.vemdot{width:9px;height:9px;border-radius:2px;display:inline-block;}
+.filter{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:20px 0 4px;}
+.pill{font-size:12px;padding:6px 13px;border-radius:9999px;background:var(--ov2);color:var(--ink2);cursor:pointer;border:0.5px solid transparent;font-family:var(--font);}
+.pill.on{background:var(--ink);color:var(--inv);}
+.pill .c{font-family:var(--mono);font-size:10px;opacity:.7;margin-left:5px;}
+.filter .ct{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:auto;}
+.lifecycle{display:flex;gap:0;border:0.5px solid var(--line2);border-radius:9px;overflow:hidden;width:fit-content;}
+.lc{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.04em;padding:6px 14px;color:var(--muted);background:var(--s1);}
+.lc+.lc{border-left:0.5px solid var(--line2);}
+.lc.on{background:var(--ink);color:var(--inv);}
+.lc.passed{background:var(--green-bg);color:var(--green);}
+/* critical path strip */
+/* critical path: read-only progress timeline (not buttons) */
+.cpcap{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-top:12px;margin-bottom:9px;}
+.cpath{display:flex;align-items:flex-start;gap:0;margin:0 2px;}
+.cpstep{flex:1 1 0;display:flex;flex-direction:column;align-items:center;position:relative;}
+.cpstep::before{content:"";position:absolute;top:10px;left:-50%;width:100%;height:2px;background:var(--line2);transform:translateY(-50%);z-index:0;}
+.cpstep:first-child::before{display:none;}
+.cpstep.done::before,.cpstep.now::before{background:var(--green);}
+.cpstep .node{position:relative;z-index:1;width:20px;height:20px;border-radius:50%;background:var(--page);border:1.5px solid var(--line3);display:grid;place-items:center;font-family:var(--mono);font-size:9px;color:var(--muted);}
+.cpstep.done .node{background:var(--green);border-color:var(--green);color:#fff;}
+.cpstep.done .node .svgic{width:11px;height:11px;stroke:#fff;}
+.cpstep.now .node{background:var(--ink);border-color:var(--ink);color:var(--inv);}
+.cpstep .cplbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.02em;color:var(--faint);text-align:center;margin-top:7px;line-height:1.3;max-width:80px;}
+.cpstep.done .cplbl{color:var(--muted);}
+.cpstep.now .cplbl{color:var(--ink);font-weight:500;}
+.cpadv{display:flex;justify-content:space-between;gap:8px;margin-top:12px;}
+/* form */
+.secblock{margin-top:10px;}
+.sechead{display:flex;align-items:center;gap:10px;margin:22px 0 10px;scroll-margin-top:24px;}
+.sechead .t{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink2);}
+.sechead .ln{flex:1;height:0.5px;background:var(--line2);}
+.sechead .who{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);background:var(--s3);border-radius:5px;padding:2px 7px;}
+.field{margin-bottom:14px;}
+.field label{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px;}
+.field input,.field select,.field textarea{width:100%;font-family:var(--font);font-size:14px;color:var(--ink);background:var(--s1);border:0.5px solid var(--line2);border-radius:8px;padding:9px 12px;outline:none;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--ink);}
+.field textarea{min-height:60px;resize:vertical;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}
+.fgrid.f3{grid-template-columns:1fr 1fr 1fr;}
+@media(max-width:600px){.fgrid,.fgrid.f3{grid-template-columns:1fr;}}
+.autochip{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.04em;border-radius:5px;padding:1px 6px;}
+.autochip.hi{color:var(--green);background:var(--green-bg);}
+.autochip.mid{color:var(--amber);background:var(--amber-bg);}
+.autochip.lo{color:var(--red);background:var(--red-bg);}
+.autochip.man{color:var(--muted);background:var(--grey-bg);}
+.autochip.lka{color:var(--blue);background:var(--blue-bg);}
+/* doc rows */
+.doc{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:0.5px solid var(--line);}
+.doc:last-child{border-bottom:0;}
+.doc .nm{font-size:13px;font-weight:500;flex:1;}
+.doc .nm small{display:block;font-weight:400;color:var(--muted);font-size:11px;margin-top:1px;}
+.check{display:flex;align-items:center;gap:8px;}
+.checkbox{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:1.5px solid var(--line3);border-radius:6px;background:#fff;cursor:pointer;display:grid;place-items:center;flex:0 0 20px;}
+.checkbox:checked{background:var(--green);border-color:var(--green);}
+.checkbox:checked::after{content:"\2713";color:#fff;font-size:12px;font-weight:700;}
+/* record view (buyer) */
+.rec .sechead{margin:18px 0 8px;}
+.kv2{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;}
+@media(max-width:600px){.kv2{grid-template-columns:1fr;}}
+.kvr{display:block;padding:8px 0;border-bottom:0.5px solid var(--line);min-width:0;}
+.kvr .k{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;}
+.kvr .vc{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-width:0;}
+.kvr .v{font-size:13px;color:var(--ink);min-width:0;overflow-wrap:anywhere;}
+.kvr .v.empty{color:var(--faint);}
+.kvr .pv{flex:0 0 auto;}
+.tbl{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px;}
+.tbl th{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted);text-align:left;padding:6px 8px;border-bottom:0.5px solid var(--line2);font-weight:500;}
+.tbl td{padding:6px 8px;border-bottom:0.5px solid var(--line);color:var(--ink2);}
+.pa{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:0.5px solid var(--line);font-size:12px;}
+.pa:last-child{border-bottom:0;}
+.pa .nm{flex:1;}
+.pa .pct{font-family:var(--mono);font-size:11px;color:var(--ink2);}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,0.40);z-index:40;display:none;}
+.scrim.on{display:block;}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(680px,96vw);background:var(--page);z-index:50;transform:translateX(100%);transition:transform .28s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;border-left:0.5px solid var(--line2);}
+.drawer.on{transform:none;}
+.drawer .dhead{padding:18px 24px;border-bottom:0.5px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.drawer .dbody{padding:18px 24px 48px;overflow-y:auto;flex:1;}
+.drawer .dx{width:32px;height:32px;border-radius:9999px;border:0;background:var(--ov2);cursor:pointer;font-size:16px;color:var(--ink);flex:0 0 32px;}
+.dtabs{display:flex;gap:4px;padding:0 24px;border-bottom:0.5px solid var(--line);overflow-x:auto;}
+.dtab{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.04em;padding:11px 10px;color:var(--muted);background:none;border:0;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;}
+.dtab.on{color:var(--ink);border-bottom-color:var(--ink);}
+.approval{background:var(--s1);border:0.5px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.approval .t{font-size:13px;font-weight:500;}
+.approval .t small{display:block;font-weight:400;color:var(--muted);font-size:11px;margin-top:2px;}
+.gate{background:var(--amber-bg);border:0.5px solid rgba(184,109,5,0.25);border-radius:10px;padding:11px 14px;font-size:12.5px;color:var(--amber);margin-top:10px;display:flex;gap:9px;align-items:flex-start;}
+.gate.ok{background:var(--green-bg);border-color:rgba(24,126,67,0.25);color:var(--green);}
+.banner{background:var(--blue-bg);border:0.5px solid rgba(3,101,216,0.25);border-radius:12px;padding:13px 16px;font-size:13px;color:var(--blue);display:flex;gap:10px;align-items:flex-start;margin-bottom:18px;}
+.banner b{font-weight:600;}
+.muted{color:var(--muted);}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--inv);padding:12px 20px;border-radius:10px;font-size:13px;font-weight:500;z-index:60;opacity:0;transition:.3s;pointer-events:none;}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+.svgic{stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.progress{height:5px;background:var(--s3);border-radius:9999px;overflow:hidden;margin-top:6px;}
+.progress span{display:block;height:100%;background:var(--ink);transition:width .4s ease;}
+/* guided two-pane */
+.guided{display:grid;grid-template-columns:360px 1fr;gap:28px;align-items:start;}
+@media(max-width:900px){.guided{grid-template-columns:1fr;}}
+.lpane{position:sticky;top:8px;}
+@media(max-width:900px){.lpane{position:static;}}
+.dropzone{border:1.5px dashed var(--line3);border-radius:14px;padding:26px 18px;text-align:center;background:var(--s1);cursor:pointer;transition:120ms ease;}
+.dropzone:hover{border-color:var(--line3);background:var(--ov2);}
+.dropzone.over{border-color:var(--ink);background:var(--ov2);}
+.dropzone .dzic{width:30px;height:30px;color:var(--muted);margin:0 auto 8px;}
+.dropzone .big{font-size:14px;font-weight:500;}
+.dropzone .sm{font-size:12px;color:var(--muted);margin-top:3px;}
+.reclist{margin-top:8px;}
+.recitem{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--line);cursor:pointer;}
+.recitem:last-child{border-bottom:0;}
+.recitem:hover{background:var(--ov);}
+.recitem .ic{width:30px;height:30px;border-radius:8px;background:var(--s3);display:grid;place-items:center;flex:0 0 30px;color:var(--muted);}
+.recitem.done{cursor:default;}
+.recitem.done .ic{background:var(--green-bg);color:var(--green);}
+.recitem .nm{flex:1;font-size:13px;font-weight:500;min-width:0;}
+.recitem .nm small{display:block;font-weight:400;color:var(--muted);font-size:11px;}
+.fieldrow{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:0.5px solid var(--line);}
+.fieldrow:last-child{border-bottom:0;}
+.fieldrow .k{flex:0 0 168px;font-size:12px;color:var(--muted);padding-top:8px;}
+@media(max-width:600px){.fieldrow{flex-direction:column;gap:4px;}.fieldrow .k{flex:none;padding-top:0;}}
+.fieldrow .c{flex:1;min-width:0;}
+.fieldrow .val{font-size:14px;font-weight:500;padding-top:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.fieldrow.filled{border-radius:8px;}
+.fieldrow.flash{animation:flashbg 1.1s ease;}
+@keyframes flashbg{0%{background:var(--green-bg);}100%{background:transparent;}}
+.recpill{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.03em;color:var(--blue);background:var(--blue-bg);border:0.5px solid rgba(3,101,216,0.22);border-radius:9999px;padding:5px 11px;cursor:pointer;display:inline-flex;gap:6px;align-items:center;margin-top:3px;}
+.recpill:hover{background:rgba(3,101,216,0.16);}
+.recpill .svgic{width:12px;height:12px;}
+.lkahint{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.03em;color:var(--muted);background:var(--grey-bg);border-radius:9999px;padding:5px 11px;display:inline-flex;margin-top:3px;}
+.reasonhint{font-size:12px;color:var(--muted);background:var(--ov2);border:0.5px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:12px;line-height:1.45;}
+.rsntag{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.03em;color:var(--amber);background:var(--amber-bg);border-radius:5px;padding:1px 6px;}
+.reqcard{border:0.5px solid var(--line2);}
+.reqrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:0.5px solid var(--line);}
+.reqrow:last-child{border-bottom:0;}
+.reqrow .nm{flex:1;font-size:13px;font-weight:500;}
+.tick{width:20px;height:20px;border-radius:9999px;border:1.5px solid var(--line3);display:grid;place-items:center;flex:0 0 20px;color:#fff;background:#fff;}
+.tick.on{background:var(--green);border-color:var(--green);}
+.tick .svgic{width:12px;height:12px;}
+.reqmark{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.03em;color:var(--red);}
+.chips{display:flex;flex-wrap:wrap;gap:6px;}
+.chip2{font-size:12px;padding:6px 12px;border-radius:9999px;background:var(--ov2);color:var(--ink2);border:0.5px solid var(--line2);cursor:pointer;font-family:var(--font);}
+.chip2.on{background:var(--ink);color:var(--inv);border-color:var(--ink);}
+.tag{font-size:12px;padding:4px 6px 4px 11px;border-radius:9999px;background:var(--s3);display:inline-flex;align-items:center;gap:6px;}
+.tag button{border:0;background:none;cursor:pointer;color:var(--muted);font-size:15px;line-height:1;padding:0;}
+.catadd{margin-top:8px;font-family:var(--font);font-size:13px;background:var(--s1);border:0.5px solid var(--line2);border-radius:8px;padding:8px 11px;width:100%;}
+.prow{display:grid;grid-template-columns:1.5fr 1fr 0.9fr 0.8fr 24px;gap:6px;margin-bottom:6px;align-items:center;}
+.prow input{font-family:var(--font);font-size:13px;background:var(--s1);border:0.5px solid var(--line2);border-radius:7px;padding:7px 9px;width:100%;}
+.prm{border:0;background:none;color:var(--muted);cursor:pointer;font-size:17px;line-height:1;}
+.condnote{font-size:12px;color:var(--amber);background:var(--amber-bg);border:0.5px solid rgba(184,109,5,0.22);border-radius:8px;padding:8px 11px;margin-top:10px;display:flex;gap:8px;align-items:flex-start;}
+@media(max-width:600px){.prow{grid-template-columns:1fr 1fr;}}
+.chk{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:0.5px solid var(--line);}
+.chk:last-child{border-bottom:0;}
+.chk .nm{flex:1;font-size:13px;font-weight:500;}
+.chk .nm small{display:block;font-weight:400;color:var(--muted);font-size:11px;margin-top:1px;}
+.clar{border:0.5px solid var(--line2);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.clar .top{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;}
+.clar .ty{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.04em;color:var(--blue);background:var(--blue-bg);border-radius:5px;padding:2px 7px;}
+.clar .msg{font-size:13px;line-height:1.45;}
+.clar .resp{font-size:13px;background:var(--ov2);border-radius:8px;padding:8px 10px;margin-top:8px;}
+.clar .resp .who{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted);display:block;margin-bottom:3px;}
+.clarform textarea{width:100%;font-family:var(--font);font-size:13px;background:var(--s1);border:0.5px solid var(--line2);border-radius:8px;padding:9px 11px;min-height:60px;resize:vertical;}
+.clarform select{font-family:var(--font);font-size:13px;background:var(--s1);border:0.5px solid var(--line2);border-radius:8px;padding:8px 10px;}
+.precond{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:5px 0;}
+.precond .ic{width:15px;height:15px;flex:0 0 15px;}
+.precond.ok{color:var(--ink2);}.precond.ok .ic{color:var(--green);}
+.precond.no{color:var(--muted);}.precond.no .ic{color:var(--faint);}
+.actneed{background:var(--amber-bg);border:0.5px solid rgba(184,109,5,0.25);border-radius:12px;padding:14px 16px;margin-bottom:12px;}
+.actneed .h{font-size:13px;font-weight:600;color:var(--amber);display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">NxB<span class="sl">/</span>Supply</div>
+    <div class="vswitch" id="vswitch">
+      <button class="vbtn on" data-view="portal"><svg class="svgic ic" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>Supplier Portal<span class="who">Vendor</span></button>
+      <button class="vbtn" data-view="buyer"><svg class="svgic ic" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"/></svg>Supplier Master Data<span class="who">LKA</span></button>
+    </div>
+    <div id="sidenav"></div>
+    <div class="sidefoot">
+      <div class="avatar" id="avatar">SU</div>
+      <div><div class="nm" id="footnm">New supplier</div><div class="rl" id="footrl">Vendor · self-service</div></div>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <div class="crumbs" id="crumbs">NxB Supply <span>/</span> <b>Supplier Portal</b></div>
+      <div class="sysstat"><span class="dot"></span> All systems operational</div>
+    </div>
+    <div class="content"><div id="view"></div></div>
+  </main>
+</div>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer"></aside>
+<div class="toast" id="toast"></div>
+<script>
+// ============ icons ============
+const ICONS={
+  dash:'<path d="M3 13h8V3H3zM13 21h8V8h-8zM13 3v3h8V3zM3 17v4h8v-4z"/>',
+  building:'<path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/>',
+  file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>',
+  shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  list:'<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>'
+};
+// ============ documents (uploads that drive autofill) ============
+const DOCS=[
+  {key:'license',nm:'Business licence',sub:'Company registration certificate',req:true},
+  {key:'bank',nm:'Bank proof',sub:'Bank letter / statement for payments',req:true},
+  {key:'social',nm:'Social compliance (amfori BSCI)',sub:'amfori / BSCI audit report',req:true},
+  {key:'env',nm:'Environmental cert (ISO 14001)',sub:'Environmental management system'},
+  {key:'fire',nm:'Fire & building safety cert',sub:'Factory fire safety certificate (BD/PK)'},
+  {key:'factory',nm:'Factory registration form',sub:'Factory address, capacity, lines',req:true},
+  {key:'trial',nm:'Trial quotation',sub:'Initial price sheet'}
+];
+const REQDOCS=DOCS.filter(d=>d.req);
+// conditional documents triggered by product type (extra compliance). Standard retail requirements, confirm exact list with LKA.
+const COND_DOCS={
+  children:[{key:'en71',nm:'EN 71 toy-safety test report',sub:'Triggered by children / toy products'},{key:'cpsia',nm:'CPSIA + age grading',sub:'Children products shipped to US'}],
+  food:[{key:'lfgb',nm:'Food-contact declaration (LFGB / EU 10/2011)',sub:'Triggered by food-contact products'}],
+  electrical:[{key:'ce',nm:'CE (LVD/EMC) + RoHS',sub:'Triggered by electrical products'}],
+  textile:[{key:'oeko',nm:'OEKO-TEX Standard 100',sub:'Triggered by textile products'}]
+};
+const PTYPES=[['children','Children / toys'],['food','Food contact'],['electrical','Electrical'],['textile','Textiles'],['general','General merchandise']];
+function condDocs(){const out=[];(cur.ptypes||[]).forEach(t=>{(COND_DOCS[t]||[]).forEach(dd=>out.push(dd));});return out;}
+function activeDocs(){return DOCS.concat(condDocs());}
+function reqActive(){return REQDOCS.concat(condDocs());}
+// ============ field schema (grounded in CBX supplier + factory records) ============
+// fill: 'doc' (extracted from an upload), 'supplier' (vendor types), 'lka' (LKA assigns)
+// doc fields carry a demo value + confidence (mock NxB Parse output)
+const SCHEMA=[
+ {sec:'General', who:'Supplier + LKA', fields:[
+   {k:'vendor',label:'Vendor (short name)',fill:'supplier'},
+   {k:'name',label:'Supplier name',fill:'doc',doc:'license',conf:0.97,val:'Hangzhou Textile Co., Ltd'},
+   {k:'type',label:'Supplier type',fill:'supplier',type:'select',opts:['','Manufacturer','Trader','Agent']},
+   {k:'website',label:'Website',fill:'supplier'},
+   {k:'refNo',label:'L&K supplier ref no.',fill:'lka'},
+   {k:'fnf',label:'Supplier ID (FNF)',fill:'lka'},
+   {k:'keyContact',label:'Key account contact',fill:'lka'},
+   {k:'access',label:'Supplier access creation',fill:'lka',type:'flag'},
+   {k:'target',label:'Target selection',fill:'lka'},
+   {k:'office',label:'L&K office (supplier)',fill:'lka'}
+ ]},
+ {sec:'Business licence', who:'Document', fields:[
+   {k:'licNo',label:'Business licence number',fill:'doc',doc:'license',conf:0.95,val:'91330100MA27XYZ12K'},
+   {k:'licCountry',label:'Licence country',fill:'doc',doc:'license',conf:0.99,val:'China'},
+   {k:'licIssue',label:'Licence issue date',fill:'doc',doc:'license',conf:0.93,val:'2019-03-12'},
+   {k:'licExp',label:'Licence expiry date',fill:'doc',doc:'license',conf:0.91,val:'2039-03-11'},
+   {k:'licNotes',label:'Licence notes',fill:'supplier'},
+   {k:'licAttach',label:'Attachment',fill:'doc',doc:'license',conf:1,val:'business-licence.pdf'},
+   {k:'licStatus',label:'Licence status',fill:'lka'},
+   {k:'licVerified',label:'Verified on',fill:'lka',type:'date'}
+ ]},
+ {sec:'Addresses & contacts', who:'Supplier + document', fields:[
+   {k:'addr',label:'Registered address',fill:'doc',doc:'license',conf:0.84,val:'No. 88 Jianggan Rd, Hangzhou'},
+   {k:'city',label:'City',fill:'doc',doc:'license',conf:0.86,val:'Hangzhou'},
+   {k:'province',label:'Province / region',fill:'doc',doc:'license',conf:0.8,val:'Zhejiang'},
+   {k:'contactName',label:'Contact person',fill:'supplier'},
+   {k:'contactEmail',label:'Email',fill:'supplier'},
+   {k:'contactPhone',label:'Phone',fill:'supplier'}
+ ]},
+ {sec:'Classification', who:'LKA', fields:[
+   {k:'prodCat',label:'Product category',fill:'lka'},
+   {k:'division',label:'Division',fill:'lka'},
+   {k:'merchCat',label:'Merchandise category',fill:'lka'},
+   {k:'dirCat',label:'Director category',fill:'lka'},
+   {k:'cat',label:'Category',fill:'lka'},
+   {k:'subCat',label:'Sub-category',fill:'lka'},
+   {k:'mainDiv',label:'Main division',fill:'lka'},
+   {k:'mainDirCat',label:'Main director category',fill:'lka'},
+   {k:'mainCat',label:'Main category',fill:'lka'},
+   {k:'mainSubCat',label:'Main sub-category',fill:'lka'}
+ ]},
+ {sec:'Financial information', who:'Document', fields:[
+   {k:'payTerm',label:'Payment term',fill:'supplier'},
+   {k:'bankName',label:'Bank name',fill:'doc',doc:'bank',conf:0.94,val:'Bank of China, Hangzhou Branch'},
+   {k:'acctHolder',label:'Account holder',fill:'doc',doc:'bank',conf:0.88,val:'Hangzhou Textile Co., Ltd'},
+   {k:'bankAcct',label:'Account number',fill:'doc',doc:'bank',conf:0.79,val:'3980 1122 4455 7788'},
+   {k:'swift',label:'SWIFT / BIC',fill:'doc',doc:'bank',conf:0.96,val:'BKCHCNBJ900'},
+   {k:'currency',label:'Currency',fill:'doc',doc:'bank',conf:0.9,val:'USD'}
+ ]},
+ {sec:'Products & categories', who:'Supplier', custom:'products', fields:[
+   {k:'annualVolume',label:'Annual production volume (units)',fill:'supplier'},
+   {k:'keyCustomers',label:'Key customers',fill:'supplier'}
+ ]},
+ {sec:'Commercial information', who:'Supplier + LKA', fields:[
+   {k:'turnover',label:'Annual turnover (total)',fill:'supplier'},
+   {k:'turnEU',label:'Europe %',fill:'supplier'},
+   {k:'turnUS',label:'US %',fill:'supplier'},
+   {k:'turnAsia',label:'Asia %',fill:'supplier'},
+   {k:'turnME',label:'Middle East %',fill:'supplier'},
+   {k:'turnAfr',label:'Africa %',fill:'supplier'},
+   {k:'trialIan',label:'Trial quotation IAN',fill:'doc',doc:'trial',conf:0.82,val:'IAN-77041'},
+   {k:'trialFob',label:'Trial FOB price (USD)',fill:'doc',doc:'trial',conf:0.8,val:'0.65'},
+   {k:'trialTarget',label:'Internal target price',fill:'lka'}
+ ]},
+ {sec:'Compliance & certificates', who:'Document', fields:[
+   {k:'amforiId',label:'amfori ID',fill:'doc',doc:'social',conf:0.92,val:'DBID 388291'},
+   {k:'amforiSite',label:'amfori site ID',fill:'doc',doc:'social',conf:0.9,val:'SITE-552108'},
+   {k:'monId',label:'Monitoring ID',fill:'doc',doc:'social',conf:0.88,val:'MON-2025-04412'},
+   {k:'bsciRating',label:'amfori BSCI rating',fill:'doc',doc:'social',conf:0.9,val:'B'},
+   {k:'bsciExp',label:'BSCI valid until',fill:'doc',doc:'social',conf:0.87,val:'2026-11-30'},
+   {k:'isoNo',label:'ISO 14001 cert no.',fill:'doc',doc:'env',conf:0.9,val:'EMS-2021-44817'},
+   {k:'isoExp',label:'ISO 14001 expiry',fill:'doc',doc:'env',conf:0.88,val:'2027-05-20'},
+   {k:'fireNo',label:'Fire safety cert no.',fill:'doc',doc:'fire',conf:0.83,val:'FS-ZJ-33-7790'},
+   {k:'fireExp',label:'Fire safety expiry',fill:'doc',doc:'fire',conf:0.81,val:'2027-02-28'}
+ ]},
+ {sec:'Capacity & production', who:'Supplier + document', fields:[
+   {k:'facName',label:'Factory name',fill:'doc',doc:'factory',conf:0.9,val:'Hangzhou Textile Mill 2'},
+   {k:'facRef',label:'L&K factory ref',fill:'lka'},
+   {k:'facAddr',label:'Factory address',fill:'doc',doc:'factory',conf:0.82,val:'No. 12 Industrial Park, Xiaoshan'},
+   {k:'monthlyCapacity',label:'Monthly capacity (units)',fill:'doc',doc:'factory',conf:0.72,val:'420,000'},
+   {k:'annualCapacity',label:'Annual capacity (units)',fill:'supplier'},
+   {k:'freeCapacity',label:'Capacity available to LKA',fill:'supplier'},
+   {k:'utilisation',label:'Current utilisation %',fill:'supplier'},
+   {k:'prodLines',label:'Production lines',fill:'supplier'},
+   {k:'workers',label:'Number of workers',fill:'supplier'},
+   {k:'leadTime',label:'Lead time (days)',fill:'supplier'},
+   {k:'moq',label:'Minimum order quantity',fill:'supplier'},
+   {k:'facPort',label:'Port of loading',fill:'doc',doc:'factory',conf:0.82,val:'Ningbo'}
+ ]},
+ {sec:'Acknowledgements & agreements', who:'Supplier', fields:[
+   {k:'nda',label:'Non-disclosure agreement',fill:'supplier',type:'flag'},
+   {k:'coc',label:'Code of conduct',fill:'supplier',type:'flag'},
+   {k:'sca',label:'Supplier contract agreement',fill:'supplier',type:'flag'}
+ ]}
+];
+// BSCI 13 performance areas (from amfori section ratings)
+const PA=['PA1 Social Management System','PA2 Workers Involvement & Protection','PA3 Freedom of Association & Collective Bargaining','PA4 No Discrimination','PA5 Fair Remuneration','PA6 Decent Working Hours','PA7 Occupational Health & Safety','PA8 No Child Labour','PA9 Special Protection for Young Workers','PA10 No Precarious Employment','PA11 No Bonded Labour','PA12 Protection of the Environment','PA13 Ethical Business Behaviour'];
+const CPATH=['Explore Data Submission','Explore Trial Quotation','Explore Approval','Onboard Data Submission','Onboard Credit Check & DD','Onboard Financial Data Eval','Onboard Data Review','Onboard Approval','Manage Active'];
+const CPSHORT=['Explore: data','Explore: trial quote','Explore: approval','Onboard: data','Credit & DD','Financial eval','Data review','Onboard: approval','Manage: active'];
+const STAGE_CP={explore:1,onboard:5,manage:9}; // fallback only; s.cp is the live position (0..8)
+function cpStage(cp){return cp<=2?'explore':cp<=7?'onboard':'manage';}
+function reconcileCp(s){
+  s.stage=cpStage(s.cp);
+  if(s.status==='rejected')return;
+  if(s.cp>=8){s.status='active';s.gm=true;s.coo=true;}
+  else{s.status=s.cp<=2?'review':'pending';s.coo=false;if(s.cp<7)s.gm=false;}
+}
+
+// ---- helpers ----
+const FBYK={};SCHEMA.forEach(s=>s.fields.forEach(f=>{f._sec=s.sec;FBYK[f.k]=f;}));
+const DOC_FIELDS=k=>SCHEMA.flatMap(s=>s.fields).filter(f=>f.fill==='doc'&&f.doc===k);
+const VEMCAT=n=>!n?{t:'Not scored',c:'var(--muted)'}:n<=2?{t:'Preferred',c:'var(--green)'}:n<=4?{t:'Approved',c:'var(--blue)'}:n===5?{t:'Conditional',c:'var(--amber)'}:{t:'Insufficient',c:'var(--red)'};
+const confClass=c=>c>=0.9?'hi':c>=0.8?'mid':'lo';
+const confTxt=c=>'auto · '+Math.round(c*100)+'%';
+const todayStr=()=>new Date().toISOString().slice(0,10);
+const esc=s=>(s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+
+// ---- seed suppliers (each carries D = field values, meta = per-field provenance) ----
+function rec(o){return Object.assign({docs:{},D:{},meta:{},reasonedDocs:[],cats:[],products:[],ptypes:[],checks:{},clarifications:[],cp:0,verifiedOn:null},o);}
+// external data verification checks run after submit
+const CHECKS=[
+  {key:'sanctions',nm:'Sanctions & denied-party screening',sub:'OFAC / EU / UN lists'},
+  {key:'media',nm:'Adverse media check',sub:'News & reputational scan'},
+  {key:'licence',nm:'Business licence validation',sub:'Government registry lookup'},
+  {key:'bank',nm:'Bank account verification',sub:'Account name vs licence holder'},
+  {key:'credit',nm:'Credit & due-diligence',sub:'Commercial credit reference'}
+];
+const CHKSTAT={clear:['active','Clear'],flag:['rejected','Flagged'],pending:['pending','Running'],review:['pending','In review'],na:['draft','Not started']};
+const cstat=v=>CHKSTAT[v]||CHKSTAT.na;
+let clarSeq=1;
+let SUP=[
+  rec({id:'SUP-1042',nm:'Hangzhou Textile Co.',country:'China',cat:'Apparel · Knitwear',stage:'manage',status:'active',vem:2,gm:true,coo:true,nda:true,cp:8,verifiedOn:'2026-04-18',
+    ptypes:['textile','children'],cats:['Knitwear','Jersey','Activewear'],products:[{name:'Cotton tee 180g',cat:'Knitwear',vol:'1,200,000',fob:'1.85'},{name:'Polo piqué',cat:'Knitwear',vol:'600,000',fob:'2.40'},{name:'Kids fleece set',cat:'Childrenswear',vol:'300,000',fob:'3.10'}],
+    checks:{sanctions:'clear',media:'clear',licence:'clear',bank:'clear',credit:'clear'},
+    clarifications:[{id:101,type:'Question',field:'Bank account holder',msg:'Bank account name differed from the licence holder. Please confirm the relationship.',status:'resolved',response:'Confirmed: account is held by the parent company, Hangzhou Textile Group.',at:'2026-04-10'}],
+    docs:{license:1,bank:1,social:1,env:1,fire:1,factory:1,trial:1,oeko:1,en71:1,cpsia:1},
+    D:{vendor:'HZ Textile',name:'Hangzhou Textile Co., Ltd',type:'Manufacturer',website:'hztextile.cn',refNo:'SG-CN-1042',fnf:'FNF-44021',keyContact:'Cher Zhou',access:'Yes',target:'2507',office:'Lidl & Kaufland Asia Pte. Limited',
+       licNo:'91330100MA27XYZ12K',licCountry:'China',licIssue:'2019-03-12',licExp:'2039-03-11',licAttach:'business-licence.pdf',licStatus:'Verified',licVerified:'2026-04-18',
+       addr:'No. 88 Jianggan Rd, Hangzhou',city:'Hangzhou',province:'Zhejiang',contactName:'Su Chen',contactEmail:'su.chen@hztextile.cn',contactPhone:'+86 571 8888 1042',
+       prodCat:'Apparel',division:'Softline',merchCat:'Knitwear',dirCat:'Apparel',cat:'310 Knitwear',subCat:'310.115 Jersey',mainDiv:'Softline',mainDirCat:'Apparel',mainCat:'310 Knitwear',mainSubCat:'310.115 Jersey',
+       payTerm:'60 days',bankName:'Bank of China, Hangzhou Branch',acctHolder:'Hangzhou Textile Co., Ltd',bankAcct:'3980 1122 4455 7788',swift:'BKCHCNBJ900',currency:'USD',
+       turnover:'38,000,000',turnEU:'55',turnUS:'20',turnAsia:'20',turnME:'3',turnAfr:'2',trialIan:'IAN-77041',trialFob:'0.65',trialTarget:'0.62',
+       categories:'Knitwear, Jersey, Activewear',mainProducts:'T-shirts, polos, fleece',annualVolume:'5,000,000',topProduct:'Cotton tee 180g',topProductQty:'1,200,000',topProductFob:'1.85',keyCustomers:'Target, H&M, Ikea',
+       amforiId:'DBID 388291',amforiSite:'SITE-552108',monId:'MON-2025-04412',bsciRating:'B',bsciExp:'2026-11-30',isoNo:'EMS-2021-44817',isoExp:'2027-05-20',fireNo:'FS-ZJ-33-7790',fireExp:'2027-02-28',
+       facName:'Hangzhou Textile Mill 2',facRef:'FAC-CN-2231',facAddr:'No. 12 Industrial Park, Xiaoshan',monthlyCapacity:'420,000',annualCapacity:'5,000,000',freeCapacity:'90,000 / month',utilisation:'78',prodLines:'8',workers:'650',leadTime:'45',moq:'5,000',facPort:'Ningbo',
+       nda:'Signed',coc:'Signed',sca:'Acknowledged'} }),
+  rec({id:'SUP-1067',nm:'Bangkok Home Goods',country:'Thailand',cat:'Near-Food · Homeware',stage:'onboard',status:'pending',vem:3,gm:true,coo:false,nda:true,cp:7,
+    checks:{sanctions:'clear',media:'clear',licence:'clear',bank:'flag',credit:'pending'},
+    clarifications:[{id:102,type:'Document request',field:'Bank proof',msg:'The uploaded bank letter is not legible. Please re-upload a clear, stamped copy.',status:'open',at:'2026-06-05'}],
+    docs:{license:1,bank:1,fire:1,factory:1},
+    D:{vendor:'BKK Home',name:'Bangkok Home Goods Co., Ltd',type:'Manufacturer',website:'bkkhome.co.th',refNo:'SG-TH-1067',keyContact:'M. Dohle',target:'2507',office:'Lidl & Kaufland Asia Pte. Limited',
+       licNo:'0105551234567',licCountry:'Thailand',licIssue:'2016-07-01',licExp:'2031-06-30',licAttach:'th-licence.pdf',licStatus:'In review',
+       addr:'45 Rama IV Rd, Bangkok',city:'Bangkok',contactName:'Anong P.',contactEmail:'anong@bkkhome.co.th',
+       payTerm:'45 days',bankName:'Bangkok Bank',bankAcct:'1234 5678 90',swift:'BKKBTHBK',currency:'USD',
+       prodCat:'Near-Food',division:'Hardline',merchCat:'Homeware',facName:'BKK Home Factory 1',facPort:'Laem Chabang'} }),
+  rec({id:'SUP-1071',nm:'Dhaka Knitwear Ltd',country:'Bangladesh',cat:'Apparel',stage:'onboard',status:'pending',vem:4,gm:false,coo:false,nda:true,cp:4,
+    checks:{sanctions:'clear',media:'flag',licence:'review',bank:'clear',credit:'pending'},
+    docs:{license:1,social:1,env:1,fire:1,factory:1,bank:1},
+    D:{vendor:'Dhaka Knit',name:'Dhaka Knitwear Ltd',type:'Manufacturer',refNo:'SG-BD-1071',
+       licNo:'C-112233/2015',licCountry:'Bangladesh',licStatus:'In review',addr:'Tejgaon I/A, Dhaka',city:'Dhaka',contactName:'R. Hasan',contactEmail:'hasan@dhakaknit.bd',
+       amforiId:'DBID 771902',bsciRating:'C',bsciExp:'2026-05-31',facName:'Dhaka Knit Unit 3',facPort:'Chittagong',bankName:'BRAC Bank',currency:'USD'} }),
+  rec({id:'SUP-1080',nm:'Shenzhen Electronics',country:'China',cat:'Near-Food · Electricals',stage:'explore',status:'review',vem:null,gm:false,coo:false,nda:false,cp:1,
+    docs:{license:1},
+    D:{vendor:'SZ Elec',name:'Shenzhen Electronics Co., Ltd',type:'Trader',licNo:'914403007788XYZ',licCountry:'China',licStatus:'In review',city:'Shenzhen',contactName:'Wei L.',contactEmail:'wei@szelec.cn'} }),
+  rec({id:'SUP-1085',nm:'Jaipur Ceramics',country:'India',cat:'Homeware',stage:'explore',status:'rejected',vem:6,gm:false,coo:false,nda:true,cp:0,
+    docs:{license:1,factory:1},
+    D:{vendor:'Jaipur Cer',name:'Jaipur Ceramics Pvt Ltd',type:'Manufacturer',licNo:'08AABCJ1234',licCountry:'India',city:'Jaipur',contactName:'P. Mehta',facName:'Jaipur Kiln 2'} })
+];
+// backfill provenance for seeded suppliers: any doc-sourced field that has a value gets a meta entry
+SUP.forEach(s=>{SCHEMA.flatMap(x=>x.fields).forEach(f=>{
+  if(f.fill==='doc'&&s.D[f.k]!=null&&s.D[f.k]!==''&&!s.meta[f.k]&&s.docs[f.doc]){
+    s.meta[f.k]={conf:f.conf,srcNm:(DOCS.find(d=>d.key===f.doc)||{}).nm||'document',doc:f.doc,status:'confirmed'};
+  }});});
+const STATUS={review:'In review',pending:'Pending approval',active:'Active supplier',draft:'Draft',rejected:'Rejected'};
+let view='portal';
+let cur=rec({id:null,nm:'',country:'',cat:'',stage:'explore',status:'draft',vem:null,gm:false,coo:false,nda:false}); // portal draft
+let filter='all';
+let openId=null;
+let dtab='profile';
+
+const $=s=>document.querySelector(s);
+const viewEl=$('#view');
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2600);}
+
+// ============ chrome ============
+let pnavTarget='top';
+const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+function renderChrome(){
+  document.querySelectorAll('.vbtn').forEach(b=>b.classList.toggle('on',b.dataset.view===view));
+  const nav=$('#sidenav');
+  if(view==='portal'){
+    // nav generated from the form sections, in the same order they render
+    const SECIC={'General':'building','Business licence':'file','Addresses & contacts':'building','Financial information':'dash','Products & categories':'dash','Commercial information':'dash','Compliance & certificates':'shield','Capacity & production':'list','Acknowledgements & agreements':'shield'};
+    const items=[['file','Documents & autofill','top']].concat(portalSections().map(s=>[SECIC[s.sec]||'file',s.sec,'sec-'+slug(s.sec)]));
+    nav.innerHTML='<div class="navsec">Jump to</div>'+items.map(it=>'<button class="navitem'+(pnavTarget===it[2]?' on':'')+'" data-target="'+it[2]+'"><svg class="svgic ic" viewBox="0 0 24 24">'+ICONS[it[0]]+'</svg>'+it[1]+'</button>').join('');
+    $('#crumbs').innerHTML='NxB Supply <span>/</span> <b>Supplier Portal</b>';
+    $('#avatar').textContent='SU';$('#footnm').textContent=(cur.D&&cur.D.contactName)||'New supplier';$('#footrl').textContent='Vendor · self-service';
+  }else{
+    const counts={all:SUP.length,review:0,pending:0,active:0,rejected:0};SUP.forEach(s=>{if(counts[s.status]!=null)counts[s.status]++;});
+    const items=[['list','Supplier queue','all',counts.all],['shield','In review','review',counts.review],['file','Pending approval','pending',counts.pending],['building','Active suppliers','active',counts.active]];
+    nav.innerHTML='<div class="navsec">Supplier Master Data</div>'+items.map(it=>'<button class="navitem'+(filter===it[2]?' on':'')+'" data-bfilter="'+it[2]+'"><svg class="svgic ic" viewBox="0 0 24 24">'+ICONS[it[0]]+'</svg>'+it[1]+'<span class="num">'+it[3]+'</span></button>').join('');
+    $('#crumbs').innerHTML='NxB Supply <span>/</span> Supplier Master Data <span>/</span> <b>Supplier queue</b>';
+    $('#avatar').textContent='KP';$('#footnm').textContent='Keerthi P.';$('#footrl').textContent='LKA · sourcing lead';
+  }
+}
+function wireNav(){
+  document.querySelectorAll('#sidenav [data-target]').forEach(b=>b.addEventListener('click',()=>{
+    pnavTarget=b.dataset.target;
+    document.querySelectorAll('#sidenav .navitem').forEach(n=>n.classList.toggle('on',n===b));
+    if(b.dataset.target==='top'){const c=$('.content');if(c)c.scrollTo({top:0,behavior:'smooth'});}
+    else{const el=document.getElementById(b.dataset.target);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+  }));
+  document.querySelectorAll('#sidenav [data-bfilter]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.bfilter;render();}));
+}
+function render(){renderChrome();view==='portal'?renderPortal():renderBuyer();wireNav();}
+
+// ============ PORTAL (supplier self-service, full sectioned form) ============
+// sections the supplier sees: those that contain supplier- or doc-filled fields (not pure LKA)
+function portalSections(){return SCHEMA.filter(s=>s.fields.some(f=>f.fill!=='lka'));}
+const UPLOAD_SVG='<svg class="svgic" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>';
+const CHECK_SVG='<svg class="svgic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>';
+const REASON_SVG='<svg class="svgic" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-4 10.5c.6.5 1 1.3 1 2.1V17h6v-1.4c0-.8.4-1.6 1-2.1A6 6 0 0 0 12 3zM9 21h6M10 17v4M14 17v4"/></svg>';
+const FILE_SVG='<svg class="svgic" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>';
+// right-pane live field row
+function rField(f){
+  const flash=(cur._just&&cur._just.indexOf(f.k)>=0)?' flash':'';
+  if(f.type==='flag'){
+    return '<div class="fieldrow'+flash+'"><div class="k">'+f.label+'</div><div class="c"><label class="check" style="padding-top:4px"><input type="checkbox" class="checkbox" data-flag="'+f.k+'" '+(cur.D[f.k]?'checked':'')+'><span style="font-size:12px;color:var(--ink2)">'+(f.k==='nda'?'I have read &amp; sign':'I accept')+'</span></label></div></div>';
+  }
+  if(f.fill==='supplier'){
+    const val=esc(cur.D[f.k]||'');const ms=cur.meta[f.k];
+    let input;
+    if(f.type==='select'){input='<select data-k="'+f.k+'">'+f.opts.map(o=>'<option'+(cur.D[f.k]===o?' selected':'')+'>'+(o||'Select…')+'</option>').join('')+'</select>';}
+    else{input='<input data-k="'+f.k+'" value="'+val+'" placeholder="type here">';}
+    const chip=ms?'<div style="margin-top:5px">'+'<span class="autochip '+confClass(ms.conf)+'">'+confTxt(ms.conf)+'</span>'+(ms.reasoned?' <span class="rsntag" title="reasoned from '+esc(ms.srcNm)+'">reasoned</span>':'')+'</div>':'';
+    const hasDocs=Object.keys(cur.docs).some(k=>cur.docs[k]);
+    const fillpill=(!cur.D[f.k]&&!ms&&hasDocs&&REASONVAL[f.k]!=null)?'<div style="margin-top:5px"><button class="recpill" data-fillfield="'+f.k+'" title="Pull this from documents you have uploaded">'+FILE_SVG+'Fill from documents</button></div>':'';
+    return '<div class="fieldrow'+flash+'"><div class="k">'+f.label+'</div><div class="c"><div class="field" style="margin:0">'+input+'</div>'+chip+fillpill+'</div></div>';
+  }
+  // doc field
+  const v=cur.D[f.k];const m=cur.meta[f.k];
+  if(v){
+    return '<div class="fieldrow filled'+flash+'"><div class="k">'+f.label+'</div><div class="c"><div class="val">'+esc(v)
+      +(m?'<span class="autochip '+confClass(m.conf)+'">'+confTxt(m.conf)+'</span>':'')
+      +(m&&m.reasoned?'<span class="rsntag" title="reasoned from '+esc(m.srcNm)+'">reasoned</span>':'')
+      +(m&&m.status==='confirmed'?'<span class="badge active"><span class="dot"></span>OK</span>':'')+'</div></div></div>';
+  }
+  const docNm=(DOCS.find(d=>d.key===f.doc)||{}).nm||'a document';
+  return '<div class="fieldrow"><div class="k">'+f.label+'</div><div class="c"><button class="recpill" data-recdoc="'+f.doc+'" title="Add the '+docNm+' to fill this">'+FILE_SVG+'Extracted from '+docNm+'</button></div></div>';
+}
+function fillPct(){const all=SCHEMA.flatMap(s=>s.fields).filter(f=>f.fill!=='lka');const done=all.filter(f=>cur.D[f.k]).length;return all.length?done/all.length:0;}
+function canSubmit(){return cur.D.name&&cur.D.licCountry&&cur.D.nda&&reqActive().every(d=>cur.docs[d.key]);}
+// repeatable products + categories + product types (drives conditional docs)
+function productsBlock(){
+  let h='<div class="sechead" id="sec-products-categories"><span class="t">Products &amp; categories</span><span class="ln"></span><span class="who">Supplier</span></div>';
+  h+='<div class="fieldrow"><div class="k">Product types</div><div class="c"><div class="chips">'
+    +PTYPES.map(t=>'<button class="chip2'+((cur.ptypes||[]).indexOf(t[0])>=0?' on':'')+'" data-ptype="'+t[0]+'">'+t[1]+'</button>').join('')+'</div>';
+  const cds=condDocs();
+  if(cds.length)h+='<div class="condnote"><svg class="svgic" style="width:14px;height:14px;flex:0 0 14px" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span>This adds required documents: '+cds.map(c=>c.nm).join(', ')+'. They now appear in Required documents above.</span></div>';
+  h+='</div></div>';
+  h+='<div class="fieldrow"><div class="k">Categories offered</div><div class="c">'
+    +((cur.cats||[]).length?'<div class="chips" style="margin-bottom:4px">'+cur.cats.map((c,i)=>'<span class="tag">'+esc(c)+'<button data-rmcat="'+i+'">&times;</button></span>').join('')+'</div>':'')
+    +'<input class="catadd" id="catadd" placeholder="add a category, press Enter (e.g. Knitwear)"></div></div>';
+  let prows=(cur.products||[]).map((p,i)=>'<div class="prow"><input data-pi="'+i+'" data-pk="name" value="'+esc(p.name||'')+'" placeholder="product"><input data-pi="'+i+'" data-pk="cat" value="'+esc(p.cat||'')+'" placeholder="category"><input data-pi="'+i+'" data-pk="vol" value="'+esc(p.vol||'')+'" placeholder="annual qty"><input data-pi="'+i+'" data-pk="fob" value="'+esc(p.fob||'')+'" placeholder="FOB USD"><button class="prm" data-rmprod="'+i+'">&times;</button></div>').join('');
+  h+='<div class="fieldrow"><div class="k">Products</div><div class="c">'+(prows||'<span class="muted" style="font-size:12px">No products added yet.</span>')
+    +'<div class="row" style="gap:8px;margin-top:8px;flex-wrap:wrap"><button class="btn ghost sm" id="addprod">+ Add product</button>'
+    +((cur.docs.trial||cur.docs.factory)?'<button class="recpill" id="prodfromdocs">'+FILE_SVG+'Fill from documents</button>':'')+'</div></div></div>';
+  return h;
+}
+function recProductsBlock(s){
+  let h='';
+  if((s.ptypes||[]).length)h+='<div class="kvr"><div class="k">Product types</div><div class="vc"><span class="v">'+s.ptypes.map(t=>(PTYPES.find(p=>p[0]===t)||[,t])[1]).join(', ')+'</span><span class="pv"><span class="autochip man">supplier</span></span></div></div>';
+  if((s.cats||[]).length)h+='<div class="kvr"><div class="k">Categories</div><div class="vc"><span class="v">'+s.cats.map(esc).join(', ')+'</span><span class="pv"><span class="autochip man">supplier</span></span></div></div>';
+  if((s.products||[]).length)h+='<table class="tbl" style="margin:8px 0"><thead><tr><th>Product</th><th>Category</th><th>Annual qty</th><th>FOB</th></tr></thead><tbody>'
+    +s.products.map(p=>'<tr><td>'+esc(p.name||'')+'</td><td>'+esc(p.cat||'')+'</td><td>'+esc(p.vol||'')+'</td><td>'+esc(p.fob||'')+'</td></tr>').join('')+'</tbody></table>';
+  return h;
+}
+function fillField(k){if(REASONVAL[k]==null)return;cur.D[k]=REASONVAL[k];cur.meta[k]={conf:0.68,srcNm:'your uploaded documents',doc:'reasoned',reasoned:true,status:'review'};cur._just=[k];toast((FBYK[k]?FBYK[k].label:k)+' filled from your documents');render();}
+function fillOpenFromDocs(){
+  if(!Object.keys(cur.docs).some(k=>cur.docs[k])){toast('Upload a document first');return;}
+  let n=0;const just=[];SCHEMA.flatMap(s=>s.fields).forEach(f=>{if(f.fill==='supplier'&&f.type!=='flag'&&(cur.D[f.k]==null||cur.D[f.k]==='')&&REASONVAL[f.k]!=null){cur.D[f.k]=REASONVAL[f.k];cur.meta[f.k]={conf:0.68,srcNm:'your uploaded documents',doc:'reasoned',reasoned:true,status:'review'};just.push(f.k);n++;}});
+  cur._just=just;toast(n?('Filled '+n+' open field'+(n>1?'s':'')+' from your documents'):'Nothing more to fill');render();
+}
+function fillProductsFromDocs(){
+  cur.products=cur.products||[];
+  if(!cur.products.length){cur.products=[{name:'Cotton tee 180g',cat:'Knitwear',vol:'1,200,000',fob:'1.85'},{name:'Polo piqué',cat:'Knitwear',vol:'600,000',fob:'2.40'}];toast('2 products read from your documents');}
+  else toast('Products already listed');
+  render();
+}
+function renderPortal(){
+  if(cur.status==='review'&&cur.id){return renderPortalDone();}
+  const upc=DOCS.filter(d=>cur.docs[d.key]).length;
+  const ents=Object.entries(cur.meta);
+  const conf=ents.filter(([,m])=>m.status==='confirmed').length;
+  // LEFT pane: dropzone + recommended documents
+  const left='<div class="lpane">'
+    +'<div class="dropzone" id="dz"><svg class="svgic dzic" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>'
+    +'<div class="big">Drag documents here</div><div class="sm">or click to browse · PDF, JPG, PNG</div>'
+    +(LIVE_EXTRACT?'<div class="sm" style="color:var(--green);margin-top:6px">● Live AI parsing on</div>':'<div class="sm" style="margin-top:6px">○ Demo mode · drop a real PDF/image to parse it for real once a key is set</div>')
+    +'</div>'
+    +'<input type="file" id="fileinput" multiple style="display:none">'
+    +'<div class="spread" style="margin-top:18px"><span class="eyemono">Recommended documents</span><span class="eyemono">'+upc+' / '+DOCS.length+'</span></div>'
+    +'<div class="reclist">'+activeDocs().map(d=>{const up=cur.docs[d.key];const n=DOC_FIELDS(d.key).length;const isReq=d.req||condDocs().some(c=>c.key===d.key);
+        const small=up?(n?'read · '+n+' field'+(n>1?'s':'')+' filled':'received'):(n?'fills '+n+' field'+(n>1?'s':''):'compliance document');
+        return '<div class="recitem'+(up?' done':'')+'" data-rec="'+d.key+'"><div class="ic">'+(up?CHECK_SVG:UPLOAD_SVG)+'</div>'
+        +'<div class="nm">'+d.nm+(isReq&&!up?' <span class="reqmark">· required</span>':'')+'<small>'+small+'</small></div>'
+        +(up?'<button class="btn ghost sm" data-undoc="'+d.key+'">Replace</button>':'')+'</div>';}).join('')+'</div>'
+    +'<div class="reasonhint">No matching document? Drop any internal note, company profile or spreadsheet. We reason over it and fill what we can find (flagged for review).</div>'
+    +((cur.reasonedDocs&&cur.reasonedDocs.length)?'<div class="spread" style="margin-top:14px"><span class="eyemono">Reasoned documents</span></div>'
+        +'<div class="reclist">'+cur.reasonedDocs.map((r,i)=>'<div class="recitem done"><div class="ic">'+REASON_SVG+'</div>'
+        +'<div class="nm">'+esc(r.name)+'<small>reasoned · '+r.keys.length+' field'+(r.keys.length>1?'s':'')+' filled</small></div>'
+        +'<button class="btn ghost sm" data-unreason="'+i+'">Remove</button></div>').join('')+'</div>':'')
+    +(ents.length?'<div class="card" style="margin-top:14px;padding:12px 14px"><div class="spread"><span class="eyemono">NxB Parse</span><span class="muted" style="font-size:11px">'+conf+'/'+ents.length+' confirmed</span></div>'
+        +'<p style="font-size:12px;color:var(--muted);margin:6px 0 10px">Check amber/red fields, then confirm. Nothing reaches LKA as verified until you confirm.</p>'
+        +'<button class="btn secondary sm" id="confirmall" style="width:100%">Confirm all extracted</button></div>':'')
+    +'</div>';
+  // RIGHT pane: live record filling
+  const all=SCHEMA.flatMap(s=>s.fields).filter(f=>f.fill!=='lka');
+  const done=all.filter(f=>cur.D[f.k]).length;
+  let secs=portalSections().map(s=>{
+    if(s.custom==='products')return productsBlock()+s.fields.filter(f=>f.fill!=='lka').map(rField).join('');
+    const flds=s.fields.filter(f=>f.fill!=='lka');if(!flds.length)return '';
+    return '<div class="sechead" id="sec-'+slug(s.sec)+'"><span class="t">'+s.sec+'</span><span class="ln"></span><span class="who">'+s.who+'</span></div>'+flds.map(rField).join('');
+  }).join('');
+  const RA=reqActive();
+  const gotReq=RA.filter(d=>cur.docs[d.key]).length;
+  const reqCard='<div class="card reqcard"><div class="spread"><span class="eyemono">Required documents</span><span class="eyemono">'+gotReq+' / '+RA.length+'</span></div>'
+    +'<div class="mt8">'+RA.map(d=>{const up=cur.docs[d.key];const cond=condDocs().some(c=>c.key===d.key);
+      return '<div class="reqrow"><span class="tick'+(up?' on':'')+'">'+(up?CHECK_SVG:'')+'</span><span class="nm">'+d.nm+(cond?' <span class="reqmark" style="color:var(--amber)">· conditional</span>':'')+'</span>'
+        +(up?'<span class="badge active"><span class="dot"></span>Received</span>':'<span class="reqmark">Required</span>')+'</div>';}).join('')+'</div></div>';
+  const missing=[];if(!cur.D.name)missing.push('supplier name');if(!cur.D.licCountry)missing.push('licence country');if(!cur.D.nda)missing.push('signed NDA');RA.forEach(d=>{if(!cur.docs[d.key])missing.push(d.nm.toLowerCase());});
+  const hint=missing.length?'Still needed: '+missing.join(', '):'All required items complete';
+  const hasDocsR=Object.keys(cur.docs).some(k=>cur.docs[k]);
+  const openEmpty=all.some(f=>f.fill==='supplier'&&f.type!=='flag'&&!cur.D[f.k]&&!cur.meta[f.k]&&REASONVAL[f.k]!=null);
+  const right='<div class="rpane">'
+    +'<div class="spread"><span class="eyemono">Your supplier record</span><span class="eyemono">'+done+' / '+all.length+' fields filled</span></div>'
+    +'<div class="progress mt8"><span style="width:'+Math.round(fillPct()*100)+'%"></span></div>'
+    +(hasDocsR&&openEmpty?'<button class="recpill" id="fillopen" style="margin-top:10px">'+FILE_SVG+'Auto-fill open fields from my documents</button>':'')
+    +'<div class="mt16">'+reqCard+'</div>'
+    +'<div class="mt16">'+secs+'</div>'
+    +'<div class="spread mt24"><span class="muted" style="font-size:12px;max-width:60%">'+hint+'</span>'
+    +'<button class="btn primary" id="psubmit"'+(canSubmit()?'':' disabled')+'><svg class="svgic" style="width:15px;height:15px" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4z"/></svg>Submit for review</button></div>'
+    +'</div>';
+  viewEl.innerHTML='<div class="wrap"><div class="eyemono">Vendor onboarding</div>'
+    +'<div class="spread mt8"><h1>Become a supplier.</h1><span class="badge draft"><span class="dot"></span>Draft application</span></div>'
+    +'<p class="sub">Drop your documents on the left. Your record fills itself on the right. Anything still empty shows which document to add.</p>'
+    +'<div class="guided mt24">'+left+right+'</div></div>';
+  wirePortal();
+  if(cur._just){setTimeout(()=>{cur._just=null;},1200);}
+}
+function detectDoc(name){name=(name||'').toLowerCase();
+  if(/licen|business.?lic|\bbrc\b/.test(name))return 'license';
+  if(/bank|account|swift|iban/.test(name))return 'bank';
+  if(/amfori|bsci|social|sa8000/.test(name))return 'social';
+  if(/iso|14001|environ/.test(name))return 'env';
+  if(/fire|safety|building/.test(name))return 'fire';
+  if(/factory.?reg|reg.*factory|factory.?form|factory.?profile|\bmill\b/.test(name))return 'factory';
+  if(/trial.?quot|\bquotation\b/.test(name))return 'trial';
+  if(/en\s?71|toy.?saf/.test(name))return 'en71';
+  if(/cpsia|age.?grad/.test(name))return 'cpsia';
+  if(/lfgb|food.?contact/.test(name))return 'lfgb';
+  if(/\bce\b|lvd|emc|rohs/.test(name))return 'ce';
+  if(/oeko|tex\b/.test(name))return 'oeko';
+  return null;
+}
+function assignDoc(key,fn){if(cur.docs[key])return;cur.docs[key]=fn||true;runExtract(key);}
+// demo values for fields that no single official document carries (an internal note / sheet might)
+const REASONVAL={vendor:'HZ Textile',website:'hztextile.cn',contactName:'Su Chen',contactEmail:'su.chen@hztextile.cn',contactPhone:'+86 571 8888 1042',turnover:'38,000,000',turnEU:'55',turnUS:'20',turnAsia:'20',turnME:'3',turnAfr:'2',payTerm:'60 days',licNotes:'Renewed 2024',categories:'Knitwear, Jersey, Activewear',mainProducts:'T-shirts, polos, fleece',annualVolume:'5,000,000',keyCustomers:'Target, H&M, Ikea',annualCapacity:'5,000,000',freeCapacity:'90,000 / month',utilisation:'78',prodLines:'8',workers:'650',leadTime:'45',moq:'5,000'};
+// open reasoning over an unclassified file: infer which schema fields appear, lower confidence, always review
+function reasonFile(name){
+  const low=(name||'').toLowerCase();let keys;
+  if(/capacity|line|production|factory|mill|plant/.test(low))keys=['facName','facAddr','monthlyCapacity','annualCapacity','freeCapacity','utilisation','prodLines','workers','leadTime','moq','facPort'];
+  else if(/price|quot|cost|fob|sheet|xls|product|catalog/.test(low))keys=['annualVolume','keyCustomers','trialIan','trialFob','currency'];
+  else if(/audit|compliance|cert|social/.test(low))keys=['bsciRating','bsciExp','isoNo','isoExp','fireNo','fireExp','facAddr'];
+  else if(/profile|company|overview|about|intro/.test(low))keys=['name','addr','city','province','website','turnover','turnEU','turnUS','keyCustomers','contactName'];
+  else keys=['name','contactName','contactEmail','contactPhone','turnover','annualVolume','monthlyCapacity','payTerm']; // generic internal note
+  const filled=[];
+  keys.forEach(k=>{const f=FBYK[k];if(!f)return;
+    if(cur.D[k]==null||cur.D[k]===''){
+      cur.D[k]=f.fill==='doc'?f.val:(REASONVAL[k]!=null?REASONVAL[k]:'(reasoned)');
+      const base=f.fill==='doc'?(f.conf||0.8):0.72;
+      cur.meta[k]={conf:Math.max(0.55,+(base-0.18).toFixed(2)),srcNm:name,doc:'reasoned',reasoned:true,status:'review'};
+      filled.push(k);
+    }});
+  // a product catalogue or price sheet also yields product rows
+  if(/product|catalog|price|sheet|range/.test(low)&&(!cur.products||!cur.products.length)){
+    cur.products=[{name:'Cotton tee 180g',cat:'Knitwear',vol:'1,200,000',fob:'1.85'},{name:'Polo piqué',cat:'Knitwear',vol:'600,000',fob:'2.40'}];
+    filled.push('products');
+  }
+  cur.reasonedDocs=cur.reasonedDocs||[];
+  if(filled.length){cur._just=filled.filter(k=>k!=='products');cur.reasonedDocs.push({name,keys:filled});toast('Reasoned over '+name+': '+filled.length+' item'+(filled.length>1?'s':'')+' filled');}
+  else toast('Nothing new found in '+name);
+}
+// ---- live extraction (real NxB Parse via /api/extract; falls back to mock) ----
+let LIVE_EXTRACT=false;
+fetch('/api/extract').then(r=>r.json()).then(j=>{LIVE_EXTRACT=!!(j&&j.configured);if(LIVE_EXTRACT&&view==='portal')render();}).catch(()=>{});
+function fileToB64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result));r.onerror=rej;r.readAsDataURL(file);});}
+async function callExtract(file,docType){
+  try{
+    const url=await fileToB64(file);const comma=url.indexOf(',');if(comma<0)return null;
+    const mediaType=url.slice(5,comma).split(';')[0]||file.type||'';
+    const resp=await fetch('/api/extract',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({filename:file.name,mediaType,dataBase64:url.slice(comma+1),docType:docType||undefined})});
+    if(!resp.ok)return null;const j=await resp.json();return (j&&j.ok&&Array.isArray(j.fields))?j:null;
+  }catch(e){return null;}
+}
+function applyExtracted(fields,docKey,srcNm){
+  const docNm=(DOCS.find(d=>d.key===docKey)||{}).nm||srcNm||'document';let n=0;const just=[];
+  fields.forEach(fd=>{const k=fd.fieldKey,f=FBYK[k];if(!f)return;
+    if(cur.D[k]==null||cur.D[k]==='')cur.D[k]=fd.value;
+    cur.meta[k]={conf:(typeof fd.confidence==='number'?fd.confidence:0.85),srcNm:docNm,doc:docKey,status:'review',lang:fd.lang,translated:fd.translated};
+    just.push(k);n++;});
+  cur._just=just;return n;
+}
+// real upload of a recognised document type → live extract, else mock
+async function extractDoc(key,file){
+  toast('Reading '+file.name+'…');
+  const res=await callExtract(file,key);
+  if(res&&res.fields.length){const n=applyExtracted(res.fields,key,file.name);
+    toast(n+' field'+(n!==1?'s':'')+' read from '+((DOCS.find(d=>d.key===key)||{}).nm||'document')+' · live');}
+  else{runExtract(key);} // fallback: no key / unreadable / network
+}
+// real upload of an unclassified file → open reasoning (lower confidence), else mock reasonFile
+async function extractUnknown(file){
+  if(!LIVE_EXTRACT)return false;
+  toast('Reading '+file.name+'…');
+  const res=await callExtract(file,'');
+  if(!res||!res.fields.length)return false;
+  const just=[];res.fields.forEach(fd=>{const k=fd.fieldKey,f=FBYK[k];if(!f)return;
+    if(cur.D[k]==null||cur.D[k]===''){cur.D[k]=fd.value;
+      cur.meta[k]={conf:Math.min(typeof fd.confidence==='number'?fd.confidence:0.6,0.78),srcNm:file.name,doc:'reasoned',reasoned:true,status:'review'};just.push(k);}});
+  if(!just.length)return false;
+  cur._just=just;cur.reasonedDocs=cur.reasonedDocs||[];cur.reasonedDocs.push({name:file.name,keys:just});
+  toast('Reasoned over '+file.name+' · '+just.length+' field'+(just.length!==1?'s':'')+' filled');return true;
+}
+async function handleFiles(files){
+  if(!files||!files.length)return;
+  let acted=0;
+  for(const f of Array.from(files)){
+    const key=detectDoc(f.name);
+    if(key){if(!cur.docs[key]){cur.docs[key]=f.name;acted++;await extractDoc(key,f);render();}}
+    else{const did=await extractUnknown(f);if(!did)reasonFile(f.name);acted++;render();}
+  }
+  if(!acted){toast('Those documents are already read');}
+  render();
+}
+function runExtract(key){
+  const fields=DOC_FIELDS(key);const docNm=(DOCS.find(d=>d.key===key)||{}).nm||'document';
+  if(!fields.length){toast('Document read');return;}
+  let n=0;const just=[];fields.forEach(f=>{if(cur.D[f.k]==null||cur.D[f.k]===''){cur.D[f.k]=f.val;}cur.meta[f.k]={conf:f.conf,srcNm:docNm,doc:key,status:'review'};just.push(f.k);n++;});
+  cur._just=just;
+  toast(n+' field'+(n>1?'s':'')+' read from '+docNm);
+}
+function wirePortal(){
+  viewEl.querySelectorAll('input[data-k],select[data-k]').forEach(el=>el.addEventListener('input',e=>{cur.D[e.target.dataset.k]=e.target.value;}));
+  viewEl.querySelectorAll('[data-flag]').forEach(el=>el.addEventListener('change',e=>{cur.D[e.target.dataset.flag]=e.target.checked?(e.target.dataset.flag==='nda'?'Signed':'Acknowledged'):'';const sb=$('#psubmit');if(sb)sb.disabled=!canSubmit();}));
+  // dropzone
+  const dz=$('#dz'),fi=$('#fileinput');
+  if(dz&&fi){
+    ['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('over');}));
+    ['dragleave','dragend'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('over');}));
+    dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');handleFiles(e.dataTransfer&&e.dataTransfer.files);});
+    dz.addEventListener('click',()=>fi.click());
+    fi.addEventListener('change',e=>{handleFiles(e.target.files);e.target.value='';});
+  }
+  // recommended doc click + right-pane recommendation pill both simulate an upload
+  viewEl.querySelectorAll('[data-rec]').forEach(r=>r.addEventListener('click',e=>{if(e.target.closest('[data-undoc]'))return;const k=r.dataset.rec;if(cur.docs[k])return;assignDoc(k,k+'.pdf');render();}));
+  viewEl.querySelectorAll('[data-recdoc]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.recdoc;assignDoc(k,k+'.pdf');render();}));
+  viewEl.querySelectorAll('[data-undoc]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const k=b.dataset.undoc;cur.docs[k]=false;DOC_FIELDS(k).forEach(f=>{delete cur.meta[f.k];if(f.fill==='doc')cur.D[f.k]='';});render();}));
+  viewEl.querySelectorAll('[data-unreason]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const i=+b.dataset.unreason;const r=(cur.reasonedDocs||[])[i];if(r){r.keys.forEach(k=>{if(cur.meta[k]&&cur.meta[k].reasoned){delete cur.meta[k];cur.D[k]='';}});cur.reasonedDocs.splice(i,1);}render();}));
+  const ca=$('#confirmall');if(ca)ca.addEventListener('click',()=>{Object.values(cur.meta).forEach(m=>m.status='confirmed');render();toast('All extracted fields confirmed');});
+  // product types -> conditional docs
+  viewEl.querySelectorAll('[data-ptype]').forEach(b=>b.addEventListener('click',()=>{const t=b.dataset.ptype;const i=cur.ptypes.indexOf(t);if(i>=0)cur.ptypes.splice(i,1);else cur.ptypes.push(t);render();}));
+  // categories tags
+  const cadd=$('#catadd');if(cadd)cadd.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.value.trim()){cur.cats.push(e.target.value.trim());render();}});
+  viewEl.querySelectorAll('[data-rmcat]').forEach(b=>b.addEventListener('click',()=>{cur.cats.splice(+b.dataset.rmcat,1);render();}));
+  // products repeater
+  const ap=$('#addprod');if(ap)ap.addEventListener('click',()=>{cur.products.push({name:'',cat:'',vol:'',fob:''});render();});
+  viewEl.querySelectorAll('[data-rmprod]').forEach(b=>b.addEventListener('click',()=>{cur.products.splice(+b.dataset.rmprod,1);render();}));
+  viewEl.querySelectorAll('[data-pi]').forEach(inp=>inp.addEventListener('input',e=>{const i=+e.target.dataset.pi,k=e.target.dataset.pk;if(cur.products[i])cur.products[i][k]=e.target.value;}));
+  const pf=$('#prodfromdocs');if(pf)pf.addEventListener('click',fillProductsFromDocs);
+  // fill open fields from documents
+  const fo=$('#fillopen');if(fo)fo.addEventListener('click',fillOpenFromDocs);
+  viewEl.querySelectorAll('[data-fillfield]').forEach(b=>b.addEventListener('click',()=>fillField(b.dataset.fillfield)));
+  const sb=$('#psubmit');if(sb)sb.addEventListener('click',submitApplication);
+}
+function submitApplication(){
+  const id='SUP-'+(1090+SUP.filter(s=>s.id&&s.id.indexOf('SUP-109')===0).length);
+  cur.id=id;cur.nm=cur.D.name||'New supplier';cur.country=cur.D.licCountry||cur.D.country||'';cur.cat=cur.D.prodCat||'Uncategorised';
+  cur.status='review';cur.stage='explore';cur.isNew=true;
+  // kick off external data verification; one check flags to show the clarification path
+  cur.checks={sanctions:'clear',media:'clear',licence:'clear',bank:'flag',credit:'pending'};
+  SUP.unshift(JSON.parse(JSON.stringify(cur)));
+  render();
+}
+// supplier's live application tracker (reads the live LKA record so it reflects checks, clarifications, approvals)
+function renderPortalDone(){
+  const s=SUP.find(x=>x.id===cur.id)||SUP[0];
+  const openClar=(s.clarifications||[]).filter(c=>c.status==='open');
+  const chkVals=CHECKS.map(c=>s.checks[c.key]||'pending');
+  const clear=chkVals.filter(v=>v==='clear').length;
+  let body='<div class="wrap narrow"><div class="eyemono">Vendor onboarding</div>'
+    +'<div class="spread mt8"><h1>Application status.</h1><span class="badge '+s.status+'"><span class="dot"></span>'+STATUS[s.status]+'</span></div>'
+    +'<p class="sub">Reference <b>'+s.id+'</b>. Track verification and approval here. We will ask you here if anything else is needed.</p>'
+    +'<div class="mt16">'+cpathStrip(s)+'</div>';
+  // action needed
+  if(openClar.length){
+    body+='<div class="actneed mt24"><div class="h"><svg class="svgic" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>Action needed: '+openClar.length+' request'+(openClar.length>1?'s':'')+' from LKA</div>'
+      +openClar.map(c=>'<div class="clar" style="background:var(--s1)"><div class="top"><span class="ty">'+c.type+'</span>'+(c.field?'<span class="muted" style="font-size:11px">re: '+esc(c.field)+'</span>':'')+'</div><div class="msg">'+esc(c.msg)+'</div>'
+        +'<div class="clarform" style="margin-top:8px"><textarea data-clar="'+c.id+'" placeholder="Type your response"></textarea>'
+        +'<div class="row" style="gap:8px;margin-top:8px"><button class="btn ghost sm" data-clardoc="'+c.id+'">Attach a document</button><button class="btn primary sm" data-clarsend="'+c.id+'">Send response</button></div></div></div>').join('')
+      +'</div>';
+  }else{
+    body+='<div class="banner mt24"><svg class="svgic" style="width:16px;height:16px;flex:0 0 16px" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div>Nothing needed from you right now. LKA is verifying your data and documents.</div></div>';
+  }
+  // verification status (supplier-facing summary)
+  body+='<div class="card mt16"><div class="spread"><span class="eyemono">Verification</span><span class="eyemono">'+clear+' / '+CHECKS.length+' clear</span></div><div class="mt8">'
+    +CHECKS.map((c,i)=>{const v=chkVals[i];const st=cstat(v);return '<div class="chk"><div class="nm">'+c.nm+'</div><span class="badge '+st[0]+'"><span class="dot"></span>'+st[1]+'</span></div>';}).join('')+'</div></div>';
+  // answered / resolved history
+  const hist=(s.clarifications||[]).filter(c=>c.status!=='open');
+  if(hist.length){body+='<div class="card mt16"><span class="eyemono">Clarification history</span><div class="mt8">'
+    +hist.map(c=>'<div class="clar"><div class="top"><span class="ty">'+c.type+'</span><span class="badge '+(c.status==='resolved'?'active':'pending')+'"><span class="dot"></span>'+(c.status==='resolved'?'Resolved':'Answered')+'</span></div><div class="msg">'+esc(c.msg)+'</div>'+(c.response?'<div class="resp"><span class="who">your response</span>'+esc(c.response)+'</div>':'')+'</div>').join('')+'</div></div>';}
+  // approval status
+  body+='<div class="card mt16"><span class="eyemono">Approval</span><div class="kv2 mt8" style="gap:2px 24px">'
+    +'<div class="kvr"><div class="k">Data verified</div><div class="v">'+(s.verifiedOn?'Yes, '+s.verifiedOn:'<span class="muted">In progress</span>')+'</div></div>'
+    +'<div class="kvr"><div class="k">GM approval</div><div class="v">'+(s.gm?'Approved':'<span class="muted">Pending</span>')+'</div></div>'
+    +'<div class="kvr"><div class="k">COO / HQ approval</div><div class="v">'+(s.coo?'Approved':'<span class="muted">Pending</span>')+'</div></div>'
+    +'<div class="kvr"><div class="k">Outcome</div><div class="v">'+(s.status==='active'?'<span style="color:var(--green)">Activated</span>':s.status==='rejected'?'<span style="color:var(--red)">Not approved</span>':'In progress')+'</div></div>'
+    +'</div></div>';
+  body+='<div class="spread mt24"><button class="btn ghost" id="restart">Start another</button><div class="row" style="gap:8px"><button class="btn ghost" id="refresh">Refresh</button><button class="btn primary" id="goqueue">Open LKA view</button></div></div></div>';
+  viewEl.innerHTML=body;
+  $('#restart').addEventListener('click',()=>{cur=rec({id:null,nm:'',country:'',cat:'',stage:'explore',status:'draft',vem:null,gm:false,coo:false,nda:false});render();});
+  $('#refresh').addEventListener('click',()=>render());
+  $('#goqueue').addEventListener('click',()=>{view='buyer';dtab='profile';openId=s.id;render();openDrawer(openId);});
+  viewEl.querySelectorAll('[data-clarsend]').forEach(b=>b.addEventListener('click',()=>{
+    const id=b.dataset.clarsend;const ta=viewEl.querySelector('textarea[data-clar="'+id+'"]');const c=(s.clarifications||[]).find(x=>x.id==id);
+    if(c){c.response=(ta&&ta.value.trim())||'(document attached)';c.status='answered';toast('Response sent to LKA');render();}
+  }));
+  viewEl.querySelectorAll('[data-clardoc]').forEach(b=>b.addEventListener('click',()=>toast('Document attached to your response')));
+}
+// ============ BUYER (LKA Supplier Master Data) ============
+function renderBuyer(){
+  const counts={all:SUP.length,review:0,pending:0,active:0,rejected:0};
+  SUP.forEach(s=>counts[s.status]++);
+  const fl=[['all','All'],['review','In review'],['pending','Pending approval'],['active','Active'],['rejected','Rejected']];
+  const list=SUP.filter(s=>filter==='all'||s.status===filter);
+  viewEl.innerHTML='<div class="wrap"><div class="eyemono">Supplier Master Data</div>'
+   +'<div class="spread mt8"><h1>Supplier queue.</h1><button class="btn secondary" id="addmanual"><svg class="svgic" style="width:15px;height:15px" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add supplier</button></div>'
+   +'<p class="sub">Explore, onboard and manage suppliers through the controlled request &amp; approval workflow. Each record carries the full CBX field set, tagged by source. Gates: GM, then COO/HQ.</p>'
+   +'<div class="grid3 mt24"><div class="stat"><div class="v">'+counts.all+'</div><div class="k">suppliers in scope</div></div>'
+   +'<div class="stat"><div class="v amber">'+(counts.review+counts.pending)+'</div><div class="k">awaiting action</div></div>'
+   +'<div class="stat"><div class="v green">'+counts.active+'</div><div class="k">active suppliers</div></div></div>'
+   +'<div class="filter">'+fl.map(f=>'<button class="pill'+(filter===f[0]?' on':'')+'" data-f="'+f[0]+'">'+f[1]+'<span class="c">'+counts[f[0]]+'</span></button>').join('')+'<span class="ct">'+list.length+' shown</span></div>'
+   +'<div class="mt16">'+(list.length?list.map(supRow).join(''):'<div class="card" style="text-align:center;color:var(--muted)">No suppliers in this view.</div>')+'</div></div>';
+  viewEl.querySelectorAll('.suprow').forEach(r=>r.addEventListener('click',()=>{dtab='profile';openDrawer(r.dataset.id);}));
+  viewEl.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>{filter=p.dataset.f;render();}));
+  $('#addmanual').addEventListener('click',()=>toast('Manual add is stubbed in this prototype'));
+}
+function lifecycle(stage){const st=['explore','onboard','manage'];const i=st.indexOf(stage);
+  return '<div class="lifecycle">'+st.map((s,j)=>'<span class="lc '+(j===i?'on':j<i?'passed':'')+'">'+s+'</span>').join('')+'</div>';}
+function supRow(s){const cat=VEMCAT(s.vem);const dn=DOCS.filter(d=>s.docs[d.key]).length;
+  return '<div class="suprow'+(s.isNew?' new':'')+'" data-id="'+s.id+'">'
+   +'<div><div class="meta">'+(s.isNew?'<span class="badge review" style="padding:1px 7px"><span class="dot"></span>New</span> ':'')+s.id+' &middot; '+s.country+' &middot; '+s.cat+'</div>'
+   +'<div class="nm">'+s.nm+'</div>'
+   +'<div class="tags"><span class="badge '+s.status+'"><span class="dot"></span>'+STATUS[s.status]+'</span>'+lifecycle(s.stage)+'</div></div>'
+   +'<div class="rt"><span class="vem"><span class="vemdot" style="background:'+cat.c+'"></span>VEM <b>'+(s.vem||'–')+'</b> '+cat.t+'</span>'
+   +'<span class="meta">'+dn+'/'+DOCS.length+' docs</span></div></div>';
+}
+
+// ---- record field row with provenance ----
+function provChip(s,f){
+  const m=s.meta&&s.meta[f.k];
+  if(m)return '<span class="autochip '+confClass(m.conf)+'">'+confTxt(m.conf)+'</span>'+(m.reasoned?' <span class="rsntag">reasoned</span>':'');
+  if(f.fill==='lka')return '<span class="autochip lka">LKA</span>';
+  if(f.fill==='doc')return s.D[f.k]?'<span class="autochip man">document</span>':'';
+  return s.D[f.k]?'<span class="autochip man">supplier</span>':'';
+}
+function recRow(s,f){const v=s.D[f.k];
+  return '<div class="kvr"><div class="k">'+f.label+'</div><div class="vc"><span class="v'+(v?'':' empty')+'">'+(v?esc(v):'Not provided')+'</span><span class="pv">'+provChip(s,f)+'</span></div></div>';
+}
+function recordView(s){
+  // group sections into the full CBX-like record
+  return SCHEMA.map(sec=>{
+    const head='<div class="sechead"><span class="t">'+sec.sec+'</span><span class="ln"></span><span class="who">'+sec.who+'</span></div>';
+    if(sec.custom==='products'){return head+recProductsBlock(s)+'<div class="kv2">'+sec.fields.map(f=>recRow(s,f)).join('')+'</div>';}
+    const rows=sec.fields.map(f=>recRow(s,f)).join('');
+    let extra='';
+    if(sec.sec==='Compliance & certificates'){extra=paBlock(s);}
+    return head+'<div class="kv2">'+rows+'</div>'+extra;
+  }).join('');
+}
+function paBlock(s){
+  if(!s.docs.social)return '';
+  // demo PA ratings (would come from amfori report)
+  const vals=[88,72,90,100,80,76,94,100,100,84,100,79,86];
+  return '<div class="card" style="margin-top:8px;padding:12px 16px"><div class="eyemono" style="margin-bottom:6px">amfori BSCI · section ratings (13)</div>'
+    +PA.map((p,i)=>'<div class="pa"><span class="nm">'+p+'</span><span class="pct">'+vals[i]+'%</span></div>').join('')+'</div>';
+}
+function extractReview(s){
+  const ents=Object.entries(s.meta||{});
+  if(!ents.length)return '<p class="muted" style="font-size:13px">No document-extracted fields. Data was entered directly.</p>'
+    +(s.verifiedOn?'<div class="gate ok"><svg class="svgic" style="width:16px;height:16px;flex:0 0 16px" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Reviewed and verified on '+s.verifiedOn+'.</div>'
+      :'<button class="btn approve sm" style="margin-top:10px" data-verify="1"><svg class="svgic" style="width:14px;height:14px" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Mark record reviewed</button>');
+  const low=ents.filter(([,m])=>m.conf<0.8).length;
+  const rows=ents.map(([k,m])=>{const f=FBYK[k];return '<div class="kvr"><div class="k">'+f.label+'</div><div class="vc"><span class="v">'+esc(s.D[k])+'<br><span class="muted" style="font-size:11px">'+(m.reasoned?'reasoned from ':'from ')+esc(m.srcNm||'document')+(m.reasoned?' · review carefully':'')+'</span></span><span class="pv"><span class="autochip '+confClass(m.conf)+'">'+confTxt(m.conf)+'</span></span></div></div>';}).join('');
+  let gate;
+  if(s.verifiedOn){gate='<div class="gate ok"><svg class="svgic" style="width:16px;height:16px;flex:0 0 16px" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified by LKA on '+s.verifiedOn+'. Written to Supplier Master.</div>';}
+  else{gate='<div class="gate"><svg class="svgic" style="width:16px;height:16px;flex:0 0 16px" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>Advisory until confirmed. '+(low?low+' field(s) below 80% need a closer look. ':'')+'Verified On is empty.</div>';}
+  return '<div class="card" style="padding:6px 16px 14px">'+rows+'</div>'+gate
+    +(s.verifiedOn?'':'<button class="btn approve sm" style="margin-top:10px" data-verify="1"><svg class="svgic" style="width:14px;height:14px" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Confirm &amp; set Verified On</button>');
+}
+function reqForRec(s){return REQDOCS.concat((s.ptypes||[]).flatMap(t=>COND_DOCS[t]||[]));}
+function checksClear(s){return CHECKS.every(c=>(s.checks[c.key]||'pending')==='clear');}
+function openClarCount(s){return (s.clarifications||[]).filter(c=>c.status==='open').length;}
+function isReady(s){return reqForRec(s).every(d=>s.docs[d.key])&&!!s.verifiedOn&&checksClear(s)&&!!s.vem&&s.vem!==6&&openClarCount(s)===0;}
+const I_WARN='<svg class="svgic" style="width:16px;height:16px;flex:0 0 16px" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>';
+const I_OK='<svg class="svgic" style="width:16px;height:16px;flex:0 0 16px" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>';
+function checksBlock(s){
+  const rows=CHECKS.map(c=>{const v=s.checks[c.key]||'pending';const st=cstat(v);
+    const acts=(v==='flag'||v==='pending'||v==='review')?'<button class="btn ghost sm" data-chkclear="'+c.key+'">Mark clear</button><button class="btn ghost sm" data-chkclar="'+c.key+'">Ask supplier</button>':'';
+    return '<div class="chk"><div class="nm">'+c.nm+'<small>'+c.sub+'</small></div><div class="row" style="gap:6px;flex-wrap:wrap;justify-content:flex-end"><span class="badge '+st[0]+'"><span class="dot"></span>'+st[1]+'</span>'+acts+'</div></div>';}).join('');
+  const flagged=CHECKS.filter(c=>s.checks[c.key]==='flag').length;
+  const pend=CHECKS.filter(c=>{const v=s.checks[c.key]||'pending';return v==='pending'||v==='review';}).length;
+  let note=flagged?'<div class="gate">'+I_WARN+flagged+' check(s) flagged. Clear directly, or raise a clarification, before approval.</div>'
+    :(pend?'<div class="gate">'+I_WARN+pend+' check(s) still running.</div>':'<div class="gate ok">'+I_OK+'All external checks clear.</div>');
+  return '<div class="sechead" style="margin-top:0"><span class="t">External data verification</span><span class="ln"></span><button class="btn ghost sm" id="rerunchk">Re-run all</button></div>'
+    +'<div class="card" style="padding:4px 16px">'+rows+'</div>'+note;
+}
+function clarifyBlock(s){
+  const list=(s.clarifications||[]).map(c=>'<div class="clar"><div class="top"><span class="ty">'+c.type+'</span>'+(c.field?'<span class="muted" style="font-size:11px">re: '+esc(c.field)+'</span>':'')+'<span class="badge '+(c.status==='open'?'pending':c.status==='answered'?'review':'active')+'" style="margin-left:auto"><span class="dot"></span>'+(c.status==='open'?'Awaiting supplier':c.status==='answered'?'Answered':'Resolved')+'</span></div><div class="msg">'+esc(c.msg)+'</div>'
+    +(c.response?'<div class="resp"><span class="who">supplier response</span>'+esc(c.response)+'</div>':'')
+    +(c.status==='answered'?'<button class="btn approve sm" style="margin-top:8px" data-clarresolve="'+c.id+'">Mark resolved</button>':'')+'</div>').join('');
+  const form='<div class="clarform card" style="padding:14px 16px"><div class="eyemono" style="margin-bottom:8px">Raise a clarification</div>'
+    +'<div class="row" style="gap:8px;margin-bottom:8px"><select id="clartype"><option>Question</option><option>Document request</option><option>Data correction</option></select>'
+    +'<input id="clarfield" placeholder="related field (optional)" style="flex:1;font-family:var(--font);font-size:13px;background:var(--s1);border:0.5px solid var(--line2);border-radius:8px;padding:8px 10px"></div>'
+    +'<textarea id="clarmsg" placeholder="Message to the supplier"></textarea>'
+    +'<button class="btn primary sm" id="clarsend" style="margin-top:8px">Send to supplier</button></div>';
+  return '<div class="sechead" style="margin-top:0"><span class="t">Clarifications with supplier</span><span class="ln"></span></div>'+(list||'<p class="muted" style="font-size:13px">No clarifications raised yet.</p>')+'<div style="margin-top:12px">'+form+'</div>';
+}
+function approvalsBlock(s){
+  const cat=VEMCAT(s.vem);
+  const pc=[
+    {ok:reqForRec(s).every(d=>s.docs[d.key]),label:'Required documents received'},
+    {ok:!!s.verifiedOn,label:'Document data verified'},
+    {ok:checksClear(s),label:'External checks clear'},
+    {ok:!!s.vem&&s.vem!==6,label:'VEM scored and eligible'},
+    {ok:openClarCount(s)===0,label:'No open clarifications'}
+  ];
+  const ready=pc.every(p=>p.ok);
+  const pcList='<div class="sechead" style="margin-top:0"><span class="t">Ready to approve?</span><span class="ln"></span></div>'
+    +'<div class="card" style="padding:10px 16px">'+pc.map(p=>'<div class="precond '+(p.ok?'ok':'no')+'">'+(p.ok?I_OK:'<svg class="svgic ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>')+p.label+'</div>').join('')+'</div>';
+  let gates='';
+  if(s.status==='rejected'){gates='<div class="gate"><svg class="svgic" style="width:16px;height:16px;flex:0 0 16px" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>Rejected: VEM 6 (Insufficient). Not eligible for onboarding.</div>';}
+  else if(s.status==='active'){gates='<div class="gate ok"><svg class="svgic" style="width:16px;height:16px;flex:0 0 16px" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Fully approved &middot; active supplier. Now in Manage.</div>';}
+  else{gates='<div class="approval"><div class="t">GM approval<small>General Manager sign-off</small></div>'
+      +(s.gm?'<span class="badge active"><span class="dot"></span>Approved</span>':'<button class="btn approve sm" data-approve="gm"'+(ready?'':' disabled')+'>Approve as GM</button>')+'</div>'
+      +'<div class="approval"><div class="t">COO / HQ approval<small>Final gate before activation</small></div>'
+      +(s.coo?'<span class="badge active"><span class="dot"></span>Approved</span>':'<button class="btn approve sm" data-approve="coo"'+(s.gm&&ready?'':' disabled')+'>Approve as COO</button>')+'</div>'
+      +(!s.gm&&!ready?'<div class="gate">'+I_WARN+'Complete the checklist above before GM approval.</div>':(!s.gm?'<div class="gate">'+I_WARN+'COO approval unlocks after GM signs off (sequential gate).</div>':''));
+  }
+  return pcList
+    +'<div class="sechead"><span class="t">VEM · Vendor Evaluation Matrix</span><span class="ln"></span></div>'
+    +'<div class="card" style="padding:14px 16px"><div class="spread"><div><div style="font-size:13px;color:var(--muted)">Score 1 (Very Good) to 6 (Insufficient)</div>'
+    +'<div class="row" style="gap:8px;margin-top:6px"><span class="vemdot" style="width:12px;height:12px;background:'+cat.c+'"></span><b style="font-size:20px">'+(s.vem||'–')+'</b><span style="color:'+cat.c+';font-weight:500">'+cat.t+'</span></div></div>'
+    +'<div class="field" style="margin:0;width:150px"><label>set score</label><select id="vemset"><option value="">Not scored</option>'+[1,2,3,4,5,6].map(n=>'<option value="'+n+'"'+(s.vem===n?' selected':'')+'>'+n+'</option>').join('')+'</select></div></div></div>'
+    +'<div class="sechead"><span class="t">Approval gates</span><span class="ln"></span></div>'+gates;
+}
+function cpathStrip(s,ctrl){
+  const cp=(s.cp!=null)?s.cp:(STAGE_CP[s.stage]||0);
+  const steps=CPATH.map((c,i)=>{
+    const cls=i<cp?'done':i===cp?'now':'';
+    const inner=i<cp?'<svg class="svgic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>':(i+1);
+    return '<div class="cpstep '+cls+'" title="'+c+'"><div class="node">'+inner+'</div><div class="cplbl">'+CPSHORT[i]+'</div></div>';
+  }).join('');
+  let adv='';
+  if(ctrl){
+    const atEnd=cp>=CPATH.length-1, atStart=cp<=0;
+    const finalStep=cp===CPATH.length-2; // advancing into Manage Active
+    const blocked=finalStep&&!isReady(s);
+    const advLbl=atEnd?'Completed':('Advance: '+CPSHORT[cp+1]);
+    adv='<div class="cpadv"><button class="btn ghost sm" data-cpback'+(atStart?' disabled':'')+'>&larr; Back</button>'
+      +'<button class="btn '+(finalStep?'approve':'secondary')+' sm" data-cpadv'+((atEnd||blocked)?' disabled':'')+'>'+advLbl+' &rarr;</button></div>'
+      +(blocked?'<div class="gate" style="margin-top:8px">'+I_WARN+'Final activation needs the Qualification checklist complete.</div>':'');
+  }
+  return '<div class="cpcap"><span class="eyemono">Onboarding critical path</span><span class="eyemono">step '+(Math.min(cp,CPATH.length-1)+1)+' of '+CPATH.length+'</span></div><div class="cpath">'+steps+'</div>'+adv;
+}
+
+// ============ DRAWER ============
+function openDrawer(id){openId=id;const s=SUP.find(x=>x.id===id);if(!s)return;
+  SUP.forEach(x=>x.isNew=false);
+  const oc=openClarCount(s);
+  const tabs=[['profile','Full record'],['data','Document data'],['checks','Verification'],['clarify','Clarifications'+(oc?' ('+oc+')':'')],['approval','Qualification']];
+  let body;
+  if(dtab==='data')body=extractReview(s);
+  else if(dtab==='checks')body=checksBlock(s);
+  else if(dtab==='clarify')body=clarifyBlock(s);
+  else if(dtab==='approval')body=approvalsBlock(s);
+  else body='<div class="rec">'+recordView(s)+'</div>';
+  $('#drawer').innerHTML='<div class="dhead"><div><div class="eyemono">'+s.id+' &middot; '+s.country+'</div><h2 style="margin-top:4px">'+s.nm+'</h2>'
+    +'<div class="tags" style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><span class="badge '+s.status+'"><span class="dot"></span>'+STATUS[s.status]+'</span>'+lifecycle(s.stage)+'</div>'
+    +cpathStrip(s,true)+'</div>'
+    +'<button class="dx" id="dxc">&times;</button></div>'
+    +'<div class="dtabs">'+tabs.map(t=>'<button class="dtab'+(dtab===t[0]?' on':'')+'" data-tab="'+t[0]+'">'+t[1]+'</button>').join('')+'</div>'
+    +'<div class="dbody">'+body+'</div>';
+  $('#dxc').addEventListener('click',closeDrawer);
+  $('#drawer').querySelectorAll('.dtab').forEach(t=>t.addEventListener('click',()=>{dtab=t.dataset.tab;openDrawer(id);}));
+  const vs=$('#vemset');if(vs)vs.addEventListener('change',e=>{s.vem=e.target.value?+e.target.value:null;if(s.vem===6){s.status='rejected';s.stage='explore';}else if(s.status==='rejected'){s.status='pending';}openDrawer(id);render();});
+  const vfy=$('#drawer [data-verify]');if(vfy)vfy.addEventListener('click',()=>{s.verifiedOn=todayStr();s.D.licStatus='Verified';s.D.licVerified=s.verifiedOn;toast('Extracted data verified, written to master');openDrawer(id);render();});
+  $('#drawer').querySelectorAll('[data-approve]').forEach(b=>b.addEventListener('click',()=>{
+    const role=b.dataset.approve;
+    if(role==='gm'){s.gm=true;s.cp=Math.max(s.cp||0,7);reconcileCp(s);s.status='pending';toast('GM approval recorded');}
+    if(role==='coo'&&s.gm){s.coo=true;s.cp=8;reconcileCp(s);toast(s.nm+' activated, now in Manage');}
+    openDrawer(id);render();
+  }));
+  // critical-path progression (demo): step forward/back through the 9 stages
+  const cpa=$('#drawer [data-cpadv]');if(cpa)cpa.addEventListener('click',()=>{s.cp=Math.min(CPATH.length-1,(s.cp||0)+1);reconcileCp(s);toast('Advanced to '+CPATH[s.cp]);openDrawer(id);render();});
+  const cpb=$('#drawer [data-cpback]');if(cpb)cpb.addEventListener('click',()=>{s.cp=Math.max(0,(s.cp||0)-1);reconcileCp(s);toast('Moved back to '+CPATH[s.cp]);openDrawer(id);render();});
+  // verification: re-run, mark clear, raise clarification from a flagged check
+  const rr=$('#rerunchk');if(rr)rr.addEventListener('click',()=>{CHECKS.forEach(c=>{if((s.checks[c.key]||'pending')!=='clear'&&s.checks[c.key]!=='flag')s.checks[c.key]='clear';});toast('Checks re-run');openDrawer(id);});
+  $('#drawer').querySelectorAll('[data-chkclear]').forEach(b=>b.addEventListener('click',()=>{s.checks[b.dataset.chkclear]='clear';toast('Check marked clear');openDrawer(id);render();}));
+  $('#drawer').querySelectorAll('[data-chkclar]').forEach(b=>b.addEventListener('click',()=>{const c=CHECKS.find(x=>x.key===b.dataset.chkclar);s.clarifications.push({id:clarSeq++,type:'Question',field:c?c.nm:'',msg:'Our '+(c?c.nm.toLowerCase():'check')+' raised a query. Please confirm or provide supporting detail.',status:'open',at:todayStr()});dtab='clarify';toast('Clarification raised');openDrawer(id);render();}));
+  // clarifications: raise + resolve
+  const cs=$('#clarsend');if(cs)cs.addEventListener('click',()=>{const ty=$('#clartype').value,fl=$('#clarfield').value.trim(),msg=$('#clarmsg').value.trim();if(!msg){toast('Add a message');return;}s.clarifications.push({id:clarSeq++,type:ty,field:fl,msg,status:'open',at:todayStr()});toast('Sent to supplier');openDrawer(id);render();});
+  $('#drawer').querySelectorAll('[data-clarresolve]').forEach(b=>b.addEventListener('click',()=>{const c=s.clarifications.find(x=>x.id==b.dataset.clarresolve);if(c)c.status='resolved';toast('Clarification resolved');openDrawer(id);render();}));
+  $('#scrim').classList.add('on');$('#drawer').classList.add('on');
+}
+function closeDrawer(){$('#scrim').classList.remove('on');$('#drawer').classList.remove('on');openId=null;}
+$('#scrim').addEventListener('click',closeDrawer);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+document.querySelectorAll('.vbtn').forEach(b=>b.addEventListener('click',()=>{view=b.dataset.view;closeDrawer();render();}));
+render();
+</script>
+</body>
+</html>
