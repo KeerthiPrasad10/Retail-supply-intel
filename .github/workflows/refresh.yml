@@ -39,12 +39,17 @@ jobs:
         working-directory: pipelines
         # `db init` is idempotent (create_all) and ensures the schema — incl.
         # source_status — exists on the target store. `export` publishes the
-        # snapshot row to Supabase when RSI_DATABASE_URL is set. For reliable
-        # Google Trends and the social/marketplace feeds, set RSI_APIFY_TOKEN
-        # and add the opt-in connectors here (e.g. `rsi ingest tiktok amazon`).
+        # snapshot row to Supabase when RSI_DATABASE_URL is set.
+        #
+        # Trade-flows + Wikipedia pageviews are reliable from CI. The free
+        # Google-Trends connector is intentionally NOT run here: Google rate-
+        # limits GitHub's datacenter IPs hard, so it stalls on backoff and
+        # returns little. For Google Trends + social/marketplace feeds, set
+        # RSI_APIFY_TOKEN and add the opt-in connectors (e.g. `rsi ingest
+        # tiktok amazon`), which use Apify actors instead.
         run: |
           uv run rsi db init
-          uv run rsi ingest wikipedia google_trends comtrade --days 60
+          uv run rsi ingest wikipedia comtrade --days 60
           uv run rsi score
           uv run rsi correlate
           uv run rsi insights
