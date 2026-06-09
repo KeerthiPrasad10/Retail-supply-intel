@@ -76,7 +76,7 @@ export function buildModel(snap: Snapshot): Model {
   const max = Math.max(...rawScores);
   const scale = (v: number) => (max === min ? 80 : Math.round(34 + ((v - min) / (max - min)) * 62));
 
-  const trends: Trend[] = snap.triggers
+  const allOpps: Trend[] = snap.triggers
     .map((t): Trend => {
       const p = t.payload || {};
       const sources: Source[] = (p.top_sources || []).map((s): Source =>
@@ -130,6 +130,18 @@ export function buildModel(snap: Snapshot): Model {
       };
     })
     .sort((a, b) => b.score - a.score);
+
+  // One opportunity per category — keep the strongest market. Per-market
+  // triggers share the same category-level supply data (origins, why, impact),
+  // so extra markets render as duplicate cards (e.g. "Coffee" three times).
+  // Collapse to the top-scoring market per category.
+  const trends: Trend[] = [];
+  const seenCat = new Set<string>();
+  for (const t of allOpps) {
+    if (seenCat.has(t.cat)) continue;
+    seenCat.add(t.cat);
+    trends.push(t);
+  }
 
   const emSet = new Set<string>();
   trends.forEach((t) => t.emerging.forEach((e) => emSet.add(e[0])));
