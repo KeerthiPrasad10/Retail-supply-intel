@@ -162,6 +162,14 @@ export function Suppliers({
             )}
           </p>
         </div>
+        <a
+          className="btn inverse"
+          href="/onboard.html"
+          style={{ flex: "0 0 auto", textDecoration: "none", whiteSpace: "nowrap" }}
+        >
+          <Icons.factory size={14} />
+          Onboard a supplier
+        </a>
       </header>
 
       <div className="callout warn">
@@ -169,7 +177,7 @@ export function Suppliers({
         <p>
           <b>Illustrative directory.</b> These supplier profiles model the Phase-3
           supplier-resolution layer and are <b>not customs-verified</b>. Demand momentum and
-          trade-flow origins are real (Wikipedia + Google Trends · UN Comtrade).
+          trade-flow origins are real (TikTok, Instagram &amp; Google Trends · UN Comtrade).
         </p>
       </div>
 
