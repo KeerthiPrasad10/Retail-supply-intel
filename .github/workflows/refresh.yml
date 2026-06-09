@@ -79,5 +79,13 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add web/lib/snapshot.json
             git commit -m "chore(data): snapshot refresh"
-            git push
+            # `main` can advance during the (long) run, so rebase the snapshot
+            # commit onto the latest main before pushing — otherwise the push
+            # fails non-fast-forward and the committed copy goes stale.
+            for attempt in 1 2 3; do
+              git pull --rebase origin main && git push origin HEAD:main && break
+              echo "push attempt $attempt failed; retrying after rebase…"
+              git rebase --abort 2>/dev/null || true
+              sleep 3
+            done
           fi
