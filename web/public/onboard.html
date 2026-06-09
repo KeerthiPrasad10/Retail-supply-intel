@@ -584,7 +584,12 @@ function rField(f){
   return '<div class="fieldrow"><div class="k">'+f.label+'</div><div class="c"><button class="recpill" data-recdoc="'+f.doc+'" title="Add the '+docNm+' to fill this">'+FILE_SVG+'Extracted from '+docNm+'</button></div></div>';
 }
 function fillPct(){const all=SCHEMA.flatMap(s=>s.fields).filter(f=>f.fill!=='lka');const done=all.filter(f=>cur.D[f.k]).length;return all.length?done/all.length:0;}
-function canSubmit(){return cur.D.name&&cur.D.licCountry&&cur.D.nda&&reqActive().every(d=>cur.docs[d.key]);}
+// a required doc counts as satisfied if its file was uploaded OR all its fields are already
+// filled from other documents (e.g. factory name/address from the amfori report, capacity
+// from the capability statement). Docs with no form fields (e.g. EN 71) must be uploaded.
+function docCovered(key){const fs=DOC_FIELDS(key).filter(f=>!/Attach$/.test(f.k));return fs.length>0&&fs.every(f=>cur.D[f.k]!=null&&cur.D[f.k]!=='');}
+function docSatisfied(d){return !!cur.docs[d.key]||docCovered(d.key);}
+function canSubmit(){return cur.D.name&&cur.D.licCountry&&cur.D.nda&&reqActive().every(docSatisfied);}
 // repeatable products + categories + product types (drives conditional docs)
 function productsBlock(){
   let h='<div class="sechead" id="sec-products-categories"><span class="t">Products &amp; categories</span><span class="ln"></span><span class="who">Supplier</span></div>';
@@ -636,10 +641,10 @@ function renderPortal(){
     +'<input type="file" id="fileinput" multiple style="display:none">'
     +((cur._uploadQueue&&cur._uploadQueue.length)?'<div class="spread" style="margin-top:16px"><span class="eyemono">Uploading · one at a time</span><span class="eyemono">'+cur._uploadQueue.filter(q=>q.status!=='pending'&&q.status!=='parsing').length+' / '+cur._uploadQueue.length+'</span></div><div class="reclist" id="upq">'+cur._uploadQueue.map(uqRow).join('')+'</div>':'')
     +'<div class="spread" style="margin-top:18px"><span class="eyemono">Recommended documents</span><span class="eyemono">'+upc+' / '+DOCS.length+'</span></div>'
-    +'<div class="reclist">'+activeDocs().map(d=>{const up=cur.docs[d.key];const n=DOC_FIELDS(d.key).length;const isReq=d.req||condDocs().some(c=>c.key===d.key);
-        const small=up?(n?'read · '+n+' field'+(n>1?'s':'')+' filled':'received'):(n?'fills '+n+' field'+(n>1?'s':''):'compliance document');
-        return '<div class="recitem'+(up?' done':'')+'" data-rec="'+d.key+'"><div class="ic">'+(up?CHECK_SVG:UPLOAD_SVG)+'</div>'
-        +'<div class="nm">'+d.nm+(isReq&&!up?' <span class="reqmark">· required</span>':'')+'<small>'+small+'</small></div>'
+    +'<div class="reclist">'+activeDocs().map(d=>{const up=cur.docs[d.key];const cov=!up&&docCovered(d.key);const n=DOC_FIELDS(d.key).length;const isReq=d.req||condDocs().some(c=>c.key===d.key);
+        const small=up?(n?'read · '+n+' field'+(n>1?'s':'')+' filled':'received'):(cov?'covered by your other documents':(n?'fills '+n+' field'+(n>1?'s':''):'compliance document'));
+        return '<div class="recitem'+(up||cov?' done':'')+'" data-rec="'+d.key+'"><div class="ic">'+(up||cov?CHECK_SVG:UPLOAD_SVG)+'</div>'
+        +'<div class="nm">'+d.nm+(isReq&&!up&&!cov?' <span class="reqmark">· required</span>':'')+'<small>'+small+'</small></div>'
         +(up?'<button class="btn ghost sm" data-undoc="'+d.key+'">Replace</button>':'')+'</div>';}).join('')+'</div>'
     +'<div class="reasonhint">No matching document? Drop any internal note, company profile or spreadsheet. We reason over it and fill what we can find (flagged for review).</div>'
     +((cur.reasonedDocs&&cur.reasonedDocs.length)?'<div class="spread" style="margin-top:14px"><span class="eyemono">Reasoned documents</span></div>'
@@ -659,12 +664,12 @@ function renderPortal(){
     return '<div class="sechead" id="sec-'+slug(s.sec)+'"><span class="t">'+s.sec+'</span><span class="ln"></span><span class="who">'+s.who+'</span></div>'+flds.map(rField).join('');
   }).join('');
   const RA=reqActive();
-  const gotReq=RA.filter(d=>cur.docs[d.key]).length;
+  const gotReq=RA.filter(docSatisfied).length;
   const reqCard='<div class="card reqcard"><div class="spread"><span class="eyemono">Required documents</span><span class="eyemono">'+gotReq+' / '+RA.length+'</span></div>'
-    +'<div class="mt8">'+RA.map(d=>{const up=cur.docs[d.key];const cond=condDocs().some(c=>c.key===d.key);
-      return '<div class="reqrow"><span class="tick'+(up?' on':'')+'">'+(up?CHECK_SVG:'')+'</span><span class="nm">'+d.nm+(cond?' <span class="reqmark" style="color:var(--amber)">· conditional</span>':'')+'</span>'
-        +(up?'<span class="badge active"><span class="dot"></span>Received</span>':'<span class="reqmark">Required</span>')+'</div>';}).join('')+'</div></div>';
-  const missing=[];if(!cur.D.name)missing.push('supplier name');if(!cur.D.licCountry)missing.push('licence country');if(!cur.D.nda)missing.push('signed NDA');RA.forEach(d=>{if(!cur.docs[d.key])missing.push(d.nm.toLowerCase());});
+    +'<div class="mt8">'+RA.map(d=>{const up=cur.docs[d.key];const cov=!up&&docCovered(d.key);const ok=up||cov;const cond=condDocs().some(c=>c.key===d.key);
+      return '<div class="reqrow"><span class="tick'+(ok?' on':'')+'">'+(ok?CHECK_SVG:'')+'</span><span class="nm">'+d.nm+(cond?' <span class="reqmark" style="color:var(--amber)">· conditional</span>':'')+'</span>'
+        +(up?'<span class="badge active"><span class="dot"></span>Received</span>':(cov?'<span class="badge review"><span class="dot"></span>From documents</span>':'<span class="reqmark">Required</span>'))+'</div>';}).join('')+'</div></div>';
+  const missing=[];if(!cur.D.name)missing.push('supplier name');if(!cur.D.licCountry)missing.push('licence country');if(!cur.D.nda)missing.push('signed NDA');RA.forEach(d=>{if(!docSatisfied(d))missing.push(d.nm.toLowerCase());});
   const hint=missing.length?'Still needed: '+missing.join(', '):'All required items complete';
   const hasDocsR=Object.keys(cur.docs).some(k=>cur.docs[k]);
   const openEmpty=all.some(f=>f.fill==='supplier'&&f.type!=='flag'&&!cur.D[f.k]&&!cur.meta[f.k]&&REASONVAL[f.k]!=null);
