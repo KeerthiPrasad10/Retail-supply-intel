@@ -91,6 +91,9 @@ def ingest(
                 written, status, detail = 0, "error", str(exc)[:256]
                 typer.secho(f"    ! {name} failed: {exc}", fg=typer.colors.RED)
             _record_source_status(session, name, written, status, detail)
+            # Durably persist this connector's rows + status before the next one, so a
+            # cancelled/killed run never rolls back data already scraped (and paid for).
+            session.commit()
             color = {"ok": typer.colors.GREEN, "empty": typer.colors.YELLOW}.get(
                 status, typer.colors.RED
             )
