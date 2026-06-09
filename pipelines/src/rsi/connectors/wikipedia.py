@@ -48,6 +48,9 @@ PROJECT_COUNTRY: dict[str, str | None] = {
 
 class WikipediaConnector:
     name: ClassVar[str] = "wikipedia"
+    # Off by default: pageviews are attention/reference interest, not purchase
+    # demand, so they're a poor sourcing-trend signal. Kept for opt-in use only.
+    default: ClassVar[bool] = False
 
     def run(self, session: Session, days: int = 60, **_: object) -> int:
         end = datetime.now(tz=UTC).date() - timedelta(days=2)  # API lags ~1d

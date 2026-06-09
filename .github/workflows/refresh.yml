@@ -49,20 +49,19 @@ jobs:
 
       - name: Run pipeline (refresh demand -> recompute -> publish)
         working-directory: pipelines
-        # `db init` is idempotent (create_all) and ensures the schema — incl.
-        # source_status — exists on the target store. `export` publishes the
-        # snapshot row to Supabase when RSI_DATABASE_URL is set.
+        # `db init` is idempotent (create_all) and ensures the schema exists.
+        # `export` publishes the snapshot row to Supabase when RSI_DATABASE_URL
+        # is set.
         #
-        # Wikipedia (fast/free) runs every time. The Apify social/marketplace
-        # connectors run only when manually dispatched with `apify=true` (paid,
-        # slow). comtrade is annual + slow on the free endpoint, so it is
-        # refreshed separately/occasionally: `rsi ingest comtrade` (fast with
-        # RSI_COMTRADE_API_KEY); existing flows persist between runs.
+        # Demand now comes from search + social (consumer-demand signals), not
+        # Wikipedia pageviews (attention ≠ purchase intent). Those feeds are
+        # paid (Apify), so they run only on manual dispatch with `apify=true`.
+        # A plain run (the weekly cron) just recomputes scores/triggers against
+        # the data already in the store and republishes — no ingest, no spend.
         run: |
           uv run rsi db init
-          uv run rsi ingest wikipedia --days 60
           if [ "${{ inputs.apify }}" = "true" ]; then
-            echo "::notice::Apify feeds requested — ingesting paid social/marketplace connectors"
+            echo "::notice::Apify feeds requested — ingesting paid demand connectors"
             uv run rsi ingest google_trends tiktok instagram pinterest amazon aliexpress --days 60
           fi
           uv run rsi score
