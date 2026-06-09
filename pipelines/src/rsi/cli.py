@@ -14,6 +14,7 @@ Typical flow:
 from __future__ import annotations
 
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 
 import typer
@@ -54,6 +55,20 @@ def schema(dialect: str = typer.Option("postgres", help="postgres|sqlite")) -> N
         typer.echo(str(CreateTable(table).compile(dialect=d)).strip() + ";\n")
 
 
+def _record_source_status(session, name: str, rows: int, status: str, detail: str | None) -> None:
+    """Upsert the last-run telemetry row for a connector (see SourceStatus)."""
+    from .models import SourceStatus
+
+    row = session.get(SourceStatus, name)
+    now = datetime.now(tz=UTC)
+    if row is None:
+        session.add(
+            SourceStatus(name=name, last_run_at=now, status=status, rows=rows, detail=detail)
+        )
+    else:
+        row.last_run_at, row.status, row.rows, row.detail = now, status, rows, detail
+
+
 @app.command()
 def ingest(
     connectors: list[str] = typer.Argument(None, help="Subset of connectors; default all"),
@@ -69,8 +84,17 @@ def ingest(
                 typer.secho(f"  ! unknown connector: {name}", fg=typer.colors.RED)
                 continue
             typer.echo(f"  → {name} ...")
-            written = cls().run(session, days=days)
-            typer.secho(f"    {written} rows", fg=typer.colors.GREEN)
+            try:
+                written = cls().run(session, days=days)
+                status, detail = ("ok" if written > 0 else "empty"), None
+            except Exception as exc:  # never let one flaky source abort the run
+                written, status, detail = 0, "error", str(exc)[:256]
+                typer.secho(f"    ! {name} failed: {exc}", fg=typer.colors.RED)
+            _record_source_status(session, name, written, status, detail)
+            color = {"ok": typer.colors.GREEN, "empty": typer.colors.YELLOW}.get(
+                status, typer.colors.RED
+            )
+            typer.secho(f"    {written} rows [{status}]", fg=color)
 
 
 @app.command()

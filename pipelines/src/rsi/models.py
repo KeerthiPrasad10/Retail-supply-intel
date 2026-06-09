@@ -248,3 +248,24 @@ class Snapshot(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow)
     data: Mapped[dict] = mapped_column(JSON, nullable=False)
+
+
+# --------------------------------------------------------------------------- #
+# Ingest telemetry
+# --------------------------------------------------------------------------- #
+class SourceStatus(Base):
+    """Last-run telemetry for one ingestion connector (a "signal source").
+
+    Upserted by ``rsi ingest`` after each connector runs (keyed by
+    ``Connector.name``) so the dashboard can show which feeds are live, when
+    each last produced a signal, and how many rows it wrote on its last run.
+    """
+
+    __tablename__ = "source_status"
+
+    name: Mapped[str] = mapped_column(String(32), primary_key=True)
+    last_run_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow)
+    # ok = wrote rows · empty = ran but no new data · error = the run raised.
+    status: Mapped[str] = mapped_column(String(16), default="ok")
+    rows: Mapped[int] = mapped_column(Integer, default=0)
+    detail: Mapped[str | None] = mapped_column(String(256))

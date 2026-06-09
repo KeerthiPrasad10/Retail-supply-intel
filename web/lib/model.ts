@@ -3,7 +3,7 @@
  * are all real; the opportunity score is a 0..100 rescale of the trigger score
  * and the tier is derived from momentum/growth. */
 
-import type { Model, Snapshot, Source, Tier, Trend, TrendSummary } from "./types";
+import type { Model, SignalSource, Snapshot, Source, Tier, Trend, TrendSummary } from "./types";
 import { fmtPct } from "./util";
 
 function tierOf(momentum: number, growth: number): Tier {
@@ -142,6 +142,16 @@ export function buildModel(snap: Snapshot): Model {
 
   const insights = [...(snap.insights ?? [])].sort((a, b) => b.score - a.score);
 
+  const signalSources: SignalSource[] = (snap.signal_sources ?? []).map((s) => ({
+    name: s.name,
+    label: s.label,
+    kind: s.kind,
+    isDefault: s.default,
+    lastRunAt: s.last_run_at,
+    status: s.status,
+    rows: s.rows,
+  }));
+
   const snapshotLabel = (() => {
     const d = new Date(snap.generated_at);
     return isNaN(d.getTime())
@@ -162,5 +172,6 @@ export function buildModel(snap: Snapshot): Model {
     topSurge,
     insights,
     procureCount: insights.filter((i) => i.action === "PROCURE").length,
+    signalSources,
   };
 }

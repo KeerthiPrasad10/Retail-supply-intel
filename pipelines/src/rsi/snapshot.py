@@ -20,6 +20,7 @@ from sqlalchemy.orm import Session
 
 from . import reference
 from .config import REPO_ROOT
+from .connectors import CONNECTORS, SOURCE_META
 from .correlation.engine import category_sources
 from .models import (
     Competitor,
@@ -27,6 +28,7 @@ from .models import (
     Country,
     Insight,
     ProductCategory,
+    SourceStatus,
     Supplier,
     TradeFlow,
     Trend,
@@ -213,6 +215,64 @@ def _insights(
     ]
 
 
+def _signal_sources(session: Session) -> list[dict]:
+    """Operational status of each ingestion connector — the "signal sources".
+
+    Authoritative telemetry comes from ``source_status`` (written by ``rsi
+    ingest`` after every run). For any source without a recorded run we fall
+    back to deriving last-activity from the data it produced, so the panel is
+    truthful even before the telemetry table has been populated. Comtrade has
+    no per-row ingest timestamp, so its "last run" is proxied by the latest
+    demand-series timestamp (sources are ingested together in one pipeline run).
+    """
+    recorded: dict[str, SourceStatus] = {}
+    try:
+        recorded = {s.name: s for s in session.scalars(select(SourceStatus))}
+    except Exception:  # table absent on an older DB — fall back to derivation
+        recorded = {}
+
+    demand = {
+        platform: (last_seen, count)
+        for platform, last_seen, count in session.execute(
+            select(Trend.platform, func.max(Trend.last_seen), func.count()).group_by(
+                Trend.platform
+            )
+        ).all()
+    }
+    pipeline_run = session.scalar(select(func.max(Trend.last_seen)))
+    flow_count = session.scalar(select(func.count()).select_from(TradeFlow)) or 0
+
+    def _iso(dt) -> str | None:
+        return dt.isoformat() if dt else None
+
+    out: list[dict] = []
+    for name, cls in CONNECTORS.items():
+        meta = SOURCE_META.get(name, {})
+        kind = meta.get("kind", "demand")
+        st = recorded.get(name)
+        if st is not None:
+            last_run, status, rows = _iso(st.last_run_at), st.status, st.rows
+        elif name in demand:  # demand feed with persisted series
+            last_seen, count = demand[name]
+            last_run, status, rows = _iso(last_seen), "ok" if count else "idle", count
+        elif kind == "supply" and flow_count:  # comtrade: proxy run time
+            last_run, status, rows = _iso(pipeline_run), "ok", flow_count
+        else:  # opt-in feed not run yet
+            last_run, status, rows = None, "idle", 0
+        out.append(
+            {
+                "name": name,
+                "label": meta.get("label", name.replace("_", " ").title()),
+                "kind": kind,
+                "default": bool(getattr(cls, "default", True)),
+                "last_run_at": last_run,
+                "status": status,
+                "rows": rows,
+            }
+        )
+    return out
+
+
 def build_snapshot(session: Session, top_trends: int = 200) -> dict:
     country_names = dict(session.execute(select(Country.code, Country.name)).all())
     cat_names = dict(session.execute(select(ProductCategory.id, ProductCategory.name)).all())
@@ -286,6 +346,7 @@ def build_snapshot(session: Session, top_trends: int = 200) -> dict:
         "countries": countries,
         "categories": categories,
         "trends": trends,
+        "signal_sources": _signal_sources(session),
         "sources": sources,
         "triggers": triggers,
         "flows": _origin_market_flows(session, cat_names, country_names),
