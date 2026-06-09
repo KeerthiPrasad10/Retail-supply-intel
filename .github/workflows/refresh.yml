@@ -1,13 +1,24 @@
 name: Refresh data snapshot
 
-# Re-ingests free demand + trade-flow sources, recomputes scores/triggers, and
+# Re-ingests demand + trade-flow sources, recomputes scores/triggers, and
 # commits the updated dashboard snapshot (which triggers a Vercel redeploy).
 # If the RSI_DATABASE_URL secret is set, the same run also writes to Supabase.
+#
+# The weekly cron refreshes only the fast/free demand source (Wikipedia) and
+# recomputes against existing trade flows. The paid Apify social/marketplace
+# feeds are OPT-IN per run: trigger manually via "Run workflow" with the
+# `apify` box checked (consumes Apify credits; ~1-2h, one actor run/category
+# across 5 connectors). They never run on the schedule.
 
 on:
   schedule:
     - cron: "0 6 * * 1" # Mondays 06:00 UTC
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      apify:
+        description: "Also ingest paid Apify feeds (TikTok/Instagram/Pinterest/Amazon/AliExpress) — consumes credits"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -21,10 +32,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Optional secrets — unset => SQLite + Comtrade preview endpoint + the
-      # deterministic insight narrative (no LLM).
+      # deterministic insight narrative (no LLM) + Apify connectors no-op.
       RSI_DATABASE_URL: ${{ secrets.RSI_DATABASE_URL }}
       RSI_COMTRADE_API_KEY: ${{ secrets.RSI_COMTRADE_API_KEY }}
       RSI_ANTHROPIC_API_KEY: ${{ secrets.RSI_ANTHROPIC_API_KEY }}
+      RSI_APIFY_TOKEN: ${{ secrets.RSI_APIFY_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -41,19 +53,18 @@ jobs:
         # source_status — exists on the target store. `export` publishes the
         # snapshot row to Supabase when RSI_DATABASE_URL is set.
         #
-        # Weekly job refreshes the fast, frequently-changing demand source
-        # (Wikipedia pageviews) and recomputes scores/triggers against the
-        # trade flows already in the store. Two sources are intentionally NOT
-        # re-ingested here:
-        #   - comtrade: trade data is *annual* and rarely changes; its free
-        #     preview endpoint also times out repeatedly from GitHub IPs (~88
-        #     slow requests). Refresh it separately/occasionally, ideally with
-        #     RSI_COMTRADE_API_KEY (full endpoint, fast): `rsi ingest comtrade`.
-        #   - google_trends / social: the free connector is rate-limited on CI;
-        #     use RSI_APIFY_TOKEN + the opt-in connectors (`rsi ingest tiktok`).
+        # Wikipedia (fast/free) runs every time. The Apify social/marketplace
+        # connectors run only when manually dispatched with `apify=true` (paid,
+        # slow). comtrade is annual + slow on the free endpoint, so it is
+        # refreshed separately/occasionally: `rsi ingest comtrade` (fast with
+        # RSI_COMTRADE_API_KEY); existing flows persist between runs.
         run: |
           uv run rsi db init
           uv run rsi ingest wikipedia --days 60
+          if [ "${{ inputs.apify }}" = "true" ]; then
+            echo "::notice::Apify feeds requested — ingesting paid social/marketplace connectors"
+            uv run rsi ingest tiktok instagram pinterest amazon aliexpress --days 60
+          fi
           uv run rsi score
           uv run rsi correlate
           uv run rsi insights
@@ -67,6 +78,6 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add web/lib/snapshot.json
-            git commit -m "chore(data): scheduled snapshot refresh"
+            git commit -m "chore(data): snapshot refresh"
             git push
           fi
