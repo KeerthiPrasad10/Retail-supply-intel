@@ -148,8 +148,9 @@ function buildPrompt(docType: string | undefined): string {
     "- Dates as YYYY-MM-DD. Currencies as ISO 4217. Omit any field the document does not contain — do not guess.",
     "- Numbers (turnover, capacity, volume, workers, lead time, percentages) as plain digits — no units, currency symbols, or thousands separators; percentages as the number only.",
     "- `confidence` is 0..1: how sure you are the value is correct AND read from this document. Lower it for blurry scans, partial matches, or inferred values.",
+    "- If the document lists sellable products (a price list or catalogue), add one `products` entry per product line: name, category, yearly volume or capacity as a number, and FOB unit price in USD. Otherwise return an empty products array.",
     "",
-    'Respond with ONLY a JSON object, no prose: {"docType": "<one of the known types or \\"unknown\\">", "fields": [{"fieldKey": "...", "value": "...", "confidence": 0.0, "lang": "..", "translated": false, "original": "..."}]}',
+    'Respond with ONLY a JSON object, no prose: {"docType": "<one of the known types or \\"unknown\\">", "fields": [{"fieldKey": "...", "value": "...", "confidence": 0.0, "lang": "..", "translated": false, "original": "..."}], "products": [{"name": "...", "category": "...", "volume": "...", "fob": "..."}]}',
   ].join("\n");
 }
 
@@ -209,7 +210,7 @@ function contentBlock(mediaType: string, dataBase64: string) {
   return null;
 }
 
-function parseJson(text: string): { docType?: string; fields?: unknown[] } | null {
+function parseJson(text: string): { docType?: string; fields?: unknown[]; products?: unknown[] } | null {
   // Models sometimes wrap JSON in prose or code fences — extract the object.
   const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/);
   const raw = fenced ? fenced[1] : text;
@@ -287,7 +288,7 @@ export async function POST(req: Request) {
 
     const parsed = parseJson(text);
     if (!parsed || !Array.isArray(parsed.fields)) {
-      return NextResponse.json({ ok: true, docType: docType || "unknown", fields: [] });
+      return NextResponse.json({ ok: true, docType: docType || "unknown", fields: [], products: [] });
     }
 
     const labelFor = (k: string) =>
@@ -306,7 +307,20 @@ export async function POST(req: Request) {
         reasoned: !docType || !DOC_FIELDS[docType],
       }));
 
-    return NextResponse.json({ ok: true, docType: parsed.docType || docType || "unknown", fields });
+    // Product rows for the form's repeater (price lists / catalogues). Normalised to the
+    // portal's row shape {name, cat, vol, fob}; the form expands to fit however many.
+    const products = (Array.isArray(parsed.products) ? parsed.products : [])
+      .map((p) => p as Record<string, unknown>)
+      .filter((p) => p && String(p.name ?? "").trim() !== "")
+      .slice(0, 60)
+      .map((p) => ({
+        name: String(p.name ?? "").trim(),
+        cat: String(p.category ?? p.cat ?? "").trim(),
+        vol: String(p.volume ?? p.vol ?? p.annualVolume ?? "").trim(),
+        fob: String(p.fob ?? p.price ?? "").trim(),
+      }));
+
+    return NextResponse.json({ ok: true, docType: parsed.docType || docType || "unknown", fields, products });
   } catch (err) {
     return NextResponse.json(
       { ok: false, error: err instanceof Error ? err.message : "extraction error" },
