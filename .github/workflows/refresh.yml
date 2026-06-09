@@ -35,21 +35,25 @@ jobs:
         working-directory: pipelines
         run: uv sync --extra postgres --extra llm
 
-      - name: Run pipeline (free sources -> insights -> publish)
+      - name: Run pipeline (refresh demand -> recompute -> publish)
         working-directory: pipelines
         # `db init` is idempotent (create_all) and ensures the schema — incl.
         # source_status — exists on the target store. `export` publishes the
         # snapshot row to Supabase when RSI_DATABASE_URL is set.
         #
-        # Trade-flows + Wikipedia pageviews are reliable from CI. The free
-        # Google-Trends connector is intentionally NOT run here: Google rate-
-        # limits GitHub's datacenter IPs hard, so it stalls on backoff and
-        # returns little. For Google Trends + social/marketplace feeds, set
-        # RSI_APIFY_TOKEN and add the opt-in connectors (e.g. `rsi ingest
-        # tiktok amazon`), which use Apify actors instead.
+        # Weekly job refreshes the fast, frequently-changing demand source
+        # (Wikipedia pageviews) and recomputes scores/triggers against the
+        # trade flows already in the store. Two sources are intentionally NOT
+        # re-ingested here:
+        #   - comtrade: trade data is *annual* and rarely changes; its free
+        #     preview endpoint also times out repeatedly from GitHub IPs (~88
+        #     slow requests). Refresh it separately/occasionally, ideally with
+        #     RSI_COMTRADE_API_KEY (full endpoint, fast): `rsi ingest comtrade`.
+        #   - google_trends / social: the free connector is rate-limited on CI;
+        #     use RSI_APIFY_TOKEN + the opt-in connectors (`rsi ingest tiktok`).
         run: |
           uv run rsi db init
-          uv run rsi ingest wikipedia comtrade --days 60
+          uv run rsi ingest wikipedia --days 60
           uv run rsi score
           uv run rsi correlate
           uv run rsi insights
