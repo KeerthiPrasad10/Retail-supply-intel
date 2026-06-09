@@ -87,6 +87,12 @@ export const Icons = {
       <path d="M12 8v4l3 2" />
     </Ico>
   ),
+  refresh: (p: IconProps) => (
+    <Ico {...p}>
+      <path d="M21 12a9 9 0 1 1-2.6-6.4L21 8" />
+      <path d="M21 3v5h-5" />
+    </Ico>
+  ),
   box: (p: IconProps) => (
     <Ico {...p}>
       <path d="M21 8 12 3 3 8l9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8" />

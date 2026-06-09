@@ -38,6 +38,7 @@ body { background: var(--nxb-surface-page); color: var(--nxb-text-primary); font
 .src-dot.error { background: var(--nxb-status-high); }
 .src-dot.idle { background: var(--nxb-text-disabled); opacity: .5; }
 @keyframes src-pulse { 0% { transform: scale(1); opacity: .5; } 70% { transform: scale(2.6); opacity: 0; } 100% { opacity: 0; } }
+@keyframes spin { to { transform: rotate(360deg); } }
 .src-name { flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .src-when { flex: 0 0 auto; font-family: var(--font-mono); font-size: 10px; color: var(--nxb-text-disabled); white-space: nowrap; }
 

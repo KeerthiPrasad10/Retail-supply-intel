@@ -5,6 +5,7 @@ import type { Go, Model, View } from "@/lib/types";
 import { SUPPLIERS } from "@/lib/suppliers";
 import { Icons } from "./icons";
 import { ModelProvider } from "./model-context";
+import { RefreshButton } from "./refresh-button";
 import { Sidebar } from "./sidebar";
 import { SourceFooter } from "./source-footer";
 import { Topbar } from "./topbar";
@@ -89,6 +90,7 @@ export function Dashboard({ model }: { model: Model }) {
         <Sidebar view={view} go={go} shortlistCount={shortlist.size} />
         <main className="page">
           <Topbar crumbs={crumbs[view]} dark={dark} onToggleDark={() => setDark((d) => !d)}>
+            <RefreshButton notify={flash} />
             <button className="btn secondary sm" onClick={() => go("map")}>
               <Icons.globe size={14} />
               Map
