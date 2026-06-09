@@ -70,21 +70,42 @@ class GoogleTrendsConnector:
     def _run_apify(self, session: Session, token: str, timeframe: str) -> int:
         from .apify_base import apify_client, parse_dt, run_actor_items, write_daily
 
+        # One keyword per category; batch them so the (slow) actor runs a few
+        # times with many searchTerms each, not once per category (which took
+        # ~25 min for 11 categories and never finished).
+        cats = list(session.scalars(select(ProductCategory)))
+        by_keyword: dict[str, ProductCategory] = {}
+        terms: list[str] = []
+        for cat in cats:
+            kw = (cat.keywords or [cat.name])[0]
+            if kw.lower() in by_keyword:
+                continue
+            by_keyword[kw.lower()] = cat
+            terms.append(kw)
+        if not terms:
+            return 0
+
         written = 0
+        batch_size = 5
         with apify_client() as client:
-            for cat in session.scalars(select(ProductCategory)):
-                keyword = (cat.keywords or [cat.name])[0]
+            for start in range(0, len(terms), batch_size):
+                batch = terms[start : start + batch_size]
                 items = run_actor_items(
                     client,
                     _APIFY_ACTOR,
                     token,
-                    {"searchTerms": [keyword], "timeRange": timeframe, "geo": ""},
+                    {"searchTerms": batch, "timeRange": timeframe, "geo": ""},
                 )
-                points = _interest_points(items, parse_dt)
-                if not points:
-                    continue
-                trend = get_or_create_trend(session, f"{keyword} (trends)", self.name, cat.id)
-                written += write_daily(session, trend.id, self.name, None, points)
+                for it in items:
+                    term = it.get("searchTerm") or ""
+                    cat = by_keyword.get(term.lower())
+                    if cat is None:
+                        continue
+                    points = _interest_points([it], parse_dt)
+                    if not points:
+                        continue
+                    trend = get_or_create_trend(session, f"{term} (trends)", self.name, cat.id)
+                    written += write_daily(session, trend.id, self.name, None, points)
         return written
 
     # --- pytrends backend (local / no token) ------------------------------ #
