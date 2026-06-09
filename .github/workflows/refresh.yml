@@ -35,11 +35,16 @@ jobs:
         working-directory: pipelines
         run: uv sync --extra postgres --extra llm
 
-      - name: Run pipeline (free sources -> insights)
+      - name: Run pipeline (free sources -> insights -> publish)
         working-directory: pipelines
+        # `db init` is idempotent (create_all) and ensures the schema — incl.
+        # source_status — exists on the target store. `export` publishes the
+        # snapshot row to Supabase when RSI_DATABASE_URL is set. For reliable
+        # Google Trends and the social/marketplace feeds, set RSI_APIFY_TOKEN
+        # and add the opt-in connectors here (e.g. `rsi ingest tiktok amazon`).
         run: |
           uv run rsi db init
-          uv run rsi ingest wikipedia comtrade --days 60
+          uv run rsi ingest wikipedia google_trends comtrade --days 60
           uv run rsi score
           uv run rsi correlate
           uv run rsi insights
