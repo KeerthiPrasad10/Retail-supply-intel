@@ -136,7 +136,7 @@ function buildPrompt(docType: string | undefined): string {
   const list = fields.map((f) => `- ${f.key}: ${f.label}`).join("\n");
   const intro = known
     ? `This is a supplier "${docType}" document for retail onboarding (Lidl Kaufland Asia). Extract only the fields below that the document actually contains.`
-    : `This is an unstructured supplier document — most likely a company profile, capability statement, price list, or internal note (it may have been prepared for a different buyer; map the data regardless of layout). Extract whichever of the fields below it states or clearly implies, then classify it (one of: ${KNOWN_TYPES}, or "unknown"). This is open reasoning, so be conservative with confidence and never invent a value.`;
+    : `This is an unstructured supplier document — most likely a company profile, capability statement, price list, or internal note (it may have been prepared for a different buyer; map the data regardless of layout). Extract EVERY field below that the document states or clearly implies — be thorough, not minimal. A capability statement typically gives the website, primary contact (name/email/phone), total turnover and its regional split, annual/monthly capacity, number of production lines and workers, lead time, MOQ, key customers, and product categories; a price list gives per-product MOQ, capacity, FOB price, currency, and payment term. Then classify it (one of: ${KNOWN_TYPES}, or "unknown"). Never invent a value, but do extract anything actually present.`;
   return [
     intro,
     "",
@@ -192,19 +192,35 @@ function xlsxToText(buf: Buffer): string {
 
 const SHEET_TYPE = /spreadsheetml|ms-excel|excel/i;
 const TEXT_TYPE = /^text\/|csv|tab-separated|markdown|json|xml/i;
+const IMG_EXT: Record<string, string> = {
+  png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", webp: "image/webp", gif: "image/gif",
+};
 
-function contentBlock(mediaType: string, dataBase64: string) {
-  if (mediaType === "application/pdf") {
-    return { type: "document", source: { type: "base64", media_type: mediaType, data: dataBase64 } };
+// Classify by MIME first, then fall back to the filename extension — browsers often
+// hand us an empty or octet-stream type for .xlsx / .csv, which would otherwise 415.
+function classify(mediaType: string, ext: string): "pdf" | "image" | "sheet" | "text" | null {
+  if (mediaType === "application/pdf" || ext === "pdf") return "pdf";
+  if (mediaType.startsWith("image/") || ext in IMG_EXT) return "image";
+  if (SHEET_TYPE.test(mediaType) || /^(xlsx|xlsm|xls)$/.test(ext)) return "sheet";
+  if (TEXT_TYPE.test(mediaType) || /^(csv|tsv|txt|md|markdown|json|xml)$/.test(ext)) return "text";
+  return null;
+}
+
+function contentBlock(mediaType: string, dataBase64: string, filename: string) {
+  const ext = (filename.split(".").pop() || "").toLowerCase();
+  const kind = classify(mediaType, ext);
+  if (kind === "pdf") {
+    return { type: "document", source: { type: "base64", media_type: "application/pdf", data: dataBase64 } };
   }
-  if (mediaType.startsWith("image/")) {
-    return { type: "image", source: { type: "base64", media_type: mediaType, data: dataBase64 } };
+  if (kind === "image") {
+    const mt = mediaType.startsWith("image/") ? mediaType : IMG_EXT[ext] || "image/png";
+    return { type: "image", source: { type: "base64", media_type: mt, data: dataBase64 } };
   }
-  if (SHEET_TYPE.test(mediaType)) {
+  if (kind === "sheet") {
     const text = xlsxToText(Buffer.from(dataBase64, "base64"));
     return text ? { type: "text", text: "[Spreadsheet contents, tab/space separated]\n" + text } : null;
   }
-  if (TEXT_TYPE.test(mediaType)) {
+  if (kind === "text") {
     return { type: "text", text: Buffer.from(dataBase64, "base64").toString("utf8").slice(0, 16000) };
   }
   return null;
@@ -241,14 +257,14 @@ export async function POST(req: Request) {
   }
 
   const { mediaType, dataBase64, docType } = body;
-  if (!mediaType || !dataBase64) {
-    return NextResponse.json({ ok: false, error: "Missing mediaType or dataBase64." }, { status: 400 });
+  if (!dataBase64) {
+    return NextResponse.json({ ok: false, error: "Missing file data." }, { status: 400 });
   }
 
-  const block = contentBlock(mediaType, dataBase64);
+  const block = contentBlock(mediaType || "", dataBase64, body.filename || "");
   if (!block) {
     return NextResponse.json(
-      { ok: false, error: `Unsupported type ${mediaType}. Upload a PDF, image, spreadsheet (XLSX), or text/CSV.` },
+      { ok: false, error: `Unsupported type ${mediaType || "(none)"} / ${body.filename || "?"}. Upload a PDF, image, spreadsheet (XLSX), or text/CSV.` },
       { status: 415 },
     );
   }
