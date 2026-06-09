@@ -9,20 +9,23 @@ import { NextResponse } from "next/server";
  *
  * Configure on Vercel (Project → Settings → Environment Variables):
  *   GITHUB_DISPATCH_TOKEN  fine-grained PAT with Actions: Read and write on the repo
- *   GITHUB_REPO            e.g. "KeerthiPrasad10/Retail-supply-intel"
- *   GITHUB_REF             optional, default "main"
+ *                          (the only required value — only you can mint it)
+ *   GITHUB_REPO            optional override; defaults to this repo
+ *   GITHUB_REF             optional; defaults to "main"
  */
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+const DEFAULT_REPO = "KeerthiPrasad10/Retail-supply-intel";
+
 export async function POST() {
   const token = process.env.GITHUB_DISPATCH_TOKEN;
-  const repo = process.env.GITHUB_REPO;
+  const repo = process.env.GITHUB_REPO || DEFAULT_REPO;
   const ref = process.env.GITHUB_REF || "main";
 
-  if (!token || !repo) {
+  if (!token) {
     return NextResponse.json(
-      { ok: false, error: "Refresh isn’t configured (set GITHUB_DISPATCH_TOKEN + GITHUB_REPO)." },
+      { ok: false, error: "Refresh isn’t configured (set GITHUB_DISPATCH_TOKEN)." },
       { status: 501 },
     );
   }
