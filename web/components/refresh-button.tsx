@@ -16,7 +16,7 @@ export function RefreshButton({ notify }: { notify: (msg: string) => void }) {
       const res = await fetch("/api/refresh", { method: "POST" });
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
       if (res.ok && data.ok) {
-        notify("Refreshing signals — new data in a few minutes");
+        notify("Refresh started — pulling the latest signals");
       } else if (res.status === 501) {
         notify("Refresh isn’t configured yet");
       } else {

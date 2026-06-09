@@ -1,17 +1,19 @@
 import { NextResponse } from "next/server";
 
 /**
- * Triggers an on-demand data refresh from inside the dashboard, so a buyer
- * never has to touch GitHub. This server route dispatches the `refresh.yml`
- * pipeline workflow; the GitHub token lives only in server env (never shipped
- * to the browser). The free Wikipedia refresh runs by default — the paid Apify
- * feeds stay an explicit ops action and are not exposed here.
+ * Triggers an on-demand, full data refresh from inside the dashboard, so a
+ * user never has to touch GitHub. This server route dispatches the
+ * `refresh.yml` pipeline workflow with every source on (including the Apify
+ * social/marketplace feeds); the GitHub token lives only in server env (never
+ * shipped to the browser).
  *
  * Configure on Vercel (Project → Settings → Environment Variables):
  *   GITHUB_DISPATCH_TOKEN  fine-grained PAT with Actions: Read and write on the repo
  *                          (the only required value — only you can mint it)
  *   GITHUB_REPO            optional override; defaults to this repo
  *   GITHUB_REF             optional; defaults to "main"
+ * (The Apify feeds themselves additionally need RSI_APIFY_TOKEN as a GitHub
+ *  Actions secret; without it those connectors simply no-op.)
  */
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -40,8 +42,8 @@ export async function POST() {
           Accept: "application/vnd.github+json",
           "X-GitHub-Api-Version": "2022-11-28",
         },
-        // Free Wikipedia refresh + recompute + publish. (apify omitted on purpose.)
-        body: JSON.stringify({ ref }),
+        // Full refresh: every source incl. the Apify social/marketplace feeds.
+        body: JSON.stringify({ ref, inputs: { apify: "true" } }),
       },
     );
 
