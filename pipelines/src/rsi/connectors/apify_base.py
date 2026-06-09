@@ -143,5 +143,7 @@ def write_daily(
             )
         )
         n += 1
-    session.flush()
+    # Commit (not just flush) so each category/term is durably saved as it's
+    # written — a stop mid-connector keeps everything collected up to that point.
+    session.commit()
     return n
