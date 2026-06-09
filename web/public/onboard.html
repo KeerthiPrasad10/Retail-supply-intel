@@ -630,7 +630,7 @@ function renderPortal(){
   // LEFT pane: dropzone + recommended documents
   const left='<div class="lpane">'
     +'<div class="dropzone" id="dz"><svg class="svgic dzic" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>'
-    +'<div class="big">Drag your documents here</div><div class="sm">or click to browse · PDF, JPG, PNG · drop several at once</div>'
+    +'<div class="big">Drag your documents here</div><div class="sm">or click to browse · PDF, image, XLSX, CSV — even a company profile · drop several at once</div>'
     +(LIVE_EXTRACT?'<div class="sm" style="color:var(--green);margin-top:6px">● Live AI parsing on</div>':'<div class="sm" style="margin-top:6px">○ Demo mode · drop a real PDF/image to parse it for real once a key is set</div>')
     +'</div>'
     +'<input type="file" id="fileinput" multiple style="display:none">'
@@ -742,8 +742,18 @@ async function callExtract(file,docType){
   catch(e){return {err:'Network error calling /api/extract'};}
   let j=null;try{j=await resp.json();}catch(e){}
   if(!resp.ok){console.warn('extract failed',resp.status,j);return {err:(j&&j.error)||('HTTP '+resp.status),status:resp.status};}
-  if(j&&j.ok&&Array.isArray(j.fields))return {fields:j.fields,docType:j.docType};
+  if(j&&j.ok&&Array.isArray(j.fields))return {fields:j.fields,docType:j.docType,products:Array.isArray(j.products)?j.products:[]};
   return {err:'Unexpected response from /api/extract',status:resp.status};
+}
+// merge extracted product rows into the form's repeater; the form expands to fit. dedupes by name.
+function mergeProducts(rows){
+  if(!Array.isArray(rows)||!rows.length)return 0;
+  cur.products=cur.products||[];
+  const have=new Set(cur.products.map(p=>String(p.name||'').toLowerCase().trim()).filter(Boolean));
+  let n=0;
+  rows.forEach(r=>{const name=String(r.name||'').trim();if(!name||have.has(name.toLowerCase()))return;
+    cur.products.push({name,cat:String(r.cat||''),vol:String(r.vol||''),fob:String(r.fob||'')});have.add(name.toLowerCase());n++;});
+  return n;
 }
 function applyExtracted(fields,docKey,srcNm){
   const docNm=(DOCS.find(d=>d.key===docKey)||{}).nm||srcNm||'document';let n=0;const just=[];
@@ -757,7 +767,7 @@ function applyExtracted(fields,docKey,srcNm){
 async function extractDoc(key,file){
   const res=await callExtract(file,key);
   const docNm=(DOCS.find(d=>d.key===key)||{}).nm||'document';
-  if(res.fields&&res.fields.length)return {label:docNm,n:applyExtracted(res.fields,key,file.name),mode:'live'};
+  if(res.fields&&res.fields.length)return {label:docNm,n:applyExtracted(res.fields,key,file.name),prods:mergeProducts(res.products),mode:'live'};
   if(res.fields)return {label:docNm,n:runExtract(key,true),mode:'sample',note:'no fields detected'};
   return {label:docNm,n:runExtract(key,true),mode:'sample',err:res.err||'unknown'}; // fallback keeps the demo alive
 }
@@ -770,9 +780,10 @@ async function extractUnknown(file){
   const just=[];res.fields.forEach(fd=>{const k=fd.fieldKey,f=FBYK[k];if(!f)return;
     if(cur.D[k]==null||cur.D[k]===''){cur.D[k]=fd.value;
       cur.meta[k]={conf:Math.min(typeof fd.confidence==='number'?fd.confidence:0.6,0.78),srcNm:file.name,doc:'reasoned',reasoned:true,status:'review'};just.push(k);}});
-  if(!just.length)return null;
+  const prods=mergeProducts(res.products);
+  if(!just.length&&!prods)return null;
   cur._just=just;cur.reasonedDocs=cur.reasonedDocs||[];cur.reasonedDocs.push({name:file.name,keys:just});
-  return {ok:true,n:just.length,reasoned:true};
+  return {ok:true,n:just.length,prods,reasoned:true};
 }
 // ---- bulk upload: drop many, parse strictly one at a time, narrate a live queue ----
 function uqStat(s){
@@ -804,11 +815,11 @@ async function handleFiles(files){
       else{cur.docs[key]=f.name;const r=await extractDoc(key,f);acted++;filled+=r.n||0;
         if(r.err){q.status='sample';q.msg=LIVE_EXTRACT?('Live parse failed: '+r.err+' · sample data'):('Demo mode · '+r.label+' · '+r.n+' field'+(r.n!==1?'s':''));}
         else if(r.mode==='sample'){q.status='sample';q.msg=(r.note||'sample')+' · '+r.n+' field'+(r.n!==1?'s':'');}
-        else{q.status='done';q.msg=r.label+' · '+r.n+' field'+(r.n!==1?'s':'')+' read';}}
+        else{q.status='done';q.msg=r.label+' · '+r.n+' field'+(r.n!==1?'s':'')+' read'+(r.prods?(' · '+r.prods+' product'+(r.prods!==1?'s':'')):'');}}
     }else{
       const r=await extractUnknown(f);
       if(r&&r.err){q.status='fail';q.msg='Live parse failed: '+r.err;}
-      else if(r&&r.ok){acted++;filled+=r.n||0;q.status='done';q.msg='Reasoned · '+r.n+' field'+(r.n!==1?'s':'')+' filled';}
+      else if(r&&r.ok){acted++;filled+=r.n||0;q.status='done';q.msg='Reasoned · '+r.n+' field'+(r.n!==1?'s':'')+' filled'+(r.prods?(' · '+r.prods+' product'+(r.prods!==1?'s':'')):'');}
       else{const n=reasonFile(f.name,true);acted++;filled+=n;
         if(n){q.status='done';q.msg='Reasoned · '+n+' field'+(n!==1?'s':'')+' filled';}
         else{q.status='skip';q.msg='Nothing new found';}}
