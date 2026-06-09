@@ -1,3 +1,5 @@
+import { inflateRawSync } from "node:zlib";
+
 import { NextResponse } from "next/server";
 
 /**
@@ -77,9 +79,39 @@ const DOC_FIELDS: Record<string, { key: string; label: string }[]> = {
   ],
 };
 
-// Union of every doc field, used when the type is unknown (open reasoning).
+// Supplier- and commercial-side fields. No single certificate carries these — they
+// live on a company profile / capability statement / price list / internal note, so
+// the open-reasoning path must offer them too. Keys mirror the portal SCHEMA exactly.
+const SUPPLIER_FIELDS: { key: string; label: string }[] = [
+  { key: "vendor", label: "Vendor short name / brand" },
+  { key: "type", label: "Supplier type (one of: Manufacturer, Trader, Agent)" },
+  { key: "website", label: "Website URL" },
+  { key: "licNotes", label: "Licence notes / business-scope summary" },
+  { key: "contactName", label: "Primary contact person" },
+  { key: "contactEmail", label: "Contact email" },
+  { key: "contactPhone", label: "Contact phone" },
+  { key: "payTerm", label: "Payment term (e.g. T/T 60 days)" },
+  { key: "annualVolume", label: "Annual production volume (units)" },
+  { key: "keyCustomers", label: "Key customers / existing buyers" },
+  { key: "turnover", label: "Total annual turnover (USD, number only)" },
+  { key: "turnEU", label: "Europe share of turnover (percent, number only)" },
+  { key: "turnUS", label: "US share of turnover (percent, number only)" },
+  { key: "turnAsia", label: "Asia share of turnover (percent, number only)" },
+  { key: "turnME", label: "Middle East share of turnover (percent, number only)" },
+  { key: "turnAfr", label: "Africa share of turnover (percent, number only)" },
+  { key: "annualCapacity", label: "Annual production capacity (units)" },
+  { key: "freeCapacity", label: "Spare capacity available to the buyer" },
+  { key: "utilisation", label: "Current capacity utilisation (percent, number only)" },
+  { key: "prodLines", label: "Number of production lines" },
+  { key: "workers", label: "Number of workers / employees" },
+  { key: "leadTime", label: "Production lead time in days (number only)" },
+  { key: "moq", label: "Minimum order quantity (units)" },
+];
+
+// Vocabulary for the open-reasoning path (unknown type / profile / price list / note):
+// every doc field plus the supplier fields, de-duplicated by key.
 const ALL_FIELDS = Array.from(
-  new Map(Object.values(DOC_FIELDS).flat().map((f) => [f.key, f])).values(),
+  new Map([...Object.values(DOC_FIELDS).flat(), ...SUPPLIER_FIELDS].map((f) => [f.key, f])).values(),
 );
 
 const KNOWN_TYPES = Object.keys(DOC_FIELDS).join(", ");
@@ -104,7 +136,7 @@ function buildPrompt(docType: string | undefined): string {
   const list = fields.map((f) => `- ${f.key}: ${f.label}`).join("\n");
   const intro = known
     ? `This is a supplier "${docType}" document for retail onboarding (Lidl Kaufland Asia). Extract only the fields below that the document actually contains.`
-    : `Classify this supplier document (one of: ${KNOWN_TYPES}) then extract whichever of the fields below it contains. This is open reasoning — be conservative with confidence.`;
+    : `This is an unstructured supplier document — most likely a company profile, capability statement, price list, or internal note (it may have been prepared for a different buyer; map the data regardless of layout). Extract whichever of the fields below it states or clearly implies, then classify it (one of: ${KNOWN_TYPES}, or "unknown"). This is open reasoning, so be conservative with confidence and never invent a value.`;
   return [
     intro,
     "",
@@ -114,11 +146,51 @@ function buildPrompt(docType: string | undefined): string {
     "Rules:",
     "- OCR the document, then translate values to English. Keep the original-language string in `original` and set `lang` (ISO-639-1) and `translated` accordingly.",
     "- Dates as YYYY-MM-DD. Currencies as ISO 4217. Omit any field the document does not contain — do not guess.",
+    "- Numbers (turnover, capacity, volume, workers, lead time, percentages) as plain digits — no units, currency symbols, or thousands separators; percentages as the number only.",
     "- `confidence` is 0..1: how sure you are the value is correct AND read from this document. Lower it for blurry scans, partial matches, or inferred values.",
     "",
     'Respond with ONLY a JSON object, no prose: {"docType": "<one of the known types or \\"unknown\\">", "fields": [{"fieldKey": "...", "value": "...", "confidence": 0.0, "lang": "..", "translated": false, "original": "..."}]}',
   ].join("\n");
 }
+
+// Pull readable text out of an .xlsx (a zip of XML) with no external deps: walk the
+// central directory, inflate the shared-strings + worksheet parts, strip the tags.
+// Returns "" on any malformed input so the caller can degrade gracefully.
+function xlsxToText(buf: Buffer): string {
+  try {
+    let eocd = -1;
+    for (let i = buf.length - 22; i >= 0 && i > buf.length - 22 - 65536; i--) {
+      if (buf.readUInt32LE(i) === 0x06054b50) { eocd = i; break; }
+    }
+    if (eocd < 0) return "";
+    const count = buf.readUInt16LE(eocd + 10);
+    let off = buf.readUInt32LE(eocd + 16);
+    const parts: string[] = [];
+    for (let n = 0; n < count && off + 46 <= buf.length; n++) {
+      if (buf.readUInt32LE(off) !== 0x02014b50) break;
+      const method = buf.readUInt16LE(off + 10);
+      const compSize = buf.readUInt32LE(off + 20);
+      const nameLen = buf.readUInt16LE(off + 28);
+      const extraLen = buf.readUInt16LE(off + 30);
+      const commentLen = buf.readUInt16LE(off + 32);
+      const lho = buf.readUInt32LE(off + 42);
+      const name = buf.toString("utf8", off + 46, off + 46 + nameLen);
+      off += 46 + nameLen + extraLen + commentLen;
+      if (!/(sharedStrings\.xml|sheet\d*\.xml)$/i.test(name)) continue;
+      if (buf.readUInt32LE(lho) !== 0x04034b50) continue;
+      const dataStart = lho + 30 + buf.readUInt16LE(lho + 26) + buf.readUInt16LE(lho + 28);
+      const comp = buf.subarray(dataStart, dataStart + compSize);
+      const xml = method === 0 ? comp.toString("utf8") : inflateRawSync(comp).toString("utf8");
+      parts.push(xml);
+    }
+    return parts.join("\n").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 12000);
+  } catch {
+    return "";
+  }
+}
+
+const SHEET_TYPE = /spreadsheetml|ms-excel|excel/i;
+const TEXT_TYPE = /^text\/|csv|tab-separated|markdown|json|xml/i;
 
 function contentBlock(mediaType: string, dataBase64: string) {
   if (mediaType === "application/pdf") {
@@ -126,6 +198,13 @@ function contentBlock(mediaType: string, dataBase64: string) {
   }
   if (mediaType.startsWith("image/")) {
     return { type: "image", source: { type: "base64", media_type: mediaType, data: dataBase64 } };
+  }
+  if (SHEET_TYPE.test(mediaType)) {
+    const text = xlsxToText(Buffer.from(dataBase64, "base64"));
+    return text ? { type: "text", text: "[Spreadsheet contents, tab/space separated]\n" + text } : null;
+  }
+  if (TEXT_TYPE.test(mediaType)) {
+    return { type: "text", text: Buffer.from(dataBase64, "base64").toString("utf8").slice(0, 16000) };
   }
   return null;
 }
@@ -168,7 +247,7 @@ export async function POST(req: Request) {
   const block = contentBlock(mediaType, dataBase64);
   if (!block) {
     return NextResponse.json(
-      { ok: false, error: `Unsupported type ${mediaType}. Upload a PDF or image.` },
+      { ok: false, error: `Unsupported type ${mediaType}. Upload a PDF, image, spreadsheet (XLSX), or text/CSV.` },
       { status: 415 },
     );
   }
@@ -183,7 +262,7 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         model: MODEL,
-        max_tokens: 1500,
+        max_tokens: 3000,
         system:
           "You are NxB Parse, an extraction engine for supplier onboarding documents. " +
           "You read scanned/photographed certificates and licences in any language, translate to English, " +
