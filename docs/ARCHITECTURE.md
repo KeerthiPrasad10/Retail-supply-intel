@@ -4,7 +4,7 @@ Retail Supply Intel connects **two signal worlds** and finds the bridges between
 them:
 
 - **Demand signals** — what consumers are *about* to want, from social/search
-  momentum (currently Google Trends + Wikipedia pageviews; TikTok / Instagram /
+  momentum (currently Google Trends; TikTok / Instagram /
   Pinterest are Phase-2 connectors).
 - **Supply signals** — where goods actually come from, from international trade
   flows (UN Comtrade) and, later, per-company bill-of-lading data.
@@ -18,8 +18,8 @@ ranked, explainable **triggers**.
  DEMAND                                            SUPPLY
  ─────────────────────────────                     ──────────────────────────
  google_trends ┐                                   comtrade ┐
- wikipedia     ├─► trend_observations               (HS4)   ├─► trade_flows
- (tiktok…)     ┘          │                                  ┘        │
+ (tiktok,      ├─► trend_observations               (HS4)   ├─► trade_flows
+  instagram…)  ┘          │                                  ┘        │
                           ▼                                           │
                     trend_scores  ── momentum, growth ──┐             │
                                                          ▼             ▼
@@ -93,7 +93,7 @@ behind `NEXT_PUBLIC_SUPABASE_URL` — no component changes.
 - **Social APIs are restricted.** TikTok has a Research API + Creative Center
   trends; Instagram's Graph API only covers owned accounts; Pinterest has a
   Trends tool. Broad scraping violates ToS. The MVP therefore uses **Google
-  Trends + Wikipedia pageviews** as robust, free demand proxies.
+  Trends** plus social/marketplace feeds as demand proxies.
 - **EU customs data is largely not public** per-shipment (unlike US bills of
   lading). UN Comtrade gives *aggregate* country→country flows by HS code for
   free — enough to rank origin countries and spot emerging ones, but **not**

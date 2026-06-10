@@ -9,7 +9,7 @@ export function SourceFooter() {
     <footer className="sources">
       <span className="src-h">Sources</span>
       <span className="src-i">
-        <b>Demand</b> Wikipedia pageviews + Google Trends
+        <b>Demand</b> Google Trends + TikTok / Instagram / Pinterest
       </span>
       <span className="src-i">
         <b>Supply</b> UN Comtrade · HS-4 import/export flows

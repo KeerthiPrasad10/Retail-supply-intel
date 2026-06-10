@@ -1,7 +1,7 @@
 """Procurement insight orchestrator.
 
 Fuses every signal for a product category — multi-platform demand momentum
-(Wikipedia, Google Trends, TikTok, Instagram, Pinterest), marketplace + supply
+(Google Trends, TikTok, Instagram, Pinterest), marketplace + supply
 activity (Amazon, AliExpress), trade origins/emerging (Comtrade) and competitor
 moves — into a ranked, explainable recommendation telling Lidl's buyers **what
 to procure and from which origin**. Claude writes the buyer-facing narrative
@@ -28,7 +28,7 @@ from ..models import (
 )
 from . import llm
 
-DEMAND_PLATFORMS = {"wikipedia", "google_trends", "tiktok", "instagram", "pinterest"}
+DEMAND_PLATFORMS = {"google_trends", "tiktok", "instagram", "pinterest"}
 SUPPLY_PLATFORMS = {"amazon", "aliexpress"}
 STRONG_MOMENTUM = 1.0
 ACCELERATING = 0.1

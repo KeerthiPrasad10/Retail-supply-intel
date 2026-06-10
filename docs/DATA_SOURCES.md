@@ -1,7 +1,7 @@
 # Trend & demand data sources
 
-Candidate APIs to expand the **demand** side of the pipeline (today: Wikipedia
-pageviews + Google Trends via `pytrends`). Each would become a connector under
+Candidate APIs to expand the **demand** side of the pipeline (today: Google Trends via
+`pytrends` plus the opt-in social/marketplace feeds). Each would become a connector under
 `pipelines/src/rsi/connectors/` and must degrade gracefully like the existing
 ones. Ordered roughly by fit for a retail private-label sourcing product.
 

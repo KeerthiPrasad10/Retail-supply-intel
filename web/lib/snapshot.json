@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-10T05:26:12.276130+00:00",
+  "generated_at": "2026-06-10T05:55:09.503856+00:00",
   "countries": [
     {
       "code": "AT",
@@ -377,19 +377,6 @@
       "rank": 1
     },
     {
-      "term": "Coffee (fr)",
-      "platform": "wikipedia",
-      "category_id": 3,
-      "category": "Coffee",
-      "country_code": "FR",
-      "country": "France",
-      "momentum": 11.9842,
-      "growth": 4.8462,
-      "volume": 10.86,
-      "acceleration": 5.1619,
-      "rank": 2
-    },
-    {
       "term": "stanley cup (PL)",
       "platform": "google_trends",
       "category_id": 8,
@@ -465,7 +452,7 @@
       "growth": 0.3288,
       "volume": 48.79,
       "acceleration": 0.4635,
-      "rank": 3
+      "rank": 2
     },
     {
       "term": "stanley cup (GB)",
@@ -479,110 +466,6 @@
       "volume": 80.07,
       "acceleration": 0.3193,
       "rank": 1
-    },
-    {
-      "term": "Drinkware & Tumblers (en)",
-      "platform": "wikipedia",
-      "category_id": 8,
-      "category": "Drinkware & Tumblers",
-      "country_code": null,
-      "country": "Global",
-      "momentum": 1.0561,
-      "growth": 0.1859,
-      "volume": 292.57,
-      "acceleration": 0.3038,
-      "rank": 1
-    },
-    {
-      "term": "Knitwear & Apparel (nl)",
-      "platform": "wikipedia",
-      "category_id": 5,
-      "category": "Knitwear & Apparel",
-      "country_code": "NL",
-      "country": "Netherlands",
-      "momentum": 0.5932,
-      "growth": 0.2917,
-      "volume": 6.64,
-      "acceleration": 0.8417,
-      "rank": 2
-    },
-    {
-      "term": "Tea & Matcha (nl)",
-      "platform": "wikipedia",
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "country_code": "NL",
-      "country": "Netherlands",
-      "momentum": 0.5838,
-      "growth": 0.1028,
-      "volume": 292.0,
-      "acceleration": 0.1218,
-      "rank": 3
-    },
-    {
-      "term": "Coffee (en)",
-      "platform": "wikipedia",
-      "category_id": 3,
-      "category": "Coffee",
-      "country_code": null,
-      "country": "Global",
-      "momentum": 0.5348,
-      "growth": 0.0673,
-      "volume": 2820.29,
-      "acceleration": 0.1252,
-      "rank": 2
-    },
-    {
-      "term": "Coffee (pl)",
-      "platform": "wikipedia",
-      "category_id": 3,
-      "category": "Coffee",
-      "country_code": "PL",
-      "country": "Poland",
-      "momentum": 0.2913,
-      "growth": 0.2941,
-      "volume": 1.69,
-      "acceleration": 0.3333,
-      "rank": 3
-    },
-    {
-      "term": "Footwear (de)",
-      "platform": "wikipedia",
-      "category_id": 4,
-      "category": "Footwear",
-      "country_code": "DE",
-      "country": "Germany",
-      "momentum": 0.2783,
-      "growth": 0.1778,
-      "volume": 3.79,
-      "acceleration": -0.0064,
-      "rank": 2
-    },
-    {
-      "term": "Footwear (nl)",
-      "platform": "wikipedia",
-      "category_id": 4,
-      "category": "Footwear",
-      "country_code": "NL",
-      "country": "Netherlands",
-      "momentum": 0.2691,
-      "growth": 0.2222,
-      "volume": 2.36,
-      "acceleration": 0.6597,
-      "rank": 4
-    },
-    {
-      "term": "Coffee (it)",
-      "platform": "wikipedia",
-      "category_id": 3,
-      "category": "Coffee",
-      "country_code": "IT",
-      "country": "Italy",
-      "momentum": 0.2628,
-      "growth": 0.2632,
-      "volume": 1.71,
-      "acceleration": 0.4551,
-      "rank": 2
     },
     {
       "term": "matcha (GB)",
@@ -608,7 +491,7 @@
       "growth": 0.0561,
       "volume": 73.93,
       "acceleration": 0.1842,
-      "rank": 3
+      "rank": 2
     },
     {
       "term": "plush (GB)",
@@ -634,46 +517,7 @@
       "growth": 0.0495,
       "volume": 43.93,
       "acceleration": -0.5472,
-      "rank": 5
-    },
-    {
-      "term": "Footwear (en)",
-      "platform": "wikipedia",
-      "category_id": 4,
-      "category": "Footwear",
-      "country_code": null,
-      "country": "Global",
-      "momentum": 0.1763,
-      "growth": 0.0289,
-      "volume": 442.0,
-      "acceleration": 0.0506,
-      "rank": 3
-    },
-    {
-      "term": "Audio & Earbuds (en)",
-      "platform": "wikipedia",
-      "category_id": 10,
-      "category": "Audio & Earbuds",
-      "country_code": null,
-      "country": "Global",
-      "momentum": 0.1552,
-      "growth": 0.025,
-      "volume": 501.64,
-      "acceleration": 0.0637,
-      "rank": 4
-    },
-    {
-      "term": "Candles & Home Fragrance (en)",
-      "platform": "wikipedia",
-      "category_id": 9,
-      "category": "Candles & Home Fragrance",
-      "country_code": null,
-      "country": "Global",
-      "momentum": 0.1292,
-      "growth": 0.0214,
-      "volume": 423.57,
-      "acceleration": 0.0011,
-      "rank": 5
+      "rank": 2
     },
     {
       "term": "matcha (ES)",
@@ -689,136 +533,6 @@
       "rank": 3
     },
     {
-      "term": "Beauty & Cosmetics (en)",
-      "platform": "wikipedia",
-      "category_id": 1,
-      "category": "Beauty & Cosmetics",
-      "country_code": null,
-      "country": "Global",
-      "momentum": 0.0664,
-      "growth": 0.0102,
-      "volume": 672.64,
-      "acceleration": 0.0292,
-      "rank": 6
-    },
-    {
-      "term": "Tea & Matcha (en)",
-      "platform": "wikipedia",
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "country_code": null,
-      "country": "Global",
-      "momentum": 0.0155,
-      "growth": 0.002,
-      "volume": 2697.79,
-      "acceleration": 0.0977,
-      "rank": 7
-    },
-    {
-      "term": "Tea & Matcha (es)",
-      "platform": "wikipedia",
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "country_code": "ES",
-      "country": "Spain",
-      "momentum": 0.0,
-      "growth": 0.0,
-      "volume": 3.71,
-      "acceleration": 0.2,
-      "rank": 4
-    },
-    {
-      "term": "Knitwear & Apparel (de)",
-      "platform": "wikipedia",
-      "category_id": 5,
-      "category": "Knitwear & Apparel",
-      "country_code": "DE",
-      "country": "Germany",
-      "momentum": 0.0,
-      "growth": 0.0,
-      "volume": 1.71,
-      "acceleration": 0.5536,
-      "rank": 4
-    },
-    {
-      "term": "Knitwear & Apparel (it)",
-      "platform": "wikipedia",
-      "category_id": 5,
-      "category": "Knitwear & Apparel",
-      "country_code": "IT",
-      "country": "Italy",
-      "momentum": 0.0,
-      "growth": 0.0,
-      "volume": 1.0,
-      "acceleration": 0.0,
-      "rank": 3
-    },
-    {
-      "term": "Candles & Home Fragrance (es)",
-      "platform": "wikipedia",
-      "category_id": 9,
-      "category": "Candles & Home Fragrance",
-      "country_code": "ES",
-      "country": "Spain",
-      "momentum": 0.0,
-      "growth": 0.0,
-      "volume": 1.0,
-      "acceleration": 0.0,
-      "rank": 5
-    },
-    {
-      "term": "Pet Care (it)",
-      "platform": "wikipedia",
-      "category_id": 11,
-      "category": "Pet Care",
-      "country_code": "IT",
-      "country": "Italy",
-      "momentum": 0.0,
-      "growth": 0.0,
-      "volume": 1.0,
-      "acceleration": 0.0,
-      "rank": 4
-    },
-    {
-      "term": "Candles & Home Fragrance (nl)",
-      "platform": "wikipedia",
-      "category_id": 9,
-      "category": "Candles & Home Fragrance",
-      "country_code": "NL",
-      "country": "Netherlands",
-      "momentum": -0.0423,
-      "growth": -0.0476,
-      "volume": 1.43,
-      "acceleration": -0.1381,
-      "rank": 6
-    },
-    {
-      "term": "Small Kitchen Appliances (en)",
-      "platform": "wikipedia",
-      "category_id": 7,
-      "category": "Small Kitchen Appliances",
-      "country_code": null,
-      "country": "Global",
-      "momentum": -0.0475,
-      "growth": -0.0099,
-      "volume": 121.86,
-      "acceleration": 0.0481,
-      "rank": 8
-    },
-    {
-      "term": "Candles & Home Fragrance (it)",
-      "platform": "wikipedia",
-      "category_id": 9,
-      "category": "Candles & Home Fragrance",
-      "country_code": "IT",
-      "country": "Italy",
-      "momentum": -0.0665,
-      "growth": -0.0833,
-      "volume": 1.22,
-      "acceleration": -0.1389,
-      "rank": 5
-    },
-    {
       "term": "coffee (GB)",
       "platform": "google_trends",
       "category_id": 3,
@@ -832,19 +546,6 @@
       "rank": 4
     },
     {
-      "term": "Pet Care (fr)",
-      "platform": "wikipedia",
-      "category_id": 11,
-      "category": "Pet Care",
-      "country_code": "FR",
-      "country": "France",
-      "momentum": -0.1386,
-      "growth": -0.2,
-      "volume": 1.0,
-      "acceleration": 0.0,
-      "rank": 4
-    },
-    {
       "term": "dog treats (IT)",
       "platform": "google_trends",
       "category_id": 11,
@@ -855,7 +556,7 @@
       "growth": -0.07,
       "volume": 6.64,
       "acceleration": -10.07,
-      "rank": 6
+      "rank": 2
     },
     {
       "term": "matcha (PL)",
@@ -868,20 +569,7 @@
       "growth": -0.0415,
       "volume": 61.0,
       "acceleration": 0.0116,
-      "rank": 4
-    },
-    {
-      "term": "Knitwear & Apparel (es)",
-      "platform": "wikipedia",
-      "category_id": 5,
-      "category": "Knitwear & Apparel",
-      "country_code": "ES",
-      "country": "Spain",
-      "momentum": -0.1797,
-      "growth": -0.2174,
-      "volume": 1.29,
-      "acceleration": 0.1603,
-      "rank": 6
+      "rank": 3
     },
     {
       "term": "makeup (GB)",
@@ -910,19 +598,6 @@
       "rank": 6
     },
     {
-      "term": "Footwear (es)",
-      "platform": "wikipedia",
-      "category_id": 4,
-      "category": "Footwear",
-      "country_code": "ES",
-      "country": "Spain",
-      "momentum": -0.215,
-      "growth": -0.2308,
-      "volume": 1.54,
-      "acceleration": -1.3949,
-      "rank": 7
-    },
-    {
       "term": "matcha (DE)",
       "platform": "google_trends",
       "category_id": 2,
@@ -933,20 +608,7 @@
       "growth": -0.0516,
       "volume": 69.64,
       "acceleration": -0.0315,
-      "rank": 5
-    },
-    {
-      "term": "Candles & Home Fragrance (fr)",
-      "platform": "wikipedia",
-      "category_id": 9,
-      "category": "Candles & Home Fragrance",
-      "country_code": "FR",
-      "country": "France",
-      "momentum": -0.2519,
-      "growth": -0.2667,
-      "volume": 1.57,
-      "acceleration": -0.3778,
-      "rank": 5
+      "rank": 3
     },
     {
       "term": "plush (DE)",
@@ -959,33 +621,7 @@
       "growth": -0.0676,
       "volume": 46.29,
       "acceleration": -0.0236,
-      "rank": 6
-    },
-    {
-      "term": "Small Kitchen Appliances (fr)",
-      "platform": "wikipedia",
-      "category_id": 7,
-      "category": "Small Kitchen Appliances",
-      "country_code": "FR",
-      "country": "France",
-      "momentum": -0.2742,
-      "growth": -0.2903,
-      "volume": 1.57,
-      "acceleration": -0.3711,
-      "rank": 6
-    },
-    {
-      "term": "Footwear (it)",
-      "platform": "wikipedia",
-      "category_id": 4,
-      "category": "Footwear",
-      "country_code": "IT",
-      "country": "Italy",
-      "momentum": -0.2963,
-      "growth": -0.2292,
-      "volume": 2.64,
-      "acceleration": -0.4599,
-      "rank": 7
+      "rank": 4
     },
     {
       "term": "dog treats (GB)",
@@ -1014,58 +650,6 @@
       "rank": 2
     },
     {
-      "term": "Coffee (de)",
-      "platform": "wikipedia",
-      "category_id": 3,
-      "category": "Coffee",
-      "country_code": "DE",
-      "country": "Germany",
-      "momentum": -0.3315,
-      "growth": -0.3158,
-      "volume": 1.86,
-      "acceleration": -0.1794,
-      "rank": 7
-    },
-    {
-      "term": "Tea & Matcha (fr)",
-      "platform": "wikipedia",
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "country_code": "FR",
-      "country": "France",
-      "momentum": -0.3526,
-      "growth": -0.0538,
-      "volume": 700.93,
-      "acceleration": -0.0487,
-      "rank": 7
-    },
-    {
-      "term": "Toys & Collectibles (en)",
-      "platform": "wikipedia",
-      "category_id": 6,
-      "category": "Toys & Collectibles",
-      "country_code": null,
-      "country": "Global",
-      "momentum": -0.3818,
-      "growth": -0.066,
-      "volume": 325.71,
-      "acceleration": -0.0457,
-      "rank": 9
-    },
-    {
-      "term": "Tea & Matcha (de)",
-      "platform": "wikipedia",
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "country_code": "DE",
-      "country": "Germany",
-      "momentum": -0.4459,
-      "growth": -0.0622,
-      "volume": 1291.43,
-      "acceleration": -0.183,
-      "rank": 8
-    },
-    {
       "term": "plush (PL)",
       "platform": "google_trends",
       "category_id": 6,
@@ -1076,7 +660,7 @@
       "growth": -0.1149,
       "volume": 55.57,
       "acceleration": -0.1104,
-      "rank": 5
+      "rank": 4
     },
     {
       "term": "matcha (IT)",
@@ -1089,7 +673,7 @@
       "growth": -0.1161,
       "volume": 56.0,
       "acceleration": -0.0898,
-      "rank": 8
+      "rank": 3
     },
     {
       "term": "matcha (NL)",
@@ -1102,20 +686,7 @@
       "growth": -0.1248,
       "volume": 64.14,
       "acceleration": -0.0384,
-      "rank": 7
-    },
-    {
-      "term": "Tea & Matcha (pl)",
-      "platform": "wikipedia",
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "country_code": "PL",
-      "country": "Poland",
-      "momentum": -0.5317,
-      "growth": -0.0991,
-      "volume": 213.0,
-      "acceleration": -0.1462,
-      "rank": 6
+      "rank": 3
     },
     {
       "term": "air fryer (US)",
@@ -1144,32 +715,6 @@
       "rank": 8
     },
     {
-      "term": "Footwear (fr)",
-      "platform": "wikipedia",
-      "category_id": 4,
-      "category": "Footwear",
-      "country_code": "FR",
-      "country": "France",
-      "momentum": -0.5825,
-      "growth": -0.1485,
-      "volume": 49.57,
-      "acceleration": -0.0441,
-      "rank": 8
-    },
-    {
-      "term": "Pet Care (en)",
-      "platform": "wikipedia",
-      "category_id": 11,
-      "category": "Pet Care",
-      "country_code": null,
-      "country": "Global",
-      "momentum": -0.5907,
-      "growth": -0.1272,
-      "volume": 102.93,
-      "acceleration": -0.1571,
-      "rank": 10
-    },
-    {
       "term": "sweater (GB)",
       "platform": "google_trends",
       "category_id": 5,
@@ -1193,7 +738,7 @@
       "growth": -0.1561,
       "volume": 50.57,
       "acceleration": -0.1633,
-      "rank": 9
+      "rank": 3
     },
     {
       "term": "#stanleycup",
@@ -1206,33 +751,7 @@
       "growth": -0.0468,
       "volume": 884536.82,
       "acceleration": -0.215,
-      "rank": 11
-    },
-    {
-      "term": "Knitwear & Apparel (en)",
-      "platform": "wikipedia",
-      "category_id": 5,
-      "category": "Knitwear & Apparel",
-      "country_code": null,
-      "country": "Global",
-      "momentum": -0.6414,
-      "growth": -0.1185,
-      "volume": 223.14,
-      "acceleration": 0.0036,
-      "rank": 12
-    },
-    {
-      "term": "Tea & Matcha (it)",
-      "platform": "wikipedia",
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "country_code": "IT",
-      "country": "Italy",
-      "momentum": -0.6452,
-      "growth": -0.1041,
-      "volume": 489.79,
-      "acceleration": -0.0692,
-      "rank": 9
+      "rank": 1
     },
     {
       "term": "matcha (FR)",
@@ -1245,7 +764,7 @@
       "growth": -0.1668,
       "volume": 66.0,
       "acceleration": -0.1805,
-      "rank": 10
+      "rank": 4
     },
     {
       "term": "sneakers (IT)",
@@ -1258,7 +777,7 @@
       "growth": -0.1758,
       "volume": 55.57,
       "acceleration": -0.0614,
-      "rank": 10
+      "rank": 4
     },
     {
       "term": "sneakers (GB)",
@@ -1284,7 +803,7 @@
       "growth": -0.1849,
       "volume": 54.79,
       "acceleration": -0.0888,
-      "rank": 7
+      "rank": 5
     },
     {
       "term": "makeup (IT)",
@@ -1297,7 +816,7 @@
       "growth": -0.1933,
       "volume": 46.5,
       "acceleration": -0.0667,
-      "rank": 11
+      "rank": 5
     },
     {
       "term": "plush (NL)",
@@ -1310,7 +829,7 @@
       "growth": -0.1938,
       "volume": 46.36,
       "acceleration": -0.1988,
-      "rank": 8
+      "rank": 4
     },
     {
       "term": "plush (ES)",
@@ -1323,7 +842,7 @@
       "growth": -0.2376,
       "volume": 27.5,
       "acceleration": -0.1098,
-      "rank": 8
+      "rank": 4
     },
     {
       "term": "sweater (DE)",
@@ -1336,7 +855,7 @@
       "growth": -0.2175,
       "volume": 42.14,
       "acceleration": -0.059,
-      "rank": 9
+      "rank": 5
     },
     {
       "term": "air fryer (ES)",
@@ -1349,7 +868,7 @@
       "growth": -0.2123,
       "volume": 49.29,
       "acceleration": -0.2393,
-      "rank": 9
+      "rank": 5
     },
     {
       "term": "plush (IT)",
@@ -1362,7 +881,7 @@
       "growth": -0.2549,
       "volume": 26.93,
       "acceleration": -0.114,
-      "rank": 12
+      "rank": 6
     },
     {
       "term": "coffee (NL)",
@@ -1375,7 +894,7 @@
       "growth": -0.2031,
       "volume": 65.29,
       "acceleration": -0.2701,
-      "rank": 9
+      "rank": 5
     },
     {
       "term": "sneakers (FR)",
@@ -1388,7 +907,7 @@
       "growth": -0.2227,
       "volume": 51.86,
       "acceleration": -0.1013,
-      "rank": 11
+      "rank": 5
     },
     {
       "term": "air fryer (DE)",
@@ -1401,7 +920,7 @@
       "growth": -0.2329,
       "volume": 44.93,
       "acceleration": -0.2579,
-      "rank": 10
+      "rank": 6
     },
     {
       "term": "air fryer (PL)",
@@ -1414,7 +933,7 @@
       "growth": -0.2899,
       "volume": 27.64,
       "acceleration": -0.4397,
-      "rank": 8
+      "rank": 6
     },
     {
       "term": "coffee (FR)",
@@ -1427,7 +946,7 @@
       "growth": -0.2585,
       "volume": 42.21,
       "acceleration": -0.1939,
-      "rank": 12
+      "rank": 6
     },
     {
       "term": "coffee (DE)",
@@ -1440,7 +959,7 @@
       "growth": -0.2446,
       "volume": 60.21,
       "acceleration": -0.2134,
-      "rank": 11
+      "rank": 7
     },
     {
       "term": "coffee (US)",
@@ -1466,7 +985,7 @@
       "growth": -0.318,
       "volume": 24.36,
       "acceleration": -0.316,
-      "rank": 13
+      "rank": 7
     },
     {
       "term": "air fryer (NL)",
@@ -1479,7 +998,7 @@
       "growth": -0.2778,
       "volume": 41.21,
       "acceleration": -0.2854,
-      "rank": 10
+      "rank": 6
     },
     {
       "term": "makeup (NL)",
@@ -1492,7 +1011,7 @@
       "growth": -0.2625,
       "volume": 52.57,
       "acceleration": -0.2258,
-      "rank": 11
+      "rank": 7
     },
     {
       "term": "coffee (PL)",
@@ -1505,7 +1024,7 @@
       "growth": -0.2774,
       "volume": 47.64,
       "acceleration": -0.2221,
-      "rank": 9
+      "rank": 7
     },
     {
       "term": "sneakers (ES)",
@@ -1518,7 +1037,7 @@
       "growth": -0.3156,
       "volume": 36.71,
       "acceleration": -0.089,
-      "rank": 10
+      "rank": 6
     },
     {
       "term": "sneakers (DE)",
@@ -1531,7 +1050,7 @@
       "growth": -0.2956,
       "volume": 48.86,
       "acceleration": -0.1122,
-      "rank": 12
+      "rank": 8
     },
     {
       "term": "air fryer (IT)",
@@ -1544,7 +1063,7 @@
       "growth": -0.348,
       "volume": 30.64,
       "acceleration": -0.1524,
-      "rank": 13
+      "rank": 7
     },
     {
       "term": "makeup (US)",
@@ -1570,7 +1089,7 @@
       "growth": -0.3054,
       "volume": 53.93,
       "acceleration": -0.2158,
-      "rank": 13
+      "rank": 9
     },
     {
       "term": "makeup (FR)",
@@ -1583,7 +1102,7 @@
       "growth": -0.3293,
       "volume": 43.79,
       "acceleration": -0.2814,
-      "rank": 14
+      "rank": 8
     },
     {
       "term": "makeup (ES)",
@@ -1596,7 +1115,7 @@
       "growth": -0.3439,
       "volume": 38.57,
       "acceleration": -0.1906,
-      "rank": 11
+      "rank": 7
     },
     {
       "term": "sweater (FR)",
@@ -1609,7 +1128,7 @@
       "growth": -0.3828,
       "volume": 27.64,
       "acceleration": -0.2622,
-      "rank": 15
+      "rank": 9
     },
     {
       "term": "candle (US)",
@@ -1635,7 +1154,7 @@
       "growth": -0.3785,
       "volume": 30.5,
       "acceleration": -0.7124,
-      "rank": 10
+      "rank": 8
     },
     {
       "term": "earbuds (US)",
@@ -1661,7 +1180,7 @@
       "growth": -0.4422,
       "volume": 31.71,
       "acceleration": -0.5524,
-      "rank": 14
+      "rank": 8
     },
     {
       "term": "plush (US)",
@@ -1713,7 +1232,7 @@
       "growth": -0.255,
       "volume": 562065.07,
       "acceleration": -0.1017,
-      "rank": 13
+      "rank": 2
     },
     {
       "term": "#airfryer",
@@ -1726,7 +1245,7 @@
       "growth": -0.4653,
       "volume": 1657364.14,
       "acceleration": 0.0838,
-      "rank": 14
+      "rank": 3
     },
     {
       "term": "#coffee",
@@ -1739,7 +1258,7 @@
       "growth": -0.4697,
       "volume": 2168135.71,
       "acceleration": -0.0513,
-      "rank": 15
+      "rank": 4
     },
     {
       "term": "#candle",
@@ -1752,7 +1271,7 @@
       "growth": -0.5426,
       "volume": 1367502.57,
       "acceleration": -0.4272,
-      "rank": 16
+      "rank": 5
     },
     {
       "term": "#makeup",
@@ -1765,7 +1284,7 @@
       "growth": -0.5655,
       "volume": 4857974.33,
       "acceleration": -2.6503,
-      "rank": 17
+      "rank": 6
     },
     {
       "term": "#matcha",
@@ -1778,7 +1297,7 @@
       "growth": -0.6544,
       "volume": 715804.57,
       "acceleration": -0.1638,
-      "rank": 18
+      "rank": 7
     },
     {
       "term": "#knitwear",
@@ -1791,7 +1310,7 @@
       "growth": -0.8674,
       "volume": 94827.14,
       "acceleration": -0.7077,
-      "rank": 19
+      "rank": 8
     },
     {
       "term": "#earbuds",
@@ -1804,7 +1323,7 @@
       "growth": -0.786,
       "volume": 382529.79,
       "acceleration": -0.1609,
-      "rank": 20
+      "rank": 9
     },
     {
       "term": "#petfood",
@@ -1817,7 +1336,7 @@
       "growth": -0.783,
       "volume": 952357.57,
       "acceleration": -0.0812,
-      "rank": 21
+      "rank": 10
     },
     {
       "term": "#labubu",
@@ -1830,19 +1349,10 @@
       "growth": -0.9109,
       "volume": 238871.0,
       "acceleration": -0.2336,
-      "rank": 22
+      "rank": 11
     }
   ],
   "signal_sources": [
-    {
-      "name": "wikipedia",
-      "label": "Wikipedia",
-      "kind": "demand",
-      "default": false,
-      "last_run_at": "2026-06-09T01:46:21.718329",
-      "status": "ok",
-      "rows": 30
-    },
     {
       "name": "google_trends",
       "label": "Google Trends",
@@ -2776,7 +2286,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Drinkware & Tumblers is rising in Spain (momentum 36.01, +1000%). Top origins: China (91%, -19%), Vietnam (4%, +119%), Thailand (4%, +136%), Japan (0%, +35%), India (0%, -39%). Emerging: Vietnam (4%, +119%), Thailand (4%, +136%). Competitors already sourcing there: Tesco.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535671",
+      "created_at": "2026-06-10T05:54:26.256903",
       "payload": {
         "top_sources": [
           {
@@ -2849,7 +2359,7 @@
       "focus_partner_name": "Thailand",
       "rationale": "Demand for Pet Care is rising in Netherlands (momentum 39.25, +985%). Top origins: Thailand (57%, +20%), China (17%, -32%), Indonesia (10%, +34%), Cambodia (6%, +50%), Vietnam (5%, -4%). Emerging: Thailand (57%, +20%), Indonesia (10%, +34%), Cambodia (6%, +50%), India (3%, +62%). Competitors already sourcing there: Rewe.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535681",
+      "created_at": "2026-06-10T05:54:26.256910",
       "payload": {
         "top_sources": [
           {
@@ -2936,7 +2446,7 @@
       "focus_partner_name": "Thailand",
       "rationale": "Demand for Pet Care is rising in France (momentum 33.01, +1000%). Top origins: Thailand (57%, +20%), China (17%, -32%), Indonesia (10%, +34%), Cambodia (6%, +50%), Vietnam (5%, -4%). Emerging: Thailand (57%, +20%), Indonesia (10%, +34%), Cambodia (6%, +50%), India (3%, +62%). Competitors already sourcing there: Rewe.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535683",
+      "created_at": "2026-06-10T05:54:26.256911",
       "payload": {
         "top_sources": [
           {
@@ -3023,7 +2533,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Drinkware & Tumblers is rising in Italy (momentum 21.96, +574%). Top origins: China (91%, -19%), Vietnam (4%, +119%), Thailand (4%, +136%), Japan (0%, +35%), India (0%, -39%). Emerging: Vietnam (4%, +119%), Thailand (4%, +136%). Competitors already sourcing there: Tesco.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535684",
+      "created_at": "2026-06-10T05:54:26.256912",
       "payload": {
         "top_sources": [
           {
@@ -3087,86 +2597,6 @@
     },
     {
       "id": 5,
-      "score": 15.1885,
-      "market_code": "FR",
-      "market": "France",
-      "category_id": 3,
-      "category": "Coffee",
-      "focus_partner": "VN",
-      "focus_partner_name": "Vietnam",
-      "rationale": "Demand for Coffee is rising in France (momentum 11.98, +485%). Top origins: Vietnam (63%, +53%), Indonesia (21%, +51%), India (14%, +19%), China (1%, -33%), Turkey (0%, +2%). Emerging: Vietnam (63%, +53%), Indonesia (21%, +51%), India (14%, +19%). Competitors already sourcing there: Rewe.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535688",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "VN",
-            "value": 1613906488.254,
-            "share": 0.6315116546918134,
-            "growth": 0.5347467029977893,
-            "emerging": true
-          },
-          {
-            "partner_code": "ID",
-            "value": 537415807.719,
-            "share": 0.21028749091734866,
-            "growth": 0.5108071171560082,
-            "emerging": true
-          },
-          {
-            "partner_code": "IN",
-            "value": 365284436.155,
-            "share": 0.1429335468865808,
-            "growth": 0.192363231938848,
-            "emerging": true
-          },
-          {
-            "partner_code": "CN",
-            "value": 29419328.636,
-            "share": 0.011511601844380628,
-            "growth": -0.3291501910585183,
-            "emerging": false
-          },
-          {
-            "partner_code": "TR",
-            "value": 6511721.242000001,
-            "share": 0.002547996359365314,
-            "growth": 0.018252705108838353,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [
-          {
-            "partner_code": "VN",
-            "value": 1613906488.254,
-            "share": 0.6315116546918134,
-            "growth": 0.5347467029977893,
-            "emerging": true
-          },
-          {
-            "partner_code": "ID",
-            "value": 537415807.719,
-            "share": 0.21028749091734866,
-            "growth": 0.5108071171560082,
-            "emerging": true
-          },
-          {
-            "partner_code": "IN",
-            "value": 365284436.155,
-            "share": 0.1429335468865808,
-            "growth": 0.192363231938848,
-            "emerging": true
-          }
-        ],
-        "competitors": [
-          "Rewe"
-        ],
-        "demand_momentum": 11.98420144744704,
-        "demand_growth": 4.8461538435443785
-      }
-    },
-    {
-      "id": 6,
       "score": 14.6942,
       "market_code": "PL",
       "market": "Poland",
@@ -3176,7 +2606,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Drinkware & Tumblers is rising in Poland (momentum 8.74, +265%). Top origins: China (91%, -19%), Vietnam (4%, +119%), Thailand (4%, +136%), Japan (0%, +35%), India (0%, -39%). Emerging: Vietnam (4%, +119%), Thailand (4%, +136%). Competitors already sourcing there: Tesco.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535689",
+      "created_at": "2026-06-10T05:54:26.256914",
       "payload": {
         "top_sources": [
           {
@@ -3239,7 +2669,7 @@
       }
     },
     {
-      "id": 7,
+      "id": 6,
       "score": 10.9918,
       "market_code": "US",
       "market": "United States",
@@ -3249,7 +2679,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Drinkware & Tumblers is rising in United States (momentum 6.54, +176%). Top origins: China (91%, -19%), Vietnam (4%, +119%), Thailand (4%, +136%), Japan (0%, +35%), India (0%, -39%). Emerging: Vietnam (4%, +119%), Thailand (4%, +136%). Competitors already sourcing there: Tesco.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535690",
+      "created_at": "2026-06-10T05:54:26.256915",
       "payload": {
         "top_sources": [
           {
@@ -3312,7 +2742,7 @@
       }
     },
     {
-      "id": 8,
+      "id": 7,
       "score": 7.9686,
       "market_code": "PL",
       "market": "Poland",
@@ -3322,7 +2752,7 @@
       "focus_partner_name": "Thailand",
       "rationale": "Demand for Pet Care is rising in Poland (momentum 6.07, +520%). Top origins: Thailand (57%, +20%), China (17%, -32%), Indonesia (10%, +34%), Cambodia (6%, +50%), Vietnam (5%, -4%). Emerging: Thailand (57%, +20%), Indonesia (10%, +34%), Cambodia (6%, +50%), India (3%, +62%). Competitors already sourcing there: Rewe.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535692",
+      "created_at": "2026-06-10T05:54:26.256916",
       "payload": {
         "top_sources": [
           {
@@ -3399,7 +2829,7 @@
       }
     },
     {
-      "id": 9,
+      "id": 8,
       "score": 6.7704,
       "market_code": "ES",
       "market": "Spain",
@@ -3409,7 +2839,7 @@
       "focus_partner_name": "Thailand",
       "rationale": "Demand for Pet Care is rising in Spain (momentum 5.16, +387%). Top origins: Thailand (57%, +20%), China (17%, -32%), Indonesia (10%, +34%), Cambodia (6%, +50%), Vietnam (5%, -4%). Emerging: Thailand (57%, +20%), Indonesia (10%, +34%), Cambodia (6%, +50%), India (3%, +62%). Competitors already sourcing there: Rewe.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535693",
+      "created_at": "2026-06-10T05:54:26.256917",
       "payload": {
         "top_sources": [
           {
@@ -3486,7 +2916,7 @@
       }
     },
     {
-      "id": 10,
+      "id": 9,
       "score": 3.5343,
       "market_code": "DE",
       "market": "Germany",
@@ -3496,7 +2926,7 @@
       "focus_partner_name": "Thailand",
       "rationale": "Demand for Pet Care is rising in Germany (momentum 2.69, +101%). Top origins: Thailand (57%, +20%), China (17%, -32%), Indonesia (10%, +34%), Cambodia (6%, +50%), Vietnam (5%, -4%). Emerging: Thailand (57%, +20%), Indonesia (10%, +34%), Cambodia (6%, +50%), India (3%, +62%). Competitors already sourcing there: Rewe.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535694",
+      "created_at": "2026-06-10T05:54:26.256918",
       "payload": {
         "top_sources": [
           {
@@ -3573,7 +3003,7 @@
       }
     },
     {
-      "id": 11,
+      "id": 10,
       "score": 2.1599,
       "market_code": "FR",
       "market": "France",
@@ -3583,7 +3013,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Drinkware & Tumblers is rising in France (momentum 1.28, +33%). Top origins: China (91%, -19%), Vietnam (4%, +119%), Thailand (4%, +136%), Japan (0%, +35%), India (0%, -39%). Emerging: Vietnam (4%, +119%), Thailand (4%, +136%). Competitors already sourcing there: Tesco.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535696",
+      "created_at": "2026-06-10T05:54:26.256919",
       "payload": {
         "top_sources": [
           {
@@ -3646,7 +3076,7 @@
       }
     },
     {
-      "id": 12,
+      "id": 11,
       "score": 1.8865,
       "market_code": "GB",
       "market": "United Kingdom",
@@ -3656,7 +3086,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Drinkware & Tumblers is rising in United Kingdom (momentum 1.12, +26%). Top origins: China (91%, -19%), Vietnam (4%, +119%), Thailand (4%, +136%), Japan (0%, +35%), India (0%, -39%). Emerging: Vietnam (4%, +119%), Thailand (4%, +136%). Competitors already sourcing there: Tesco.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535697",
+      "created_at": "2026-06-10T05:54:26.256919",
       "payload": {
         "top_sources": [
           {
@@ -3719,303 +3149,7 @@
       }
     },
     {
-      "id": 13,
-      "score": 1.7755,
-      "market_code": null,
-      "market": "Global",
-      "category_id": 8,
-      "category": "Drinkware & Tumblers",
-      "focus_partner": "VN",
-      "focus_partner_name": "Vietnam",
-      "rationale": "Demand for Drinkware & Tumblers is rising in Global (momentum 1.06, +19%). Top origins: China (91%, -19%), Vietnam (4%, +119%), Thailand (4%, +136%), Japan (0%, +35%), India (0%, -39%). Emerging: Vietnam (4%, +119%), Thailand (4%, +136%). Competitors already sourcing there: Tesco.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535698",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "CN",
-            "value": 1536387037.02,
-            "share": 0.913355290778922,
-            "growth": -0.18707712229497755,
-            "emerging": false
-          },
-          {
-            "partner_code": "VN",
-            "value": 72236456.051,
-            "share": 0.04294331293582833,
-            "growth": 1.1929663501515155,
-            "emerging": true
-          },
-          {
-            "partner_code": "TH",
-            "value": 69891290.90799999,
-            "share": 0.04154915317041925,
-            "growth": 1.362139667383199,
-            "emerging": true
-          },
-          {
-            "partner_code": "JP",
-            "value": 1692542.1970000002,
-            "share": 0.001006186809213756,
-            "growth": 0.34782675767642407,
-            "emerging": false
-          },
-          {
-            "partner_code": "IN",
-            "value": 982629.379,
-            "share": 0.0005841560235533108,
-            "growth": -0.3914852188177881,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [
-          {
-            "partner_code": "VN",
-            "value": 72236456.051,
-            "share": 0.04294331293582833,
-            "growth": 1.1929663501515155,
-            "emerging": true
-          },
-          {
-            "partner_code": "TH",
-            "value": 69891290.90799999,
-            "share": 0.04154915317041925,
-            "growth": 1.362139667383199,
-            "emerging": true
-          }
-        ],
-        "competitors": [
-          "Tesco"
-        ],
-        "demand_momentum": 1.0561440844762524,
-        "demand_growth": 0.18587145338662348
-      }
-    },
-    {
-      "id": 14,
-      "score": 0.8248,
-      "market_code": "NL",
-      "market": "Netherlands",
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "focus_partner": "JP",
-      "focus_partner_name": "Japan",
-      "rationale": "Demand for Tea & Matcha is rising in Netherlands (momentum 0.58, +10%). Top origins: Japan (46%, +83%), India (23%, +0%), China (20%, +11%), Vietnam (3%, +5%), Pakistan (3%, +5%). Emerging: Japan (46%, +83%). Competitors already sourcing there: Rewe, Sainsbury's.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535699",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "JP",
-            "value": 214209767.91,
-            "share": 0.45588827616281324,
-            "growth": 0.825478654402471,
-            "emerging": true
-          },
-          {
-            "partner_code": "IN",
-            "value": 106306765.035,
-            "share": 0.22624555513553182,
-            "growth": 0.0037960733687597845,
-            "emerging": false
-          },
-          {
-            "partner_code": "CN",
-            "value": 95226883.562,
-            "share": 0.20266498682579673,
-            "growth": 0.10568142210562619,
-            "emerging": false
-          },
-          {
-            "partner_code": "VN",
-            "value": 12567337.247,
-            "share": 0.02674622062939121,
-            "growth": 0.04952049900710027,
-            "emerging": false
-          },
-          {
-            "partner_code": "PK",
-            "value": 12560018.390999999,
-            "share": 0.026730644399241305,
-            "growth": 0.05446552665945007,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [
-          {
-            "partner_code": "JP",
-            "value": 214209767.91,
-            "share": 0.45588827616281324,
-            "growth": 0.825478654402471,
-            "emerging": true
-          }
-        ],
-        "competitors": [
-          "Rewe",
-          "Sainsbury's"
-        ],
-        "demand_momentum": 0.5837997744880847,
-        "demand_growth": 0.1027785271104832
-      }
-    },
-    {
-      "id": 15,
-      "score": 0.715,
-      "market_code": "NL",
-      "market": "Netherlands",
-      "category_id": 5,
-      "category": "Knitwear & Apparel",
-      "focus_partner": "KH",
-      "focus_partner_name": "Cambodia",
-      "rationale": "Demand for Knitwear & Apparel is rising in Netherlands (momentum 0.59, +29%). Top origins: China (25%, -28%), Vietnam (22%, +11%), Bangladesh (14%, +1%), Cambodia (14%, +41%), Indonesia (7%, +10%). Emerging: Cambodia (14%, +41%), Pakistan (6%, +18%). Competitors already sourcing there: Aldi, Auchan, Sainsbury's, Tesco.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535700",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "CN",
-            "value": 2973815782.483,
-            "share": 0.24677733238996344,
-            "growth": -0.27594347279045844,
-            "emerging": false
-          },
-          {
-            "partner_code": "VN",
-            "value": 2705283044.112,
-            "share": 0.2244935738515523,
-            "growth": 0.11228354019530658,
-            "emerging": false
-          },
-          {
-            "partner_code": "BD",
-            "value": 1722883951.141,
-            "share": 0.14297076099483866,
-            "growth": 0.006991104208822065,
-            "emerging": false
-          },
-          {
-            "partner_code": "KH",
-            "value": 1701763348.328,
-            "share": 0.14121810165011348,
-            "growth": 0.41083205839031073,
-            "emerging": true
-          },
-          {
-            "partner_code": "ID",
-            "value": 824208139.268,
-            "share": 0.06839559031892227,
-            "growth": 0.1004484297782238,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [
-          {
-            "partner_code": "KH",
-            "value": 1701763348.328,
-            "share": 0.14121810165011348,
-            "growth": 0.41083205839031073,
-            "emerging": true
-          },
-          {
-            "partner_code": "PK",
-            "value": 714260947.155,
-            "share": 0.05927179894851041,
-            "growth": 0.1795025141952429,
-            "emerging": true
-          }
-        ],
-        "competitors": [
-          "Aldi",
-          "Auchan",
-          "Sainsbury's",
-          "Tesco"
-        ],
-        "demand_momentum": 0.593183355464931,
-        "demand_growth": 0.29166666660995366
-      }
-    },
-    {
-      "id": 16,
-      "score": 0.6777,
-      "market_code": null,
-      "market": "Global",
-      "category_id": 3,
-      "category": "Coffee",
-      "focus_partner": "VN",
-      "focus_partner_name": "Vietnam",
-      "rationale": "Demand for Coffee is rising in Global (momentum 0.53, +7%). Top origins: Vietnam (63%, +53%), Indonesia (21%, +51%), India (14%, +19%), China (1%, -33%), Turkey (0%, +2%). Emerging: Vietnam (63%, +53%), Indonesia (21%, +51%), India (14%, +19%). Competitors already sourcing there: Rewe.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535701",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "VN",
-            "value": 1613906488.254,
-            "share": 0.6315116546918134,
-            "growth": 0.5347467029977893,
-            "emerging": true
-          },
-          {
-            "partner_code": "ID",
-            "value": 537415807.719,
-            "share": 0.21028749091734866,
-            "growth": 0.5108071171560082,
-            "emerging": true
-          },
-          {
-            "partner_code": "IN",
-            "value": 365284436.155,
-            "share": 0.1429335468865808,
-            "growth": 0.192363231938848,
-            "emerging": true
-          },
-          {
-            "partner_code": "CN",
-            "value": 29419328.636,
-            "share": 0.011511601844380628,
-            "growth": -0.3291501910585183,
-            "emerging": false
-          },
-          {
-            "partner_code": "TR",
-            "value": 6511721.242000001,
-            "share": 0.002547996359365314,
-            "growth": 0.018252705108838353,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [
-          {
-            "partner_code": "VN",
-            "value": 1613906488.254,
-            "share": 0.6315116546918134,
-            "growth": 0.5347467029977893,
-            "emerging": true
-          },
-          {
-            "partner_code": "ID",
-            "value": 537415807.719,
-            "share": 0.21028749091734866,
-            "growth": 0.5108071171560082,
-            "emerging": true
-          },
-          {
-            "partner_code": "IN",
-            "value": 365284436.155,
-            "share": 0.1429335468865808,
-            "growth": 0.192363231938848,
-            "emerging": true
-          }
-        ],
-        "competitors": [
-          "Rewe"
-        ],
-        "demand_momentum": 0.5347602445754276,
-        "demand_growth": 0.06730821214248404
-      }
-    },
-    {
-      "id": 17,
+      "id": 12,
       "score": 0.4072,
       "market_code": "DE",
       "market": "Germany",
@@ -4025,7 +3159,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Drinkware & Tumblers is rising in Germany (momentum 0.24, +6%). Top origins: China (91%, -19%), Vietnam (4%, +119%), Thailand (4%, +136%), Japan (0%, +35%), India (0%, -39%). Emerging: Vietnam (4%, +119%), Thailand (4%, +136%). Competitors already sourcing there: Tesco.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535702",
+      "created_at": "2026-06-10T05:54:26.256920",
       "payload": {
         "top_sources": [
           {
@@ -4088,87 +3222,7 @@
       }
     },
     {
-      "id": 18,
-      "score": 0.3692,
-      "market_code": "PL",
-      "market": "Poland",
-      "category_id": 3,
-      "category": "Coffee",
-      "focus_partner": "VN",
-      "focus_partner_name": "Vietnam",
-      "rationale": "Demand for Coffee is rising in Poland (momentum 0.29, +29%). Top origins: Vietnam (63%, +53%), Indonesia (21%, +51%), India (14%, +19%), China (1%, -33%), Turkey (0%, +2%). Emerging: Vietnam (63%, +53%), Indonesia (21%, +51%), India (14%, +19%). Competitors already sourcing there: Rewe.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535703",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "VN",
-            "value": 1613906488.254,
-            "share": 0.6315116546918134,
-            "growth": 0.5347467029977893,
-            "emerging": true
-          },
-          {
-            "partner_code": "ID",
-            "value": 537415807.719,
-            "share": 0.21028749091734866,
-            "growth": 0.5108071171560082,
-            "emerging": true
-          },
-          {
-            "partner_code": "IN",
-            "value": 365284436.155,
-            "share": 0.1429335468865808,
-            "growth": 0.192363231938848,
-            "emerging": true
-          },
-          {
-            "partner_code": "CN",
-            "value": 29419328.636,
-            "share": 0.011511601844380628,
-            "growth": -0.3291501910585183,
-            "emerging": false
-          },
-          {
-            "partner_code": "TR",
-            "value": 6511721.242000001,
-            "share": 0.002547996359365314,
-            "growth": 0.018252705108838353,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [
-          {
-            "partner_code": "VN",
-            "value": 1613906488.254,
-            "share": 0.6315116546918134,
-            "growth": 0.5347467029977893,
-            "emerging": true
-          },
-          {
-            "partner_code": "ID",
-            "value": 537415807.719,
-            "share": 0.21028749091734866,
-            "growth": 0.5108071171560082,
-            "emerging": true
-          },
-          {
-            "partner_code": "IN",
-            "value": 365284436.155,
-            "share": 0.1429335468865808,
-            "growth": 0.192363231938848,
-            "emerging": true
-          }
-        ],
-        "competitors": [
-          "Rewe"
-        ],
-        "demand_momentum": 0.2912937362560333,
-        "demand_growth": 0.29411764683391
-      }
-    },
-    {
-      "id": 19,
+      "id": 13,
       "score": 0.356,
       "market_code": "GB",
       "market": "United Kingdom",
@@ -4178,7 +3232,7 @@
       "focus_partner_name": "Japan",
       "rationale": "Demand for Tea & Matcha is rising in United Kingdom (momentum 0.25, +6%). Top origins: Japan (46%, +83%), India (23%, +0%), China (20%, +11%), Vietnam (3%, +5%), Pakistan (3%, +5%). Emerging: Japan (46%, +83%). Competitors already sourcing there: Rewe, Sainsbury's.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535705",
+      "created_at": "2026-06-10T05:54:26.256920",
       "payload": {
         "top_sources": [
           {
@@ -4235,243 +3289,7 @@
       }
     },
     {
-      "id": 20,
-      "score": 0.341,
-      "market_code": "DE",
-      "market": "Germany",
-      "category_id": 4,
-      "category": "Footwear",
-      "focus_partner": "ID",
-      "focus_partner_name": "Indonesia",
-      "rationale": "Demand for Footwear is rising in Germany (momentum 0.28, +18%). Top origins: Vietnam (49%, +6%), China (32%, -19%), Indonesia (13%, +45%), Cambodia (4%, +34%), India (1%, +68%). Emerging: Indonesia (13%, +45%), Cambodia (4%, +34%). Competitors already sourcing there: Aldi, Auchan, Carrefour, Mercadona, Tesco, Walmart.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535706",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "VN",
-            "value": 4777783223.55,
-            "share": 0.485291009138092,
-            "growth": 0.06228438464669613,
-            "emerging": false
-          },
-          {
-            "partner_code": "CN",
-            "value": 3133674766.393,
-            "share": 0.3182949327205948,
-            "growth": -0.18828623712179138,
-            "emerging": false
-          },
-          {
-            "partner_code": "ID",
-            "value": 1326995848.027,
-            "share": 0.13478618097130618,
-            "growth": 0.4502270935208398,
-            "emerging": true
-          },
-          {
-            "partner_code": "KH",
-            "value": 405090714.26100004,
-            "share": 0.04114604458134514,
-            "growth": 0.34226111787401525,
-            "emerging": true
-          },
-          {
-            "partner_code": "IN",
-            "value": 91288365.45,
-            "share": 0.009272380289970645,
-            "growth": 0.6846269701152198,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [
-          {
-            "partner_code": "ID",
-            "value": 1326995848.027,
-            "share": 0.13478618097130618,
-            "growth": 0.4502270935208398,
-            "emerging": true
-          },
-          {
-            "partner_code": "KH",
-            "value": 405090714.26100004,
-            "share": 0.04114604458134514,
-            "growth": 0.34226111787401525,
-            "emerging": true
-          }
-        ],
-        "competitors": [
-          "Aldi",
-          "Auchan",
-          "Carrefour",
-          "Mercadona",
-          "Tesco",
-          "Walmart"
-        ],
-        "demand_momentum": 0.27833516254019913,
-        "demand_growth": 0.17777777772246905
-      }
-    },
-    {
-      "id": 21,
-      "score": 0.333,
-      "market_code": "IT",
-      "market": "Italy",
-      "category_id": 3,
-      "category": "Coffee",
-      "focus_partner": "VN",
-      "focus_partner_name": "Vietnam",
-      "rationale": "Demand for Coffee is rising in Italy (momentum 0.26, +26%). Top origins: Vietnam (63%, +53%), Indonesia (21%, +51%), India (14%, +19%), China (1%, -33%), Turkey (0%, +2%). Emerging: Vietnam (63%, +53%), Indonesia (21%, +51%), India (14%, +19%). Competitors already sourcing there: Rewe.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535707",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "VN",
-            "value": 1613906488.254,
-            "share": 0.6315116546918134,
-            "growth": 0.5347467029977893,
-            "emerging": true
-          },
-          {
-            "partner_code": "ID",
-            "value": 537415807.719,
-            "share": 0.21028749091734866,
-            "growth": 0.5108071171560082,
-            "emerging": true
-          },
-          {
-            "partner_code": "IN",
-            "value": 365284436.155,
-            "share": 0.1429335468865808,
-            "growth": 0.192363231938848,
-            "emerging": true
-          },
-          {
-            "partner_code": "CN",
-            "value": 29419328.636,
-            "share": 0.011511601844380628,
-            "growth": -0.3291501910585183,
-            "emerging": false
-          },
-          {
-            "partner_code": "TR",
-            "value": 6511721.242000001,
-            "share": 0.002547996359365314,
-            "growth": 0.018252705108838353,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [
-          {
-            "partner_code": "VN",
-            "value": 1613906488.254,
-            "share": 0.6315116546918134,
-            "growth": 0.5347467029977893,
-            "emerging": true
-          },
-          {
-            "partner_code": "ID",
-            "value": 537415807.719,
-            "share": 0.21028749091734866,
-            "growth": 0.5108071171560082,
-            "emerging": true
-          },
-          {
-            "partner_code": "IN",
-            "value": 365284436.155,
-            "share": 0.1429335468865808,
-            "growth": 0.192363231938848,
-            "emerging": true
-          }
-        ],
-        "competitors": [
-          "Rewe"
-        ],
-        "demand_momentum": 0.2627707445724654,
-        "demand_growth": 0.26315789454293614
-      }
-    },
-    {
-      "id": 22,
-      "score": 0.3297,
-      "market_code": "NL",
-      "market": "Netherlands",
-      "category_id": 4,
-      "category": "Footwear",
-      "focus_partner": "ID",
-      "focus_partner_name": "Indonesia",
-      "rationale": "Demand for Footwear is rising in Netherlands (momentum 0.27, +22%). Top origins: Vietnam (49%, +6%), China (32%, -19%), Indonesia (13%, +45%), Cambodia (4%, +34%), India (1%, +68%). Emerging: Indonesia (13%, +45%), Cambodia (4%, +34%). Competitors already sourcing there: Aldi, Auchan, Carrefour, Mercadona, Tesco, Walmart.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535708",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "VN",
-            "value": 4777783223.55,
-            "share": 0.485291009138092,
-            "growth": 0.06228438464669613,
-            "emerging": false
-          },
-          {
-            "partner_code": "CN",
-            "value": 3133674766.393,
-            "share": 0.3182949327205948,
-            "growth": -0.18828623712179138,
-            "emerging": false
-          },
-          {
-            "partner_code": "ID",
-            "value": 1326995848.027,
-            "share": 0.13478618097130618,
-            "growth": 0.4502270935208398,
-            "emerging": true
-          },
-          {
-            "partner_code": "KH",
-            "value": 405090714.26100004,
-            "share": 0.04114604458134514,
-            "growth": 0.34226111787401525,
-            "emerging": true
-          },
-          {
-            "partner_code": "IN",
-            "value": 91288365.45,
-            "share": 0.009272380289970645,
-            "growth": 0.6846269701152198,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [
-          {
-            "partner_code": "ID",
-            "value": 1326995848.027,
-            "share": 0.13478618097130618,
-            "growth": 0.4502270935208398,
-            "emerging": true
-          },
-          {
-            "partner_code": "KH",
-            "value": 405090714.26100004,
-            "share": 0.04114604458134514,
-            "growth": 0.34226111787401525,
-            "emerging": true
-          }
-        ],
-        "competitors": [
-          "Aldi",
-          "Auchan",
-          "Carrefour",
-          "Mercadona",
-          "Tesco",
-          "Walmart"
-        ],
-        "demand_momentum": 0.2691311714370727,
-        "demand_growth": 0.22222222210699588
-      }
-    },
-    {
-      "id": 23,
+      "id": 14,
       "score": 0.3166,
       "market_code": "NL",
       "market": "Netherlands",
@@ -4481,7 +3299,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Drinkware & Tumblers is rising in Netherlands (momentum 0.19, +5%). Top origins: China (91%, -19%), Vietnam (4%, +119%), Thailand (4%, +136%), Japan (0%, +35%), India (0%, -39%). Emerging: Vietnam (4%, +119%), Thailand (4%, +136%). Competitors already sourcing there: Tesco.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535709",
+      "created_at": "2026-06-10T05:54:26.256921",
       "payload": {
         "top_sources": [
           {
@@ -4544,7 +3362,7 @@
       }
     },
     {
-      "id": 24,
+      "id": 15,
       "score": 0.2355,
       "market_code": "GB",
       "market": "United Kingdom",
@@ -4554,7 +3372,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Toys & Collectibles is rising in United Kingdom (momentum 0.21, +5%). Top origins: China (79%, -27%), Vietnam (14%, +20%), Indonesia (4%, +6%), Thailand (1%, +7%), India (1%, +7%). Emerging: Vietnam (14%, +20%). Competitors already sourcing there: Ahold Delhaize, Tesco, Walmart.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535710",
+      "created_at": "2026-06-10T05:54:26.256922",
       "payload": {
         "top_sources": [
           {
@@ -4612,159 +3430,7 @@
       }
     },
     {
-      "id": 25,
-      "score": 0.216,
-      "market_code": null,
-      "market": "Global",
-      "category_id": 4,
-      "category": "Footwear",
-      "focus_partner": "ID",
-      "focus_partner_name": "Indonesia",
-      "rationale": "Demand for Footwear is rising in Global (momentum 0.18, +3%). Top origins: Vietnam (49%, +6%), China (32%, -19%), Indonesia (13%, +45%), Cambodia (4%, +34%), India (1%, +68%). Emerging: Indonesia (13%, +45%), Cambodia (4%, +34%). Competitors already sourcing there: Aldi, Auchan, Carrefour, Mercadona, Tesco, Walmart.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535711",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "VN",
-            "value": 4777783223.55,
-            "share": 0.485291009138092,
-            "growth": 0.06228438464669613,
-            "emerging": false
-          },
-          {
-            "partner_code": "CN",
-            "value": 3133674766.393,
-            "share": 0.3182949327205948,
-            "growth": -0.18828623712179138,
-            "emerging": false
-          },
-          {
-            "partner_code": "ID",
-            "value": 1326995848.027,
-            "share": 0.13478618097130618,
-            "growth": 0.4502270935208398,
-            "emerging": true
-          },
-          {
-            "partner_code": "KH",
-            "value": 405090714.26100004,
-            "share": 0.04114604458134514,
-            "growth": 0.34226111787401525,
-            "emerging": true
-          },
-          {
-            "partner_code": "IN",
-            "value": 91288365.45,
-            "share": 0.009272380289970645,
-            "growth": 0.6846269701152198,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [
-          {
-            "partner_code": "ID",
-            "value": 1326995848.027,
-            "share": 0.13478618097130618,
-            "growth": 0.4502270935208398,
-            "emerging": true
-          },
-          {
-            "partner_code": "KH",
-            "value": 405090714.26100004,
-            "share": 0.04114604458134514,
-            "growth": 0.34226111787401525,
-            "emerging": true
-          }
-        ],
-        "competitors": [
-          "Aldi",
-          "Auchan",
-          "Carrefour",
-          "Mercadona",
-          "Tesco",
-          "Walmart"
-        ],
-        "demand_momentum": 0.1763021516437291,
-        "demand_growth": 0.028932490854605118
-      }
-    },
-    {
-      "id": 26,
-      "score": 0.1794,
-      "market_code": null,
-      "market": "Global",
-      "category_id": 10,
-      "category": "Audio & Earbuds",
-      "focus_partner": "VN",
-      "focus_partner_name": "Vietnam",
-      "rationale": "Demand for Audio & Earbuds is rising in Global (momentum 0.16, +2%). Top origins: Vietnam (53%, +26%), China (40%, -36%), Thailand (4%, +31%), Japan (1%, +7%), Indonesia (1%, -0%). Emerging: Vietnam (53%, +26%), Thailand (4%, +31%). Competitors already sourcing there: Ahold Delhaize, Aldi.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535712",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "VN",
-            "value": 5981927458.476,
-            "share": 0.5331941554689043,
-            "growth": 0.2617500093264522,
-            "emerging": true
-          },
-          {
-            "partner_code": "CN",
-            "value": 4470313128.766,
-            "share": 0.3984576626713544,
-            "growth": -0.35927968188043624,
-            "emerging": false
-          },
-          {
-            "partner_code": "TH",
-            "value": 478942215.45,
-            "share": 0.042690118169759365,
-            "growth": 0.3109772415196627,
-            "emerging": true
-          },
-          {
-            "partner_code": "JP",
-            "value": 91974739.987,
-            "share": 0.00819809236274731,
-            "growth": 0.06742415431084484,
-            "emerging": false
-          },
-          {
-            "partner_code": "ID",
-            "value": 82667152.72299999,
-            "share": 0.007368468271661131,
-            "growth": -0.003988381906031724,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [
-          {
-            "partner_code": "VN",
-            "value": 5981927458.476,
-            "share": 0.5331941554689043,
-            "growth": 0.2617500093264522,
-            "emerging": true
-          },
-          {
-            "partner_code": "TH",
-            "value": 478942215.45,
-            "share": 0.042690118169759365,
-            "growth": 0.3109772415196627,
-            "emerging": true
-          }
-        ],
-        "competitors": [
-          "Ahold Delhaize",
-          "Aldi"
-        ],
-        "demand_momentum": 0.1552246733201836,
-        "demand_growth": 0.02495621716282118
-      }
-    },
-    {
-      "id": 27,
+      "id": 16,
       "score": 0.1767,
       "market_code": "ES",
       "market": "Spain",
@@ -4774,7 +3440,7 @@
       "focus_partner_name": "Japan",
       "rationale": "Demand for Tea & Matcha is rising in Spain (momentum 0.13, +3%). Top origins: Japan (46%, +83%), India (23%, +0%), China (20%, +11%), Vietnam (3%, +5%), Pakistan (3%, +5%). Emerging: Japan (46%, +83%). Competitors already sourcing there: Rewe, Sainsbury's.",
       "status": "new",
-      "created_at": "2026-06-10T05:26:11.535714",
+      "created_at": "2026-06-10T05:54:26.256922",
       "payload": {
         "top_sources": [
           {
@@ -4828,197 +3494,6 @@
         ],
         "demand_momentum": 0.12511046735384573,
         "demand_growth": 0.029029029028622186
-      }
-    },
-    {
-      "id": 28,
-      "score": 0.1292,
-      "market_code": null,
-      "market": "Global",
-      "category_id": 9,
-      "category": "Candles & Home Fragrance",
-      "focus_partner": "VN",
-      "focus_partner_name": "Vietnam",
-      "rationale": "Demand for Candles & Home Fragrance is rising in Global (momentum 0.13, +2%). Top origins: Vietnam (73%, +3%), China (18%, -26%), India (7%, -10%), Thailand (1%, -32%), Turkey (0%, +0%). Competitors already sourcing there: Carrefour.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535715",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "VN",
-            "value": 673762674.038,
-            "share": 0.7287725342180563,
-            "growth": 0.03128519254591995,
-            "emerging": false
-          },
-          {
-            "partner_code": "CN",
-            "value": 169523676.567,
-            "share": 0.18336456461927256,
-            "growth": -0.2618558915822549,
-            "emerging": false
-          },
-          {
-            "partner_code": "IN",
-            "value": 62990771.655,
-            "share": 0.06813370057477565,
-            "growth": -0.10344411591012087,
-            "emerging": false
-          },
-          {
-            "partner_code": "TH",
-            "value": 12945048.401,
-            "share": 0.014001956612158799,
-            "growth": -0.32421185075944364,
-            "emerging": false
-          },
-          {
-            "partner_code": "TR",
-            "value": 1612131.725,
-            "share": 0.0017437554319836275,
-            "growth": 0.0030337693340318603,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [],
-        "competitors": [
-          "Carrefour"
-        ],
-        "demand_momentum": 0.12923423214591775,
-        "demand_growth": 0.021357216672356297
-      }
-    },
-    {
-      "id": 29,
-      "score": 0.0715,
-      "market_code": null,
-      "market": "Global",
-      "category_id": 1,
-      "category": "Beauty & Cosmetics",
-      "focus_partner": "KR",
-      "focus_partner_name": "South Korea",
-      "rationale": "Demand for Beauty & Cosmetics is rising in Global (momentum 0.07, +1%). Top origins: South Korea (66%, +15%), China (21%, -21%), Japan (6%, -15%), India (2%, -28%), Vietnam (2%, +235%). Emerging: South Korea (66%, +15%). Competitors already sourcing there: Edeka.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535716",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "KR",
-            "value": 2288071196.735,
-            "share": 0.6556580288423105,
-            "growth": 0.15326025399877116,
-            "emerging": true
-          },
-          {
-            "partner_code": "CN",
-            "value": 745906683.363,
-            "share": 0.21374322023368925,
-            "growth": -0.20809333441575517,
-            "emerging": false
-          },
-          {
-            "partner_code": "JP",
-            "value": 200762939.983,
-            "share": 0.05752960558293598,
-            "growth": -0.1484256198621938,
-            "emerging": false
-          },
-          {
-            "partner_code": "IN",
-            "value": 78004346.641,
-            "share": 0.02235252829228014,
-            "growth": -0.2755298204016587,
-            "emerging": false
-          },
-          {
-            "partner_code": "VN",
-            "value": 65394722.707,
-            "share": 0.018739178679380485,
-            "growth": 2.349338643030568,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [
-          {
-            "partner_code": "KR",
-            "value": 2288071196.735,
-            "share": 0.6556580288423105,
-            "growth": 0.15326025399877116,
-            "emerging": true
-          }
-        ],
-        "competitors": [
-          "Edeka"
-        ],
-        "demand_momentum": 0.06637057584931177,
-        "demand_growth": 0.010190946148879684
-      }
-    },
-    {
-      "id": 30,
-      "score": 0.0219,
-      "market_code": null,
-      "market": "Global",
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "focus_partner": "JP",
-      "focus_partner_name": "Japan",
-      "rationale": "Demand for Tea & Matcha is rising in Global (momentum 0.02, +0%). Top origins: Japan (46%, +83%), India (23%, +0%), China (20%, +11%), Vietnam (3%, +5%), Pakistan (3%, +5%). Emerging: Japan (46%, +83%). Competitors already sourcing there: Rewe, Sainsbury's.",
-      "status": "new",
-      "created_at": "2026-06-10T05:26:11.535717",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "JP",
-            "value": 214209767.91,
-            "share": 0.45588827616281324,
-            "growth": 0.825478654402471,
-            "emerging": true
-          },
-          {
-            "partner_code": "IN",
-            "value": 106306765.035,
-            "share": 0.22624555513553182,
-            "growth": 0.0037960733687597845,
-            "emerging": false
-          },
-          {
-            "partner_code": "CN",
-            "value": 95226883.562,
-            "share": 0.20266498682579673,
-            "growth": 0.10568142210562619,
-            "emerging": false
-          },
-          {
-            "partner_code": "VN",
-            "value": 12567337.247,
-            "share": 0.02674622062939121,
-            "growth": 0.04952049900710027,
-            "emerging": false
-          },
-          {
-            "partner_code": "PK",
-            "value": 12560018.390999999,
-            "share": 0.026730644399241305,
-            "growth": 0.05446552665945007,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [
-          {
-            "partner_code": "JP",
-            "value": 214209767.91,
-            "share": 0.45588827616281324,
-            "growth": 0.825478654402471,
-            "emerging": true
-          }
-        ],
-        "competitors": [
-          "Rewe",
-          "Sainsbury's"
-        ],
-        "demand_momentum": 0.0155097820384135,
-        "demand_growth": 0.0019631250829014887
       }
     }
   ],
@@ -10864,18 +9339,6 @@
       "volume": 2.21
     },
     {
-      "term": "Coffee (fr)",
-      "platform": "wikipedia",
-      "category_id": 3,
-      "category": "Coffee",
-      "country_code": "FR",
-      "country": "France",
-      "acceleration": 5.1619,
-      "momentum": 11.9842,
-      "growth": 4.8462,
-      "volume": 10.86
-    },
-    {
       "term": "stanley cup (US)",
       "platform": "google_trends",
       "category_id": 8,
@@ -10900,18 +9363,6 @@
       "volume": 26.07
     },
     {
-      "term": "Knitwear & Apparel (nl)",
-      "platform": "wikipedia",
-      "category_id": 5,
-      "category": "Knitwear & Apparel",
-      "country_code": "NL",
-      "country": "Netherlands",
-      "acceleration": 0.8417,
-      "momentum": 0.5932,
-      "growth": 0.2917,
-      "volume": 6.64
-    },
-    {
       "term": "dog treats (DE)",
       "platform": "google_trends",
       "category_id": 11,
@@ -10922,30 +9373,6 @@
       "momentum": 2.6929,
       "growth": 1.0108,
       "volume": 13.36
-    },
-    {
-      "term": "Footwear (nl)",
-      "platform": "wikipedia",
-      "category_id": 4,
-      "category": "Footwear",
-      "country_code": "NL",
-      "country": "Netherlands",
-      "acceleration": 0.6597,
-      "momentum": 0.2691,
-      "growth": 0.2222,
-      "volume": 2.36
-    },
-    {
-      "term": "Knitwear & Apparel (de)",
-      "platform": "wikipedia",
-      "category_id": 5,
-      "category": "Knitwear & Apparel",
-      "country_code": "DE",
-      "country": "Germany",
-      "acceleration": 0.5536,
-      "momentum": 0.0,
-      "growth": 0.0,
-      "volume": 1.71
     },
     {
       "term": "stanley cup (FR)",
@@ -10960,30 +9387,6 @@
       "volume": 48.79
     },
     {
-      "term": "Coffee (it)",
-      "platform": "wikipedia",
-      "category_id": 3,
-      "category": "Coffee",
-      "country_code": "IT",
-      "country": "Italy",
-      "acceleration": 0.4551,
-      "momentum": 0.2628,
-      "growth": 0.2632,
-      "volume": 1.71
-    },
-    {
-      "term": "Coffee (pl)",
-      "platform": "wikipedia",
-      "category_id": 3,
-      "category": "Coffee",
-      "country_code": "PL",
-      "country": "Poland",
-      "acceleration": 0.3333,
-      "momentum": 0.2913,
-      "growth": 0.2941,
-      "volume": 1.69
-    },
-    {
       "term": "stanley cup (GB)",
       "platform": "google_trends",
       "category_id": 8,
@@ -10996,30 +9399,6 @@
       "volume": 80.07
     },
     {
-      "term": "Drinkware & Tumblers (en)",
-      "platform": "wikipedia",
-      "category_id": 8,
-      "category": "Drinkware & Tumblers",
-      "country_code": null,
-      "country": "Global",
-      "acceleration": 0.3038,
-      "momentum": 1.0561,
-      "growth": 0.1859,
-      "volume": 292.57
-    },
-    {
-      "term": "Tea & Matcha (es)",
-      "platform": "wikipedia",
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "country_code": "ES",
-      "country": "Spain",
-      "acceleration": 0.2,
-      "momentum": 0.0,
-      "growth": 0.0,
-      "volume": 3.71
-    },
-    {
       "term": "stanley cup (DE)",
       "platform": "google_trends",
       "category_id": 8,
@@ -11030,42 +9409,6 @@
       "momentum": 0.2423,
       "growth": 0.0561,
       "volume": 73.93
-    },
-    {
-      "term": "Knitwear & Apparel (es)",
-      "platform": "wikipedia",
-      "category_id": 5,
-      "category": "Knitwear & Apparel",
-      "country_code": "ES",
-      "country": "Spain",
-      "acceleration": 0.1603,
-      "momentum": -0.1797,
-      "growth": -0.2174,
-      "volume": 1.29
-    },
-    {
-      "term": "Coffee (en)",
-      "platform": "wikipedia",
-      "category_id": 3,
-      "category": "Coffee",
-      "country_code": null,
-      "country": "Global",
-      "acceleration": 0.1252,
-      "momentum": 0.5348,
-      "growth": 0.0673,
-      "volume": 2820.29
-    },
-    {
-      "term": "Tea & Matcha (nl)",
-      "platform": "wikipedia",
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "country_code": "NL",
-      "country": "Netherlands",
-      "acceleration": 0.1218,
-      "momentum": 0.5838,
-      "growth": 0.1028,
-      "volume": 292.0
     },
     {
       "term": "plush (GB)",
@@ -11092,18 +9435,6 @@
       "volume": 73.43
     },
     {
-      "term": "Tea & Matcha (en)",
-      "platform": "wikipedia",
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "country_code": null,
-      "country": "Global",
-      "acceleration": 0.0977,
-      "momentum": 0.0155,
-      "growth": 0.002,
-      "volume": 2697.79
-    },
-    {
       "term": "matcha (GB)",
       "platform": "google_trends",
       "category_id": 2,
@@ -11126,127 +9457,20 @@
       "momentum": -6.6631,
       "growth": -0.4653,
       "volume": 1657364.14
-    },
-    {
-      "term": "Audio & Earbuds (en)",
-      "platform": "wikipedia",
-      "category_id": 10,
-      "category": "Audio & Earbuds",
-      "country_code": null,
-      "country": "Global",
-      "acceleration": 0.0637,
-      "momentum": 0.1552,
-      "growth": 0.025,
-      "volume": 501.64
-    },
-    {
-      "term": "Footwear (en)",
-      "platform": "wikipedia",
-      "category_id": 4,
-      "category": "Footwear",
-      "country_code": null,
-      "country": "Global",
-      "acceleration": 0.0506,
-      "momentum": 0.1763,
-      "growth": 0.0289,
-      "volume": 442.0
     }
   ],
   "insights": [
     {
       "id": 1,
-      "category_id": 11,
-      "category": "Pet Care",
-      "market_code": "NL",
-      "market": "Netherlands",
-      "action": "PROCURE",
-      "score": 100.0,
-      "confidence": 0.667,
-      "headline": "PROCURE: Pet Care \u2014 source from Indonesia (emerging origin)",
-      "narrative": "Procure Pet Care for Netherlands. Demand strongest on google_trends (momentum 39.25); 1 of 3 demand sources rising, accelerating (+10.00). Source from Indonesia \u2014 emerging origins gaining share. Note: Rewe already sources here (Thailand).",
-      "narrator": "rule",
-      "evidence": {
-        "category": "Pet Care",
-        "market": "Netherlands",
-        "demand": [
-          {
-            "platform": "google_trends",
-            "momentum": 39.251,
-            "growth": 10.0,
-            "acceleration": 10.0
-          },
-          {
-            "platform": "wikipedia",
-            "momentum": 0.0,
-            "growth": 0.0,
-            "acceleration": 0.0
-          },
-          {
-            "platform": "tiktok",
-            "momentum": -10.7794,
-            "growth": -0.783,
-            "acceleration": -0.0812
-          }
-        ],
-        "rising_sources": 1,
-        "total_sources": 3,
-        "max_acceleration": 10.0,
-        "top_origins": [
-          {
-            "origin": "Thailand",
-            "share": 0.5128,
-            "growth": -0.3884,
-            "emerging": false
-          },
-          {
-            "origin": "China",
-            "share": 0.2616,
-            "growth": -0.3095,
-            "emerging": false
-          },
-          {
-            "origin": "Indonesia",
-            "share": 0.0964,
-            "growth": 0.1865,
-            "emerging": true
-          },
-          {
-            "origin": "Vietnam",
-            "share": 0.0484,
-            "growth": -0.3807,
-            "emerging": false
-          },
-          {
-            "origin": "Cambodia",
-            "share": 0.0432,
-            "growth": 0.0284,
-            "emerging": false
-          }
-        ],
-        "recommended_origins": [
-          "Indonesia"
-        ],
-        "marketplace": [],
-        "competitors": [
-          {
-            "competitor": "Rewe",
-            "origin": "Thailand"
-          }
-        ]
-      },
-      "status": "new"
-    },
-    {
-      "id": 2,
       "category_id": 8,
       "category": "Drinkware & Tumblers",
       "market_code": "ES",
       "market": "Spain",
       "action": "PROCURE",
-      "score": 88.0,
-      "confidence": 0.583,
-      "headline": "PROCURE: Drinkware & Tumblers \u2014 source from China",
-      "narrative": "Procure Drinkware & Tumblers for Spain. Demand strongest on google_trends (momentum 36.01); 2 of 3 demand sources rising, accelerating (+10.84). Source from China, Thailand, Japan (current top origins). Note: Tesco already sources here (China).",
+      "score": 100.0,
+      "confidence": 0.75,
+      "headline": "PROCURE: Drinkware & Tumblers \u2014 source from Vietnam (emerging origin)",
+      "narrative": "Procure Drinkware & Tumblers for Spain. Demand strongest on google_trends (momentum 36.01); 1 of 2 demand sources rising, accelerating (+10.84). Source from Vietnam, Thailand \u2014 emerging origins gaining share. Note: Tesco already sources here (China).",
       "narrator": "rule",
       "evidence": {
         "category": "Drinkware & Tumblers",
@@ -11259,57 +9483,50 @@
             "acceleration": 10.8446
           },
           {
-            "platform": "wikipedia",
-            "momentum": 1.0561,
-            "growth": 0.1859,
-            "acceleration": 0.3038
-          },
-          {
             "platform": "tiktok",
             "momentum": -0.6412,
             "growth": -0.0468,
             "acceleration": -0.215
           }
         ],
-        "rising_sources": 2,
-        "total_sources": 3,
+        "rising_sources": 1,
+        "total_sources": 2,
         "max_acceleration": 10.8446,
         "top_origins": [
           {
             "origin": "China",
-            "share": 0.9907,
-            "growth": -0.0532,
-            "emerging": false
-          },
-          {
-            "origin": "Thailand",
-            "share": 0.0071,
-            "growth": 0.3801,
-            "emerging": false
-          },
-          {
-            "origin": "Japan",
-            "share": 0.0008,
-            "growth": -0.5889,
-            "emerging": false
-          },
-          {
-            "origin": "India",
-            "share": 0.0008,
-            "growth": 0.2232,
+            "share": 0.9134,
+            "growth": -0.1871,
             "emerging": false
           },
           {
             "origin": "Vietnam",
-            "share": 0.0002,
-            "growth": -0.2137,
+            "share": 0.0429,
+            "growth": 1.193,
+            "emerging": true
+          },
+          {
+            "origin": "Thailand",
+            "share": 0.0415,
+            "growth": 1.3621,
+            "emerging": true
+          },
+          {
+            "origin": "Japan",
+            "share": 0.001,
+            "growth": 0.3478,
+            "emerging": false
+          },
+          {
+            "origin": "India",
+            "share": 0.0006,
+            "growth": -0.3915,
             "emerging": false
           }
         ],
         "recommended_origins": [
-          "China",
-          "Thailand",
-          "Japan"
+          "Vietnam",
+          "Thailand"
         ],
         "marketplace": [],
         "competitors": [
@@ -11322,27 +9539,431 @@
       "status": "new"
     },
     {
+      "id": 2,
+      "category_id": 11,
+      "category": "Pet Care",
+      "market_code": "NL",
+      "market": "Netherlands",
+      "action": "PROCURE",
+      "score": 100.0,
+      "confidence": 0.75,
+      "headline": "PROCURE: Pet Care \u2014 source from Thailand (emerging origin)",
+      "narrative": "Procure Pet Care for Netherlands. Demand strongest on google_trends (momentum 39.25); 1 of 2 demand sources rising, accelerating (+10.00). Source from Thailand, Indonesia, Cambodia \u2014 emerging origins gaining share. Note: Rewe already sources here (Thailand).",
+      "narrator": "rule",
+      "evidence": {
+        "category": "Pet Care",
+        "market": "Netherlands",
+        "demand": [
+          {
+            "platform": "google_trends",
+            "momentum": 39.251,
+            "growth": 10.0,
+            "acceleration": 10.0
+          },
+          {
+            "platform": "tiktok",
+            "momentum": -10.7794,
+            "growth": -0.783,
+            "acceleration": -0.0812
+          }
+        ],
+        "rising_sources": 1,
+        "total_sources": 2,
+        "max_acceleration": 10.0,
+        "top_origins": [
+          {
+            "origin": "Thailand",
+            "share": 0.5731,
+            "growth": 0.196,
+            "emerging": true
+          },
+          {
+            "origin": "China",
+            "share": 0.1655,
+            "growth": -0.3219,
+            "emerging": false
+          },
+          {
+            "origin": "Indonesia",
+            "share": 0.1026,
+            "growth": 0.3434,
+            "emerging": true
+          },
+          {
+            "origin": "Cambodia",
+            "share": 0.0617,
+            "growth": 0.5001,
+            "emerging": true
+          },
+          {
+            "origin": "Vietnam",
+            "share": 0.0529,
+            "growth": -0.0433,
+            "emerging": false
+          }
+        ],
+        "recommended_origins": [
+          "Thailand",
+          "Indonesia",
+          "Cambodia",
+          "India"
+        ],
+        "marketplace": [],
+        "competitors": [
+          {
+            "competitor": "Rewe",
+            "origin": "Thailand"
+          }
+        ]
+      },
+      "status": "new"
+    },
+    {
       "id": 3,
+      "category_id": 2,
+      "category": "Tea & Matcha",
+      "market_code": "GB",
+      "market": "United Kingdom",
+      "action": "WATCH",
+      "score": 40.41,
+      "confidence": 0.75,
+      "headline": "WATCH: Tea & Matcha \u2014 source from Japan (emerging origin)",
+      "narrative": "Watch Tea & Matcha for United Kingdom. Demand strongest on google_trends (momentum 0.25); 1 of 2 demand sources rising, accelerating (+0.11). Source from Japan \u2014 emerging origins gaining share. Note: Rewe already sources here (China).",
+      "narrator": "rule",
+      "evidence": {
+        "category": "Tea & Matcha",
+        "market": "United Kingdom",
+        "demand": [
+          {
+            "platform": "google_trends",
+            "momentum": 0.252,
+            "growth": 0.0573,
+            "acceleration": 0.1091
+          },
+          {
+            "platform": "tiktok",
+            "momentum": -8.8219,
+            "growth": -0.6544,
+            "acceleration": -0.1638
+          }
+        ],
+        "rising_sources": 1,
+        "total_sources": 2,
+        "max_acceleration": 0.1091,
+        "top_origins": [
+          {
+            "origin": "Japan",
+            "share": 0.4559,
+            "growth": 0.8255,
+            "emerging": true
+          },
+          {
+            "origin": "India",
+            "share": 0.2262,
+            "growth": 0.0038,
+            "emerging": false
+          },
+          {
+            "origin": "China",
+            "share": 0.2027,
+            "growth": 0.1057,
+            "emerging": false
+          },
+          {
+            "origin": "Vietnam",
+            "share": 0.0267,
+            "growth": 0.0495,
+            "emerging": false
+          },
+          {
+            "origin": "Pakistan",
+            "share": 0.0267,
+            "growth": 0.0545,
+            "emerging": false
+          }
+        ],
+        "recommended_origins": [
+          "Japan"
+        ],
+        "marketplace": [],
+        "competitors": [
+          {
+            "competitor": "Rewe",
+            "origin": "China"
+          },
+          {
+            "competitor": "Sainsbury's",
+            "origin": "India"
+          }
+        ]
+      },
+      "status": "new"
+    },
+    {
+      "id": 4,
+      "category_id": 6,
+      "category": "Toys & Collectibles",
+      "market_code": "GB",
+      "market": "United Kingdom",
+      "action": "WATCH",
+      "score": 40.33,
+      "confidence": 0.75,
+      "headline": "WATCH: Toys & Collectibles \u2014 source from Vietnam (emerging origin)",
+      "narrative": "Watch Toys & Collectibles for United Kingdom. Demand strongest on google_trends (momentum 0.21); 1 of 2 demand sources rising, accelerating (+0.12). Source from Vietnam \u2014 emerging origins gaining share. Note: Tesco already sources here (China).",
+      "narrator": "rule",
+      "evidence": {
+        "category": "Toys & Collectibles",
+        "market": "United Kingdom",
+        "demand": [
+          {
+            "platform": "google_trends",
+            "momentum": 0.2137,
+            "growth": 0.0497,
+            "acceleration": 0.121
+          },
+          {
+            "platform": "tiktok",
+            "momentum": -11.2802,
+            "growth": -0.9109,
+            "acceleration": -0.2336
+          }
+        ],
+        "rising_sources": 1,
+        "total_sources": 2,
+        "max_acceleration": 0.121,
+        "top_origins": [
+          {
+            "origin": "China",
+            "share": 0.7855,
+            "growth": -0.2688,
+            "emerging": false
+          },
+          {
+            "origin": "Vietnam",
+            "share": 0.1406,
+            "growth": 0.2048,
+            "emerging": true
+          },
+          {
+            "origin": "Indonesia",
+            "share": 0.0375,
+            "growth": 0.0597,
+            "emerging": false
+          },
+          {
+            "origin": "Thailand",
+            "share": 0.0118,
+            "growth": 0.0678,
+            "emerging": false
+          },
+          {
+            "origin": "India",
+            "share": 0.01,
+            "growth": 0.0696,
+            "emerging": false
+          }
+        ],
+        "recommended_origins": [
+          "Vietnam"
+        ],
+        "marketplace": [],
+        "competitors": [
+          {
+            "competitor": "Tesco",
+            "origin": "China"
+          },
+          {
+            "competitor": "Ahold Delhaize",
+            "origin": "China"
+          },
+          {
+            "competitor": "Walmart",
+            "origin": "China"
+          }
+        ]
+      },
+      "status": "new"
+    },
+    {
+      "id": 5,
+      "category_id": 7,
+      "category": "Small Kitchen Appliances",
+      "market_code": "GB",
+      "market": "United Kingdom",
+      "action": "HOLD",
+      "score": 23.35,
+      "confidence": 0.4,
+      "headline": "HOLD: Small Kitchen Appliances \u2014 source from Thailand (emerging origin)",
+      "narrative": "Hold on Small Kitchen Appliances for United Kingdom. Demand strongest on google_trends (momentum -0.19); 0 of 2 demand sources rising, accelerating (+0.08). Source from Thailand, Vietnam, Indonesia \u2014 emerging origins gaining share. Note: Aldi already sources here (China).",
+      "narrator": "rule",
+      "evidence": {
+        "category": "Small Kitchen Appliances",
+        "market": "United Kingdom",
+        "demand": [
+          {
+            "platform": "google_trends",
+            "momentum": -0.1857,
+            "growth": -0.0444,
+            "acceleration": 0.0076
+          },
+          {
+            "platform": "tiktok",
+            "momentum": -6.6631,
+            "growth": -0.4653,
+            "acceleration": 0.0838
+          }
+        ],
+        "rising_sources": 0,
+        "total_sources": 2,
+        "max_acceleration": 0.0838,
+        "top_origins": [
+          {
+            "origin": "China",
+            "share": 0.7595,
+            "growth": -0.1795,
+            "emerging": false
+          },
+          {
+            "origin": "Thailand",
+            "share": 0.0624,
+            "growth": 0.4253,
+            "emerging": true
+          },
+          {
+            "origin": "Vietnam",
+            "share": 0.0556,
+            "growth": 2.4499,
+            "emerging": true
+          },
+          {
+            "origin": "Indonesia",
+            "share": 0.0403,
+            "growth": 0.2075,
+            "emerging": true
+          },
+          {
+            "origin": "South Korea",
+            "share": 0.0347,
+            "growth": 0.026,
+            "emerging": false
+          }
+        ],
+        "recommended_origins": [
+          "Thailand",
+          "Vietnam",
+          "Indonesia"
+        ],
+        "marketplace": [],
+        "competitors": [
+          {
+            "competitor": "Aldi",
+            "origin": "China"
+          },
+          {
+            "competitor": "Edeka",
+            "origin": "China"
+          },
+          {
+            "competitor": "Walmart",
+            "origin": "China"
+          }
+        ]
+      },
+      "status": "new"
+    },
+    {
+      "id": 6,
+      "category_id": 1,
+      "category": "Beauty & Cosmetics",
+      "market_code": "GB",
+      "market": "United Kingdom",
+      "action": "HOLD",
+      "score": 20.1,
+      "confidence": 0.4,
+      "headline": "HOLD: Beauty & Cosmetics \u2014 source from South Korea (emerging origin)",
+      "narrative": "Hold on Beauty & Cosmetics for United Kingdom. Demand strongest on google_trends (momentum -0.18); 0 of 2 demand sources rising, accelerating (+0.00). Source from South Korea \u2014 emerging origins gaining share. Note: Edeka already sources here (South Korea).",
+      "narrator": "rule",
+      "evidence": {
+        "category": "Beauty & Cosmetics",
+        "market": "United Kingdom",
+        "demand": [
+          {
+            "platform": "google_trends",
+            "momentum": -0.1846,
+            "growth": -0.0431,
+            "acceleration": 0.0026
+          },
+          {
+            "platform": "tiktok",
+            "momentum": -8.7072,
+            "growth": -0.5655,
+            "acceleration": -2.6503
+          }
+        ],
+        "rising_sources": 0,
+        "total_sources": 2,
+        "max_acceleration": 0.0026,
+        "top_origins": [
+          {
+            "origin": "South Korea",
+            "share": 0.6557,
+            "growth": 0.1533,
+            "emerging": true
+          },
+          {
+            "origin": "China",
+            "share": 0.2137,
+            "growth": -0.2081,
+            "emerging": false
+          },
+          {
+            "origin": "Japan",
+            "share": 0.0575,
+            "growth": -0.1484,
+            "emerging": false
+          },
+          {
+            "origin": "India",
+            "share": 0.0224,
+            "growth": -0.2755,
+            "emerging": false
+          },
+          {
+            "origin": "Vietnam",
+            "share": 0.0187,
+            "growth": 2.3493,
+            "emerging": false
+          }
+        ],
+        "recommended_origins": [
+          "South Korea"
+        ],
+        "marketplace": [],
+        "competitors": [
+          {
+            "competitor": "Edeka",
+            "origin": "South Korea"
+          }
+        ]
+      },
+      "status": "new"
+    },
+    {
+      "id": 7,
       "category_id": 3,
       "category": "Coffee",
-      "market_code": "FR",
-      "market": "France",
-      "action": "PROCURE",
-      "score": 86.15,
-      "confidence": 0.417,
-      "headline": "PROCURE: Coffee \u2014 source from Vietnam",
-      "narrative": "Procure Coffee for France. Demand strongest on wikipedia (momentum 11.98); 1 of 3 demand sources rising, accelerating (+5.16). Source from Vietnam, Indonesia, India (current top origins). Note: Rewe already sources here (Vietnam).",
+      "market_code": "GB",
+      "market": "United Kingdom",
+      "action": "HOLD",
+      "score": 20.0,
+      "confidence": 0.25,
+      "headline": "HOLD: Coffee \u2014 source from Vietnam (emerging origin)",
+      "narrative": "Hold on Coffee for United Kingdom. Demand strongest on google_trends (momentum -0.13); 0 of 2 demand sources rising. Source from Vietnam, Indonesia, India \u2014 emerging origins gaining share. Note: Rewe already sources here (Vietnam).",
       "narrator": "rule",
       "evidence": {
         "category": "Coffee",
-        "market": "France",
+        "market": "United Kingdom",
         "demand": [
-          {
-            "platform": "wikipedia",
-            "momentum": 11.9842,
-            "growth": 4.8462,
-            "acceleration": 5.1619
-          },
           {
             "platform": "google_trends",
             "momentum": -0.1281,
@@ -11356,38 +9977,38 @@
             "acceleration": -0.0513
           }
         ],
-        "rising_sources": 1,
-        "total_sources": 3,
-        "max_acceleration": 5.1619,
+        "rising_sources": 0,
+        "total_sources": 2,
+        "max_acceleration": -0.0333,
         "top_origins": [
           {
             "origin": "Vietnam",
-            "share": 0.6241,
-            "growth": 0.0721,
-            "emerging": false
+            "share": 0.6315,
+            "growth": 0.5347,
+            "emerging": true
           },
           {
             "origin": "Indonesia",
-            "share": 0.2376,
-            "growth": -0.1279,
-            "emerging": false
+            "share": 0.2103,
+            "growth": 0.5108,
+            "emerging": true
           },
           {
             "origin": "India",
-            "share": 0.1208,
-            "growth": -0.049,
-            "emerging": false
+            "share": 0.1429,
+            "growth": 0.1924,
+            "emerging": true
           },
           {
             "origin": "China",
             "share": 0.0115,
-            "growth": -0.7092,
+            "growth": -0.3292,
             "emerging": false
           },
           {
             "origin": "Turkey",
-            "share": 0.0037,
-            "growth": 0.4606,
+            "share": 0.0025,
+            "growth": 0.0183,
             "emerging": false
           }
         ],
@@ -11407,220 +10028,21 @@
       "status": "new"
     },
     {
-      "id": 4,
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "market_code": "NL",
-      "market": "Netherlands",
-      "action": "PROCURE",
-      "score": 60.28,
-      "confidence": 0.833,
-      "headline": "PROCURE: Tea & Matcha \u2014 source from Japan (emerging origin)",
-      "narrative": "Procure Tea & Matcha for Netherlands. Demand strongest on wikipedia (momentum 0.58); 2 of 3 demand sources rising, accelerating (+0.20). Source from Japan, Pakistan \u2014 emerging origins gaining share. Note: Rewe already sources here (China).",
-      "narrator": "rule",
-      "evidence": {
-        "category": "Tea & Matcha",
-        "market": "Netherlands",
-        "demand": [
-          {
-            "platform": "wikipedia",
-            "momentum": 0.5838,
-            "growth": 0.1028,
-            "acceleration": 0.2
-          },
-          {
-            "platform": "google_trends",
-            "momentum": 0.252,
-            "growth": 0.0573,
-            "acceleration": 0.1091
-          },
-          {
-            "platform": "tiktok",
-            "momentum": -8.8219,
-            "growth": -0.6544,
-            "acceleration": -0.1638
-          }
-        ],
-        "rising_sources": 2,
-        "total_sources": 3,
-        "max_acceleration": 0.2,
-        "top_origins": [
-          {
-            "origin": "Japan",
-            "share": 0.3468,
-            "growth": 0.2639,
-            "emerging": true
-          },
-          {
-            "origin": "India",
-            "share": 0.2835,
-            "growth": -0.144,
-            "emerging": false
-          },
-          {
-            "origin": "China",
-            "share": 0.2314,
-            "growth": -0.2792,
-            "emerging": false
-          },
-          {
-            "origin": "Pakistan",
-            "share": 0.0306,
-            "growth": 0.176,
-            "emerging": true
-          },
-          {
-            "origin": "Indonesia",
-            "share": 0.0301,
-            "growth": -0.3962,
-            "emerging": false
-          }
-        ],
-        "recommended_origins": [
-          "Japan",
-          "Pakistan"
-        ],
-        "marketplace": [],
-        "competitors": [
-          {
-            "competitor": "Rewe",
-            "origin": "China"
-          },
-          {
-            "competitor": "Sainsbury's",
-            "origin": "India"
-          }
-        ]
-      },
-      "status": "new"
-    },
-    {
-      "id": 5,
-      "category_id": 5,
-      "category": "Knitwear & Apparel",
-      "market_code": "NL",
-      "market": "Netherlands",
-      "action": "WATCH",
-      "score": 48.38,
-      "confidence": 0.417,
-      "headline": "WATCH: Knitwear & Apparel \u2014 source from China",
-      "narrative": "Watch Knitwear & Apparel for Netherlands. Demand strongest on wikipedia (momentum 0.59); 1 of 3 demand sources rising, accelerating (+0.84). Source from China, Vietnam, Bangladesh (current top origins). Note: Aldi already sources here (Bangladesh).",
-      "narrator": "rule",
-      "evidence": {
-        "category": "Knitwear & Apparel",
-        "market": "Netherlands",
-        "demand": [
-          {
-            "platform": "wikipedia",
-            "momentum": 0.5932,
-            "growth": 0.2917,
-            "acceleration": 0.8417
-          },
-          {
-            "platform": "google_trends",
-            "momentum": -0.6016,
-            "growth": -0.1545,
-            "acceleration": -0.059
-          },
-          {
-            "platform": "tiktok",
-            "momentum": -9.9398,
-            "growth": -0.8674,
-            "acceleration": -0.7077
-          }
-        ],
-        "rising_sources": 1,
-        "total_sources": 3,
-        "max_acceleration": 0.8417,
-        "top_origins": [
-          {
-            "origin": "China",
-            "share": 0.3186,
-            "growth": -0.2308,
-            "emerging": false
-          },
-          {
-            "origin": "Vietnam",
-            "share": 0.2056,
-            "growth": -0.3073,
-            "emerging": false
-          },
-          {
-            "origin": "Bangladesh",
-            "share": 0.1397,
-            "growth": -0.1993,
-            "emerging": false
-          },
-          {
-            "origin": "Cambodia",
-            "share": 0.094,
-            "growth": -0.1478,
-            "emerging": false
-          },
-          {
-            "origin": "Indonesia",
-            "share": 0.0678,
-            "growth": -0.3397,
-            "emerging": false
-          }
-        ],
-        "recommended_origins": [
-          "China",
-          "Vietnam",
-          "Bangladesh"
-        ],
-        "marketplace": [],
-        "competitors": [
-          {
-            "competitor": "Aldi",
-            "origin": "Bangladesh"
-          },
-          {
-            "competitor": "Tesco",
-            "origin": "Bangladesh"
-          },
-          {
-            "competitor": "Carrefour",
-            "origin": "Turkey"
-          },
-          {
-            "competitor": "Auchan",
-            "origin": "Bangladesh"
-          },
-          {
-            "competitor": "Mercadona",
-            "origin": "Turkey"
-          },
-          {
-            "competitor": "Sainsbury's",
-            "origin": "Bangladesh"
-          }
-        ]
-      },
-      "status": "new"
-    },
-    {
-      "id": 6,
+      "id": 8,
       "category_id": 4,
       "category": "Footwear",
-      "market_code": "DE",
-      "market": "Germany",
-      "action": "WATCH",
-      "score": 44.42,
-      "confidence": 0.417,
-      "headline": "WATCH: Footwear \u2014 source from Vietnam",
-      "narrative": "Watch Footwear for Germany. Demand strongest on wikipedia (momentum 0.28); 1 of 3 demand sources rising, accelerating (+0.66). Source from Vietnam, China, Indonesia (current top origins). Note: Aldi already sources here (Vietnam).",
+      "market_code": "IT",
+      "market": "Italy",
+      "action": "HOLD",
+      "score": 20.0,
+      "confidence": 0.25,
+      "headline": "HOLD: Footwear \u2014 source from Indonesia (emerging origin)",
+      "narrative": "Hold on Footwear for Italy. Demand strongest on google_trends (momentum -0.71); 0 of 2 demand sources rising. Source from Indonesia, Cambodia \u2014 emerging origins gaining share. Note: Aldi already sources here (Vietnam).",
       "narrator": "rule",
       "evidence": {
         "category": "Footwear",
-        "market": "Germany",
+        "market": "Italy",
         "demand": [
-          {
-            "platform": "wikipedia",
-            "momentum": 0.2783,
-            "growth": 0.2222,
-            "acceleration": 0.6597
-          },
           {
             "platform": "google_trends",
             "momentum": -0.7096,
@@ -11634,45 +10056,44 @@
             "acceleration": -0.1017
           }
         ],
-        "rising_sources": 1,
-        "total_sources": 3,
-        "max_acceleration": 0.6597,
+        "rising_sources": 0,
+        "total_sources": 2,
+        "max_acceleration": -0.0614,
         "top_origins": [
           {
             "origin": "Vietnam",
-            "share": 0.4411,
-            "growth": -0.3427,
+            "share": 0.4853,
+            "growth": 0.0623,
             "emerging": false
           },
           {
             "origin": "China",
-            "share": 0.4199,
-            "growth": -0.361,
+            "share": 0.3183,
+            "growth": -0.1883,
             "emerging": false
           },
           {
             "origin": "Indonesia",
-            "share": 0.0924,
-            "growth": -0.433,
-            "emerging": false
+            "share": 0.1348,
+            "growth": 0.4502,
+            "emerging": true
           },
           {
             "origin": "Cambodia",
-            "share": 0.0299,
-            "growth": -0.373,
-            "emerging": false
+            "share": 0.0411,
+            "growth": 0.3423,
+            "emerging": true
           },
           {
-            "origin": "Bangladesh",
-            "share": 0.0057,
-            "growth": -0.4084,
+            "origin": "India",
+            "share": 0.0093,
+            "growth": 0.6846,
             "emerging": false
           }
         ],
         "recommended_origins": [
-          "Vietnam",
-          "China",
-          "Indonesia"
+          "Indonesia",
+          "Cambodia"
         ],
         "marketplace": [],
         "competitors": [
@@ -11705,203 +10126,119 @@
       "status": "new"
     },
     {
-      "id": 7,
-      "category_id": 1,
-      "category": "Beauty & Cosmetics",
+      "id": 9,
+      "category_id": 5,
+      "category": "Knitwear & Apparel",
       "market_code": "GB",
       "market": "United Kingdom",
-      "action": "WATCH",
-      "score": 34.33,
-      "confidence": 0.667,
-      "headline": "WATCH: Beauty & Cosmetics \u2014 source from South Korea (emerging origin)",
-      "narrative": "Watch Beauty & Cosmetics for United Kingdom. Demand strongest on wikipedia (momentum 0.07); 1 of 3 demand sources rising, accelerating (+0.03). Source from South Korea \u2014 emerging origins gaining share. Note: Edeka already sources here (South Korea).",
+      "action": "HOLD",
+      "score": 20.0,
+      "confidence": 0.25,
+      "headline": "HOLD: Knitwear & Apparel \u2014 source from Cambodia (emerging origin)",
+      "narrative": "Hold on Knitwear & Apparel for United Kingdom. Demand strongest on google_trends (momentum -0.60); 0 of 2 demand sources rising. Source from Cambodia, Pakistan \u2014 emerging origins gaining share. Note: Aldi already sources here (Bangladesh).",
       "narrator": "rule",
       "evidence": {
-        "category": "Beauty & Cosmetics",
-        "market": "United Kingdom",
-        "demand": [
-          {
-            "platform": "wikipedia",
-            "momentum": 0.0664,
-            "growth": 0.0102,
-            "acceleration": 0.0292
-          },
-          {
-            "platform": "google_trends",
-            "momentum": -0.1846,
-            "growth": -0.0431,
-            "acceleration": 0.0026
-          },
-          {
-            "platform": "tiktok",
-            "momentum": -8.7072,
-            "growth": -0.5655,
-            "acceleration": -2.6503
-          }
-        ],
-        "rising_sources": 1,
-        "total_sources": 3,
-        "max_acceleration": 0.0292,
-        "top_origins": [
-          {
-            "origin": "South Korea",
-            "share": 0.5038,
-            "growth": 0.28,
-            "emerging": true
-          },
-          {
-            "origin": "China",
-            "share": 0.3468,
-            "growth": 0.0527,
-            "emerging": false
-          },
-          {
-            "origin": "Japan",
-            "share": 0.078,
-            "growth": -0.2138,
-            "emerging": false
-          },
-          {
-            "origin": "India",
-            "share": 0.0296,
-            "growth": 0.078,
-            "emerging": false
-          },
-          {
-            "origin": "Turkey",
-            "share": 0.0191,
-            "growth": -0.3999,
-            "emerging": false
-          }
-        ],
-        "recommended_origins": [
-          "South Korea"
-        ],
-        "marketplace": [],
-        "competitors": [
-          {
-            "competitor": "Edeka",
-            "origin": "South Korea"
-          }
-        ]
-      },
-      "status": "new"
-    },
-    {
-      "id": 8,
-      "category_id": 6,
-      "category": "Toys & Collectibles",
-      "market_code": "GB",
-      "market": "United Kingdom",
-      "action": "WATCH",
-      "score": 28.33,
-      "confidence": 0.417,
-      "headline": "WATCH: Toys & Collectibles \u2014 source from China",
-      "narrative": "Watch Toys & Collectibles for United Kingdom. Demand strongest on google_trends (momentum 0.21); 1 of 3 demand sources rising, accelerating (+0.12). Source from China, Vietnam, Indonesia (current top origins). Note: Tesco already sources here (China).",
-      "narrator": "rule",
-      "evidence": {
-        "category": "Toys & Collectibles",
+        "category": "Knitwear & Apparel",
         "market": "United Kingdom",
         "demand": [
           {
             "platform": "google_trends",
-            "momentum": 0.2137,
-            "growth": 0.0497,
-            "acceleration": 0.121
-          },
-          {
-            "platform": "wikipedia",
-            "momentum": -0.3818,
-            "growth": -0.066,
-            "acceleration": -0.0457
+            "momentum": -0.6016,
+            "growth": -0.1545,
+            "acceleration": -0.059
           },
           {
             "platform": "tiktok",
-            "momentum": -11.2802,
-            "growth": -0.9109,
-            "acceleration": -0.2336
+            "momentum": -9.9398,
+            "growth": -0.8674,
+            "acceleration": -0.7077
           }
         ],
-        "rising_sources": 1,
-        "total_sources": 3,
-        "max_acceleration": 0.121,
+        "rising_sources": 0,
+        "total_sources": 2,
+        "max_acceleration": -0.059,
         "top_origins": [
           {
             "origin": "China",
-            "share": 0.8625,
-            "growth": -0.2607,
+            "share": 0.2468,
+            "growth": -0.2759,
             "emerging": false
           },
           {
             "origin": "Vietnam",
-            "share": 0.0847,
-            "growth": -0.2198,
+            "share": 0.2245,
+            "growth": 0.1123,
             "emerging": false
+          },
+          {
+            "origin": "Bangladesh",
+            "share": 0.143,
+            "growth": 0.007,
+            "emerging": false
+          },
+          {
+            "origin": "Cambodia",
+            "share": 0.1412,
+            "growth": 0.4108,
+            "emerging": true
           },
           {
             "origin": "Indonesia",
-            "share": 0.0273,
-            "growth": -0.2029,
-            "emerging": false
-          },
-          {
-            "origin": "Thailand",
-            "share": 0.0092,
-            "growth": -0.1815,
-            "emerging": false
-          },
-          {
-            "origin": "India",
-            "share": 0.0076,
-            "growth": -0.1296,
+            "share": 0.0684,
+            "growth": 0.1004,
             "emerging": false
           }
         ],
         "recommended_origins": [
-          "China",
-          "Vietnam",
-          "Indonesia"
+          "Cambodia",
+          "Pakistan"
         ],
         "marketplace": [],
         "competitors": [
           {
+            "competitor": "Aldi",
+            "origin": "Bangladesh"
+          },
+          {
             "competitor": "Tesco",
-            "origin": "China"
+            "origin": "Bangladesh"
           },
           {
-            "competitor": "Ahold Delhaize",
-            "origin": "China"
+            "competitor": "Carrefour",
+            "origin": "Turkey"
           },
           {
-            "competitor": "Walmart",
-            "origin": "China"
+            "competitor": "Auchan",
+            "origin": "Bangladesh"
+          },
+          {
+            "competitor": "Mercadona",
+            "origin": "Turkey"
+          },
+          {
+            "competitor": "Sainsbury's",
+            "origin": "Bangladesh"
           }
         ]
       },
       "status": "new"
     },
     {
-      "id": 9,
+      "id": 10,
       "category_id": 10,
       "category": "Audio & Earbuds",
       "market_code": "GB",
       "market": "United Kingdom",
-      "action": "WATCH",
-      "score": 25.14,
-      "confidence": 0.417,
-      "headline": "WATCH: Audio & Earbuds \u2014 source from China",
-      "narrative": "Watch Audio & Earbuds for United Kingdom. Demand strongest on wikipedia (momentum 0.16); 1 of 3 demand sources rising, accelerating (+0.06). Source from China, Vietnam, Thailand (current top origins). Note: Aldi already sources here (China).",
+      "action": "HOLD",
+      "score": 20.0,
+      "confidence": 0.25,
+      "headline": "HOLD: Audio & Earbuds \u2014 source from Vietnam (emerging origin)",
+      "narrative": "Hold on Audio & Earbuds for United Kingdom. Demand strongest on google_trends (momentum -0.58); 0 of 2 demand sources rising. Source from Vietnam, Thailand \u2014 emerging origins gaining share. Note: Aldi already sources here (China).",
       "narrator": "rule",
       "evidence": {
         "category": "Audio & Earbuds",
         "market": "United Kingdom",
         "demand": [
-          {
-            "platform": "wikipedia",
-            "momentum": 0.1552,
-            "growth": 0.025,
-            "acceleration": 0.0637
-          },
           {
             "platform": "google_trends",
             "momentum": -0.5793,
@@ -11915,43 +10252,42 @@
             "acceleration": -0.1609
           }
         ],
-        "rising_sources": 1,
-        "total_sources": 3,
-        "max_acceleration": 0.0637,
+        "rising_sources": 0,
+        "total_sources": 2,
+        "max_acceleration": -0.1609,
         "top_origins": [
           {
-            "origin": "China",
-            "share": 0.6183,
-            "growth": -0.1352,
-            "emerging": false
+            "origin": "Vietnam",
+            "share": 0.5332,
+            "growth": 0.2618,
+            "emerging": true
           },
           {
-            "origin": "Vietnam",
-            "share": 0.3299,
-            "growth": -0.1878,
+            "origin": "China",
+            "share": 0.3985,
+            "growth": -0.3593,
             "emerging": false
           },
           {
             "origin": "Thailand",
-            "share": 0.0295,
-            "growth": -0.1938,
-            "emerging": false
+            "share": 0.0427,
+            "growth": 0.311,
+            "emerging": true
           },
           {
             "origin": "Japan",
-            "share": 0.0094,
-            "growth": -0.2804,
+            "share": 0.0082,
+            "growth": 0.0674,
             "emerging": false
           },
           {
             "origin": "Indonesia",
-            "share": 0.0064,
-            "growth": -0.2501,
+            "share": 0.0074,
+            "growth": -0.004,
             "emerging": false
           }
         ],
         "recommended_origins": [
-          "China",
           "Vietnam",
           "Thailand"
         ],
@@ -11970,27 +10306,21 @@
       "status": "new"
     },
     {
-      "id": 10,
+      "id": 11,
       "category_id": 9,
       "category": "Candles & Home Fragrance",
-      "market_code": "ES",
-      "market": "Spain",
-      "action": "WATCH",
-      "score": 22.23,
-      "confidence": 0.417,
-      "headline": "WATCH: Candles & Home Fragrance \u2014 source from Vietnam",
-      "narrative": "Watch Candles & Home Fragrance for Spain. Demand strongest on wikipedia (momentum 0.13); 1 of 3 demand sources rising, accelerating (+0.00). Source from Vietnam, China, India (current top origins). Note: Carrefour already sources here (India).",
+      "market_code": "US",
+      "market": "United States",
+      "action": "HOLD",
+      "score": 8.0,
+      "confidence": 0.0,
+      "headline": "HOLD: Candles & Home Fragrance \u2014 source from Vietnam",
+      "narrative": "Hold on Candles & Home Fragrance for United States. Demand strongest on google_trends (momentum -1.30); 0 of 2 demand sources rising. Source from Vietnam, China, India (current top origins). Note: Carrefour already sources here (India).",
       "narrator": "rule",
       "evidence": {
         "category": "Candles & Home Fragrance",
-        "market": "Spain",
+        "market": "United States",
         "demand": [
-          {
-            "platform": "wikipedia",
-            "momentum": 0.1292,
-            "growth": 0.0214,
-            "acceleration": 0.0011
-          },
           {
             "platform": "google_trends",
             "momentum": -1.305,
@@ -12004,38 +10334,38 @@
             "acceleration": -0.4272
           }
         ],
-        "rising_sources": 1,
-        "total_sources": 3,
-        "max_acceleration": 0.0011,
+        "rising_sources": 0,
+        "total_sources": 2,
+        "max_acceleration": -0.4272,
         "top_origins": [
           {
             "origin": "Vietnam",
-            "share": 0.6931,
-            "growth": -0.0358,
+            "share": 0.7288,
+            "growth": 0.0313,
             "emerging": false
           },
           {
             "origin": "China",
-            "share": 0.2098,
-            "growth": -0.2245,
+            "share": 0.1834,
+            "growth": -0.2619,
             "emerging": false
           },
           {
             "origin": "India",
-            "share": 0.0619,
-            "growth": -0.2527,
+            "share": 0.0681,
+            "growth": -0.1034,
             "emerging": false
           },
           {
             "origin": "Thailand",
-            "share": 0.0291,
-            "growth": 0.0539,
+            "share": 0.014,
+            "growth": -0.3242,
             "emerging": false
           },
           {
             "origin": "Turkey",
-            "share": 0.0026,
-            "growth": 0.1793,
+            "share": 0.0017,
+            "growth": 0.003,
             "emerging": false
           }
         ],
@@ -12049,99 +10379,6 @@
           {
             "competitor": "Carrefour",
             "origin": "India"
-          }
-        ]
-      },
-      "status": "new"
-    },
-    {
-      "id": 11,
-      "category_id": 7,
-      "category": "Small Kitchen Appliances",
-      "market_code": "GB",
-      "market": "United Kingdom",
-      "action": "HOLD",
-      "score": 11.35,
-      "confidence": 0.15,
-      "headline": "HOLD: Small Kitchen Appliances \u2014 source from China",
-      "narrative": "Hold on Small Kitchen Appliances for United Kingdom. Demand strongest on wikipedia (momentum -0.05); 0 of 3 demand sources rising, accelerating (+0.08). Source from China, Thailand, South Korea (current top origins). Note: Aldi already sources here (China).",
-      "narrator": "rule",
-      "evidence": {
-        "category": "Small Kitchen Appliances",
-        "market": "United Kingdom",
-        "demand": [
-          {
-            "platform": "wikipedia",
-            "momentum": -0.0475,
-            "growth": -0.0099,
-            "acceleration": 0.0481
-          },
-          {
-            "platform": "google_trends",
-            "momentum": -0.1857,
-            "growth": -0.0444,
-            "acceleration": 0.0076
-          },
-          {
-            "platform": "tiktok",
-            "momentum": -6.6631,
-            "growth": -0.4653,
-            "acceleration": 0.0838
-          }
-        ],
-        "rising_sources": 0,
-        "total_sources": 3,
-        "max_acceleration": 0.0838,
-        "top_origins": [
-          {
-            "origin": "China",
-            "share": 0.833,
-            "growth": -0.1391,
-            "emerging": false
-          },
-          {
-            "origin": "Thailand",
-            "share": 0.065,
-            "growth": -0.2236,
-            "emerging": false
-          },
-          {
-            "origin": "South Korea",
-            "share": 0.0282,
-            "growth": -0.1969,
-            "emerging": false
-          },
-          {
-            "origin": "Indonesia",
-            "share": 0.0238,
-            "growth": -0.253,
-            "emerging": false
-          },
-          {
-            "origin": "Turkey",
-            "share": 0.0213,
-            "growth": -0.2116,
-            "emerging": false
-          }
-        ],
-        "recommended_origins": [
-          "China",
-          "Thailand",
-          "South Korea"
-        ],
-        "marketplace": [],
-        "competitors": [
-          {
-            "competitor": "Aldi",
-            "origin": "China"
-          },
-          {
-            "competitor": "Edeka",
-            "origin": "China"
-          },
-          {
-            "competitor": "Walmart",
-            "origin": "China"
           }
         ]
       },
