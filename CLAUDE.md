@@ -21,7 +21,7 @@ Pipelines (run from `pipelines/`):
 ```bash
 uv sync --extra dev                 # install (add --extra postgres for Supabase/Postgres)
 uv run rsi run                      # full pipeline: db init → ingest → score → correlate → export
-uv run rsi ingest [connector...]    # connectors: wikipedia | google_trends | comtrade (default: all)
+uv run rsi ingest [connector...]    # connectors: google_trends | comtrade (default: all)
 uv run rsi score / correlate / export / stats
 uv run pytest                       # tests
 uv run pytest tests/test_scoring.py::test_flat_series_has_near_zero_growth   # single test
@@ -57,7 +57,7 @@ npm run lint
 - **Connectors must degrade gracefully.** Every connector (`connectors/`)
   swallows network/rate-limit errors and returns a partial row count so a flaky
   source never aborts a pipeline run. Google Trends in particular rate-limits
-  (429) and often returns little; Wikipedia and Comtrade are reliable.
+  (429) and often returns little; Comtrade is reliable.
 
 - **Correlation re-runs preserve human triage**: `run_correlation` deletes only
   `status='new'` triggers, leaving `actioned`/`dismissed` ones intact.

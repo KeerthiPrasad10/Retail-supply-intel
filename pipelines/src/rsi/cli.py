@@ -3,7 +3,7 @@
 Typical flow:
 
     rsi db init            # create schema + seed reference data
-    rsi ingest             # pull all free sources (wikipedia, google_trends, comtrade)
+    rsi ingest             # pull all free sources (google_trends, comtrade)
     rsi score              # compute trend momentum
     rsi correlate          # generate sourcing triggers
     rsi export             # write web/lib/snapshot.json

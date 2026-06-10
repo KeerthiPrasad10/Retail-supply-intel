@@ -70,7 +70,7 @@ class Trend(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     term: Mapped[str] = mapped_column(String(256), nullable=False, index=True)
-    # one of: google_trends | wikipedia | tiktok
+    # one of: google_trends | tiktok | instagram | pinterest | amazon | aliexpress
     platform: Mapped[str] = mapped_column(String(32), nullable=False)
     category_id: Mapped[int | None] = mapped_column(ForeignKey("product_categories.id"))
     first_seen: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow)

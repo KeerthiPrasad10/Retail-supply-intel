@@ -78,7 +78,7 @@ export function DeepDive({ trend: t, go, showMap }: { trend: Trend; go: Go; show
               </div>
             </div>
             <p className="db-foot">
-              Interest momentum from Wikipedia pageviews &amp; Google Trends, weighted by volume.
+              Interest momentum from Google Trends &amp; social feeds, weighted by volume.
               Recent window vs the prior one.
             </p>
           </section>

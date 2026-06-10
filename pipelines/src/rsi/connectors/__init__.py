@@ -8,10 +8,8 @@ from .google_trends import GoogleTrendsConnector
 from .instagram import InstagramTrendsConnector
 from .pinterest import PinterestTrendsConnector
 from .tiktok import TikTokTrendsConnector
-from .wikipedia import WikipediaConnector
 
 CONNECTORS: dict[str, type[Connector]] = {
-    WikipediaConnector.name: WikipediaConnector,
     GoogleTrendsConnector.name: GoogleTrendsConnector,
     ComtradeConnector.name: ComtradeConnector,
     TikTokTrendsConnector.name: TikTokTrendsConnector,
@@ -33,7 +31,6 @@ DEFAULT_CONNECTORS: list[str] = [
 # human name. Order here is the order the panel lists them (core feeds first,
 # then the opt-in social/marketplace ones).
 SOURCE_META: dict[str, dict[str, str]] = {
-    "wikipedia": {"label": "Wikipedia", "kind": "demand"},
     "google_trends": {"label": "Google Trends", "kind": "demand"},
     "comtrade": {"label": "UN Comtrade", "kind": "supply"},
     "tiktok": {"label": "TikTok", "kind": "demand"},
@@ -48,7 +45,6 @@ __all__ = [
     "CONNECTORS",
     "DEFAULT_CONNECTORS",
     "SOURCE_META",
-    "WikipediaConnector",
     "GoogleTrendsConnector",
     "ComtradeConnector",
     "TikTokTrendsConnector",

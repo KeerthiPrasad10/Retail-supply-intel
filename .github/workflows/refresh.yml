@@ -4,8 +4,7 @@ name: Refresh data snapshot
 # commits the updated dashboard snapshot (which triggers a Vercel redeploy).
 # If the RSI_DATABASE_URL secret is set, the same run also writes to Supabase.
 #
-# The weekly cron refreshes only the fast/free demand source (Wikipedia) and
-# recomputes against existing trade flows. The paid Apify social/marketplace
+# The weekly cron recomputes against existing demand series and trade flows. The paid Apify social/marketplace
 # feeds are OPT-IN per run: trigger manually via "Run workflow" with the
 # `apify` box checked (consumes Apify credits; ~1-2h, one actor run/category
 # across 5 connectors). They never run on the schedule.
@@ -53,9 +52,9 @@ jobs:
         # `export` publishes the snapshot row to Supabase when RSI_DATABASE_URL
         # is set.
         #
-        # Demand now comes from search + social (consumer-demand signals), not
-        # Wikipedia pageviews (attention ≠ purchase intent). Those feeds are
-        # paid (Apify), so they run only on manual dispatch with `apify=true`.
+        # Demand comes from search + social (consumer-demand signals). The
+        # social feeds are paid (Apify), so they run only on manual dispatch
+        # with `apify=true`.
         # A plain run (the weekly cron) just recomputes scores/triggers against
         # the data already in the store and republishes — no ingest, no spend.
         run: |

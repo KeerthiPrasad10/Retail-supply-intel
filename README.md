@@ -21,7 +21,7 @@ Each trigger answers: what's trending, where it's bought from, which origins are
 - **`supabase/`** — Postgres schema (the production store). SQLite is used for
   zero-config local dev.
 
-Data sources are all **free**: Google Trends + Wikipedia pageviews (demand) and
+Data sources: Google Trends + social/marketplace feeds (demand) and
 UN Comtrade (supply). See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the
 full design, data model, and roadmap.
 
