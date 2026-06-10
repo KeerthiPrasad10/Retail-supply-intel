@@ -34,13 +34,18 @@ function synthSummary(o: {
   const mkt = o.market === "Global" ? "all markets" : o.market;
   const verb = o.tier === "SURGING" ? "surging" : o.tier === "RISING" ? "rising" : "holding steady";
 
-  const change = `${o.cat} demand is ${verb} in ${mkt} — ${fmtPct(o.growth)} vs the prior window.`;
+  // Demand growth is clamped at ±1000% so a near-zero baseline can't print a fake huge
+  // number — when it's pegged there, say so qualitatively rather than quoting "+1000%".
+  const surgeClamped = o.growth >= 9.99;
+  const change = `${o.cat} demand is ${verb} in ${mkt} — ${
+    surgeClamped ? "up sharply from a near-zero base" : `${fmtPct(o.growth)} vs the prior window`
+  }.`;
 
   let why: string;
   let impact: string;
   if (o.focusEmerging && o.focusName) {
     // A genuinely emerging origin, distinct from the incumbent and gaining share.
-    why = `${o.focusName} is gaining import share`;
+    why = `${o.focusName} is gaining export share`;
     if (o.focusGrowth != null) why += ` (${fmtPct(o.focusGrowth)})`;
     why += " as an emerging origin";
     if (o.leaderName && o.leaderShare != null && o.leaderName !== o.focusName) {
@@ -57,7 +62,7 @@ function synthSummary(o: {
     const riserShareLabel =
       o.riserShare == null ? "" : o.riserShare >= 1 ? `${o.riserShare}%` : "under 1%";
     why = `${o.leaderName} leads supply at ${o.leaderShare}%`;
-    if (contracting) why += `, but its import share is contracting (${fmtPct(o.leaderGrowth!)})`;
+    if (contracting) why += `, but its export share is contracting (${fmtPct(o.leaderGrowth!)})`;
     if (o.riserName && o.riserGrowth != null) {
       why += `${contracting ? "; " : ", and "}${o.riserName} is the fastest-growing alternative (${fmtPct(o.riserGrowth)})${riserShareLabel ? `, though still small at ${riserShareLabel}` : ""}.`;
     } else {

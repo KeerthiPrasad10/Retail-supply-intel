@@ -39,7 +39,7 @@ export function MapView({
               <>
                 Where <b>{trend.cat}</b> is sourced from and the{" "}
                 {trend.market === "Global" ? "EU" : trend.market} market it feeds. Arc weight = share
-                of import value; green = emerging origins gaining share.
+                of export value; green = emerging origins gaining share.
               </>
             )}
           </p>

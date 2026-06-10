@@ -55,6 +55,7 @@ def category_sources(
         select(
             TradeFlow.partner_code,
             TradeFlow.period,
+            TradeFlow.reporter_code,
             func.sum(TradeFlow.trade_value),
         )
         .where(
@@ -62,26 +63,49 @@ def category_sources(
             TradeFlow.flow == "import",
             TradeFlow.partner_code.in_(allowed),
         )
-        .group_by(TradeFlow.partner_code, TradeFlow.period)
+        .group_by(TradeFlow.partner_code, TradeFlow.period, TradeFlow.reporter_code)
     ).all()
     if not rows:
         return []
 
-    periods = sorted({r[1] for r in rows})
-    latest = periods[-1]
-    prev = periods[-2] if len(periods) > 1 else None
+    # Reporter coverage per period. Comtrade's most recent year is often only
+    # partially reported (fewer markets), which would masquerade as a real decline.
+    reporters_by_period: dict[str, set[str]] = defaultdict(set)
+    for _partner, period, reporter, _value in rows:
+        reporters_by_period[period].add(reporter)
+    periods = sorted(reporters_by_period)
+    max_cov = max(len(r) for r in reporters_by_period.values())
+    # Drop trailing periods covering < half the best year's markets (too partial to trust).
+    usable = [p for p in periods if len(reporters_by_period[p]) >= max(1, max_cov * 0.5)]
+    if not usable:
+        usable = periods
+    latest = usable[-1]
+    prev = usable[-2] if len(usable) > 1 else None
 
-    by_partner: dict[str, dict[str, float]] = defaultdict(dict)
-    for partner, period, value in rows:
-        by_partner[partner][period] = float(value or 0.0)
+    # Compare like-for-like: only reporters present in BOTH periods, so a change in
+    # which markets reported can't read as a change in trade.
+    common = reporters_by_period[latest]
+    if prev:
+        common = common & reporters_by_period[prev]
+    if not common:
+        common = reporters_by_period[latest]
 
-    total_latest = sum(p.get(latest, 0.0) for p in by_partner.values()) or 1.0
+    lat: dict[str, float] = defaultdict(float)
+    prv: dict[str, float] = defaultdict(float)
+    for partner, period, reporter, value in rows:
+        if reporter not in common:
+            continue
+        if period == latest:
+            lat[partner] += float(value or 0.0)
+        elif prev and period == prev:
+            prv[partner] += float(value or 0.0)
+
+    total_latest = sum(lat.values()) or 1.0
     out: list[dict] = []
-    for partner, vals in by_partner.items():
-        v_latest = vals.get(latest, 0.0)
-        v_prev = vals.get(prev, 0.0) if prev else 0.0
+    for partner, v_latest in lat.items():
         if v_latest <= 0:
             continue
+        v_prev = prv.get(partner, 0.0)
         growth = (v_latest - v_prev) / v_prev if v_prev > 0 else (1.0 if v_latest else 0.0)
         share = v_latest / total_latest
         emerging = share >= EMERGING_MIN_SHARE and (
