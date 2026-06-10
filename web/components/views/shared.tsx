@@ -54,8 +54,17 @@ export function TrendCard({ t, go, matches }: { t: Trend; go: Go; matches: numbe
           <Tier tier={t.tier} />
         </div>
         <h3 className="tcard-title">
-          {t.cat} demand is {verb} — source from <span className="focus">{focusName}</span> before
-          competitors lock it in
+          {t.focusEmerging ? (
+            <>
+              {t.cat} demand is {verb} — source from <span className="focus">{focusName}</span>{" "}
+              before competitors lock it in
+            </>
+          ) : (
+            <>
+              {t.cat} demand is {verb} — secure <span className="focus">{focusName}</span> capacity
+              before supply tightens
+            </>
+          )}
         </h3>
         <SummaryBlock summary={t.summary} />
         <div className="tcard-origins">

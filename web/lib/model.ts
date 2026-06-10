@@ -21,8 +21,10 @@ function synthSummary(o: {
   tier: Tier;
   focusName: string | null;
   focusGrowth: number | null;
+  focusEmerging: boolean;
   leaderName: string | null;
   leaderShare: number | null;
+  leaderGrowth: number | null;
   leaderFalling: boolean;
   compName: string | null;
 }): TrendSummary {
@@ -32,21 +34,34 @@ function synthSummary(o: {
   const change = `${o.cat} demand is ${verb} in ${mkt} — ${fmtPct(o.growth)} vs the prior window.`;
 
   let why: string;
-  if (o.focusName) {
+  let impact: string;
+  if (o.focusEmerging && o.focusName) {
+    // A genuinely emerging origin, distinct from the incumbent and gaining share.
     why = `${o.focusName} is gaining import share`;
     if (o.focusGrowth != null) why += ` (${fmtPct(o.focusGrowth)})`;
     why += " as an emerging origin";
-    if (o.leaderName && o.leaderShare != null) {
+    if (o.leaderName && o.leaderShare != null && o.leaderName !== o.focusName) {
       why += o.leaderFalling
         ? `, while the incumbent ${o.leaderName} (${o.leaderShare}%) is slipping.`
         : `; ${o.leaderName} still leads at ${o.leaderShare}%.`;
     } else why += ".";
+    impact = `Window to source ${o.cat} from ${o.focusName} early`;
+    impact += o.compName ? ` — ${o.compName} is already sourcing there.` : ", ahead of the demand curve.";
+  } else if (o.leaderName && o.leaderShare != null) {
+    // No emerging origin yet — don't dress the incumbent up as one. Tell it straight.
+    const contracting = o.leaderGrowth != null && o.leaderGrowth < 0;
+    why = `${o.leaderName} leads supply at ${o.leaderShare}%`;
+    why += contracting
+      ? `, but its import share is contracting (${fmtPct(o.leaderGrowth!)}) and no new origin is emerging yet.`
+      : ", with no new origin emerging yet.";
+    impact = contracting
+      ? `Demand is climbing while supply tightens — secure ${o.leaderName} capacity early`
+      : `Lock in ${o.leaderName} capacity ahead of the demand curve`;
+    impact += o.compName ? ` — ${o.compName} is already sourcing there.` : ".";
   } else {
     why = "Supply is shifting across origin countries for this category.";
+    impact = `Window to source ${o.cat} ahead of the demand curve.`;
   }
-
-  let impact = `Window to source ${o.cat} from ${o.focusName ?? "an emerging origin"} early`;
-  impact += o.compName ? ` — ${o.compName} is already sourcing there.` : ", ahead of the demand curve.";
 
   return { change, why, impact };
 }
@@ -98,7 +113,18 @@ export function buildModel(snap: Snapshot): Model {
       const leader = sources[0];
       const leaderName = leader ? (nameByCode[leader[0]] ?? leader[0]) : null;
       const leaderShare = leader ? Math.round(leader[1] * 100) : null;
+      const leaderGrowth = leader ? leader[2] : null;
       const leaderFalling = leader ? leader[2] < 0 : false;
+      // The focus is a *real* emerging origin only if it's flagged emerging, gaining
+      // share, and not just the incumbent leader. Otherwise the engine fell back to
+      // top[0] (no emerging origin existed) and the "emerging" framing would be false.
+      const focusEmerging =
+        !!t.focus_partner &&
+        (emerging.some((s) => s[0] === t.focus_partner) ||
+          sources.some((s) => s[0] === t.focus_partner && s[3] === 1)) &&
+        !!focusEntry &&
+        focusEntry[2] > 0 &&
+        (!leader || leader[0] !== t.focus_partner);
       return {
         id: "T-" + (1000 + t.id),
         cat,
@@ -109,6 +135,7 @@ export function buildModel(snap: Snapshot): Model {
         score: scale(t.score),
         tier,
         focus: t.focus_partner,
+        focusEmerging,
         sources,
         emerging,
         competitors: (p.competitors || []).map((name) => ({
@@ -122,8 +149,10 @@ export function buildModel(snap: Snapshot): Model {
           tier,
           focusName,
           focusGrowth: focusEntry ? focusEntry[2] : null,
+          focusEmerging,
           leaderName,
           leaderShare,
+          leaderGrowth,
           leaderFalling,
           compName,
         }),
