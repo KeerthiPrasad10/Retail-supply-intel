@@ -8,6 +8,7 @@ set ``RSI_COMTRADE_API_KEY`` to use the full data endpoint.
 
 from __future__ import annotations
 
+import datetime
 import time
 from typing import ClassVar
 
@@ -26,7 +27,17 @@ _FULL = "https://comtradeapi.un.org/data/v1/get/C/A/HS"
 # top-10 competitor's home market (DE/GB/FR/ES/NL + US), so "what each Asian
 # origin exports to competitor X" is read off X's home-market import records.
 DEFAULT_REPORTERS = ["DE", "GB", "FR", "ES", "NL", "PL", "IT", "US"]
-DEFAULT_PERIODS = ["2022", "2023"]
+
+
+def _recent_years(n: int = 4) -> list[str]:
+    """The last ``n`` calendar years (most recent last). Annual customs data for the
+    current year isn't published yet, so we end at last year and reach back ``n``.
+    Keeping several years lets the engine compare the latest *complete* year YoY."""
+    this_year = datetime.date.today().year
+    return [str(y) for y in range(this_year - n, this_year)]
+
+
+DEFAULT_PERIODS = _recent_years()
 
 _ISO3_TO_A2 = {iso3: a2 for a2, iso3, _, _ in reference.COUNTRIES}
 _A2_TO_M49 = {

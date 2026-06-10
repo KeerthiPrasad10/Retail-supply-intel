@@ -50,7 +50,6 @@ export function CertChip({ c }: { c: string }) {
 export function OriginBars({ sources, limit = 5, focus }: { sources: Source[]; limit?: number; focus?: string | null }) {
   const cname = useCname();
   const top = sources.slice(0, limit);
-  const max = Math.max(...top.map((s) => s[1]), 0.0001);
   return (
     <ul className="obars">
       {top.map((s) => {
@@ -72,7 +71,7 @@ export function OriginBars({ sources, limit = 5, focus }: { sources: Source[]; l
             <div className="track">
               <div
                 className={cc("fill", !!emerging && "fill-em", isFocus && "fill-focus")}
-                style={{ width: (share / max) * 100 + "%" }}
+                style={{ width: Math.min(100, Math.max(0, share * 100)) + "%" }}
               />
             </div>
           </li>

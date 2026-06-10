@@ -86,7 +86,7 @@ export function DeepDive({ trend: t, go, showMap }: { trend: Trend; go: Go; show
           <section className="panel">
             <h3 className="panel-h">
               <Icons.box size={13} />
-              Origin breakdown <span className="panel-meta">by import value · UN Comtrade</span>
+              Origin breakdown <span className="panel-meta">by export value · UN Comtrade</span>
             </h3>
             <OriginBars sources={t.sources} limit={5} focus={t.focus} />
           </section>

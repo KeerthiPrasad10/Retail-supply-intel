@@ -690,16 +690,17 @@ function renderPortal(){
   if(cur._just){setTimeout(()=>{cur._just=null;},1200);}
 }
 function detectDoc(name){name=(name||'').toLowerCase();
-  if(/licen|business.?lic|\bbrc\b/.test(name))return 'license';
-  if(/bank|account|swift|iban/.test(name))return 'bank';
-  if(/amfori|bsci|social|sa8000/.test(name))return 'social';
-  if(/iso|14001|environ/.test(name))return 'env';
-  if(/fire|safety|building/.test(name))return 'fire';
-  if(/factory.?reg|reg.*factory|factory.?form|factory.?profile|\bmill\b/.test(name))return 'factory';
-  if(/trial.?quot|\bquotation\b/.test(name))return 'trial';
-  if(/en\s?71|toy.?saf/.test(name))return 'en71';
+  if(/licen|business.?lic|\bbrc\b|营业执照|执照/.test(name))return 'license';
+  if(/bank|account|swift|iban|银行|对账单|回单/.test(name))return 'bank';
+  if(/amfori|bsci|social|sa8000|社会责任/.test(name))return 'social';
+  if(/iso|14001|environ|环境/.test(name))return 'env';
+  // EN 71 / toy reports carry "safety" in the name, so test them before fire
+  if(/en\s?71|toy.?saf|玩具/.test(name))return 'en71';
   if(/cpsia|age.?grad/.test(name))return 'cpsia';
-  if(/lfgb|food.?contact/.test(name))return 'lfgb';
+  if(/fire|safety|building|消防/.test(name))return 'fire';
+  if(/factory.?reg|reg.*factory|factory.?form|factory.?profile|\bmill\b|工厂/.test(name))return 'factory';
+  if(/trial.?quot|\bquotation\b/.test(name))return 'trial';
+  if(/lfgb|food.?contact|食品接触/.test(name))return 'lfgb';
   if(/\bce\b|lvd|emc|rohs/.test(name))return 'ce';
   if(/oeko|tex\b/.test(name))return 'oeko';
   return null;
@@ -776,12 +777,21 @@ async function extractDoc(key,file){
   if(res.fields)return {label:docNm,n:runExtract(key,true),mode:'sample',note:'no fields detected'};
   return {label:docNm,n:runExtract(key,true),mode:'sample',err:res.err||'unknown'}; // fallback keeps the demo alive
 }
-// real upload of an unclassified file → open reasoning. Returns {ok,n} | {err} | null (null ⇒ caller falls back to mock reasoning).
+function docByKey(k){return DOCS.find(d=>d.key===k)||Object.values(COND_DOCS).flat().find(d=>d.key===k)||null;}
+// real upload of an unclassified file → live extract. If the model recognises it as a known
+// document type (e.g. a licence named only 营业执照.pdf), claim that slot at full confidence;
+// otherwise open reasoning, capped. Returns {ok,n,...} | {err} | null (null ⇒ mock fallback).
 async function extractUnknown(file){
   if(!LIVE_EXTRACT)return null;
   const res=await callExtract(file,'');
   if(res.err)return {err:res.err};
   if(!res.fields||!res.fields.length)return null;
+  const dd=res.docType&&res.docType!=='unknown'?docByKey(res.docType):null;
+  if(dd&&!cur.docs[dd.key]&&res.fields.length){
+    cur.docs[dd.key]=file.name;
+    const n=applyExtracted(res.fields,dd.key,file.name);
+    return {ok:true,n,prods:mergeProducts(res.products),classified:dd.nm};
+  }
   const just=[];res.fields.forEach(fd=>{const k=fd.fieldKey,f=FBYK[k];if(!f)return;
     if(cur.D[k]==null||cur.D[k]===''){cur.D[k]=fd.value;
       cur.meta[k]={conf:Math.min(typeof fd.confidence==='number'?fd.confidence:0.6,0.78),srcNm:file.name,doc:'reasoned',reasoned:true,status:'review'};just.push(k);}});
@@ -824,7 +834,7 @@ async function handleFiles(files){
     }else{
       const r=await extractUnknown(f);
       if(r&&r.err){q.status='fail';q.msg='Live parse failed: '+r.err;}
-      else if(r&&r.ok){acted++;filled+=r.n||0;q.status='done';q.msg='Reasoned · '+r.n+' field'+(r.n!==1?'s':'')+' filled'+(r.prods?(' · '+r.prods+' product'+(r.prods!==1?'s':'')):'');}
+      else if(r&&r.ok){acted++;filled+=r.n||0;q.status='done';q.msg=(r.classified?('Recognised as '+r.classified):'Reasoned')+' · '+r.n+' field'+(r.n!==1?'s':'')+' filled'+(r.prods?(' · '+r.prods+' product'+(r.prods!==1?'s':'')):'');}
       else{const n=reasonFile(f.name,true);acted++;filled+=n;
         if(n){q.status='done';q.msg='Reasoned · '+n+' field'+(n!==1?'s':'')+' filled';}
         else{q.status='skip';q.msg='Nothing new found';}}

@@ -82,6 +82,9 @@ export interface Trend {
   score: number; // 0..100 opportunity score
   tier: Tier;
   focus: string | null;
+  /** true only when `focus` is a genuine emerging origin (gaining share, distinct
+   *  from the incumbent leader) — drives whether the "source from X" framing applies. */
+  focusEmerging: boolean;
   sources: Source[];
   emerging: Source[];
   competitors: TrendCompetitor[];
