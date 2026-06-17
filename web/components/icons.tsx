@@ -5,6 +5,7 @@ export interface IconProps {
   sw?: number;
   fill?: string;
   style?: CSSProperties;
+  className?: string;
 }
 
 function Ico({
@@ -14,6 +15,7 @@ function Ico({
   fill = "none",
   children,
   style,
+  className,
 }: IconProps & { d?: string; children?: ReactNode }) {
   return (
     <svg
@@ -26,6 +28,7 @@ function Ico({
       strokeLinecap="round"
       strokeLinejoin="round"
       style={style}
+      className={className}
     >
       {d ? <path d={d} /> : children}
     </svg>
