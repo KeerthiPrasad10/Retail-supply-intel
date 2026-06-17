@@ -7,7 +7,8 @@ export type View =
   | "deepdive"
   | "map"
   | "suppliers"
-  | "shortlist";
+  | "shortlist"
+  | "howitworks";
 export type Go = (view: View, id?: string | null) => void;
 
 export type InsightAction = "PROCURE" | "WATCH" | "HOLD";
