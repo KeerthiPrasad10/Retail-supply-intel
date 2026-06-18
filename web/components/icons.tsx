@@ -67,6 +67,7 @@ export const Icons = {
       <path d="M21 21l-4.3-4.3" />
     </Ico>
   ),
+  arrowLeft: (p: IconProps) => <Ico {...p} d="M19 12H5M11 18l-6-6 6-6" />,
   arrowRight: (p: IconProps) => <Ico {...p} d="M5 12h14M13 6l6 6-6 6" />,
   arrowUpRight: (p: IconProps) => (
     <Ico {...p}>
