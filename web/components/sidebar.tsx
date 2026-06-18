@@ -100,6 +100,7 @@ export function Sidebar({ view, go, shortlistCount }: { view: View; go: Go; shor
         <NavItem id="map" label="Map" icon="globe" view={view} go={go} />
         <NavItem id="suppliers" label="Suppliers" icon="factory" badge={SUPPLIERS.length} view={view} go={go} />
         <NavItem id="shortlist" label="Shortlist" icon="bookmark" badge={shortlistCount || null} view={view} go={go} />
+        <NavItem id="ideas" label="Validate" icon="box" view={view} go={go} />
       </div>
       <SignalSources sources={signalSources} />
       <div className="nav-section">Markets</div>

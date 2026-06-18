@@ -235,6 +235,39 @@ class Insight(Base):
     status: Mapped[str] = mapped_column(String(16), default="new")
 
 
+class ProductIdea(Base):
+    """A user-submitted product concept evaluated by the "Validate" feature.
+
+    The web app's ``/api/ideas`` routes run a multi-agent research pass
+    (classification, store/competitor benchmark, suppliers, strategy analysis)
+    and store the full result in ``research``. The analysis is also fanned out
+    onto the canonical tables — ``suppliers``, ``competitors`` and a row in
+    ``triggers`` — so submitted ideas surface in the dashboard's pipeline.
+
+    NOTE: this models.py is the single source of truth for the schema; the
+    matching DDL lives in supabase/migrations (regenerate, don't hand-edit, per
+    the repo convention) — see 0006_product_ideas.sql.
+    """
+
+    __tablename__ = "product_ideas"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)  # UUID from the web app
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow)
+    title: Mapped[str] = mapped_column(String(256), nullable=False)
+    description: Mapped[str] = mapped_column(String(4096), default="")
+    category_id: Mapped[int | None] = mapped_column(ForeignKey("product_categories.id"))
+    image_url: Mapped[str | None] = mapped_column(String(2048))
+    target_market: Mapped[str | None] = mapped_column(String(256))
+    target_price: Mapped[str | None] = mapped_column(String(64))
+    # Free-text inputs kept alongside the resolved category_id.
+    category: Mapped[str | None] = mapped_column(String(128))
+    audience: Mapped[str | None] = mapped_column(String(256))
+    features: Mapped[str | None] = mapped_column(String(4096))
+    submitted_by: Mapped[str | None] = mapped_column(String(128))
+    status: Mapped[str] = mapped_column(String(16), default="queued")  # queued|researching|complete|error
+    research: Mapped[dict] = mapped_column(JSON, default=dict)
+
+
 class Snapshot(Base):
     """Published read-model the dashboard consumes (the `rsi export` output).
 
