@@ -17,6 +17,7 @@ import { MapView } from "./views/mapview";
 import { Suppliers } from "./views/suppliers";
 import { SupplierDrawer } from "./views/supplier-drawer";
 import { Shortlist } from "./views/shortlist";
+import { Ideas } from "./views/ideas";
 import { QuoteModal } from "./views/quote-modal";
 
 export function Dashboard({ model }: { model: Model }) {
@@ -80,6 +81,7 @@ export function Dashboard({ model }: { model: Model }) {
     map: ["Lidl · Buying", "Supply-chain map"],
     suppliers: supCtx ? ["Trending", supCtx.cat, "Suppliers"] : ["Lidl · Buying", "Suppliers"],
     shortlist: ["Lidl · Buying", "Shortlist"],
+    ideas: ["Lidl · Buying", "Product Ideas"],
   };
 
   const requestQuote = (ids: string[]) => setQuoteIds(ids);
@@ -132,6 +134,7 @@ export function Dashboard({ model }: { model: Model }) {
                 requestQuote={requestQuote}
               />
             )}
+            {view === "ideas" && <Ideas />}
             <SourceFooter />
           </div>
         </main>
