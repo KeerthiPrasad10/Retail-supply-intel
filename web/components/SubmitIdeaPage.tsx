@@ -5,6 +5,14 @@ import type { ProductIdea } from "@/lib/ideas/types";
 import { cc } from "@/lib/util";
 import { Icons } from "./icons";
 
+const STEPS = [
+  { icon: "spark" as const,   label: "Classifying product",        detail: "Deriving category, search terms & HS codes…" },
+  { icon: "search" as const,  label: "Scanning online stores",     detail: "Checking Amazon listings & live prices…" },
+  { icon: "pulse" as const,   label: "Web research",               detail: "Finding similar products & market signals…" },
+  { icon: "factory" as const, label: "Finding suppliers",          detail: "Searching AliExpress & B2B directories…" },
+  { icon: "box" as const,     label: "Strategy analysis",          detail: "Synthesising positioning, pricing & next steps…" },
+];
+
 const CATEGORIES = [
   "Apparel & Fashion",
   "Drinkware & Kitchen",
@@ -48,9 +56,21 @@ export function SubmitIdeaPage() {
   const [stage, setStage] = useState<Stage>("form");
   const [doneIdea, setDoneIdea] = useState<ProductIdea | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [activeStep, setActiveStep] = useState(0);
+  const stepTimer = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
+
+  function startSteps() {
+    setActiveStep(0);
+    clearInterval(stepTimer.current);
+    stepTimer.current = setInterval(() => {
+      setActiveStep((s) => Math.min(s + 1, STEPS.length - 1));
+    }, 4000);
+  }
 
   function reset() {
+    clearInterval(stepTimer.current);
     setStage("form");
+    setActiveStep(0);
     setDoneIdea(null);
     setError(null);
   }
@@ -58,6 +78,7 @@ export function SubmitIdeaPage() {
   async function handleSubmit(payload: Record<string, string>) {
     setError(null);
     setStage("submitting");
+    startSteps();
     try {
       const createRes = await fetch("/api/ideas", {
         method: "POST",
@@ -75,16 +96,18 @@ export function SubmitIdeaPage() {
       });
       const resData = await resRes.json();
       const finalIdea: ProductIdea = resData?.idea ?? newIdea;
+      clearInterval(stepTimer.current);
       setDoneIdea(finalIdea);
       setStage("done");
     } catch (err) {
+      clearInterval(stepTimer.current);
       setError(err instanceof Error ? err.message : "Something went wrong.");
       setStage("error");
     }
   }
 
   if (stage === "submitting") {
-    return <SubmittingView />;
+    return <SubmittingView activeStep={activeStep} />;
   }
 
   if (stage === "done" && doneIdea) {
@@ -102,7 +125,7 @@ export function SubmitIdeaPage() {
 
 /* ------------------------------ Submitting view ------------------------------ */
 
-function SubmittingView() {
+function SubmittingView({ activeStep }: { activeStep: number }) {
   return (
     <div className="sp-shell">
       <div className="sp-submitting">
@@ -110,7 +133,29 @@ function SubmittingView() {
           <span className="spinner sp-spinner" aria-hidden />
         </span>
         <p className="sp-submitting-title">Researching your idea&hellip;</p>
-        <p className="sp-submitting-sub">AI agents are benchmarking market prices, suppliers and competitors.</p>
+        <p className="sp-submitting-sub">AI agents are working in parallel — this takes about 30 seconds.</p>
+        <ol className="sp-steps">
+          {STEPS.map((step, i) => {
+            const done = i < activeStep;
+            const active = i === activeStep;
+            const StepIcon = Icons[step.icon];
+            return (
+              <li key={step.label} className={cc("sp-step", done && "done", active && "active")}>
+                <span className="sp-step-icon">
+                  {done
+                    ? <Icons.check size={14} />
+                    : active
+                      ? <span className="spinner" aria-hidden />
+                      : <StepIcon size={14} />}
+                </span>
+                <span className="sp-step-text">
+                  <span className="sp-step-label">{step.label}</span>
+                  {active && <span className="sp-step-detail">{step.detail}</span>}
+                </span>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </div>
   );
