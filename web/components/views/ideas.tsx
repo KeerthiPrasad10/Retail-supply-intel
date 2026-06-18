@@ -73,7 +73,11 @@ export function Ideas() {
       const newIdea: ProductIdea = created.idea;
       setIdea(newIdea);
 
-      const res = await fetch(`/api/ideas/${newIdea.id}/research`, { method: "POST" });
+      const res = await fetch(`/api/ideas/${newIdea.id}/research`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idea: newIdea }),
+      });
       const data = await res.json();
       if (!res.ok && !data?.idea) throw new Error(data?.error || "Research failed.");
       const research: ResearchResult | undefined = data?.idea?.research;
