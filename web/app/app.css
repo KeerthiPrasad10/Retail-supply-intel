@@ -600,3 +600,26 @@ textarea.nxb-input { resize: vertical; min-height: 60px; }
   .field-row, .analysis-grid, .enrich-grid, .supplier-grid { grid-template-columns: 1fr; }
   .pipeline-grid, .agent-activity-grid, .maker-grid { grid-template-columns: 1fr; }
 }
+
+/* Submit page */
+.sp-shell { min-height: 100vh; background: var(--nxb-surface-page); display: flex; flex-direction: column; align-items: center; padding: 24px 16px 56px; }
+.sp-header { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 4px; margin-bottom: 20px; }
+.sp-logo { font-family: var(--font-mono); font-weight: 700; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--nxb-action-primary); }
+.sp-header-sub { font-size: 22px; font-weight: 500; letter-spacing: -0.4px; margin: 4px 0 0; color: var(--nxb-text-primary); }
+.sp-form { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 20px; padding: 20px; }
+.sp-zone { width: 100%; }
+.sp-fields { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+.sp-fields.sp-shimmer * { animation: sp-shimmer 1.4s ease-in-out infinite; background: linear-gradient(90deg, var(--nxb-surface-3) 25%, var(--nxb-surface-page) 50%, var(--nxb-surface-3) 75%); background-size: 200% 100%; border-color: transparent !important; color: transparent !important; border-radius: var(--radius-input); }
+@keyframes sp-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.sp-submit { width: 100%; justify-content: center; font-size: 15px; padding: 14px 20px; border-radius: var(--radius-input); }
+.sp-submitting { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 64px 24px; text-align: center; }
+.sp-spinner-wrap { width: 56px; height: 56px; border-radius: 9999px; background: var(--nxb-surface-1); border: 0.5px solid var(--nxb-border-low); display: flex; align-items: center; justify-content: center; }
+.sp-spinner { width: 24px; height: 24px; border-width: 3px; }
+.sp-submitting-title { font-size: 20px; font-weight: 500; letter-spacing: -0.4px; margin: 0; }
+.sp-submitting-sub { font-size: 14px; color: var(--nxb-text-secondary); margin: 0; max-width: 300px; line-height: 1.5; }
+.sp-success { width: 100%; max-width: 480px; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 40px 24px; text-align: center; }
+.sp-success-icon { width: 56px; height: 56px; border-radius: 9999px; background: var(--nxb-status-low-bg); color: var(--nxb-status-low); display: flex; align-items: center; justify-content: center; border: 0.5px solid color-mix(in srgb, var(--nxb-status-low) 30%, transparent); }
+.sp-success-title { font-size: 20px; font-weight: 500; letter-spacing: -0.4px; margin: 0; }
+.sp-success-name { font-size: 15px; color: var(--nxb-text-secondary); margin: 0; }
+.sp-cat { margin: 0; }
+.sp-reset-btn { margin-top: 8px; }
