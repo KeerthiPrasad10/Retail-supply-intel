@@ -451,20 +451,42 @@ textarea.nxb-input { resize: vertical; min-height: 60px; }
 .field-control { margin-top: 7px; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-.ideas-form-grid { display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: start; }
+/* ── Image-first idea form ── */
+.ideas-layout { display: flex; flex-direction: column; gap: 24px; max-width: 720px; }
 .idea-form { display: flex; flex-direction: column; gap: 18px; }
 .idea-form-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .idea-form-note { font-size: 12.5px; color: var(--nxb-text-muted); }
 
-.dropzone { border: 1px dashed var(--nxb-border-medium); border-radius: var(--radius-input); background: var(--nxb-surface-page); padding: 14px; }
-.dropzone-btn { width: 100%; background: none; border: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 0; color: var(--nxb-text-muted); }
-.dropzone-btn svg { opacity: .7; }
-.dropzone-main { font-size: 13px; font-weight: 500; color: var(--nxb-text-secondary); }
-.dropzone-sub { font-family: var(--font-mono); font-size: 10.5px; }
-.dropzone-preview { display: flex; align-items: center; gap: 14px; }
-.dropzone-thumb { width: 64px; height: 64px; border-radius: var(--radius-input); object-fit: cover; border: 0.5px solid var(--nxb-border-low); }
+/* Drop zone hero */
+.idea-image-zone { border: 2px dashed var(--nxb-border-medium); border-radius: var(--radius-md); background: var(--nxb-surface-page); transition: border-color .15s; }
+.idea-image-zone.has-image { border-style: solid; border-color: var(--nxb-border-low); }
+.idea-image-drop { width: 100%; background: none; border: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 36px 24px; color: var(--nxb-text-muted); }
+.idea-image-drop:hover { background: var(--nxb-surface-hover); }
+.idea-image-drop-icon { color: var(--nxb-action-primary); opacity: .6; }
+.idea-image-drop-main { font-size: 14px; font-weight: 500; color: var(--nxb-text-secondary); }
+.idea-image-drop-sub { font-size: 12px; color: var(--nxb-text-muted); text-align: center; }
+
+/* Image preview */
+.idea-image-preview { position: relative; }
+.idea-image-thumb { width: 100%; max-height: 260px; object-fit: contain; border-radius: calc(var(--radius-md) - 2px); display: block; background: var(--nxb-surface-page); }
+.idea-image-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; background: linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 100%); border-radius: 0 0 calc(var(--radius-md) - 2px) calc(var(--radius-md) - 2px); }
+.idea-image-remove { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22); border-radius: var(--radius-input); color: #fff; font-size: 12px; padding: 4px 10px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+.idea-image-remove:hover { background: rgba(255,255,255,.22); }
+
+/* Autofill badge */
+.idea-analyse-badge { font-size: 11.5px; color: #fff; display: flex; align-items: center; gap: 5px; }
+.idea-analyse-badge.done { color: #a7f3d0; }
+.idea-analyse-badge.warn { color: #fde68a; }
+
+/* Fields */
+.idea-fields { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 18px; }
+.idea-fields:disabled { opacity: .55; pointer-events: none; }
+.nxb-input.autofilled { background: color-mix(in srgb, var(--nxb-action-primary) 6%, var(--nxb-surface-input)); border-color: color-mix(in srgb, var(--nxb-action-primary) 35%, var(--nxb-border-medium)); }
+
 .hidden-input { display: none; }
-.dropzone-url { margin-top: 12px; }
+
+/* Legacy - kept for any residual dropzone usage */
+.dropzone { border: 1px dashed var(--nxb-border-medium); border-radius: var(--radius-input); background: var(--nxb-surface-page); padding: 14px; }
 
 .idea-aside { position: sticky; top: 84px; }
 .idea-aside-lead { font-size: 13px; color: var(--nxb-text-secondary); line-height: 1.5; margin: 0 0 16px; }

@@ -112,11 +112,11 @@ export function Ideas() {
     <div className="content">
       <header className="page-head">
         <div>
-          <h1 className="page-title">Validate a product idea</h1>
+          <h1 className="page-title">Add a product idea</h1>
           <p className="page-sub">
-            Submit a product concept and a panel of AI agents benchmark it against the live market —{" "}
-            <b>classification, store &amp; competitor benchmark, China + web suppliers, and a strategy
-            analysis</b> with positioning, pricing and next steps.
+            Drop a photo and AI fills in the details. Agents then research the live market —{" "}
+            <b>pricing, China &amp; web suppliers, competitor benchmarks, and a sourcing strategy</b>.
+            Ideas are saved and classified so you can track them over time.
           </p>
         </div>
         {stage !== "form" && (
@@ -128,10 +128,10 @@ export function Ideas() {
       </header>
 
       {stage === "form" && (
-        <>
+        <div className="ideas-layout">
           <SubmitForm imageUrlRef={imageUrlRef} onSubmit={submit} />
           <RecentIdeas ideas={recent} onView={viewIdea} />
-        </>
+        </div>
       )}
 
       {stage === "running" && idea && <RunningView idea={idea} activeStep={activeStep} />}
@@ -220,6 +220,30 @@ function Field({
   );
 }
 
+type AutofillState = "idle" | "loading" | "done" | "error";
+
+type IdeaFields = {
+  title: string;
+  description: string;
+  category: string;
+  features: string;
+  priceTarget: string;
+  targetMarket: string;
+  audience: string;
+  submittedBy: string;
+};
+
+const EMPTY_FIELDS: IdeaFields = {
+  title: "",
+  description: "",
+  category: "",
+  features: "",
+  priceTarget: "",
+  targetMarket: "",
+  audience: "",
+  submittedBy: "",
+};
+
 function SubmitForm({
   imageUrlRef,
   onSubmit,
@@ -228,14 +252,45 @@ function SubmitForm({
   onSubmit: (payload: Record<string, string>) => void;
 }) {
   const fileRef = useRef<HTMLInputElement>(null);
-  const [imageUrl, setImageUrl] = useState("");
   const [imagePreview, setImagePreview] = useState("");
+  const [autofill, setAutofill] = useState<AutofillState>("idle");
+  const [fields, setFields] = useState<IdeaFields>(EMPTY_FIELDS);
   const [formError, setFormError] = useState<string | null>(null);
 
-  function setImg(v: string) {
-    setImageUrl(v);
-    setImagePreview(v);
-    imageUrlRef.current = v;
+  function setField(key: keyof IdeaFields, value: string) {
+    setFields((f) => ({ ...f, [key]: value }));
+  }
+
+  async function analyseImage(dataUrl: string) {
+    setAutofill("loading");
+    setFormError(null);
+    try {
+      const res = await fetch("/api/ideas/analyse-image", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ imageData: dataUrl }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) {
+        // silently fall through to manual entry — not a hard error
+        setAutofill("error");
+        return;
+      }
+      const f = data.fields as Partial<IdeaFields>;
+      setFields((prev) => ({
+        title: f.title || prev.title,
+        description: f.description || prev.description,
+        category: f.category || prev.category,
+        features: f.features || prev.features,
+        priceTarget: f.priceTarget || prev.priceTarget,
+        targetMarket: f.targetMarket || prev.targetMarket,
+        audience: f.audience || prev.audience,
+        submittedBy: prev.submittedBy,
+      }));
+      setAutofill("done");
+    } catch {
+      setAutofill("error");
+    }
   }
 
   function handleFile(file?: File) {
@@ -246,175 +301,199 @@ function SubmitForm({
       return;
     }
     if (file.size > MAX_IMAGE_BYTES) {
-      setFormError("Image is too large (max 1.5 MB). Try a smaller file or paste an image URL.");
+      setFormError("Image is too large (max 1.5 MB).");
       return;
     }
     const reader = new FileReader();
-    reader.onload = () => setImg(String(reader.result || ""));
+    reader.onload = () => {
+      const dataUrl = String(reader.result || "");
+      setImagePreview(dataUrl);
+      imageUrlRef.current = dataUrl;
+      analyseImage(dataUrl);
+    };
     reader.readAsDataURL(file);
+  }
+
+  function removeImage() {
+    setImagePreview("");
+    imageUrlRef.current = "";
+    setAutofill("idle");
+    setFields(EMPTY_FIELDS);
+    if (fileRef.current) fileRef.current.value = "";
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setFormError(null);
-    const form = new FormData(e.currentTarget);
-    const payload: Record<string, string> = {
-      title: String(form.get("title") || ""),
-      description: String(form.get("description") || ""),
-      category: String(form.get("category") || ""),
-      targetMarket: String(form.get("targetMarket") || ""),
-      audience: String(form.get("audience") || ""),
-      priceTarget: String(form.get("priceTarget") || ""),
-      features: String(form.get("features") || ""),
-      submittedBy: String(form.get("submittedBy") || ""),
-      imageUrl: imageUrlRef.current,
-    };
-    if (!payload.title.trim()) {
+    if (!fields.title.trim()) {
       setFormError("Please give your product idea a title.");
       return;
     }
-    onSubmit(payload);
+    onSubmit({ ...fields, imageUrl: imageUrlRef.current });
   }
 
+  const isAnalysing = autofill === "loading";
+
   return (
-    <div className="ideas-form-grid">
-      <form className="panel idea-form" onSubmit={handleSubmit}>
-        <Field label="Product idea title" required hint="A short, descriptive name.">
+    <form className="panel idea-form" onSubmit={handleSubmit}>
+      {/* ── Image drop zone — primary input ── */}
+      <div
+        className={cc("idea-image-zone", imagePreview && "has-image")}
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={(e) => {
+          e.preventDefault();
+          handleFile(e.dataTransfer.files?.[0]);
+        }}
+      >
+        {imagePreview ? (
+          <div className="idea-image-preview">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={imagePreview} alt="Product" className="idea-image-thumb" />
+            <div className="idea-image-overlay">
+              {isAnalysing && (
+                <span className="idea-analyse-badge">
+                  <span className="spinner" aria-hidden /> Analysing image…
+                </span>
+              )}
+              {autofill === "done" && (
+                <span className="idea-analyse-badge done">
+                  <Icons.check size={12} /> Fields filled by AI — review below
+                </span>
+              )}
+              {autofill === "error" && (
+                <span className="idea-analyse-badge warn">
+                  <Icons.alert size={12} /> Could not auto-fill &mdash; fill manually
+                </span>
+              )}
+              <button type="button" className="idea-image-remove" onClick={removeImage}>
+                <Icons.x size={14} /> Change image
+              </button>
+            </div>
+          </div>
+        ) : (
+          <button
+            type="button"
+            className="idea-image-drop"
+            onClick={() => fileRef.current?.click()}
+          >
+            <span className="idea-image-drop-icon">
+              <Icons.box size={32} />
+            </span>
+            <span className="idea-image-drop-main">Drop a product photo to get started</span>
+            <span className="idea-image-drop-sub">AI fills the form for you · PNG/JPG up to 1.5 MB · or fill in manually below</span>
+          </button>
+        )}
+        <input
+          ref={fileRef}
+          type="file"
+          accept="image/*"
+          className="hidden-input"
+          onChange={(e) => handleFile(e.target.files?.[0])}
+        />
+      </div>
+
+      {/* ── Fields — shown always, disabled while analysing ── */}
+      <fieldset className="idea-fields" disabled={isAnalysing}>
+        <Field label="Product title" required>
           <input
-            name="title"
+            value={fields.title}
+            onChange={(e) => setField("title", e.target.value)}
             required
             placeholder="e.g. Insulated stainless steel kids' water bottle"
-            className="nxb-input"
+            className={cc("nxb-input", autofill === "done" && fields.title && "autofilled")}
           />
         </Field>
 
-        <Field label="Describe the idea" required hint="What is it, what problem does it solve, what makes it different?">
+        <Field label="Description" hint="What it is, who it's for, what makes it different.">
           <textarea
-            name="description"
-            required
-            rows={4}
-            placeholder="Describe the product, its purpose and any standout features…"
-            className="nxb-input"
+            value={fields.description}
+            onChange={(e) => setField("description", e.target.value)}
+            rows={3}
+            placeholder="Describe the product…"
+            className={cc("nxb-input", autofill === "done" && fields.description && "autofilled")}
           />
         </Field>
 
         <div className="field-row">
           <Field label="Category">
-            <input name="category" list="ideas-category-options" placeholder="Choose or type a category" className="nxb-input" />
+            <input
+              value={fields.category}
+              onChange={(e) => setField("category", e.target.value)}
+              list="ideas-category-options"
+              placeholder="Choose or type…"
+              className={cc("nxb-input", autofill === "done" && fields.category && "autofilled")}
+            />
             <datalist id="ideas-category-options">
-              {CATEGORIES.map((c) => (
-                <option key={c} value={c} />
-              ))}
+              {CATEGORIES.map((c) => <option key={c} value={c} />)}
             </datalist>
           </Field>
-          <Field label="Target price" hint="Used to position against the market.">
-            <input name="priceTarget" placeholder="e.g. $30–45" className="nxb-input" />
+          <Field label="Target price">
+            <input
+              value={fields.priceTarget}
+              onChange={(e) => setField("priceTarget", e.target.value)}
+              placeholder="e.g. $30–45"
+              className={cc("nxb-input", autofill === "done" && fields.priceTarget && "autofilled")}
+            />
           </Field>
         </div>
 
         <div className="field-row">
           <Field label="Target market">
-            <input name="targetMarket" placeholder="e.g. Australia, UK" className="nxb-input" />
+            <input
+              value={fields.targetMarket}
+              onChange={(e) => setField("targetMarket", e.target.value)}
+              placeholder="e.g. Australia, UK"
+              className={cc("nxb-input", autofill === "done" && fields.targetMarket && "autofilled")}
+            />
           </Field>
           <Field label="Target audience">
-            <input name="audience" placeholder="e.g. Parents of toddlers" className="nxb-input" />
+            <input
+              value={fields.audience}
+              onChange={(e) => setField("audience", e.target.value)}
+              placeholder="e.g. Parents of toddlers"
+              className={cc("nxb-input", autofill === "done" && fields.audience && "autofilled")}
+            />
           </Field>
         </div>
 
-        <Field label="Key features" hint="One per line or comma-separated — helps agents benchmark.">
-          <textarea name="features" rows={3} placeholder={"Leak-proof lid\nBPA-free\nHolds 500ml"} className="nxb-input" />
-        </Field>
-
-        <Field label="Reference image" hint="Optional — upload a sketch/photo or paste an image URL.">
-          <div
-            className="dropzone"
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={(e) => {
-              e.preventDefault();
-              handleFile(e.dataTransfer.files?.[0]);
-            }}
-          >
-            {imagePreview ? (
-              <div className="dropzone-preview">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={imagePreview} alt="Preview" className="dropzone-thumb" />
-                <button
-                  type="button"
-                  className="link-btn"
-                  onClick={() => {
-                    setImg("");
-                    if (fileRef.current) fileRef.current.value = "";
-                  }}
-                >
-                  <Icons.x size={14} /> Remove
-                </button>
-              </div>
-            ) : (
-              <button type="button" className="dropzone-btn" onClick={() => fileRef.current?.click()}>
-                <Icons.box size={20} />
-                <span className="dropzone-main">Click to upload or drag &amp; drop</span>
-                <span className="dropzone-sub">PNG/JPG up to 1.5 MB</span>
-              </button>
-            )}
-            <input
-              ref={fileRef}
-              type="file"
-              accept="image/*"
-              className="hidden-input"
-              onChange={(e) => handleFile(e.target.files?.[0])}
-            />
-            <input
-              className="nxb-input dropzone-url"
-              value={imageUrl.startsWith("data:") ? "" : imageUrl}
-              onChange={(e) => setImg(e.target.value)}
-              placeholder="…or paste an image URL"
-            />
-          </div>
+        <Field label="Key features" hint="One per line — helps agents benchmark.">
+          <textarea
+            value={fields.features}
+            onChange={(e) => setField("features", e.target.value)}
+            rows={3}
+            placeholder={"Leak-proof lid\nBPA-free\nHolds 500ml"}
+            className={cc("nxb-input", autofill === "done" && fields.features && "autofilled")}
+          />
         </Field>
 
         <Field label="Your name / team" hint="Optional.">
-          <input name="submittedBy" placeholder="e.g. Priya, Product team" className="nxb-input" />
+          <input
+            value={fields.submittedBy}
+            onChange={(e) => setField("submittedBy", e.target.value)}
+            placeholder="e.g. Priya, Product team"
+            className="nxb-input"
+          />
         </Field>
+      </fieldset>
 
-        {formError && (
-          <div className="callout warn">
-            <Icons.alert size={15} />
-            <p>{formError}</p>
-          </div>
-        )}
-
-        <div className="idea-form-foot">
-          <button type="submit" className="btn primary">
-            <Icons.spark size={15} />
-            Submit &amp; run agents
-          </button>
-          <span className="idea-form-note">Agents start researching as soon as you submit.</span>
+      {formError && (
+        <div className="callout warn">
+          <Icons.alert size={15} />
+          <p>{formError}</p>
         </div>
-      </form>
+      )}
 
-      <aside className="panel idea-aside">
-        <p className="panel-h">
-          <Icons.spark size={13} /> What happens next
-        </p>
-        <p className="idea-aside-lead">As soon as you submit, the research agents start working:</p>
-        <ul className="agent-steps">
-          {PIPELINE.map((a) => {
-            const Icon = Icons[a.icon];
-            return (
-              <li key={a.id} className="agent-step">
-                <span className="agent-step-icon">
-                  <Icon size={15} />
-                </span>
-                <div>
-                  <p className="agent-step-name">{a.name}</p>
-                  <p className="agent-step-desc">{a.desc}</p>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </aside>
-    </div>
+      <div className="idea-form-foot">
+        <button type="submit" className="btn primary" disabled={isAnalysing}>
+          {isAnalysing ? (
+            <><span className="spinner sm" aria-hidden /> Analysing image…</>
+          ) : (
+            <><Icons.spark size={15} /> Add idea &amp; research</>
+          )}
+        </button>
+        <span className="idea-form-note">Agents benchmark market prices, suppliers and competitors.</span>
+      </div>
+    </form>
   );
 }
 
