@@ -81,7 +81,7 @@ export function Dashboard({ model }: { model: Model }) {
     map: ["Lidl · Buying", "Supply-chain map"],
     suppliers: supCtx ? ["Trending", supCtx.cat, "Suppliers"] : ["Lidl · Buying", "Suppliers"],
     shortlist: ["Lidl · Buying", "Shortlist"],
-    ideas: ["Lidl · Buying", "Validate"],
+    ideas: ["Lidl · Buying", "Product Ideas"],
   };
 
   const requestQuote = (ids: string[]) => setQuoteIds(ids);
