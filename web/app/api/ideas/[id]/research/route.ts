@@ -52,15 +52,18 @@ export async function POST(req: Request, { params }: { params: { id: string } })
       status: research.error ? "error" : "complete",
       research,
     });
-    // Fan results out into the shared RSI tables (best-effort, never blocks).
+    // updateIdea returns undefined when the serverless store has been reset
+    // (cold start) — fall back to assembling the result from what we have.
+    const finalIdea: ProductIdea = updated ?? { ...idea, status: research.error ? "error" : "complete", research };
     if (!research.error) {
-      await connectResearch(updated ?? idea, research);
+      await connectResearch(finalIdea, research).catch(() => {});
     }
-    return NextResponse.json({ idea: updated });
+    return NextResponse.json({ idea: finalIdea });
   } catch (err) {
     const updated = await updateIdea(idea.id, { status: "error" });
+    const finalIdea: ProductIdea = updated ?? { ...idea, status: "error" };
     return NextResponse.json(
-      { idea: updated, error: err instanceof Error ? err.message : "Research failed" },
+      { idea: finalIdea, error: err instanceof Error ? err.message : "Research failed" },
       { status: 500 }
     );
   }
