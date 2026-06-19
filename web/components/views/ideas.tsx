@@ -203,29 +203,33 @@ function IdeaCard({ idea, onClick }: { idea: ProductIdea; onClick: () => void })
     idea.research?.classification?.category ||
     idea.research?.enrichment?.suggestedCategory ||
     idea.category;
+  const snippet =
+    idea.research?.analysis?.summary?.slice(0, 100) ||
+    idea.description?.slice(0, 100);
 
   return (
     <div className={cc("idea-card", clickable && "clickable")} onClick={clickable ? onClick : undefined}>
-      <div className="idea-card-thumb">
+      <div className="idea-card-image">
         {idea.imageUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={idea.imageUrl} alt={idea.title} />
         ) : (
-          <Icons.box size={22} />
+          <Icons.box size={28} />
         )}
       </div>
       <div className="idea-card-body">
-        <p className="idea-card-title">{idea.title}</p>
-        <div className="idea-card-meta">
+        <div className="idea-card-chips">
           {category && <span className="cat-chip">{category}</span>}
           <span className={cc("badge", s.cls)}>
             {(idea.status === "complete" || idea.status === "researching") && <span className="dot" />}
             {s.label}
           </span>
         </div>
-        <div className="idea-card-meta">
+        <p className="idea-card-title">{idea.title}</p>
+        {snippet && <p className="idea-card-snippet">{snippet}{snippet.length >= 100 ? "…" : ""}</p>}
+        <div className="idea-card-foot">
           <span className="idea-card-date">{dateStr}</span>
-          {idea.submittedBy && <span className="idea-card-date">· {idea.submittedBy}</span>}
+          {idea.submittedBy && <span className="idea-card-date">{idea.submittedBy}</span>}
         </div>
       </div>
     </div>
@@ -708,48 +712,50 @@ function Results({
         </div>
       )}
 
-      {/* 3. AI strategy analysis — single hero summary (analysis.summary) */}
+      {/* 3. AI strategy analysis */}
       {a ? (
         <section className="panel">
           <p className="panel-h">
             <Icons.spark size={13} /> AI strategy analysis
-            <span className="panel-meta">Strategy Analyst agent</span>
+            <span className="panel-meta">Strategy Analyst</span>
           </p>
           <p className="analysis-summary">{a.summary}</p>
-          <div className="analysis-grid">
-            <AnalysisBlock icon="globe" title="Positioning">
-              <p className="analysis-text">{a.positioning}</p>
-            </AnalysisBlock>
-            <AnalysisBlock icon="trending" title="Suggested price">
-              <p className="analysis-price">{a.suggestedPrice}</p>
-            </AnalysisBlock>
-            <AnalysisBlock icon="spark" title="Differentiation">
-              <AnalysisList items={a.differentiation} tone="low" />
-            </AnalysisBlock>
-            <AnalysisBlock icon="alert" title="Risks to watch">
-              <AnalysisList items={a.risks} tone="med" />
-            </AnalysisBlock>
+          <div className="analysis-row">
+            <span className="analysis-pill">
+              <Icons.globe size={12} /> {a.positioning}
+            </span>
+            <span className="analysis-pill accent">
+              <Icons.trending size={12} /> Suggested: {a.suggestedPrice}
+            </span>
           </div>
+          {(a.differentiation.length > 0 || a.risks.length > 0) && (
+            <div className="analysis-grid">
+              {a.differentiation.length > 0 && (
+                <AnalysisBlock icon="spark" title="Differentiation">
+                  <AnalysisList items={a.differentiation.slice(0, 3)} tone="low" />
+                </AnalysisBlock>
+              )}
+              {a.risks.length > 0 && (
+                <AnalysisBlock icon="alert" title="Risks">
+                  <AnalysisList items={a.risks.slice(0, 3)} tone="med" />
+                </AnalysisBlock>
+              )}
+            </div>
+          )}
           {a.nextSteps.length > 0 && (
-            <AnalysisBlock icon="check" title="Recommended next steps">
-              <ol className="next-steps">
-                {a.nextSteps.map((s, i) => (
-                  <li key={i}>
-                    <span className="next-step-num">{i + 1}</span>
-                    <span>{s}</span>
-                  </li>
-                ))}
-              </ol>
-            </AnalysisBlock>
+            <div className="next-steps-row">
+              {a.nextSteps.slice(0, 3).map((s, i) => (
+                <span key={i} className="next-step-pill">
+                  <span className="next-step-num">{i + 1}</span>
+                  {s}
+                </span>
+              ))}
+            </div>
           )}
         </section>
       ) : result.enrichment.summary ? (
-        // No strategy analysis (demo / llm disabled) — fall back to the
-        // enrichment summary once so the page never shows zero summary.
         <section className="panel">
-          <p className="panel-h">
-            <Icons.spark size={13} /> Summary
-          </p>
+          <p className="panel-h"><Icons.spark size={13} /> Summary</p>
           <p className="analysis-summary">{result.enrichment.summary}</p>
         </section>
       ) : null}
@@ -823,7 +829,7 @@ function Results({
             </span>
           </p>
           <div className="demand-grid">
-            {result.demand.posts.slice(0, 8).map((p, i) => (
+            {result.demand.posts.slice(0, 4).map((p, i) => (
               <a
                 key={i}
                 href={p.url}
@@ -908,92 +914,14 @@ function Results({
         </section>
       ) : null}
 
-      {/* 9. Insights */}
-      {result.benchmark.insights.length > 0 && (
-        <section className="panel em-panel">
-          <p className="panel-h">
-            <Icons.spark size={13} /> Insights
-          </p>
-          <ul className="dp-why">
-            {result.benchmark.insights.map((ins, i) => (
-              <li key={i}>
-                <Icons.check size={14} />
-                {ins}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {/* 10. Product profile — slimmed enrichment (meta grid + tags only) */}
-      <section className="panel">
-        <p className="panel-h">
-          <Icons.box size={13} /> Product profile
-        </p>
-        <div className="enrich-grid">
-          <InfoRow icon="box" label="Suggested category" value={result.enrichment.suggestedCategory} />
-          <InfoRow icon="grid" label="Target audience" value={result.enrichment.targetAudience} />
-          {result.classification?.productClass && (
-            <InfoRow icon="search" label="Product class" value={result.classification.productClass} />
-          )}
-        </div>
-        {result.enrichment.tags.length > 0 && (
-          <div className="enrich-tags">
-            {result.enrichment.tags.map((t) => (
-              <span key={t} className="cat-chip">
-                #{t}
-              </span>
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* 11. Sources */}
-      {result.sources.length > 0 && (
-        <section>
-          <p className="panel-h section-h">
-            <Icons.search size={13} /> Sources
-          </p>
-          <ul className="source-list">
-            {result.sources.map((s, i) => (
-              <li key={i}>
-                <a href={s.url} target="_blank" rel="noopener noreferrer" className="link-btn">
-                  <Icons.arrowUpRight size={13} />
-                  {s.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {/* 12. Agent activity — least prominent, near the bottom */}
-      <section>
-        <p className="panel-h section-h">
-          <Icons.pulse size={13} /> Agent activity
-        </p>
-        <div className="agent-activity-grid">
-          {result.agents.map((ag) => (
-            <div key={ag.id} className="panel agent-activity">
-              <div className="agent-activity-top">
-                <p className="agent-activity-name">{ag.name}</p>
-                {ag.status === "complete" ? (
-                  <span className="badge low">
-                    <span className="dot" /> done
-                  </span>
-                ) : ag.status === "skipped" ? (
-                  <span className="badge">skipped</span>
-                ) : (
-                  <span className="badge high">
-                    <span className="dot" /> error
-                  </span>
-                )}
-              </div>
-              <p className="agent-activity-detail">{ag.detail}</p>
-            </div>
+      {/* 9. Enrichment tags */}
+      {result.enrichment.tags.length > 0 && (
+        <div className="enrich-tags">
+          {result.enrichment.tags.map((t) => (
+            <span key={t} className="cat-chip">#{t}</span>
           ))}
         </div>
-      </section>
+      )}
 
       {/* 13. Feedback & comments */}
       <IdeaComments ideaId={idea.id} />
