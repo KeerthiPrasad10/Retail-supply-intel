@@ -27,12 +27,12 @@ const PIPELINE = [
   { id: "analyst", name: "Strategy Analyst", desc: "Synthesising positioning, pricing & next steps…", icon: "pulse" as const },
 ];
 
-type Stage = "form" | "running" | "results" | "error";
+type Stage = "board" | "form" | "running" | "detail" | "error";
 
 export function Ideas() {
-  const [stage, setStage] = useState<Stage>("form");
+  const [stage, setStage] = useState<Stage>("board");
   const [idea, setIdea] = useState<ProductIdea | null>(null);
-  const [result, setResult] = useState<ResearchResult | null>(null);
+  const [selectedIdea, setSelectedIdea] = useState<ProductIdea | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [activeStep, setActiveStep] = useState(0);
 
@@ -87,9 +87,10 @@ export function Ideas() {
         setStage("error");
         return;
       }
-      setResult(research);
-      setStage("results");
+      const finalIdea: ProductIdea = data?.idea ?? newIdea;
       loadRecent();
+      setSelectedIdea(finalIdea);
+      setStage("detail");
     } catch (err) {
       clearInterval(stepTimer.current);
       setError(err instanceof Error ? err.message : "Something went wrong.");
@@ -97,48 +98,45 @@ export function Ideas() {
     }
   }
 
-  function reset() {
-    setStage("form");
-    setIdea(null);
-    setResult(null);
-    setError(null);
-    imageUrlRef.current = "";
-  }
-
   function viewIdea(i: ProductIdea) {
     if (!i.research) return;
-    setIdea(i);
-    setResult(i.research);
-    setStage("results");
+    setSelectedIdea(i);
+    setStage("detail");
   }
 
   return (
     <div className="content">
       <header className="page-head">
         <div>
-          <h1 className="page-title">Add a product idea</h1>
+          <h1 className="page-title">Product Ideas</h1>
           <p className="page-sub">
-            Drop a photo and AI fills in the details. Agents then research the live market —{" "}
-            <b>pricing, China &amp; web suppliers, competitor benchmarks, and a sourcing strategy</b>.
-            Ideas are saved and classified so you can track them over time.
+            Research ideas submitted by the team — click any card to see market analysis
           </p>
         </div>
-        {stage !== "form" && (
-          <button className="btn secondary sm" onClick={reset}>
-            <Icons.plus size={14} />
-            New idea
+        {stage === "board" ? (
+          <button className="btn primary sm" onClick={() => setStage("form")}>
+            <Icons.plus size={14} /> Add idea
+          </button>
+        ) : (
+          <button className="btn secondary sm" onClick={() => setStage("board")}>
+            <Icons.arrowLeft size={14} /> Board
           </button>
         )}
       </header>
 
+      {stage === "board" && (
+        <BoardView ideas={recent} onView={viewIdea} onAdd={() => setStage("form")} />
+      )}
+
       {stage === "form" && (
-        <div className="ideas-layout">
-          <SubmitForm imageUrlRef={imageUrlRef} onSubmit={submit} />
-          <RecentIdeas ideas={recent} onView={viewIdea} />
-        </div>
+        <SubmitForm imageUrlRef={imageUrlRef} onSubmit={submit} />
       )}
 
       {stage === "running" && idea && <RunningView idea={idea} activeStep={activeStep} />}
+
+      {stage === "detail" && selectedIdea?.research && (
+        <Results idea={selectedIdea} result={selectedIdea.research} />
+      )}
 
       {stage === "error" && (
         <div className="callout warn">
@@ -146,15 +144,11 @@ export function Ideas() {
           <p>{error || "Research failed to complete. Please try again."}</p>
         </div>
       )}
-
-      {(stage === "results" || (stage === "error" && result)) && result && idea && (
-        <Results idea={idea} result={result} />
-      )}
     </div>
   );
 }
 
-/* ------------------------------ Recently validated ------------------------------ */
+/* ------------------------------ Board view ------------------------------ */
 
 const STATUS_BADGE: Record<ProductIdea["status"], { cls: string; label: string }> = {
   queued: { cls: "", label: "queued" },
@@ -163,39 +157,62 @@ const STATUS_BADGE: Record<ProductIdea["status"], { cls: string; label: string }
   error: { cls: "high", label: "error" },
 };
 
-function RecentIdeas({ ideas, onView }: { ideas: ProductIdea[]; onView: (i: ProductIdea) => void }) {
-  if (!ideas.length) return null;
+function EmptyBoard({ onAdd }: { onAdd: () => void }) {
   return (
-    <section className="panel idea-recent">
-      <p className="panel-h">
-        <Icons.grid size={13} /> Recently validated
-        <span className="panel-meta">{ideas.length}</span>
-      </p>
-      <ul className="idea-recent-list">
-        {ideas.map((i) => {
-          const s = STATUS_BADGE[i.status] ?? STATUS_BADGE.queued;
-          return (
-            <li key={i.id} className="idea-recent-row">
-              <div className="idea-recent-main">
-                <span className="idea-recent-title">{i.title}</span>
-                {i.category ? <span className="cat-chip">{i.category}</span> : null}
-              </div>
-              <div className="idea-recent-meta">
-                <span className={cc("badge", s.cls)}>
-                  {(i.status === "complete" || i.status === "researching") && <span className="dot" />}
-                  {s.label}
-                </span>
-                {i.research ? (
-                  <button className="link-btn" onClick={() => onView(i)}>
-                    View <Icons.arrowRight size={12} />
-                  </button>
-                ) : null}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
+    <div className="ideas-board-empty">
+      <div className="ideas-board-empty-icon">
+        <Icons.box size={24} />
+      </div>
+      <p className="ideas-board-empty-title">No ideas yet</p>
+      <p className="ideas-board-empty-sub">Submit a product idea and AI agents will research the live market for you.</p>
+      <button className="btn primary sm" onClick={onAdd}>
+        <Icons.plus size={14} /> Add idea
+      </button>
+    </div>
+  );
+}
+
+function IdeaCard({ idea, onClick }: { idea: ProductIdea; onClick: () => void }) {
+  const s = STATUS_BADGE[idea.status] ?? STATUS_BADGE.queued;
+  const clickable = !!idea.research;
+  const dateStr = new Date(idea.createdAt).toLocaleDateString();
+
+  return (
+    <div className={cc("idea-card", clickable && "clickable")} onClick={clickable ? onClick : undefined}>
+      <div className="idea-card-thumb">
+        {idea.imageUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={idea.imageUrl} alt={idea.title} />
+        ) : (
+          <Icons.box size={22} />
+        )}
+      </div>
+      <div className="idea-card-body">
+        <p className="idea-card-title">{idea.title}</p>
+        <div className="idea-card-meta">
+          {idea.category && <span className="cat-chip">{idea.category}</span>}
+          <span className={cc("badge", s.cls)}>
+            {(idea.status === "complete" || idea.status === "researching") && <span className="dot" />}
+            {s.label}
+          </span>
+        </div>
+        <div className="idea-card-meta">
+          <span className="idea-card-date">{dateStr}</span>
+          {idea.submittedBy && <span className="idea-card-date">· {idea.submittedBy}</span>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BoardView({ ideas, onView, onAdd }: { ideas: ProductIdea[]; onView: (i: ProductIdea) => void; onAdd: () => void }) {
+  if (!ideas.length) return <EmptyBoard onAdd={onAdd} />;
+  return (
+    <div className="ideas-board">
+      {ideas.map((idea) => (
+        <IdeaCard key={idea.id} idea={idea} onClick={() => idea.research && onView(idea)} />
+      ))}
+    </div>
   );
 }
 
@@ -511,7 +528,7 @@ function RunningView({ idea, activeStep }: { idea: ProductIdea; activeStep: numb
           <Icons.spark size={18} />
         </span>
         <div>
-          <p className="idea-banner-title">Researching “{idea.title}”</p>
+          <p className="idea-banner-title">Researching &ldquo;{idea.title}&rdquo;</p>
           <p className="idea-banner-sub">AI agents are seeking market info and benchmarking similar products…</p>
         </div>
       </div>
