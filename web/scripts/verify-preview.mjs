@@ -33,16 +33,20 @@ try {
   // Submit
   await page.getByRole("button", { name: /add idea & research|submit idea/i }).first().click();
 
-  // Wait for either the demand section or the results/agent activity to appear.
+  // Wait for research to complete — results view renders .idea-results, error shows text.
   log("waiting for research to complete (up to 90s)…");
-  await page.waitForSelector("text=/Demand signals|Agent activity|Research did not|Research failed/i", { timeout: 90_000 });
-  await page.waitForTimeout(2000);
+  await Promise.race([
+    page.waitForSelector(".ideas-results", { timeout: 90_000 }),
+    page.waitForSelector("text=Research did not", { timeout: 90_000 }),
+    page.waitForSelector("text=Research failed", { timeout: 90_000 }),
+  ]);
+  await page.waitForTimeout(1000);
 
-  const hasDemand = await page.getByText("Demand signals", { exact: false }).isVisible().catch(() => false);
+  const hasDemand = await page.locator(".demand-grid").isVisible().catch(() => false);
   log("Demand signals section visible:", hasDemand);
 
   if (hasDemand) {
-    await page.getByText("Demand signals", { exact: false }).scrollIntoViewIfNeeded();
+    await page.locator(".demand-grid").scrollIntoViewIfNeeded();
     const cards = await page.locator(".demand-card").count();
     log("demand cards:", cards);
     const momentum = await page.locator(".stat", { hasText: /Demand momentum/i }).innerText().catch(() => "(no momentum tile)");
