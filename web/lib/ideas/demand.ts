@@ -2,13 +2,15 @@ import "server-only";
 
 /* Demand-pulse agent — real community discussion from the last ~30 days.
  *
- * Adapted from the `last30days` skill's Reddit + Hacker News connectors, but
- * using each platform's free, key-free public endpoint so it runs inside the
- * serverless research route with no new credentials:
- *   - Hacker News:  hn.algolia.com/api/v1  (free, no auth)
- *   - Reddit:       www.reddit.com/search.json  (public JSON; rate-limited)
+ * Adapted from the `last30days` skill's Reddit + Hacker News connectors.
+ *   - Hacker News:  hn.algolia.com/api/v1       (free, no auth)
+ *   - Reddit:       trudax/reddit-scraper-lite   (Apify actor — residential IPs,
+ *                   bypasses Vercel IP blocks)
+ *                   Falls back to reddit.com/search.json when no APIFY_API_TOKEN.
  *
  * Degrades gracefully — any source that errors or rate-limits returns []. */
+
+import { apifyEnabled, redditSearch } from "./apify";
 
 export type DemandPost = {
   title: string;
@@ -71,8 +73,29 @@ async function searchHackerNews(query: string, limit = 10): Promise<DemandPost[]
   );
 }
 
-/** Reddit via the public search JSON — top posts this month. No key required. */
-async function searchReddit(query: string, limit = 10): Promise<DemandPost[]> {
+/** Reddit — uses Apify residential proxy actor when available (bypasses Vercel
+ *  IP blocks), otherwise falls back to the public search JSON. */
+async function searchReddit(query: string, limit = 12): Promise<DemandPost[]> {
+  if (apifyEnabled()) {
+    return withTimeout(
+      async () => {
+        const posts = await redditSearch(query, limit);
+        return posts.map((p) => ({
+          title: p.title,
+          url: p.url,
+          source: "reddit" as const,
+          channel: p.subreddit ? `r/${p.subreddit}` : "Reddit",
+          engagement: p.score + p.numComments,
+          comments: p.numComments,
+          createdAt: p.createdAt,
+        }));
+      },
+      60_000,
+      []
+    );
+  }
+
+  // Fallback: public JSON (may be blocked from Vercel's shared IPs).
   const url =
     `https://www.reddit.com/search.json?q=${encodeURIComponent(query)}` +
     `&sort=top&t=month&limit=${limit}&type=link`;
@@ -81,7 +104,6 @@ async function searchReddit(query: string, limit = 10): Promise<DemandPost[]> {
       const res = await fetch(url, {
         signal,
         cache: "no-store",
-        // A descriptive UA reduces Reddit's 429 rate-limiting on anonymous calls.
         headers: { "User-Agent": "RetailSupplyIntel/1.0 (demand-pulse)" },
       });
       if (!res.ok) return [];
