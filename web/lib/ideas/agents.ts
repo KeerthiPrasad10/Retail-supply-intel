@@ -15,6 +15,7 @@ import { demandPulse } from "./demand";
 import { analyzeWithClaude, classifyProduct, llmEnabled } from "./llm";
 import { generateRenderings, falEnabled } from "./renderings";
 import { parsePrice, priceRangeOf } from "./price";
+import { updateIdea } from "./store";
 
 function demandAgentInfo(demand: Awaited<ReturnType<typeof demandPulse>>): AgentRunInfo {
   return {
@@ -234,9 +235,17 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
       detail: classification ? `Class: ${classification.productClass} · ${classification.keywords.length} keywords.` : "Could not classify.",
     });
   }
-  const productClass = classification?.productClass || idea.category || idea.title;
+  // Reflect the classified category onto the idea so the board and detail stay
+  // consistent, and persist best-effort (non-fatal).
+  let workingIdea = idea;
+  if (classification?.category && classification.category !== "Other") {
+    workingIdea = { ...idea, category: classification.category };
+    await updateIdea(idea.id, { category: classification.category }).catch(() => {});
+  }
+
+  const productClass = classification?.productClass || workingIdea.category || workingIdea.title;
   const webQuery =
-    (classification?.keywords?.length ? classification.keywords.join(" ") : `${idea.title} ${idea.category}`.trim()) +
+    (classification?.keywords?.length ? classification.keywords.join(" ") : `${workingIdea.title} ${workingIdea.category}`.trim()) +
     " similar products";
 
   // 2. Run sources in parallel: Amazon (stores), Firecrawl (web), AliExpress
@@ -296,15 +305,15 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
 
   const priceRange = priceRangeOf(competitors);
   const makers = buildMakers(competitors);
-  const insights = buildInsights(idea, competitors, suppliers, priceRange);
-  const enrichment = buildEnrichment(idea, competitors, classification);
+  const insights = buildInsights(workingIdea, competitors, suppliers, priceRange);
+  const enrichment = buildEnrichment(workingIdea, competitors, classification);
 
   if (!competitors.length && !suppliers.length && !classification) {
     return await runDemo(idea, started);
   }
 
-  const renderings = await generateRenderings(idea);
-  const hasRealImage = Boolean(idea.imageUrl && !idea.imageUrl.startsWith("data:") && idea.imageUrl.startsWith("http"));
+  const renderings = await generateRenderings(workingIdea);
+  const hasRealImage = Boolean(workingIdea.imageUrl && !workingIdea.imageUrl.startsWith("data:") && workingIdea.imageUrl.startsWith("http"));
   agents.push({
     id: "renderings",
     name: "Product Renderings (fal.ai)",
@@ -336,7 +345,7 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
 
   // Strategy analyst (Claude) — reasons over the combined benchmark.
   if (llmEnabled()) {
-    const analysis = await analyzeWithClaude(idea, competitors, priceRange, demand);
+    const analysis = await analyzeWithClaude(workingIdea, competitors, priceRange, demand);
     if (analysis) {
       result.analysis = analysis;
       agents.push({

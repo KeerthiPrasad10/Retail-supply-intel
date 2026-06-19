@@ -145,6 +145,7 @@ export async function updateIdea(
     if (patch.imageUrl !== undefined) row.image_url = patch.imageUrl;
     if (patch.targetMarket !== undefined) row.target_market = patch.targetMarket;
     if (patch.priceTarget !== undefined) row.price_target = patch.priceTarget;
+    if (patch.category !== undefined) row.category = patch.category;
     const { data, error } = await supabaseAdmin()!
       .from(TABLE)
       .update(row)

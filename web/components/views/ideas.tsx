@@ -2,9 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ProductIdea, ResearchResult } from "@/lib/ideas/types";
+import type { Go, Trend } from "@/lib/types";
 import { resizeImage } from "@/lib/image";
-import { cc } from "@/lib/util";
+import { cc, fmtPct } from "@/lib/util";
 import { Icons } from "../icons";
+import { useModel } from "../model-context";
+import { Tier } from "../primitives";
 import { StatTile } from "./shared";
 
 const CATEGORIES = [
@@ -31,7 +34,8 @@ const PIPELINE = [
 
 type Stage = "board" | "form" | "running" | "detail" | "error";
 
-export function Ideas() {
+export function Ideas({ go, resetSignal }: { go: Go; resetSignal: number }) {
+  const { trends } = useModel();
   const [stage, setStage] = useState<Stage>("board");
   const [idea, setIdea] = useState<ProductIdea | null>(null);
   const [selectedIdea, setSelectedIdea] = useState<ProductIdea | null>(null);
@@ -51,6 +55,22 @@ export function Ideas() {
   useEffect(() => {
     loadRecent();
   }, [loadRecent]);
+
+  // Clicking "Product Ideas" in the nav always returns to the board.
+  // Skip the first run so it doesn't clobber the initial mount.
+  const firstReset = useRef(true);
+  useEffect(() => {
+    if (firstReset.current) {
+      firstReset.current = false;
+      return;
+    }
+    setStage("board");
+    setSelectedIdea(null);
+    setIdea(null);
+    setError(null);
+    loadRecent();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resetSignal]);
 
   function startStepAnimation() {
     setActiveStep(0);
@@ -137,7 +157,7 @@ export function Ideas() {
       {stage === "running" && idea && <RunningView idea={idea} activeStep={activeStep} />}
 
       {stage === "detail" && selectedIdea?.research && (
-        <Results idea={selectedIdea} result={selectedIdea.research} />
+        <Results idea={selectedIdea} result={selectedIdea.research} trends={trends} go={go} />
       )}
 
       {stage === "error" && (
@@ -178,6 +198,10 @@ function IdeaCard({ idea, onClick }: { idea: ProductIdea; onClick: () => void })
   const s = STATUS_BADGE[idea.status] ?? STATUS_BADGE.queued;
   const clickable = !!idea.research;
   const dateStr = new Date(idea.createdAt).toLocaleDateString();
+  const category =
+    idea.research?.classification?.category ||
+    idea.research?.enrichment?.suggestedCategory ||
+    idea.category;
 
   return (
     <div className={cc("idea-card", clickable && "clickable")} onClick={clickable ? onClick : undefined}>
@@ -192,7 +216,7 @@ function IdeaCard({ idea, onClick }: { idea: ProductIdea; onClick: () => void })
       <div className="idea-card-body">
         <p className="idea-card-title">{idea.title}</p>
         <div className="idea-card-meta">
-          {idea.category && <span className="cat-chip">{idea.category}</span>}
+          {category && <span className="cat-chip">{category}</span>}
           <span className={cc("badge", s.cls)}>
             {(idea.status === "complete" || idea.status === "researching") && <span className="dot" />}
             {s.label}
@@ -275,6 +299,7 @@ function SubmitForm({
   onSubmit: (payload: Record<string, string>) => void;
 }) {
   const fileRef = useRef<HTMLInputElement>(null);
+  const uploadPromiseRef = useRef<Promise<string> | null>(null);
   const [imagePreview, setImagePreview] = useState("");
   const [autofill, setAutofill] = useState<AutofillState>("idle");
   const [fields, setFields] = useState<IdeaFields>(EMPTY_FIELDS);
@@ -282,6 +307,21 @@ function SubmitForm({
 
   function setField(key: keyof IdeaFields, value: string) {
     setFields((f) => ({ ...f, [key]: value }));
+  }
+
+  async function uploadImage(dataUrl: string): Promise<string> {
+    try {
+      const res = await fetch("/api/ideas/upload-image", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ imageData: dataUrl }),
+      });
+      if (!res.ok) return dataUrl;
+      const data = await res.json();
+      return typeof data.url === "string" ? data.url : dataUrl;
+    } catch {
+      return dataUrl;
+    }
   }
 
   async function analyseImage(dataUrl: string) {
@@ -332,7 +372,12 @@ function SubmitForm({
       const raw = String(reader.result || "");
       setImagePreview(raw);
       const resized = await resizeImage(raw);
-      imageUrlRef.current = resized;
+      imageUrlRef.current = resized; // keep data URL for preview + analyse-image
+      // Upload to Storage in parallel; swap in the real URL when ready.
+      uploadPromiseRef.current = uploadImage(resized);
+      uploadPromiseRef.current.then((url) => {
+        if (url?.startsWith("http")) imageUrlRef.current = url;
+      });
       analyseImage(resized);
     };
     reader.readAsDataURL(file);
@@ -341,19 +386,29 @@ function SubmitForm({
   function removeImage() {
     setImagePreview("");
     imageUrlRef.current = "";
+    uploadPromiseRef.current = null;
     setAutofill("idle");
     setFields(EMPTY_FIELDS);
     if (fileRef.current) fileRef.current.value = "";
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setFormError(null);
     if (!fields.title.trim()) {
       setFormError("Please give your product idea a title.");
       return;
     }
-    onSubmit({ ...fields }); // imageUrl is a data URL — don't send in payload
+    // Wait for the in-flight Storage upload so the real URL is ready.
+    if (uploadPromiseRef.current) {
+      try {
+        const url = await uploadPromiseRef.current;
+        if (url?.startsWith("http")) imageUrlRef.current = url;
+      } catch {}
+    }
+    const payload: Record<string, string> = { ...fields };
+    if (imageUrlRef.current.startsWith("http")) payload.imageUrl = imageUrlRef.current;
+    onSubmit(payload);
   }
 
   const isAnalysing = autofill === "loading";
@@ -565,13 +620,58 @@ function RunningView({ idea, activeStep }: { idea: ProductIdea; activeStep: numb
 
 /* ------------------------------ Results ------------------------------ */
 
-function Results({ idea, result }: { idea: ProductIdea; result: ResearchResult }) {
+function tokenize(...parts: (string | undefined | null)[]): Set<string> {
+  const out = new Set<string>();
+  for (const part of parts) {
+    if (!part) continue;
+    for (const raw of part.split(/[^a-z0-9]+/i)) {
+      const t = raw.toLowerCase();
+      if (t.length >= 3) out.add(t);
+    }
+  }
+  return out;
+}
+
+function relatedTrends(idea: ProductIdea, result: ResearchResult, trends: Trend[]): Trend[] {
+  const tokens = tokenize(
+    idea.category,
+    idea.title,
+    result.classification?.category,
+    ...(result.classification?.keywords ?? []),
+    result.enrichment?.suggestedCategory,
+  );
+  if (tokens.size === 0) return [];
+  const scored = trends
+    .map((t) => {
+      const hay = t.cat.toLowerCase();
+      let score = 0;
+      for (const tok of tokens) if (hay.includes(tok)) score++;
+      return { t, score };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score);
+  return scored.slice(0, 3).map((x) => x.t);
+}
+
+function Results({
+  idea,
+  result,
+  trends,
+  go,
+}: {
+  idea: ProductIdea;
+  result: ResearchResult;
+  trends: Trend[];
+  go: Go;
+}) {
   const pr = result.benchmark.priceRange;
   const fmt = (n: number) => `${pr?.currency === "USD" ? "$" : (pr?.currency || "$") + " "}${Math.round(n)}`;
   const a = result.analysis;
+  const related = relatedTrends(idea, result, trends);
 
   return (
     <div className="ideas-results">
+      {/* 1. Stat row */}
       <div className="stat-row">
         <StatTile value={result.benchmark.competitors.length} label="Products benchmarked" sub="across stores & web" />
         <StatTile value={result.suppliers?.length ?? 0} label="Suppliers found" sub="China + web sourcing" />
@@ -596,6 +696,7 @@ function Results({ idea, result }: { idea: ProductIdea; result: ResearchResult }
         )}
       </div>
 
+      {/* 2. Demo callout */}
       {result.mode === "demo" && (
         <div className="callout warn">
           <Icons.alert size={15} />
@@ -606,8 +707,8 @@ function Results({ idea, result }: { idea: ProductIdea; result: ResearchResult }
         </div>
       )}
 
-      {/* Strategy analysis */}
-      {a && (
+      {/* 3. AI strategy analysis — single hero summary (analysis.summary) */}
+      {a ? (
         <section className="panel">
           <p className="panel-h">
             <Icons.spark size={13} /> AI strategy analysis
@@ -641,9 +742,77 @@ function Results({ idea, result }: { idea: ProductIdea; result: ResearchResult }
             </AnalysisBlock>
           )}
         </section>
+      ) : result.enrichment.summary ? (
+        // No strategy analysis (demo / llm disabled) — fall back to the
+        // enrichment summary once so the page never shows zero summary.
+        <section className="panel">
+          <p className="panel-h">
+            <Icons.spark size={13} /> Summary
+          </p>
+          <p className="analysis-summary">{result.enrichment.summary}</p>
+        </section>
+      ) : null}
+
+      {/* 4. Product renderings — the key product-board artifact */}
+      {result.renderings && result.renderings.length > 0 && (
+        <section className="results-section">
+          <h3 className="results-section-title">
+            <Icons.image size={13} /> Product renderings
+          </h3>
+          <div className="rendering-grid">
+            {result.renderings.map((r, i) => (
+              <a key={i} href={r.url} target="_blank" rel="noopener noreferrer" className="rendering-card">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={r.url} alt={`${r.scene} rendering`} className="rendering-img" />
+                <span className="rendering-label badge">{r.scene}</span>
+              </a>
+            ))}
+          </div>
+        </section>
       )}
 
-      {/* Demand signals — real community discussion (last 30 days) */}
+      {/* 5. Related market trends — connective tissue to the trends dashboard */}
+      <section>
+        <p className="panel-h section-h">
+          <Icons.trending size={13} /> Related market trends
+        </p>
+        {related.length > 0 ? (
+          <div className="related-trends-grid">
+            {related.map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                className="related-trend-card"
+                onClick={() => go("deepdive", t.id)}
+              >
+                <div className="related-trend-top">
+                  <Tier tier={t.tier} />
+                  <Icons.arrowUpRight size={13} />
+                </div>
+                <p className="related-trend-cat">{t.cat}</p>
+                <p className="related-trend-market">{t.market}</p>
+                <div className="related-trend-foot">
+                  <span className="related-trend-stat">
+                    Momentum <b>{Math.round(t.momentum)}</b>
+                  </span>
+                  <span className={cc("growth", t.growth >= 0 ? "up" : "down")}>
+                    {fmtPct(t.growth)}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+        ) : (
+          <p className="analysis-text muted related-trend-empty">
+            Explore the live market-trends dashboard for category context.
+          </p>
+        )}
+        <button type="button" className="btn secondary sm related-trend-all" onClick={() => go("trending")}>
+          View all market trends <Icons.arrowUpRight size={13} />
+        </button>
+      </section>
+
+      {/* 6. Demand signals — real community discussion (last 30 days) */}
       {result.demand && result.demand.posts.length > 0 && (
         <section>
           <p className="panel-h section-h">
@@ -678,77 +847,7 @@ function Results({ idea, result }: { idea: ProductIdea; result: ResearchResult }
         </section>
       )}
 
-      {/* Product renderings — AI placement scenes (requires FAL_KEY + real image URL) */}
-      {result.renderings && result.renderings.length > 0 && (
-        <section className="results-section">
-          <h3 className="results-section-title">
-            <Icons.image size={13} /> Product renderings
-          </h3>
-          <div className="rendering-grid">
-            {result.renderings.map((r, i) => (
-              <a key={i} href={r.url} target="_blank" rel="noopener noreferrer" className="rendering-card">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={r.url} alt={`${r.scene} rendering`} className="rendering-img" />
-                <span className="rendering-label badge">{r.scene}</span>
-              </a>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Agent activity */}
-      <section>
-        <p className="panel-h section-h">
-          <Icons.pulse size={13} /> Agent activity
-        </p>
-        <div className="agent-activity-grid">
-          {result.agents.map((ag) => (
-            <div key={ag.id} className="panel agent-activity">
-              <div className="agent-activity-top">
-                <p className="agent-activity-name">{ag.name}</p>
-                {ag.status === "complete" ? (
-                  <span className="badge low">
-                    <span className="dot" /> done
-                  </span>
-                ) : ag.status === "skipped" ? (
-                  <span className="badge">skipped</span>
-                ) : (
-                  <span className="badge high">
-                    <span className="dot" /> error
-                  </span>
-                )}
-              </div>
-              <p className="agent-activity-detail">{ag.detail}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Enriched understanding */}
-      <section className="panel">
-        <p className="panel-h">
-          <Icons.box size={13} /> Enriched understanding
-        </p>
-        <p className="analysis-text">{result.enrichment.summary}</p>
-        <div className="enrich-grid">
-          <InfoRow icon="box" label="Suggested category" value={result.enrichment.suggestedCategory} />
-          <InfoRow icon="grid" label="Target audience" value={result.enrichment.targetAudience} />
-          {result.classification?.productClass && (
-            <InfoRow icon="search" label="Product class" value={result.classification.productClass} />
-          )}
-        </div>
-        {result.enrichment.tags.length > 0 && (
-          <div className="enrich-tags">
-            {result.enrichment.tags.map((t) => (
-              <span key={t} className="cat-chip">
-                #{t}
-              </span>
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* Benchmark */}
+      {/* 7. Market benchmark */}
       <section>
         <p className="panel-h section-h">
           <Icons.trending size={13} /> Market benchmark
@@ -756,7 +855,7 @@ function Results({ idea, result }: { idea: ProductIdea; result: ResearchResult }
         <BenchmarkTable competitors={result.benchmark.competitors} />
       </section>
 
-      {/* Makers */}
+      {/* 8a. Makers — who's making it */}
       {result.makers?.length ? (
         <section>
           <p className="panel-h section-h">
@@ -778,7 +877,7 @@ function Results({ idea, result }: { idea: ProductIdea; result: ResearchResult }
         </section>
       ) : null}
 
-      {/* Suppliers */}
+      {/* 8b. Suppliers & manufacturers */}
       {result.suppliers?.length ? (
         <section>
           <p className="panel-h section-h">
@@ -808,7 +907,7 @@ function Results({ idea, result }: { idea: ProductIdea; result: ResearchResult }
         </section>
       ) : null}
 
-      {/* Insights */}
+      {/* 9. Insights */}
       {result.benchmark.insights.length > 0 && (
         <section className="panel em-panel">
           <p className="panel-h">
@@ -825,7 +924,30 @@ function Results({ idea, result }: { idea: ProductIdea; result: ResearchResult }
         </section>
       )}
 
-      {/* Sources */}
+      {/* 10. Product profile — slimmed enrichment (meta grid + tags only) */}
+      <section className="panel">
+        <p className="panel-h">
+          <Icons.box size={13} /> Product profile
+        </p>
+        <div className="enrich-grid">
+          <InfoRow icon="box" label="Suggested category" value={result.enrichment.suggestedCategory} />
+          <InfoRow icon="grid" label="Target audience" value={result.enrichment.targetAudience} />
+          {result.classification?.productClass && (
+            <InfoRow icon="search" label="Product class" value={result.classification.productClass} />
+          )}
+        </div>
+        {result.enrichment.tags.length > 0 && (
+          <div className="enrich-tags">
+            {result.enrichment.tags.map((t) => (
+              <span key={t} className="cat-chip">
+                #{t}
+              </span>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* 11. Sources */}
       {result.sources.length > 0 && (
         <section>
           <p className="panel-h section-h">
@@ -844,6 +966,35 @@ function Results({ idea, result }: { idea: ProductIdea; result: ResearchResult }
         </section>
       )}
 
+      {/* 12. Agent activity — least prominent, near the bottom */}
+      <section>
+        <p className="panel-h section-h">
+          <Icons.pulse size={13} /> Agent activity
+        </p>
+        <div className="agent-activity-grid">
+          {result.agents.map((ag) => (
+            <div key={ag.id} className="panel agent-activity">
+              <div className="agent-activity-top">
+                <p className="agent-activity-name">{ag.name}</p>
+                {ag.status === "complete" ? (
+                  <span className="badge low">
+                    <span className="dot" /> done
+                  </span>
+                ) : ag.status === "skipped" ? (
+                  <span className="badge">skipped</span>
+                ) : (
+                  <span className="badge high">
+                    <span className="dot" /> error
+                  </span>
+                )}
+              </div>
+              <p className="agent-activity-detail">{ag.detail}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 13. Foot note */}
       <p className="idea-foot-note">
         Submitted {new Date(idea.createdAt).toLocaleDateString()}
         {idea.submittedBy ? ` · ${idea.submittedBy}` : ""} · research ran{" "}

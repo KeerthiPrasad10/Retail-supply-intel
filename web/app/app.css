@@ -669,3 +669,17 @@ textarea.nxb-input { resize: vertical; min-height: 60px; }
 .rendering-card:hover { box-shadow: var(--shadow-2); }
 .rendering-img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
 .rendering-label { position: absolute; bottom: var(--space-2); left: var(--space-2); }
+
+/* Related market trends (Ideas → trends connective tissue) */
+.related-trends-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.related-trend-card { text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; background: var(--nxb-surface-1); border: 0.5px solid var(--nxb-border-low); border-radius: var(--radius-card); transition: 150ms; }
+.related-trend-card:hover { background: var(--nxb-overlay-subtle); border-color: var(--nxb-border-medium); }
+.related-trend-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.related-trend-top svg { color: var(--nxb-text-muted); }
+.related-trend-cat { font-size: 14px; font-weight: 500; line-height: 1.35; margin: 0; }
+.related-trend-market { font-size: 11.5px; color: var(--nxb-text-muted); margin: 0; }
+.related-trend-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 2px; padding-top: 10px; border-top: 0.5px solid var(--nxb-border-low); }
+.related-trend-stat { font-size: 11.5px; color: var(--nxb-text-muted); }
+.related-trend-stat b { color: var(--nxb-text-primary); font-weight: 500; }
+.related-trend-empty { margin: 0 0 12px; }
+.related-trend-all { margin-top: 14px; align-self: flex-start; }

@@ -77,7 +77,21 @@ const CLASSIFICATION_SCHEMA = {
   type: "object",
   additionalProperties: false,
   properties: {
-    category: { type: "string", description: "Broad product category, e.g. 'Drinkware & Kitchen'." },
+    category: {
+      type: "string",
+      enum: [
+        "Apparel & Fashion",
+        "Drinkware & Kitchen",
+        "Home & Living",
+        "Baby & Kids",
+        "Beauty & Personal Care",
+        "Sports & Outdoors",
+        "Electronics & Accessories",
+        "Pet Products",
+        "Other",
+      ],
+      description: "The single closest broad product category from the allowed list; use 'Other' only if none fit.",
+    },
     productClass: { type: "string", description: "Concise product class to search for to find similar products, e.g. 'insulated stainless steel water bottle'." },
     keywords: { type: "array", items: { type: "string" }, description: "3-6 search keywords for finding comparable products." },
     attributes: { type: "array", items: { type: "string" }, description: "Notable attributes/materials/features inferred." },
@@ -122,6 +136,7 @@ export async function classifyProduct(idea: ProductIdea): Promise<Classification
       `Description: ${idea.description || "(none)"}\n` +
       `Stated category: ${idea.category || "(none)"}\n` +
       `Features: ${idea.features || "(none)"}\n\n` +
+      "Pick the single closest category from the allowed list; use 'Other' only if none fit. " +
       "Return the category, a concise product class to search for, search keywords, key attributes, and a one-line summary.",
   });
 
