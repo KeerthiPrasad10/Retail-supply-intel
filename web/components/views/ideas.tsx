@@ -127,14 +127,35 @@ export function Ideas({ go, resetSignal }: { go: Go; resetSignal: number }) {
     setStage("detail");
   }
 
+  // The header reflects where you are — the board blurb only makes sense on the
+  // board itself; the detail page shows the product you're looking at.
+  const head: { title: string; sub: string } = (() => {
+    if (stage === "detail" && selectedIdea) {
+      const cat =
+        selectedIdea.research?.classification?.category ||
+        selectedIdea.research?.enrichment?.suggestedCategory ||
+        selectedIdea.category;
+      return {
+        title: selectedIdea.title,
+        sub: cat ? `Market analysis & sourcing · ${cat}` : "Market analysis & sourcing",
+      };
+    }
+    if (stage === "form")
+      return { title: "New product idea", sub: "Add a photo or a few details — AI agents research the live market for you" };
+    if (stage === "running")
+      return { title: idea?.title || "Researching idea", sub: "AI agents are analysing the live market…" };
+    return {
+      title: "Product Ideas",
+      sub: "Research ideas submitted by the team — click any card to see market analysis",
+    };
+  })();
+
   return (
     <div className="content">
       <header className="page-head">
         <div>
-          <h1 className="page-title">Product Ideas</h1>
-          <p className="page-sub">
-            Research ideas submitted by the team — click any card to see market analysis
-          </p>
+          <h1 className="page-title">{head.title}</h1>
+          <p className="page-sub">{head.sub}</p>
         </div>
         {stage === "board" ? (
           <button className="btn primary sm" onClick={() => setStage("form")}>
