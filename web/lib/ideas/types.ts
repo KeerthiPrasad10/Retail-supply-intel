@@ -65,6 +65,24 @@ export type Maker = {
   lowestPrice: string;
 };
 
+export type DemandPost = {
+  title: string;
+  url: string;
+  source: "reddit" | "hackernews";
+  channel: string;
+  engagement: number;
+  comments: number;
+  createdAt: string;
+};
+
+export type DemandPulse = {
+  posts: DemandPost[];
+  totalPosts: number;
+  totalEngagement: number;
+  channels: string[];
+  momentum: "high" | "moderate" | "low" | "quiet";
+};
+
 export type ResearchResult = {
   mode: "live" | "demo";
   ranAt: string;
@@ -83,6 +101,7 @@ export type ResearchResult = {
   classification?: Classification | null;
   suppliers?: Supplier[];
   makers?: Maker[];
+  demand?: DemandPulse | null;
   analysis?: {
     summary: string;
     positioning: string;

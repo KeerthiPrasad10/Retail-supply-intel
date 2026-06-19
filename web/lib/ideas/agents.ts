@@ -11,8 +11,21 @@ import type {
 } from "./types";
 import { extractProduct, firecrawlEnabled, search, type SearchResult } from "./firecrawl";
 import { amazonSearch, aliexpressSuppliers, apifyEnabled } from "./apify";
+import { demandPulse } from "./demand";
 import { analyzeWithClaude, classifyProduct, llmEnabled } from "./llm";
 import { parsePrice, priceRangeOf } from "./price";
+
+function demandAgentInfo(demand: Awaited<ReturnType<typeof demandPulse>>): AgentRunInfo {
+  return {
+    id: "demand",
+    name: "Demand Signals (Reddit + HN)",
+    description: "Reads real community discussion from the last 30 days.",
+    status: demand.totalPosts ? "complete" : "error",
+    detail: demand.totalPosts
+      ? `${demand.totalPosts} posts · ${demand.totalEngagement.toLocaleString()} engagements · ${demand.momentum} momentum.`
+      : "No recent community discussion found.",
+  };
+}
 
 const STOPWORDS = new Set([
   "the", "a", "an", "and", "or", "for", "with", "without", "of", "to", "in",
@@ -171,7 +184,9 @@ function dedupeSuppliers(rows: Supplier[]): Supplier[] {
   });
 }
 
-function runDemo(idea: ProductIdea, started: number): ResearchResult {
+async function runDemo(idea: ProductIdea, started: number): Promise<ResearchResult> {
+  // Demand signals are key-free, so fetch real ones even in demo mode.
+  const demand = await demandPulse(idea.category || idea.title);
   const base = 25 + (idea.title.length % 7) * 6;
   const competitors: Competitor[] = [
     { name: `${idea.category || "Market"} Leader Pro`, brand: "Northwind", price: `$${base + 20}`, priceValue: base + 20, currency: "USD", features: ["Premium materials", "2-year warranty"], url: "https://example.com/a", source: "example.com", rating: 4.6, reviews: 1200 },
@@ -187,9 +202,11 @@ function runDemo(idea: ProductIdea, started: number): ResearchResult {
     benchmark: { competitors, priceRange, insights: buildInsights(idea, competitors, [], priceRange) },
     makers: buildMakers(competitors),
     suppliers: [],
+    demand,
     agents: [
       { id: "amazon", name: "Online Stores", description: "Scans Amazon for live listings.", status: "skipped", detail: "Demo mode — set APIFY_API_TOKEN for live store data." },
       { id: "benchmark", name: "Benchmarking", description: "Builds the competitor benchmark.", status: "complete", detail: "Generated sample benchmark data." },
+      demandAgentInfo(demand),
     ],
     sources: [],
   };
@@ -199,7 +216,7 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
   const started = Date.now();
 
   if (!firecrawlEnabled() && !apifyEnabled() && !llmEnabled()) {
-    return runDemo(idea, started);
+    return await runDemo(idea, started);
   }
 
   const agents: AgentRunInfo[] = [];
@@ -221,13 +238,17 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
     (classification?.keywords?.length ? classification.keywords.join(" ") : `${idea.title} ${idea.category}`.trim()) +
     " similar products";
 
-  // 2. Run sources in parallel: Amazon (stores), Firecrawl (web), AliExpress (China suppliers), Firecrawl (web suppliers).
-  const [amazon, benchRes, aliexpress, webSuppliers] = await Promise.all([
+  // 2. Run sources in parallel: Amazon (stores), Firecrawl (web), AliExpress
+  // (China suppliers), Firecrawl (web suppliers), and the demand pulse
+  // (Reddit + HN — key-free, so it always runs).
+  const [amazon, benchRes, aliexpress, webSuppliers, demand] = await Promise.all([
     apifyEnabled() ? amazonSearch(productClass, 8) : Promise.resolve<Competitor[]>([]),
     firecrawlEnabled() ? benchmarkViaFirecrawl(webQuery) : Promise.resolve(null),
     apifyEnabled() ? aliexpressSuppliers(productClass, 8) : Promise.resolve<Supplier[]>([]),
     firecrawlEnabled() ? findWebSuppliers(productClass) : Promise.resolve<Supplier[]>([]),
+    demandPulse(productClass),
   ]);
+  agents.push(demandAgentInfo(demand));
 
   if (apifyEnabled()) {
     agents.push({
@@ -278,7 +299,7 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
   const enrichment = buildEnrichment(idea, competitors, classification);
 
   if (!competitors.length && !suppliers.length && !classification) {
-    return runDemo(idea, started);
+    return await runDemo(idea, started);
   }
 
   const result: ResearchResult = {
@@ -290,13 +311,14 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
     benchmark: { competitors, priceRange, insights },
     suppliers,
     makers,
+    demand,
     agents,
     sources,
   };
 
   // Strategy analyst (Claude) — reasons over the combined benchmark.
   if (llmEnabled()) {
-    const analysis = await analyzeWithClaude(idea, competitors, priceRange);
+    const analysis = await analyzeWithClaude(idea, competitors, priceRange, demand);
     if (analysis) {
       result.analysis = analysis;
       agents.push({

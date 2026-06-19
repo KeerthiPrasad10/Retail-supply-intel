@@ -1,6 +1,6 @@
 import "server-only";
 
-import type { Classification, Competitor, ProductIdea, ResearchResult } from "./types";
+import type { Classification, Competitor, DemandPulse, ProductIdea, ResearchResult } from "./types";
 
 /* Claude agents — product classifier (vision-aware) and strategy analyst.
  *
@@ -133,7 +133,8 @@ export async function classifyProduct(idea: ProductIdea): Promise<Classification
 function buildAnalysisPrompt(
   idea: ProductIdea,
   competitors: Competitor[],
-  priceRange: ResearchResult["benchmark"]["priceRange"]
+  priceRange: ResearchResult["benchmark"]["priceRange"],
+  demand?: DemandPulse | null
 ): string {
   const compLines = competitors
     .map((c) => `- ${c.name} (${c.brand}) — ${c.price || "price n/a"} — ${c.features.join("; ") || "no features listed"}`)
@@ -141,6 +142,19 @@ function buildAnalysisPrompt(
   const range = priceRange
     ? `Market price range: ${priceRange.currency} ${Math.round(priceRange.min)}–${Math.round(priceRange.max)} (avg ${Math.round(priceRange.avg)}).`
     : "No reliable market pricing was extracted.";
+
+  const demandLines =
+    demand && demand.posts.length
+      ? [
+          "",
+          "DEMAND SIGNALS (real community discussion, last 30 days — Reddit + Hacker News)",
+          `Momentum: ${demand.momentum} · ${demand.totalPosts} posts · ${demand.totalEngagement.toLocaleString()} engagements across ${demand.channels.join(", ")}.`,
+          ...demand.posts
+            .slice(0, 8)
+            .map((p) => `- [${p.channel}, ${p.engagement} eng] ${p.title}`),
+          "Use these to gauge real demand, unmet needs, and language customers actually use. Call out momentum and any recurring complaints or requests.",
+        ].join("\n")
+      : "";
 
   return [
     "You are a product strategist helping a team evaluate a new product idea against the live market.",
@@ -157,18 +171,20 @@ function buildAnalysisPrompt(
     "BENCHMARKED COMPETITORS (from live web research)",
     compLines || "(no comparable products were found)",
     range,
+    demandLines,
     "",
-    "Produce a concise, decision-useful competitive analysis. Reference specific competitors and pricing where relevant. Be concrete and avoid generic filler.",
+    "Produce a concise, decision-useful competitive analysis. Reference specific competitors, pricing, and demand signals where relevant. Be concrete and avoid generic filler.",
   ].join("\n");
 }
 
 export async function analyzeWithClaude(
   idea: ProductIdea,
   competitors: Competitor[],
-  priceRange: ResearchResult["benchmark"]["priceRange"]
+  priceRange: ResearchResult["benchmark"]["priceRange"],
+  demand?: DemandPulse | null
 ): Promise<CompetitiveAnalysis | null> {
   if (!llmEnabled()) return null;
-  const content: ContentBlock[] = [{ type: "text", text: buildAnalysisPrompt(idea, competitors, priceRange) }];
+  const content: ContentBlock[] = [{ type: "text", text: buildAnalysisPrompt(idea, competitors, priceRange, demand) }];
   const parsed = await structuredCall<CompetitiveAnalysis>(content, "competitive_analysis", ANALYSIS_SCHEMA, 4000);
   if (!parsed?.summary || !Array.isArray(parsed.differentiation)) return null;
   return parsed;
