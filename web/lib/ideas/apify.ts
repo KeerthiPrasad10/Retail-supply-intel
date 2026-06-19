@@ -112,6 +112,7 @@ export async function redditSearch(query: string, limit = 12): Promise<RedditPos
       searchComments: false,
       searchCommunities: false,
       searchUsers: false,
+      includeMediaLinks: true,
       maxItems: limit,
       maxPostCount: limit,
       sort: "top",
@@ -133,11 +134,14 @@ export async function redditSearch(query: string, limit = 12): Promise<RedditPos
     .map((i) => ({
       title: String(i.title),
       url: String(i.url),
-      subreddit: String(i.subreddit ?? i.community ?? ""),
-      score: Number(i.score ?? i.upvotes ?? 0),
-      numComments: Number(i.numComments ?? i.num_comments ?? i.commentsCount ?? 0),
+      // trudax/reddit-scraper-lite uses communityName (e.g. "r/foo")
+      subreddit: String(i.communityName ?? i.subreddit ?? i.community ?? "").replace(/^r\//, ""),
+      score: Number(i.upVotes ?? i.score ?? i.upvotes ?? 0),
+      numComments: Number(i.numberOfComments ?? i.numComments ?? i.num_comments ?? 0),
       createdAt: (() => {
-        const ts = Number(i.createdAt ?? i.created_utc ?? 0);
+        const raw = i.createdAt ?? i.created_utc ?? 0;
+        if (typeof raw === "string") return new Date(raw).toISOString();
+        const ts = Number(raw);
         return new Date(ts < 1e12 ? ts * 1000 : ts).toISOString();
       })(),
     }));
