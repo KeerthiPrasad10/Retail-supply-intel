@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ProductIdea, ResearchResult } from "@/lib/ideas/types";
+import { resizeImage } from "@/lib/image";
 import { cc } from "@/lib/util";
 import { Icons } from "../icons";
 import { StatTile } from "./shared";
@@ -17,7 +18,7 @@ const CATEGORIES = [
   "Pet Products",
 ];
 
-const MAX_IMAGE_BYTES = 1_500_000;
+const MAX_IMAGE_BYTES = 15_000_000; // 15 MB — accommodates full-res iPhone photos
 
 const PIPELINE = [
   { id: "classify", name: "Classifier", desc: "Classifying the product & deriving search terms…", icon: "spark" as const },
@@ -322,15 +323,16 @@ function SubmitForm({
       return;
     }
     if (file.size > MAX_IMAGE_BYTES) {
-      setFormError("Image is too large (max 1.5 MB).");
+      setFormError("Image is too large (max 15 MB).");
       return;
     }
     const reader = new FileReader();
-    reader.onload = () => {
-      const dataUrl = String(reader.result || "");
-      setImagePreview(dataUrl);
-      imageUrlRef.current = dataUrl;
-      analyseImage(dataUrl);
+    reader.onload = async () => {
+      const raw = String(reader.result || "");
+      setImagePreview(raw);
+      const resized = await resizeImage(raw);
+      imageUrlRef.current = resized;
+      analyseImage(resized);
     };
     reader.readAsDataURL(file);
   }
