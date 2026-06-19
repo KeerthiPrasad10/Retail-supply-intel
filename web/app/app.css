@@ -671,11 +671,21 @@ textarea.nxb-input { resize: vertical; min-height: 60px; }
 .results-section { display: flex; flex-direction: column; }
 .results-section-title { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; color: var(--nxb-text-muted); letter-spacing: 0.04em; margin: 0 0 12px; font-weight: 500; display: flex; align-items: center; gap: 7px; }
 .results-section-title svg { opacity: .7; }
-.rendering-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-3); margin-top: var(--space-3); }
-.rendering-card { position: relative; border-radius: var(--radius-2); overflow: hidden; display: block; }
-.rendering-card:hover { box-shadow: var(--shadow-2); }
-.rendering-img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-.rendering-label { position: absolute; bottom: var(--space-2); left: var(--space-2); }
+/* Image carousel (original photo + AI renderings) */
+.img-carousel-wrap { display: flex; flex-direction: column; gap: 0; }
+.img-carousel { display: flex; flex-direction: column; gap: 10px; }
+.img-carousel-stage { position: relative; border-radius: var(--radius-2); overflow: hidden; background: var(--nxb-surface-raised); aspect-ratio: 1; max-height: 480px; }
+.img-carousel-img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.img-carousel-badge { position: absolute; bottom: 10px; left: 10px; text-transform: capitalize; }
+.img-carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: color-mix(in srgb, var(--nxb-surface) 80%, transparent); border: 0.5px solid var(--nxb-border); border-radius: 9999px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--nxb-text-primary); transition: background 0.15s; }
+.img-carousel-arrow:hover { background: var(--nxb-surface); }
+.img-carousel-arrow.left { left: 10px; }
+.img-carousel-arrow.right { right: 10px; }
+.img-carousel-thumbs { display: flex; gap: 8px; flex-wrap: wrap; }
+.img-carousel-thumb { width: 64px; height: 64px; border-radius: 6px; overflow: hidden; border: 2px solid transparent; cursor: pointer; flex-shrink: 0; padding: 0; background: var(--nxb-surface-raised); }
+.img-carousel-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.img-carousel-thumb.active { border-color: var(--nxb-accent); }
+.img-carousel-thumb:hover:not(.active) { border-color: var(--nxb-border); }
 
 /* Related market trends (Ideas → trends connective tissue) */
 .related-trends-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }

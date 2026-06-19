@@ -623,6 +623,71 @@ function RunningView({ idea, activeStep }: { idea: ProductIdea; activeStep: numb
   );
 }
 
+/* ------------------------------ Image carousel ------------------------------ */
+
+function ImageCarousel({ idea, renderings }: { idea: ProductIdea; renderings?: import("@/lib/ideas/types").Rendering[] }) {
+  const slides: { url: string; label: string }[] = [];
+  if (idea.imageUrl?.startsWith("http")) slides.push({ url: idea.imageUrl, label: "Original" });
+  (renderings ?? []).forEach((r) => slides.push({ url: r.url, label: r.scene }));
+
+  const [idx, setIdx] = useState(0);
+  const safeIdx = Math.min(idx, Math.max(0, slides.length - 1));
+
+  if (slides.length === 0) return null;
+
+  return (
+    <section className="img-carousel-wrap">
+      <p className="panel-h section-h">
+        <Icons.image size={13} /> Product images
+        <span className="panel-meta">{slides.length} image{slides.length !== 1 ? "s" : ""}</span>
+      </p>
+      <div className="img-carousel">
+        <div className="img-carousel-stage">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={slides[safeIdx].url} alt={slides[safeIdx].label} className="img-carousel-img" />
+          <span className="img-carousel-badge badge">{slides[safeIdx].label}</span>
+          {slides.length > 1 && (
+            <>
+              <button
+                type="button"
+                className="img-carousel-arrow left"
+                onClick={() => setIdx((i) => (i - 1 + slides.length) % slides.length)}
+                aria-label="Previous"
+              >
+                <Icons.chevronLeft size={16} />
+              </button>
+              <button
+                type="button"
+                className="img-carousel-arrow right"
+                onClick={() => setIdx((i) => (i + 1) % slides.length)}
+                aria-label="Next"
+              >
+                <Icons.arrowRight size={16} />
+              </button>
+            </>
+          )}
+        </div>
+        {slides.length > 1 && (
+          <div className="img-carousel-thumbs">
+            {slides.map((s, i) => (
+              <button
+                key={i}
+                type="button"
+                className={cc("img-carousel-thumb", i === safeIdx && "active")}
+                onClick={() => setIdx(i)}
+                aria-label={s.label}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={s.url} alt={s.label} />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 /* ------------------------------ Results ------------------------------ */
 
 function tokenize(...parts: (string | undefined | null)[]): Set<string> {
@@ -760,23 +825,8 @@ function Results({
         </section>
       ) : null}
 
-      {/* 4. Product renderings — the key product-board artifact */}
-      {result.renderings && result.renderings.length > 0 && (
-        <section className="results-section">
-          <h3 className="results-section-title">
-            <Icons.image size={13} /> Product renderings
-          </h3>
-          <div className="rendering-grid">
-            {result.renderings.map((r, i) => (
-              <a key={i} href={r.url} target="_blank" rel="noopener noreferrer" className="rendering-card">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={r.url} alt={`${r.scene} rendering`} className="rendering-img" />
-                <span className="rendering-label badge">{r.scene}</span>
-              </a>
-            ))}
-          </div>
-        </section>
-      )}
+      {/* 4. Product image carousel — original photo + AI renderings */}
+      <ImageCarousel idea={idea} renderings={result.renderings} />
 
       {/* 5. Related market trends — connective tissue to the trends dashboard */}
       <section>
