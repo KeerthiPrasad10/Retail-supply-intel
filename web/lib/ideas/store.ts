@@ -3,6 +3,7 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import type { NewIdeaInput, ProductIdea } from "./types";
 import { supabaseAdmin, supabaseAdminEnabled } from "./supabase-admin";
+import { uploadDataUrlToStorage } from "./storage";
 
 /**
  * Persistence for product ideas.
@@ -55,7 +56,7 @@ function rowToIdea(row: Record<string, unknown>): ProductIdea {
     category: String(row.category ?? ""),
     targetMarket: String(row.target_market ?? ""),
     audience: String(row.audience ?? ""),
-    priceTarget: String(row.target_price ?? ""),
+    priceTarget: String(row.price_target ?? row.target_price ?? ""),
     features: String(row.features ?? ""),
     imageUrl: String(row.image_url ?? ""),
     submittedBy: String(row.submitted_by ?? ""),
@@ -75,7 +76,7 @@ function ideaToRow(idea: ProductIdea): Record<string, unknown> {
     description: idea.description,
     image_url: imageUrl,
     target_market: idea.targetMarket || null,
-    target_price: idea.priceTarget || null,
+    price_target: idea.priceTarget || null,
     category: idea.category || null,
     audience: idea.audience || null,
     features: idea.features || null,
@@ -111,6 +112,16 @@ export async function getIdea(id: string): Promise<ProductIdea | undefined> {
 export async function createIdea(input: NewIdeaInput): Promise<ProductIdea> {
   const idea = newIdea(input);
 
+  // If the client sent a base64 data URL, persist it to Storage *here* (server
+  // side) and swap in the public http URL. This guarantees the image survives
+  // to the DB regardless of whether the client's own upload won its race — the
+  // failure mode that left every earlier row's image_url null.
+  const original = idea.imageUrl;
+  if (original?.startsWith("data:") && supabaseAdminEnabled()) {
+    const hosted = await uploadDataUrlToStorage(original);
+    if (hosted) idea.imageUrl = hosted;
+  }
+
   if (supabaseAdminEnabled()) {
     const { data, error } = await supabaseAdmin()!
       .from(TABLE)
@@ -124,6 +135,9 @@ export async function createIdea(input: NewIdeaInput): Promise<ProductIdea> {
     merged.audience = idea.audience;
     merged.features = idea.features;
     merged.submittedBy = idea.submittedBy;
+    // DB strips data URLs (VARCHAR(2048) too small); preserve the original in
+    // the in-process cache so the card shows the image during the current session.
+    if (!merged.imageUrl && idea.imageUrl) merged.imageUrl = idea.imageUrl;
     mem.set(merged.id, merged);
     return merged;
   }
@@ -144,7 +158,8 @@ export async function updateIdea(
     if (patch.description !== undefined) row.description = patch.description;
     if (patch.imageUrl !== undefined) row.image_url = patch.imageUrl;
     if (patch.targetMarket !== undefined) row.target_market = patch.targetMarket;
-    if (patch.priceTarget !== undefined) row.target_price = patch.priceTarget;
+    if (patch.priceTarget !== undefined) row.price_target = patch.priceTarget;
+    if (patch.category !== undefined) row.category = patch.category;
     const { data, error } = await supabaseAdmin()!
       .from(TABLE)
       .update(row)

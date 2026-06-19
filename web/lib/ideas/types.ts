@@ -57,12 +57,34 @@ export type Supplier = {
   orders?: number | null;
   rating?: number | null;
   source?: string;
+  /** The seller/store or manufacturer behind the listing (when available). */
+  store?: string;
+  /** Minimum order quantity, e.g. "100 pieces" (Alibaba / B2B). */
+  minOrder?: string;
 };
 
 export type Maker = {
   name: string;
   offers: number;
   lowestPrice: string;
+};
+
+export type DemandPost = {
+  title: string;
+  url: string;
+  source: "reddit" | "hackernews";
+  channel: string;
+  engagement: number;
+  comments: number;
+  createdAt: string;
+};
+
+export type DemandPulse = {
+  posts: DemandPost[];
+  totalPosts: number;
+  totalEngagement: number;
+  channels: string[];
+  momentum: "high" | "moderate" | "low" | "quiet";
 };
 
 export type ResearchResult = {
@@ -83,6 +105,8 @@ export type ResearchResult = {
   classification?: Classification | null;
   suppliers?: Supplier[];
   makers?: Maker[];
+  demand?: DemandPulse | null;
+  renderings?: Rendering[];
   analysis?: {
     summary: string;
     positioning: string;
@@ -94,6 +118,13 @@ export type ResearchResult = {
   agents: AgentRunInfo[];
   sources: { title: string; url: string }[];
   error?: string;
+};
+
+export type Rendering = {
+  url: string;
+  scene: "shelf" | "lifestyle" | "hero";
+  width: number;
+  height: number;
 };
 
 export type NewIdeaInput = {

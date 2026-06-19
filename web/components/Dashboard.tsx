@@ -33,6 +33,7 @@ export function Dashboard({ model }: { model: Model }) {
   const [shortlist, setShortlist] = useState<Set<string>>(() => new Set());
   const [quoteIds, setQuoteIds] = useState<string[] | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [ideasNonce, setIdeasNonce] = useState(0);
 
   const scroller = useRef<HTMLDivElement>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -51,6 +52,7 @@ export function Dashboard({ model }: { model: Model }) {
     if (v === "deepdive") setTrendId(id ?? null);
     if (v === "suppliers") setSupCtxId(id ?? null);
     if (v === "map" && id !== undefined) setMapSel(id ?? null);
+    if (v === "ideas") setIdeasNonce((n) => n + 1);
     setView(v);
     if (scroller.current) scroller.current.scrollTop = 0;
   };
@@ -134,7 +136,7 @@ export function Dashboard({ model }: { model: Model }) {
                 requestQuote={requestQuote}
               />
             )}
-            {view === "ideas" && <Ideas />}
+            {view === "ideas" && <Ideas go={go} resetSignal={ideasNonce} />}
             <SourceFooter />
           </div>
         </main>
