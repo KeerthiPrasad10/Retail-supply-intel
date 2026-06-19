@@ -27,3 +27,4 @@ node_modules/
 *.swp
 .idea/
 .vscode/
+.claude/worktrees/
