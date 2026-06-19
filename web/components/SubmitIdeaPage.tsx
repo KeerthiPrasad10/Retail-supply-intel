@@ -156,6 +156,21 @@ function FormView({
     setFields((f) => ({ ...f, [key]: value }));
   }
 
+  async function uploadImage(dataUrl: string): Promise<string> {
+    try {
+      const res = await fetch("/api/ideas/upload-image", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ imageData: dataUrl }),
+      });
+      if (!res.ok) return dataUrl;
+      const data = await res.json();
+      return typeof data.url === "string" ? data.url : dataUrl;
+    } catch {
+      return dataUrl;
+    }
+  }
+
   async function analyseImage(dataUrl: string) {
     setAutofill("loading");
     setFormError(null);
@@ -203,7 +218,9 @@ function FormView({
       const raw = String(reader.result || "");
       setImagePreview(raw); // show full-res preview immediately
       const resized = await resizeImage(raw);
-      imageUrlRef.current = resized;
+      imageUrlRef.current = resized; // set immediately so submit isn't blocked
+      // Upload to Storage in parallel with analysis; update ref when done.
+      uploadImage(resized).then((url) => { imageUrlRef.current = url; });
       analyseImage(resized);
     };
     reader.readAsDataURL(file);
@@ -225,7 +242,11 @@ function FormView({
       setFormError("Please give your product idea a title.");
       return;
     }
-    onSubmit({ ...fields }); // imageUrl is a data URL — don't send in payload
+    // Include imageUrl only when it's a real HTTP URL (Storage upload succeeded).
+    const url = imageUrlRef.current;
+    const payload: Record<string, string> = { ...fields };
+    if (url && url.startsWith("http")) payload.imageUrl = url;
+    onSubmit(payload);
   }
 
   const isAnalysing = autofill === "loading";
