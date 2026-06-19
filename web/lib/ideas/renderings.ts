@@ -17,10 +17,16 @@ async function generateOne(imageUrl: string, scene: typeof SCENES[0]): Promise<R
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 60_000);
   try {
-    const res = await fetch("https://fal.run/fal-ai/product-shot", {
+    const res = await fetch("https://fal.run/fal-ai/bria/product-shot", {
       method: "POST",
       headers: { "Authorization": `Key ${key}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ image_url: imageUrl, scene_description: scene.prompt, num_images: 1 }),
+      body: JSON.stringify({
+        image_url: imageUrl,
+        scene_description: scene.prompt,
+        placement_type: "automatic",
+        num_results: 1,
+        fast: true,
+      }),
       signal: ctrl.signal,
       cache: "no-store",
     });
