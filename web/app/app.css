@@ -683,3 +683,15 @@ textarea.nxb-input { resize: vertical; min-height: 60px; }
 .related-trend-stat b { color: var(--nxb-text-primary); font-weight: 500; }
 .related-trend-empty { margin: 0 0 12px; }
 .related-trend-all { margin-top: 14px; align-self: flex-start; }
+
+/* Feedback & comments thread (per product idea) */
+.idea-comments-list { list-style: none; margin: 0 0 18px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.idea-comment { padding: 12px 14px; background: var(--nxb-surface-1); border: 0.5px solid var(--nxb-border-low); border-radius: var(--radius-card); }
+.idea-comment-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+.idea-comment-author { font-size: 12.5px; font-weight: 500; color: var(--nxb-text-primary); }
+.idea-comment-date { font-family: var(--font-mono); font-size: 10.5px; color: var(--nxb-text-muted); white-space: nowrap; }
+.idea-comment-body { font-size: 13px; line-height: 1.5; color: var(--nxb-text-secondary); margin: 0; white-space: pre-wrap; word-break: break-word; }
+.idea-comment-empty { margin: 0 0 18px; }
+.idea-comment-form { display: flex; flex-direction: column; gap: 10px; }
+.idea-comment-form-row { display: flex; flex-direction: column; }
+.idea-comment-form-row .btn { align-self: flex-start; }

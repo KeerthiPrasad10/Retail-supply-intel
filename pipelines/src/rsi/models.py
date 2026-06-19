@@ -268,6 +268,29 @@ class ProductIdea(Base):
     research: Mapped[dict] = mapped_column(JSON, default=dict)
 
 
+class ProductIdeaComment(Base):
+    """Free-text feedback left on a ``ProductIdea`` by the team.
+
+    The web app's ``/api/ideas/[id]/comments`` route writes rows here (the id is
+    a UUID generated in the web app, like ``ProductIdea``). Deleting an idea
+    cascades to its comments.
+
+    NOTE: this models.py is the single source of truth for the schema; the
+    matching DDL lives in supabase/migrations (regenerate, don't hand-edit, per
+    the repo convention) — see 0007_product_idea_comments.sql.
+    """
+
+    __tablename__ = "product_idea_comments"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)  # UUID from the web app
+    idea_id: Mapped[str] = mapped_column(
+        ForeignKey("product_ideas.id", ondelete="CASCADE"), nullable=False
+    )
+    author: Mapped[str | None] = mapped_column(String(128))
+    body: Mapped[str] = mapped_column(String(4096), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow)
+
+
 class Snapshot(Base):
     """Published read-model the dashboard consumes (the `rsi export` output).
 

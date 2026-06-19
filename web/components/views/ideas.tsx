@@ -8,6 +8,7 @@ import { cc, fmtPct } from "@/lib/util";
 import { Icons } from "../icons";
 import { useModel } from "../model-context";
 import { Tier } from "../primitives";
+import { IdeaComments } from "./idea-comments";
 import { StatTile } from "./shared";
 
 const CATEGORIES = [
@@ -994,7 +995,10 @@ function Results({
         </div>
       </section>
 
-      {/* 13. Foot note */}
+      {/* 13. Feedback & comments */}
+      <IdeaComments ideaId={idea.id} />
+
+      {/* 14. Foot note */}
       <p className="idea-foot-note">
         Submitted {new Date(idea.createdAt).toLocaleDateString()}
         {idea.submittedBy ? ` · ${idea.submittedBy}` : ""} · research ran{" "}
