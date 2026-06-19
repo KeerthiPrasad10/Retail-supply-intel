@@ -352,7 +352,7 @@ function SubmitForm({
       setFormError("Please give your product idea a title.");
       return;
     }
-    onSubmit({ ...fields, imageUrl: imageUrlRef.current });
+    onSubmit({ ...fields }); // imageUrl is a data URL — don't send in payload
   }
 
   const isAnalysing = autofill === "loading";
