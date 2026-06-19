@@ -102,6 +102,7 @@ export type ResearchResult = {
   suppliers?: Supplier[];
   makers?: Maker[];
   demand?: DemandPulse | null;
+  renderings?: Rendering[];
   analysis?: {
     summary: string;
     positioning: string;
@@ -113,6 +114,13 @@ export type ResearchResult = {
   agents: AgentRunInfo[];
   sources: { title: string; url: string }[];
   error?: string;
+};
+
+export type Rendering = {
+  url: string;
+  scene: "shelf" | "lifestyle" | "hero";
+  width: number;
+  height: number;
 };
 
 export type NewIdeaInput = {

@@ -131,6 +131,13 @@ export const Icons = {
     </Ico>
   ),
   moon: (p: IconProps) => <Ico {...p} d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />,
+  image: (p: IconProps) => (
+    <Ico {...p}>
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <circle cx="8.5" cy="8.5" r="1.5" />
+      <path d="M21 15l-5-5L5 21" />
+    </Ico>
+  ),
 };
 
 export type IconName = keyof typeof Icons;

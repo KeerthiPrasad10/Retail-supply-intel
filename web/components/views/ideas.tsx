@@ -678,6 +678,24 @@ function Results({ idea, result }: { idea: ProductIdea; result: ResearchResult }
         </section>
       )}
 
+      {/* Product renderings — AI placement scenes (requires FAL_KEY + real image URL) */}
+      {result.renderings && result.renderings.length > 0 && (
+        <section className="results-section">
+          <h3 className="results-section-title">
+            <Icons.image size={13} /> Product renderings
+          </h3>
+          <div className="rendering-grid">
+            {result.renderings.map((r, i) => (
+              <a key={i} href={r.url} target="_blank" rel="noopener noreferrer" className="rendering-card">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={r.url} alt={`${r.scene} rendering`} className="rendering-img" />
+                <span className="rendering-label badge">{r.scene}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Agent activity */}
       <section>
         <p className="panel-h section-h">

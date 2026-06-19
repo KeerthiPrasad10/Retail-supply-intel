@@ -13,6 +13,7 @@ import { extractProduct, firecrawlEnabled, search, type SearchResult } from "./f
 import { amazonSearch, aliexpressSuppliers, apifyEnabled } from "./apify";
 import { demandPulse } from "./demand";
 import { analyzeWithClaude, classifyProduct, llmEnabled } from "./llm";
+import { generateRenderings, falEnabled } from "./renderings";
 import { parsePrice, priceRangeOf } from "./price";
 
 function demandAgentInfo(demand: Awaited<ReturnType<typeof demandPulse>>): AgentRunInfo {
@@ -302,6 +303,22 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
     return await runDemo(idea, started);
   }
 
+  const renderings = await generateRenderings(idea);
+  const hasRealImage = Boolean(idea.imageUrl && !idea.imageUrl.startsWith("data:") && idea.imageUrl.startsWith("http"));
+  agents.push({
+    id: "renderings",
+    name: "Product Renderings (fal.ai)",
+    description: "Generates AI placement scenes from the product image.",
+    status: falEnabled() && hasRealImage ? (renderings.length ? "complete" : "error") : "skipped",
+    detail: falEnabled() && hasRealImage
+      ? renderings.length
+        ? `Generated ${renderings.length} placement rendering${renderings.length === 1 ? "" : "s"}.`
+        : "Rendering generation failed."
+      : falEnabled() && !hasRealImage
+        ? "Skipped — no public image URL available."
+        : "Skipped — set FAL_KEY to enable placement renderings.",
+  });
+
   const result: ResearchResult = {
     mode: "live",
     ranAt: new Date().toISOString(),
@@ -312,6 +329,7 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
     suppliers,
     makers,
     demand,
+    renderings,
     agents,
     sources,
   };
