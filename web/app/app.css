@@ -630,6 +630,7 @@ textarea.nxb-input { resize: vertical; min-height: 60px; }
 .sp-success-icon { width: 56px; height: 56px; border-radius: 9999px; background: var(--nxb-status-low-bg); color: var(--nxb-status-low); display: flex; align-items: center; justify-content: center; border: 0.5px solid color-mix(in srgb, var(--nxb-status-low) 30%, transparent); }
 .sp-success-title { font-size: 20px; font-weight: 500; letter-spacing: -0.4px; margin: 0; }
 .sp-success-name { font-size: 15px; color: var(--nxb-text-secondary); margin: 0; }
+.sp-success-sub { font-size: 13px; color: var(--nxb-text-secondary); margin: 0; max-width: 280px; line-height: 1.5; text-align: center; }
 .sp-cat { margin: 0; }
 .sp-reset-btn { margin-top: 8px; }
 
