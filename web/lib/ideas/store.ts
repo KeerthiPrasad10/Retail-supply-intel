@@ -65,11 +65,15 @@ function rowToIdea(row: Record<string, unknown>): ProductIdea {
 }
 
 function ideaToRow(idea: ProductIdea): Record<string, unknown> {
+  // Don't persist base64 data URLs — the image_url column is VARCHAR(2048)
+  // and base64-encoded images are hundreds of KB. The data URL is only needed
+  // for the analyse-image step which runs before this point.
+  const imageUrl = idea.imageUrl?.startsWith("data:") ? null : (idea.imageUrl || null);
   return {
     id: idea.id,
     title: idea.title,
     description: idea.description,
-    image_url: idea.imageUrl || null,
+    image_url: imageUrl,
     target_market: idea.targetMarket || null,
     target_price: idea.priceTarget || null,
     category: idea.category || null,
