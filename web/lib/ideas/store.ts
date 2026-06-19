@@ -3,6 +3,7 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import type { NewIdeaInput, ProductIdea } from "./types";
 import { supabaseAdmin, supabaseAdminEnabled } from "./supabase-admin";
+import { uploadDataUrlToStorage } from "./storage";
 
 /**
  * Persistence for product ideas.
@@ -110,6 +111,16 @@ export async function getIdea(id: string): Promise<ProductIdea | undefined> {
 
 export async function createIdea(input: NewIdeaInput): Promise<ProductIdea> {
   const idea = newIdea(input);
+
+  // If the client sent a base64 data URL, persist it to Storage *here* (server
+  // side) and swap in the public http URL. This guarantees the image survives
+  // to the DB regardless of whether the client's own upload won its race — the
+  // failure mode that left every earlier row's image_url null.
+  const original = idea.imageUrl;
+  if (original?.startsWith("data:") && supabaseAdminEnabled()) {
+    const hosted = await uploadDataUrlToStorage(original);
+    if (hosted) idea.imageUrl = hosted;
+  }
 
   if (supabaseAdminEnabled()) {
     const { data, error } = await supabaseAdmin()!
