@@ -90,7 +90,7 @@ async function searchReddit(query: string, limit = 12): Promise<DemandPost[]> {
           createdAt: p.createdAt,
         }));
       },
-      60_000,
+      90_000,
       []
     );
   }
