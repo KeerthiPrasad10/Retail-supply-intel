@@ -949,16 +949,18 @@ function Results({
           </p>
           <div className="supplier-grid">
             {result.suppliers.map((s, i) => {
-              const srcBadge =
-                s.source === "alibaba"
-                  ? "Alibaba"
-                  : s.source === "made-in-china"
-                    ? "Made-in-China"
-                    : s.source === "aliexpress"
-                      ? "AliExpress"
-                      : s.source === "web" || s.source === "firecrawl"
-                        ? "Web"
-                        : null;
+              const SRC_LABELS: Record<string, string> = {
+                alibaba: "Alibaba",
+                "made-in-china": "Made-in-China",
+                "global-sources": "Global Sources",
+                indiamart: "IndiaMART",
+                aliexpress: "AliExpress",
+                web: "Web",
+                firecrawl: "Web",
+              };
+              const srcBadge = s.source ? SRC_LABELS[s.source] ?? "Web" : null;
+              const isManufacturer =
+                s.source === "alibaba" || s.source === "made-in-china" || s.source === "global-sources";
               return (
                 <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="panel supplier-card">
                   <div className="supplier-top">
@@ -967,7 +969,7 @@ function Results({
                       <Icons.arrowUpRight size={13} />
                     </span>
                     {srcBadge && (
-                      <span className={cc("badge", s.source === "alibaba" || s.source === "made-in-china" ? "low" : "med")}>{srcBadge}</span>
+                      <span className={cc("badge", isManufacturer ? "low" : "med")}>{srcBadge}</span>
                     )}
                   </div>
                   {s.store && (

@@ -159,11 +159,46 @@ async function benchmarkViaFirecrawl(query: string): Promise<{ competitors: Comp
   };
 }
 
+/** Infer the supplier directory from the result URL so the UI badge is accurate. */
+function supplierSourceFromUrl(url: string): string {
+  const u = url.toLowerCase();
+  if (u.includes("alibaba.")) return "alibaba";
+  if (u.includes("made-in-china.")) return "made-in-china";
+  if (u.includes("globalsources.")) return "global-sources";
+  if (u.includes("indiamart.")) return "indiamart";
+  if (u.includes("aliexpress.")) return "aliexpress";
+  return "web";
+}
+
+// Web sourcing via Firecrawl — run a general query plus targeted B2B-directory
+// searches so we surface real manufacturers (Alibaba, Made-in-China, Global
+// Sources) without needing those paid Apify actors rented. Deduped by URL (not
+// domain) so multiple listings from the same directory survive.
 async function findWebSuppliers(productClass: string): Promise<Supplier[]> {
-  const results = await search(`${productClass} manufacturer supplier wholesale OEM`, 6);
-  return uniqueByDomain(results, 5)
-    .slice(0, 5)
-    .map((r) => ({ name: r.title.replace(/\s*[-|–].*$/, "").trim(), url: r.url, snippet: r.description, source: "web" }));
+  const queries = [
+    `${productClass} manufacturer OEM wholesale supplier`,
+    `${productClass} supplier manufacturer site:alibaba.com`,
+    `${productClass} site:made-in-china.com`,
+    `${productClass} supplier site:globalsources.com`,
+  ];
+  const batches = await Promise.all(
+    queries.map((q) => search(q, 4).catch(() => [] as SearchResult[]))
+  );
+  const seen = new Set<string>();
+  const out: Supplier[] = [];
+  for (const r of batches.flat()) {
+    const key = r.url.toLowerCase().split("?")[0];
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    out.push({
+      name: r.title.replace(/\s*[-|–].*$/, "").trim() || r.url,
+      url: r.url,
+      snippet: r.description,
+      source: supplierSourceFromUrl(r.url),
+    });
+    if (out.length >= 10) break;
+  }
+  return out;
 }
 
 function dedupeCompetitors(rows: Competitor[]): Competitor[] {
