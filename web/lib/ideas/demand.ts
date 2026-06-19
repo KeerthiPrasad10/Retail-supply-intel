@@ -140,6 +140,14 @@ function momentumOf(posts: number, engagement: number): DemandPulse["momentum"] 
   return "low";
 }
 
+/** Drop posts whose title+channel share no words with the query (actor may return off-topic results). */
+function isRelevant(post: DemandPost, query: string): boolean {
+  const words = query.toLowerCase().match(/[a-z0-9]{3,}/g) ?? [];
+  if (!words.length) return true;
+  const hay = `${post.title} ${post.channel}`.toLowerCase();
+  return words.some((w) => hay.includes(w));
+}
+
 /**
  * Run the demand pulse for a product. `query` should be the product class /
  * core subject (e.g. "insulated kids water bottle"), not the full idea title.
@@ -150,14 +158,14 @@ export async function demandPulse(query: string): Promise<DemandPulse> {
 
   const [hn, reddit] = await Promise.all([searchHackerNews(q, 10), searchReddit(q, 12)]);
 
-  // Merge, dedupe by URL, rank by engagement.
+  // Merge, dedupe by URL, filter to on-topic posts, rank by engagement.
   const seen = new Set<string>();
   const posts = [...reddit, ...hn]
     .filter((p) => {
       const key = p.url.toLowerCase();
       if (seen.has(key)) return false;
       seen.add(key);
-      return true;
+      return isRelevant(p, q);
     })
     .sort((a, b) => b.engagement - a.engagement)
     .slice(0, 12);
