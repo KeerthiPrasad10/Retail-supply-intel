@@ -14,6 +14,6 @@ export async function POST(req: Request, { params }: { params: { id: string } })
   const idea = body.idea ?? await getIdea(params.id);
   if (!idea) return NextResponse.json({ error: "Idea not found" }, { status: 404 });
 
-  const renderings = await generateRenderings(idea);
-  return NextResponse.json({ renderings });
+  const { renderings, error } = await generateRenderings(idea);
+  return NextResponse.json({ renderings, error });
 }

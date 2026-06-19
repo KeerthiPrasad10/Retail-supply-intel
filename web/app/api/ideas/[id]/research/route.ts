@@ -44,6 +44,22 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     return NextResponse.json({ error: "Idea not found" }, { status: 404 });
   }
 
+  // The DB row may be missing the image (data URLs are stripped before insert,
+  // or the Storage upload resolved after the row was created). The client sends
+  // the full idea in the body, so prefer its image URL when the stored one is
+  // empty — this keeps the renderings agent fed and the original photo visible.
+  if (bodyIdea?.imageUrl && idea.imageUrl !== bodyIdea.imageUrl) {
+    const stored = idea.imageUrl || "";
+    const incoming = bodyIdea.imageUrl;
+    if (!stored || (incoming.startsWith("http") && !stored.startsWith("http"))) {
+      idea = { ...idea, imageUrl: incoming };
+      // Persist http URLs so a later page load / reload still shows the image.
+      if (incoming.startsWith("http")) {
+        await updateIdea(idea.id, { imageUrl: incoming }).catch(() => {});
+      }
+    }
+  }
+
   await updateIdea(idea.id, { status: "researching" });
 
   try {

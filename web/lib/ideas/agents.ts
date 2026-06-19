@@ -329,8 +329,8 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
     return await runDemo(idea, started);
   }
 
-  const renderings = await generateRenderings(workingIdea);
-  const hasRealImage = Boolean(workingIdea.imageUrl && !workingIdea.imageUrl.startsWith("data:") && workingIdea.imageUrl.startsWith("http"));
+  const { renderings, error: renderError } = await generateRenderings(workingIdea);
+  const hasRealImage = Boolean(workingIdea.imageUrl && workingIdea.imageUrl.startsWith("http"));
   agents.push({
     id: "renderings",
     name: "Product Renderings (fal.ai)",
@@ -339,9 +339,9 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
     detail: falEnabled() && hasRealImage
       ? renderings.length
         ? `Generated ${renderings.length} placement rendering${renderings.length === 1 ? "" : "s"}.`
-        : "Rendering generation failed."
+        : `Rendering failed${renderError ? ` — ${renderError}` : "."}`
       : falEnabled() && !hasRealImage
-        ? "Skipped — no public image URL available."
+        ? "Skipped — upload a product photo (needs a public image URL)."
         : "Skipped — set FAL_KEY to enable placement renderings.",
   });
 

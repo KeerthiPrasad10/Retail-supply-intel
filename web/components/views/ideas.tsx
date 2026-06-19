@@ -630,7 +630,11 @@ function RunningView({ idea, activeStep }: { idea: ProductIdea; activeStep: numb
 
 function ImageCarousel({ idea, renderings }: { idea: ProductIdea; renderings?: import("@/lib/ideas/types").Rendering[] }) {
   const slides: { url: string; label: string }[] = [];
-  if (idea.imageUrl?.startsWith("http")) slides.push({ url: idea.imageUrl, label: "Original" });
+  // Show the original photo whether it's a persisted http URL or an in-session
+  // data URL (Storage strips data URLs from the DB column, but the uploaded
+  // image is still available client-side during the session that created it).
+  if (idea.imageUrl?.startsWith("http") || idea.imageUrl?.startsWith("data:"))
+    slides.push({ url: idea.imageUrl, label: "Original" });
   (renderings ?? []).forEach((r) => slides.push({ url: r.url, label: r.scene }));
 
   const [idx, setIdx] = useState(0);
