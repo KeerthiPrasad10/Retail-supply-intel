@@ -57,6 +57,10 @@ export type Supplier = {
   orders?: number | null;
   rating?: number | null;
   source?: string;
+  /** The seller/store or manufacturer behind the listing (when available). */
+  store?: string;
+  /** Minimum order quantity, e.g. "100 pieces" (Alibaba / B2B). */
+  minOrder?: string;
 };
 
 export type Maker = {

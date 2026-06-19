@@ -11,6 +11,7 @@ const BASE = "https://api.apify.com/v2";
 // Marketplace-native actors (richer than generic web extraction).
 const AMAZON_ACTOR = "junglee~Amazon-crawler";
 const ALIEXPRESS_ACTOR = "thirdwatch~aliexpress-product-scraper";
+const ALIBABA_ACTOR = "epctex~alibaba-scraper";
 
 export function apifyEnabled(): boolean {
   return Boolean(process.env.APIFY_API_TOKEN);
@@ -160,6 +161,20 @@ export async function aliexpressSuppliers(query: string, limit = 8): Promise<Sup
     .map((i) => {
       const cur = normalizeCurrency(String(i.sale_price_currency || "USD"));
       const price = i.sale_price != null ? `${cur === "USD" ? "$" : cur + " "}${i.sale_price}` : "";
+      // The actual seller behind the listing lives under a handful of possible
+      // keys depending on the actor's version — read them defensively.
+      const storeObj = (i.store ?? i.seller ?? i.shop) as Record<string, unknown> | string | undefined;
+      const store =
+        typeof storeObj === "string"
+          ? storeObj
+          : String(
+              (storeObj as Record<string, unknown>)?.name ??
+                (storeObj as Record<string, unknown>)?.store_name ??
+                i.store_name ??
+                i.seller_name ??
+                i.storeName ??
+                ""
+            ).trim();
       return {
         name: String(i.title).trim(),
         url: String(i.url),
@@ -168,6 +183,50 @@ export async function aliexpressSuppliers(query: string, limit = 8): Promise<Sup
         orders: typeof i.orders_count === "number" ? i.orders_count : null,
         rating: typeof i.rating === "number" ? i.rating : null,
         source: "aliexpress",
+        store: store || undefined,
+      } satisfies Supplier;
+    });
+}
+
+// Alibaba — B2B manufacturer/supplier directory: company names, MOQs, factory
+// listings. Complements AliExpress (retail) with real manufacturers.
+export async function alibabaSuppliers(query: string, limit = 8): Promise<Supplier[]> {
+  const url = `https://www.alibaba.com/trade/search?SearchText=${encodeURIComponent(query)}`;
+  const items = await runActor(
+    ALIBABA_ACTOR,
+    {
+      startUrls: [{ url }],
+      search: [query],
+      maxItems: limit,
+      proxy: { useApifyProxy: true },
+    },
+    180_000
+  );
+  if (!items) return [];
+
+  return items
+    .map((i) => i as Record<string, unknown>)
+    .filter((i) => (i?.title || i?.name) && i?.url)
+    .slice(0, limit)
+    .map((i) => {
+      const company = i.companyName ?? i.company ?? i.seller ?? i.supplier ?? i.storeName;
+      const store =
+        typeof company === "string"
+          ? company.trim()
+          : String((company as Record<string, unknown>)?.name ?? "").trim();
+      const priceRaw = i.price ?? i.priceText ?? i.salePrice;
+      const price = priceRaw != null ? String(priceRaw).trim() : "";
+      const moq = i.minOrder ?? i.minOrderQuantity ?? i.moq ?? i.minimumOrder;
+      return {
+        name: String(i.title ?? i.name).trim(),
+        url: String(i.url),
+        snippet: i.description ? String(i.description).trim() : "",
+        price,
+        orders: null,
+        rating: typeof i.rating === "number" ? i.rating : null,
+        source: "alibaba",
+        store: store || undefined,
+        minOrder: moq != null ? String(moq).trim() : undefined,
       } satisfies Supplier;
     });
 }

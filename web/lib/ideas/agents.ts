@@ -10,7 +10,7 @@ import type {
   Supplier,
 } from "./types";
 import { extractProduct, firecrawlEnabled, search, type SearchResult } from "./firecrawl";
-import { amazonSearch, aliexpressSuppliers, apifyEnabled } from "./apify";
+import { amazonSearch, aliexpressSuppliers, alibabaSuppliers, apifyEnabled } from "./apify";
 import { demandPulse } from "./demand";
 import { analyzeWithClaude, classifyProduct, llmEnabled } from "./llm";
 import { generateRenderings, falEnabled } from "./renderings";
@@ -251,10 +251,11 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
   // 2. Run sources in parallel: Amazon (stores), Firecrawl (web), AliExpress
   // (China suppliers), Firecrawl (web suppliers), and the demand pulse
   // (Reddit + HN — key-free, so it always runs).
-  const [amazon, benchRes, aliexpress, webSuppliers, demand] = await Promise.all([
+  const [amazon, benchRes, aliexpress, alibaba, webSuppliers, demand] = await Promise.all([
     apifyEnabled() ? amazonSearch(productClass, 8) : Promise.resolve<Competitor[]>([]),
     firecrawlEnabled() ? benchmarkViaFirecrawl(webQuery) : Promise.resolve(null),
     apifyEnabled() ? aliexpressSuppliers(productClass, 8) : Promise.resolve<Supplier[]>([]),
+    apifyEnabled() ? alibabaSuppliers(productClass, 8) : Promise.resolve<Supplier[]>([]),
     firecrawlEnabled() ? findWebSuppliers(productClass) : Promise.resolve<Supplier[]>([]),
     demandPulse(productClass),
   ]);
@@ -283,9 +284,16 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
     agents.push({
       id: "aliexpress",
       name: "China Suppliers (AliExpress)",
-      description: "Finds China suppliers, wholesale prices and demand.",
+      description: "Finds China sellers, wholesale prices and demand.",
       status: aliexpress.length ? "complete" : "error",
-      detail: aliexpress.length ? `Found ${aliexpress.length} AliExpress suppliers.` : "No AliExpress results.",
+      detail: aliexpress.length ? `Found ${aliexpress.length} AliExpress sellers.` : "No AliExpress results.",
+    });
+    agents.push({
+      id: "alibaba",
+      name: "Manufacturers (Alibaba)",
+      description: "Finds B2B manufacturers, factories and MOQs.",
+      status: alibaba.length ? "complete" : "error",
+      detail: alibaba.length ? `Found ${alibaba.length} Alibaba manufacturers.` : "No Alibaba results.",
     });
   }
   if (firecrawlEnabled()) {
@@ -300,7 +308,7 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
 
   // Combine sources.
   const competitors = dedupeCompetitors([...amazon, ...(benchRes?.competitors ?? [])]).slice(0, 12);
-  const suppliers = dedupeSuppliers([...aliexpress, ...webSuppliers]).slice(0, 10);
+  const suppliers = dedupeSuppliers([...alibaba, ...aliexpress, ...webSuppliers]).slice(0, 12);
   const sources = benchRes?.sources ?? [];
 
   const priceRange = priceRangeOf(competitors);

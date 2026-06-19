@@ -29,7 +29,7 @@ const PIPELINE = [
   { id: "stores", name: "Online Stores", desc: "Scanning Amazon for live listings & prices…", icon: "box" as const },
   { id: "web", name: "Web Research", desc: "Searching the web for similar products…", icon: "search" as const },
   { id: "demand", name: "Demand Signals", desc: "Reading Reddit & Hacker News from the last 30 days…", icon: "pulse" as const },
-  { id: "suppliers", name: "China Suppliers", desc: "Finding AliExpress & web suppliers…", icon: "factory" as const },
+  { id: "suppliers", name: "Suppliers & Manufacturers", desc: "Finding Alibaba manufacturers, AliExpress sellers & web suppliers…", icon: "factory" as const },
   { id: "analyst", name: "Strategy Analyst", desc: "Synthesising positioning, pricing & next steps…", icon: "trending" as const },
 ];
 
@@ -941,25 +941,43 @@ function Results({
             <Icons.factory size={13} /> Suppliers &amp; manufacturers
           </p>
           <div className="supplier-grid">
-            {result.suppliers.map((s, i) => (
-              <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="panel supplier-card">
-                <div className="supplier-top">
-                  <span className="supplier-name">
-                    {s.name}
-                    <Icons.arrowUpRight size={13} />
-                  </span>
-                  {s.source === "aliexpress" && <span className="badge med">AliExpress</span>}
-                </div>
-                {(s.price || s.orders != null || s.rating != null) && (
-                  <div className="supplier-meta">
-                    {s.price && <span className="supplier-price">{s.price}</span>}
-                    {s.rating != null && <span>★ {s.rating}</span>}
-                    {s.orders != null && <span>{s.orders.toLocaleString()} orders</span>}
+            {result.suppliers.map((s, i) => {
+              const srcBadge =
+                s.source === "alibaba"
+                  ? "Alibaba"
+                  : s.source === "aliexpress"
+                    ? "AliExpress"
+                    : s.source === "web" || s.source === "firecrawl"
+                      ? "Web"
+                      : null;
+              return (
+                <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="panel supplier-card">
+                  <div className="supplier-top">
+                    <span className="supplier-name">
+                      {s.name}
+                      <Icons.arrowUpRight size={13} />
+                    </span>
+                    {srcBadge && (
+                      <span className={cc("badge", s.source === "alibaba" ? "low" : "med")}>{srcBadge}</span>
+                    )}
                   </div>
-                )}
-                {s.snippet && <p className="supplier-snippet">{s.snippet}</p>}
-              </a>
-            ))}
+                  {s.store && (
+                    <p className="supplier-store">
+                      <Icons.building size={12} /> {s.store}
+                    </p>
+                  )}
+                  {(s.price || s.orders != null || s.rating != null || s.minOrder) && (
+                    <div className="supplier-meta">
+                      {s.price && <span className="supplier-price">{s.price}</span>}
+                      {s.minOrder && <span>MOQ {s.minOrder}</span>}
+                      {s.rating != null && <span>★ {s.rating}</span>}
+                      {s.orders != null && <span>{s.orders.toLocaleString()} orders</span>}
+                    </div>
+                  )}
+                  {s.snippet && <p className="supplier-snippet">{s.snippet}</p>}
+                </a>
+              );
+            })}
           </div>
         </section>
       ) : null}
