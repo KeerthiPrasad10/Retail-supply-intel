@@ -92,7 +92,7 @@ export async function amazonSearch(query: string, limit = 8): Promise<Competitor
 
 // Reddit — community discussion via trudax/reddit-scraper-lite (pay-per-result).
 // Returns raw post objects mapped to DemandPost shape (imported by demand.ts).
-const REDDIT_ACTOR = "trudax~reddit-scraper-lite";
+const REDDIT_ACTOR = "harshmaur~reddit-scraper";
 
 export type RedditPost = {
   title: string;
@@ -107,37 +107,29 @@ export async function redditSearch(query: string, limit = 12): Promise<RedditPos
   const items = await runActor(
     REDDIT_ACTOR,
     {
-      searches: [query],
+      searchTerms: [query],
       searchPosts: true,
       searchComments: false,
       searchCommunities: false,
-      searchUsers: false,
-      includeMediaLinks: true,
-      maxItems: limit,
-      maxPostCount: limit,
-      sort: "top",
-      proxy: { useApifyProxy: true, apifyProxyGroups: ["RESIDENTIAL"] },
+      searchSort: "top",
+      searchTime: "month",
+      maxPostsCount: limit,
     },
     90_000
   );
   if (!items) return [];
 
-  const since = Date.now() - 30 * 24 * 60 * 60 * 1000;
   return items
     .map((i) => i as Record<string, unknown>)
-    .filter((i) => i?.title && i?.url)
-    .filter((i) => {
-      const ts = Number(i.createdAt ?? i.created_utc ?? 0);
-      return ts === 0 || (ts < 1e12 ? ts * 1000 : ts) >= since;
-    })
+    .filter((i) => i?.title && (i?.postUrl ?? i?.url))
     .slice(0, limit)
     .map((i) => ({
       title: String(i.title),
-      url: String(i.url),
-      // trudax/reddit-scraper-lite uses communityName (e.g. "r/foo")
-      subreddit: String(i.communityName ?? i.subreddit ?? i.community ?? "").replace(/^r\//, ""),
-      score: Number(i.upVotes ?? i.score ?? i.upvotes ?? 0),
-      numComments: Number(i.numberOfComments ?? i.numComments ?? i.num_comments ?? 0),
+      url: String(i.postUrl ?? i.url),
+      // harshmaur/reddit-scraper uses subredditName / communityName
+      subreddit: String(i.subredditName ?? i.communityName ?? i.subreddit ?? "").replace(/^r\//, ""),
+      score: Number(i.score ?? i.upVotes ?? i.upvotes ?? 0),
+      numComments: Number(i.commentsCount ?? i.numberOfComments ?? i.num_comments ?? 0),
       createdAt: (() => {
         const raw = i.createdAt ?? i.created_utc ?? 0;
         if (typeof raw === "string") return new Date(raw).toISOString();
