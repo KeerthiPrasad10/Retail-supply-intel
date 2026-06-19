@@ -412,7 +412,10 @@ function SubmitForm({
       } catch {}
     }
     const payload: Record<string, string> = { ...fields };
-    if (imageUrlRef.current.startsWith("http")) payload.imageUrl = imageUrlRef.current;
+    // Always pass the image URL — HTTP URLs get persisted to the DB; data URLs
+    // are kept only in the in-process cache (stripped before DB insert) so the
+    // card still shows the image within the current session.
+    if (imageUrlRef.current) payload.imageUrl = imageUrlRef.current;
     onSubmit(payload);
   }
 
@@ -945,11 +948,13 @@ function Results({
               const srcBadge =
                 s.source === "alibaba"
                   ? "Alibaba"
-                  : s.source === "aliexpress"
-                    ? "AliExpress"
-                    : s.source === "web" || s.source === "firecrawl"
-                      ? "Web"
-                      : null;
+                  : s.source === "made-in-china"
+                    ? "Made-in-China"
+                    : s.source === "aliexpress"
+                      ? "AliExpress"
+                      : s.source === "web" || s.source === "firecrawl"
+                        ? "Web"
+                        : null;
               return (
                 <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="panel supplier-card">
                   <div className="supplier-top">
@@ -958,7 +963,7 @@ function Results({
                       <Icons.arrowUpRight size={13} />
                     </span>
                     {srcBadge && (
-                      <span className={cc("badge", s.source === "alibaba" ? "low" : "med")}>{srcBadge}</span>
+                      <span className={cc("badge", s.source === "alibaba" || s.source === "made-in-china" ? "low" : "med")}>{srcBadge}</span>
                     )}
                   </div>
                   {s.store && (

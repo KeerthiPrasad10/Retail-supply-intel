@@ -10,8 +10,12 @@ const BASE = "https://api.apify.com/v2";
 
 // Marketplace-native actors (richer than generic web extraction).
 const AMAZON_ACTOR = "junglee~Amazon-crawler";
-const ALIEXPRESS_ACTOR = "thirdwatch~aliexpress-product-scraper";
-const ALIBABA_ACTOR = "epctex~alibaba-scraper";
+// piotrv1001/aliexpress-listings-scraper: 99.9% success, returns store name/ID
+const ALIEXPRESS_ACTOR = "piotrv1001~aliexpress-listings-scraper";
+// nifty.codes/alibaba-suppliers-scraper: B2B company/manufacturer data + MOQs
+const ALIBABA_ACTOR = "nifty.codes~alibaba-suppliers-scraper";
+// agenscrape/made-in-china-com-product-scraper: cheapest, MOQ-specific data
+const MADE_IN_CHINA_ACTOR = "agenscrape~made-in-china-com-product-scraper";
 
 export function apifyEnabled(): boolean {
   return Boolean(process.env.APIFY_API_TOKEN);
@@ -140,63 +144,14 @@ export async function redditSearch(query: string, limit = 12): Promise<RedditPos
     }));
 }
 
-// AliExpress — China sellers/suppliers: wholesale-ish prices, order volume, ratings.
+// AliExpress — China sellers with store names (piotrv1001/aliexpress-listings-scraper,
+// 99.9% success rate, returns storeName + storeId + storeUrl).
 export async function aliexpressSuppliers(query: string, limit = 8): Promise<Supplier[]> {
+  const searchUrl = `https://www.aliexpress.com/wholesale?SearchText=${encodeURIComponent(query)}`;
   const items = await runActor(
     ALIEXPRESS_ACTOR,
     {
-      queries: [query],
-      maxResults: limit,
-      country: "US",
-      proxyConfiguration: { useApifyProxy: true },
-    },
-    180_000
-  );
-  if (!items) return [];
-
-  return items
-    .map((i) => i as Record<string, unknown>)
-    .filter((i) => i?.title && i?.url)
-    .slice(0, limit)
-    .map((i) => {
-      const cur = normalizeCurrency(String(i.sale_price_currency || "USD"));
-      const price = i.sale_price != null ? `${cur === "USD" ? "$" : cur + " "}${i.sale_price}` : "";
-      // The actual seller behind the listing lives under a handful of possible
-      // keys depending on the actor's version — read them defensively.
-      const storeObj = (i.store ?? i.seller ?? i.shop) as Record<string, unknown> | string | undefined;
-      const store =
-        typeof storeObj === "string"
-          ? storeObj
-          : String(
-              (storeObj as Record<string, unknown>)?.name ??
-                (storeObj as Record<string, unknown>)?.store_name ??
-                i.store_name ??
-                i.seller_name ??
-                i.storeName ??
-                ""
-            ).trim();
-      return {
-        name: String(i.title).trim(),
-        url: String(i.url),
-        snippet: Array.isArray(i.selling_points) ? i.selling_points.join(" · ") : "",
-        price,
-        orders: typeof i.orders_count === "number" ? i.orders_count : null,
-        rating: typeof i.rating === "number" ? i.rating : null,
-        source: "aliexpress",
-        store: store || undefined,
-      } satisfies Supplier;
-    });
-}
-
-// Alibaba — B2B manufacturer/supplier directory: company names, MOQs, factory
-// listings. Complements AliExpress (retail) with real manufacturers.
-export async function alibabaSuppliers(query: string, limit = 8): Promise<Supplier[]> {
-  const url = `https://www.alibaba.com/trade/search?SearchText=${encodeURIComponent(query)}`;
-  const items = await runActor(
-    ALIBABA_ACTOR,
-    {
-      startUrls: [{ url }],
-      search: [query],
+      searchUrls: [{ url: searchUrl }],
       maxItems: limit,
       proxy: { useApifyProxy: true },
     },
@@ -209,22 +164,110 @@ export async function alibabaSuppliers(query: string, limit = 8): Promise<Suppli
     .filter((i) => (i?.title || i?.name) && i?.url)
     .slice(0, limit)
     .map((i) => {
-      const company = i.companyName ?? i.company ?? i.seller ?? i.supplier ?? i.storeName;
+      // piotrv1001 actor exposes storeName, storeId, storeUrl
+      const storeObj = (i.store ?? i.seller ?? i.shop) as Record<string, unknown> | string | undefined;
       const store =
-        typeof company === "string"
-          ? company.trim()
-          : String((company as Record<string, unknown>)?.name ?? "").trim();
-      const priceRaw = i.price ?? i.priceText ?? i.salePrice;
-      const price = priceRaw != null ? String(priceRaw).trim() : "";
-      const moq = i.minOrder ?? i.minOrderQuantity ?? i.moq ?? i.minimumOrder;
+        String(
+          i.storeName ??
+            i.store_name ??
+            i.sellerName ??
+            i.seller_name ??
+            (typeof storeObj === "string" ? storeObj : (storeObj as Record<string, unknown>)?.name) ??
+            ""
+        ).trim() || undefined;
+      const cur = normalizeCurrency(String(i.currency ?? i.sale_price_currency ?? "USD"));
+      const priceVal = i.price ?? i.salePrice ?? i.sale_price;
+      const price = priceVal != null ? `${cur === "USD" ? "$" : cur + " "}${priceVal}` : "";
+      const orders = i.tradeCount ?? i.orders ?? i.orders_count;
       return {
         name: String(i.title ?? i.name).trim(),
         url: String(i.url),
-        snippet: i.description ? String(i.description).trim() : "",
+        snippet: Array.isArray(i.selling_points) ? i.selling_points.join(" · ") : "",
+        price,
+        orders: typeof orders === "number" ? orders : null,
+        rating: typeof i.rating === "number" ? i.rating : (typeof i.stars === "number" ? i.stars : null),
+        source: "aliexpress",
+        store,
+      } satisfies Supplier;
+    });
+}
+
+// Alibaba — B2B supplier directory (nifty.codes/alibaba-suppliers-scraper).
+// Returns company names, verification status, ratings, revenue, reorder rates.
+export async function alibabaSuppliers(query: string, limit = 8): Promise<Supplier[]> {
+  const url = `https://www.alibaba.com/trade/search?SearchText=${encodeURIComponent(query)}`;
+  const items = await runActor(
+    ALIBABA_ACTOR,
+    {
+      startUrls: [{ url }],
+      maxItems: limit,
+      enablePagination: false,
+      proxyConfiguration: { useApifyProxy: true },
+    },
+    180_000
+  );
+  if (!items) return [];
+
+  return items
+    .map((i) => i as Record<string, unknown>)
+    .filter((i) => (i?.companyName ?? i?.name ?? i?.title) && i?.url)
+    .slice(0, limit)
+    .map((i) => {
+      const company = i.companyName ?? i.company ?? i.name ?? i.title;
+      const store = typeof company === "string" ? company.trim() : "";
+      const priceRaw = i.price ?? i.priceRange ?? i.priceText;
+      const price = priceRaw != null ? String(priceRaw).trim() : "";
+      const moq = i.minOrder ?? i.minOrderQuantity ?? i.moq ?? i.minimumOrder;
+      const snippet =
+        [i.verifiedType, i.businessType, i.mainProducts]
+          .filter(Boolean)
+          .map((v) => String(v))
+          .join(" · ") || (i.description ? String(i.description).trim() : "");
+      return {
+        name: store || String(i.title ?? i.name ?? "").trim(),
+        url: String(i.url),
+        snippet,
         price,
         orders: null,
         rating: typeof i.rating === "number" ? i.rating : null,
         source: "alibaba",
+        store: store || undefined,
+        minOrder: moq != null ? String(moq).trim() : undefined,
+      } satisfies Supplier;
+    });
+}
+
+// Made-in-China — B2B manufacturers with MOQs and certifications
+// (agenscrape/made-in-china-com-product-scraper, cheapest at $1/1000).
+export async function madeInChinaSuppliers(query: string, limit = 6): Promise<Supplier[]> {
+  const items = await runActor(
+    MADE_IN_CHINA_ACTOR,
+    {
+      searchMode: "keyword",
+      keyword: query,
+      maxResults: limit,
+    },
+    180_000
+  );
+  if (!items) return [];
+
+  return items
+    .map((i) => i as Record<string, unknown>)
+    .filter((i) => (i?.title || i?.productName) && i?.url)
+    .slice(0, limit)
+    .map((i) => {
+      const store = String(i.supplierName ?? i.companyName ?? i.supplier ?? "").trim();
+      const priceRaw = i.price ?? i.unitPrice ?? i.priceText;
+      const price = priceRaw != null ? String(priceRaw).trim() : "";
+      const moq = i.minOrder ?? i.moq ?? i.minimumOrderQuantity;
+      return {
+        name: String(i.title ?? i.productName ?? "").trim(),
+        url: String(i.url),
+        snippet: i.description ? String(i.description).trim().slice(0, 120) : "",
+        price,
+        orders: null,
+        rating: null,
+        source: "made-in-china",
         store: store || undefined,
         minOrder: moq != null ? String(moq).trim() : undefined,
       } satisfies Supplier;

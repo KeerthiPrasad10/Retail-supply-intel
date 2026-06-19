@@ -124,6 +124,9 @@ export async function createIdea(input: NewIdeaInput): Promise<ProductIdea> {
     merged.audience = idea.audience;
     merged.features = idea.features;
     merged.submittedBy = idea.submittedBy;
+    // DB strips data URLs (VARCHAR(2048) too small); preserve the original in
+    // the in-process cache so the card shows the image during the current session.
+    if (!merged.imageUrl && idea.imageUrl) merged.imageUrl = idea.imageUrl;
     mem.set(merged.id, merged);
     return merged;
   }
