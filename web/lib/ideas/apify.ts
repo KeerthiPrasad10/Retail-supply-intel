@@ -2,9 +2,9 @@ import "server-only";
 
 import type { Competitor, Supplier } from "./types";
 
-/* Apify agents — marketplace-native scrapers for Amazon (online stores) and
- * AliExpress (China suppliers). Degrade gracefully: with no APIFY_API_TOKEN
- * every call returns an empty list. */
+/* Apify agents — marketplace-native scrapers for Amazon (online stores),
+ * AliExpress (China suppliers), and Reddit (demand signals).
+ * Degrade gracefully: with no APIFY_API_TOKEN every call returns an empty list. */
 
 const BASE = "https://api.apify.com/v2";
 
@@ -88,6 +88,55 @@ export async function amazonSearch(query: string, limit = 8): Promise<Competitor
         reviews: typeof i.reviewsCount === "number" ? i.reviewsCount : null,
       } satisfies Competitor;
     });
+}
+
+// Reddit — community discussion via trudax/reddit-scraper-lite (pay-per-result).
+// Returns raw post objects mapped to DemandPost shape (imported by demand.ts).
+const REDDIT_ACTOR = "harshmaur~reddit-scraper";
+
+export type RedditPost = {
+  title: string;
+  url: string;
+  subreddit: string;
+  score: number;
+  numComments: number;
+  createdAt: string;
+};
+
+export async function redditSearch(query: string, limit = 12): Promise<RedditPost[]> {
+  const items = await runActor(
+    REDDIT_ACTOR,
+    {
+      searchTerms: [query],
+      searchPosts: true,
+      searchComments: false,
+      searchCommunities: false,
+      searchSort: "top",
+      searchTime: "month",
+      maxPostsCount: limit,
+    },
+    90_000
+  );
+  if (!items) return [];
+
+  return items
+    .map((i) => i as Record<string, unknown>)
+    .filter((i) => i?.title && (i?.postUrl ?? i?.url))
+    .slice(0, limit)
+    .map((i) => ({
+      title: String(i.title),
+      url: String(i.postUrl ?? i.url),
+      // harshmaur/reddit-scraper uses subredditName / communityName
+      subreddit: String(i.subredditName ?? i.communityName ?? i.subreddit ?? "").replace(/^r\//, ""),
+      score: Number(i.score ?? i.upVotes ?? i.upvotes ?? 0),
+      numComments: Number(i.commentsCount ?? i.numberOfComments ?? i.num_comments ?? 0),
+      createdAt: (() => {
+        const raw = i.createdAt ?? i.created_utc ?? 0;
+        if (typeof raw === "string") return new Date(raw).toISOString();
+        const ts = Number(raw);
+        return new Date(ts < 1e12 ? ts * 1000 : ts).toISOString();
+      })(),
+    }));
 }
 
 // AliExpress — China sellers/suppliers: wholesale-ish prices, order volume, ratings.

@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS product_ideas (
 	category_id INTEGER,
 	image_url VARCHAR(2048),
 	target_market VARCHAR(256),
-	target_price VARCHAR(64),
+	price_target VARCHAR(64),
 	category VARCHAR(128),
 	audience VARCHAR(256),
 	features VARCHAR(4096),

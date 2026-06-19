@@ -24,8 +24,9 @@ const PIPELINE = [
   { id: "classify", name: "Classifier", desc: "Classifying the product & deriving search terms…", icon: "spark" as const },
   { id: "stores", name: "Online Stores", desc: "Scanning Amazon for live listings & prices…", icon: "box" as const },
   { id: "web", name: "Web Research", desc: "Searching the web for similar products…", icon: "search" as const },
+  { id: "demand", name: "Demand Signals", desc: "Reading Reddit & Hacker News from the last 30 days…", icon: "pulse" as const },
   { id: "suppliers", name: "China Suppliers", desc: "Finding AliExpress & web suppliers…", icon: "factory" as const },
-  { id: "analyst", name: "Strategy Analyst", desc: "Synthesising positioning, pricing & next steps…", icon: "pulse" as const },
+  { id: "analyst", name: "Strategy Analyst", desc: "Synthesising positioning, pricing & next steps…", icon: "trending" as const },
 ];
 
 type Stage = "board" | "form" | "running" | "detail" | "error";
@@ -580,11 +581,19 @@ function Results({ idea, result }: { idea: ProductIdea; result: ResearchResult }
           sub={pr ? `${fmt(pr.min)} – ${fmt(pr.max)}` : "no pricing extracted"}
           accent
         />
-        <StatTile
-          value={result.mode === "live" ? "Live" : "Demo"}
-          label="Research mode"
-          sub={result.mode === "live" ? `${(result.durationMs / 1000).toFixed(1)}s` : "set API keys for live data"}
-        />
+        {result.demand && result.demand.totalPosts > 0 ? (
+          <StatTile
+            value={result.demand.momentum.charAt(0).toUpperCase() + result.demand.momentum.slice(1)}
+            label="Demand momentum"
+            sub={`${result.demand.totalPosts} posts · ${result.demand.totalEngagement.toLocaleString()} engagements`}
+          />
+        ) : (
+          <StatTile
+            value={result.mode === "live" ? "Live" : "Demo"}
+            label="Research mode"
+            sub={result.mode === "live" ? `${(result.durationMs / 1000).toFixed(1)}s` : "set API keys for live data"}
+          />
+        )}
       </div>
 
       {result.mode === "demo" && (
@@ -631,6 +640,41 @@ function Results({ idea, result }: { idea: ProductIdea; result: ResearchResult }
               </ol>
             </AnalysisBlock>
           )}
+        </section>
+      )}
+
+      {/* Demand signals — real community discussion (last 30 days) */}
+      {result.demand && result.demand.posts.length > 0 && (
+        <section>
+          <p className="panel-h section-h">
+            <Icons.pulse size={13} /> Demand signals
+            <span className="panel-meta">
+              {result.demand.momentum} momentum · {result.demand.channels.slice(0, 4).join(", ")}
+            </span>
+          </p>
+          <div className="demand-grid">
+            {result.demand.posts.slice(0, 8).map((p, i) => (
+              <a
+                key={i}
+                href={p.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="panel demand-card"
+              >
+                <div className="demand-card-top">
+                  <span className={cc("badge", p.source === "reddit" ? "med" : "")}>{p.channel}</span>
+                  <span className="demand-eng">
+                    <Icons.trending size={12} /> {p.engagement.toLocaleString()}
+                  </span>
+                </div>
+                <p className="demand-title">{p.title}</p>
+                <p className="demand-meta">
+                  {p.comments.toLocaleString()} comments · {new Date(p.createdAt).toLocaleDateString()}
+                  <Icons.arrowUpRight size={12} />
+                </p>
+              </a>
+            ))}
+          </div>
         </section>
       )}
 
