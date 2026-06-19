@@ -19,11 +19,11 @@ test.describe("Product Ideas board", () => {
   test("navigates to Product Ideas and shows board", async ({ page }) => {
     await page.goto("/");
 
-    // Click "Product Ideas" in the sidebar
-    await page.getByText("Product Ideas").click();
+    // Click "Product Ideas" in the sidebar (scope to sidebar to avoid ambiguity)
+    await page.locator("aside.sidebar").getByText("Product Ideas").click();
 
-    // The page title should appear
-    await expect(page.getByText("Product Ideas", { exact: false })).toBeVisible();
+    // The page h1 title should appear
+    await expect(page.getByRole("heading", { name: "Product Ideas" })).toBeVisible();
 
     // Either empty state or the board itself
     const emptyState = page.locator(".ideas-board-empty");
@@ -35,7 +35,7 @@ test.describe("Product Ideas board", () => {
 
   test("empty state shows 'No ideas yet' when API returns empty", async ({ page }) => {
     await page.goto("/");
-    await page.getByText("Product Ideas").click();
+    await page.locator("aside.sidebar").getByText("Product Ideas").click();
 
     await expect(page.getByText("No ideas yet")).toBeVisible();
     // The Add idea button should be present in the empty state

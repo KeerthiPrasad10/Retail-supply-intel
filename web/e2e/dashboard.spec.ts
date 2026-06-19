@@ -13,13 +13,15 @@ test.describe("Dashboard loads", () => {
     // NxB logo mark in sidebar
     await expect(page.locator(".logo-mark")).toBeVisible();
 
-    // Main navigation items
-    await expect(page.getByText("Overview")).toBeVisible();
-    await expect(page.getByText("Trending")).toBeVisible();
-    await expect(page.getByText("Product Ideas")).toBeVisible();
+    // Main navigation items — scope to the sidebar to avoid strict-mode violations
+    // (the active view breadcrumb also contains these strings)
+    const sidebar = page.locator("aside.sidebar");
+    await expect(sidebar.getByText("Overview")).toBeVisible();
+    await expect(sidebar.getByText("Trending")).toBeVisible();
+    await expect(sidebar.getByText("Product Ideas")).toBeVisible();
 
-    // Some main content area
-    await expect(page.locator(".content, main, [class*='overview']")).toBeVisible();
+    // Main page wrapper is present
+    await expect(page.locator("main.page")).toBeVisible();
 
     // No uncaught JS errors
     expect(jsErrors).toEqual([]);
