@@ -51,12 +51,19 @@ async function runActor(
         cache: "no-store",
       }
     );
-    if (!res.ok) return null;
+    if (!res.ok) {
+      // 404/403 usually means the actor isn't rented on this account; log it so
+      // "no results" can be told apart from "actor unavailable".
+      const body = await res.text().catch(() => "");
+      console.error(`[apify] ${actorId} → HTTP ${res.status}${body ? `: ${body.slice(0, 160)}` : ""}`);
+      return null;
+    }
     const data = await res.json();
     if (Array.isArray(data)) return data as Record<string, unknown>[];
     const items = (data as { items?: unknown })?.items;
     return Array.isArray(items) ? (items as Record<string, unknown>[]) : null;
-  } catch {
+  } catch (err) {
+    console.error(`[apify] ${actorId} threw — ${err instanceof Error ? err.message : "request failed"}`);
     return null;
   } finally {
     clearTimeout(timer);
