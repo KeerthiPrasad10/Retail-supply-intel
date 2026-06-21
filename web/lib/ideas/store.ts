@@ -5,25 +5,6 @@ import type { NewIdeaInput, ProductIdea } from "./types";
 import { supabaseAdmin, supabaseAdminEnabled } from "./supabase-admin";
 import { uploadDataUrlToStorage } from "./storage";
 
-/**
- * Persistence for product ideas.
- *
- * - With Supabase configured (service-role key), ideas live in the
- *   `product_ideas` table (see supabase/migrations/0006_product_ideas.sql and
- *   pipelines/src/rsi/models.py::ProductIdea).
- * - Without it, an in-memory map keeps the feature working for build/runtime.
- *   This is module-scoped, not a file on disk — serverless cold starts reset it,
- *   which is fine: the demo flow creates and researches within one process, and
- *   results are echoed back to the client.
- *
- * The canonical `product_ideas` columns are a subset of ProductIdea (title,
- * description, category_id, image_url, target_market, target_price, status,
- * research, created_at). The auxiliary free-text inputs (audience, features,
- * submittedBy, the typed category label) are carried in the in-memory store and
- * in the request flow; on the Supabase read path they are reconstructed from the
- * columns available, which is sufficient for the research pipeline.
- */
-
 const TABLE = "product_ideas";
 
 const mem = new Map<string, ProductIdea>();
@@ -40,6 +21,7 @@ function newIdea(input: NewIdeaInput): ProductIdea {
     priceTarget: (input.priceTarget || "").trim(),
     features: (input.features || "").trim(),
     imageUrl: (input.imageUrl || "").trim(),
+    imageUrls: input.imageUrls ?? [],
     submittedBy: (input.submittedBy || "").trim(),
     status: "queued",
   };
@@ -48,6 +30,10 @@ function newIdea(input: NewIdeaInput): ProductIdea {
 /* ---------- Supabase row mapping ---------- */
 
 function rowToIdea(row: Record<string, unknown>): ProductIdea {
+  const rawUrls = row.image_urls;
+  const imageUrls: string[] = Array.isArray(rawUrls)
+    ? rawUrls.filter((u): u is string => typeof u === "string" && u.startsWith("http"))
+    : [];
   return {
     id: String(row.id),
     createdAt: String(row.created_at ?? new Date().toISOString()),
@@ -59,6 +45,7 @@ function rowToIdea(row: Record<string, unknown>): ProductIdea {
     priceTarget: String(row.price_target ?? row.target_price ?? ""),
     features: String(row.features ?? ""),
     imageUrl: String(row.image_url ?? ""),
+    imageUrls,
     submittedBy: String(row.submitted_by ?? ""),
     status: (row.status as ProductIdea["status"]) ?? "queued",
     research: (row.research as ProductIdea["research"]) ?? undefined,
@@ -66,15 +53,16 @@ function rowToIdea(row: Record<string, unknown>): ProductIdea {
 }
 
 function ideaToRow(idea: ProductIdea): Record<string, unknown> {
-  // Don't persist base64 data URLs — the image_url column is VARCHAR(2048)
-  // and base64-encoded images are hundreds of KB. The data URL is only needed
-  // for the analyse-image step which runs before this point.
+  // Don't persist base64 data URLs — the image_url column is VARCHAR(2048).
   const imageUrl = idea.imageUrl?.startsWith("data:") ? null : (idea.imageUrl || null);
+  // Additional images: only persist http URLs (data URLs stripped here too).
+  const imageUrls = (idea.imageUrls ?? []).filter((u) => u.startsWith("http"));
   return {
     id: idea.id,
     title: idea.title,
     description: idea.description,
     image_url: imageUrl,
+    image_urls: imageUrls,
     target_market: idea.targetMarket || null,
     price_target: idea.priceTarget || null,
     category: idea.category || null,
@@ -112,14 +100,22 @@ export async function getIdea(id: string): Promise<ProductIdea | undefined> {
 export async function createIdea(input: NewIdeaInput): Promise<ProductIdea> {
   const idea = newIdea(input);
 
-  // If the client sent a base64 data URL, persist it to Storage *here* (server
-  // side) and swap in the public http URL. This guarantees the image survives
-  // to the DB regardless of whether the client's own upload won its race — the
-  // failure mode that left every earlier row's image_url null.
-  const original = idea.imageUrl;
-  if (original?.startsWith("data:") && supabaseAdminEnabled()) {
-    const hosted = await uploadDataUrlToStorage(original);
-    if (hosted) idea.imageUrl = hosted;
+  // Upload any data URLs to Storage server-side — guarantees persistence
+  // regardless of whether the client's parallel upload won the race.
+  if (supabaseAdminEnabled()) {
+    if (idea.imageUrl?.startsWith("data:")) {
+      const hosted = await uploadDataUrlToStorage(idea.imageUrl);
+      if (hosted) idea.imageUrl = hosted;
+    }
+    if (idea.imageUrls?.length) {
+      idea.imageUrls = await Promise.all(
+        idea.imageUrls.map(async (u) => {
+          if (!u.startsWith("data:")) return u;
+          const hosted = await uploadDataUrlToStorage(u);
+          return hosted ?? u;
+        })
+      );
+    }
   }
 
   if (supabaseAdminEnabled()) {
@@ -129,15 +125,14 @@ export async function createIdea(input: NewIdeaInput): Promise<ProductIdea> {
       .select("*")
       .single();
     if (error) throw error;
-    // Keep the rich input fields available for the immediate research call.
     const merged = { ...idea, ...rowToIdea(data as Record<string, unknown>), id: idea.id };
     merged.category = idea.category;
     merged.audience = idea.audience;
     merged.features = idea.features;
     merged.submittedBy = idea.submittedBy;
-    // DB strips data URLs (VARCHAR(2048) too small); preserve the original in
-    // the in-process cache so the card shows the image during the current session.
+    // Preserve in-session images that were stripped (data URLs / not-yet-uploaded).
     if (!merged.imageUrl && idea.imageUrl) merged.imageUrl = idea.imageUrl;
+    if (!merged.imageUrls?.length && idea.imageUrls?.length) merged.imageUrls = idea.imageUrls;
     mem.set(merged.id, merged);
     return merged;
   }
@@ -157,6 +152,7 @@ export async function updateIdea(
     if (patch.title !== undefined) row.title = patch.title;
     if (patch.description !== undefined) row.description = patch.description;
     if (patch.imageUrl !== undefined) row.image_url = patch.imageUrl;
+    if (patch.imageUrls !== undefined) row.image_urls = patch.imageUrls.filter((u) => u.startsWith("http"));
     if (patch.targetMarket !== undefined) row.target_market = patch.targetMarket;
     if (patch.priceTarget !== undefined) row.price_target = patch.priceTarget;
     if (patch.category !== undefined) row.category = patch.category;

@@ -35,6 +35,9 @@ export async function POST(req: Request) {
   }
 
   const str = (v: unknown) => (typeof v === "string" ? v : undefined);
+  const imageUrls = Array.isArray(body.imageUrls)
+    ? (body.imageUrls as unknown[]).filter((u): u is string => typeof u === "string")
+    : undefined;
   const idea = await createIdea({
     title: body.title,
     description: str(body.description),
@@ -44,6 +47,7 @@ export async function POST(req: Request) {
     priceTarget: str(body.priceTarget),
     features: str(body.features),
     imageUrl: str(body.imageUrl),
+    imageUrls,
     submittedBy: str(body.submittedBy),
   });
 

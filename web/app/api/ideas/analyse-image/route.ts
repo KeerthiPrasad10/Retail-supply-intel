@@ -28,7 +28,11 @@ function apiKey() {
   return process.env.ANTHROPIC_API_KEY || process.env.RSI_ANTHROPIC_API_KEY;
 }
 
-const PROMPT = `Look at this product image and extract as much information as you can for a product sourcing form.
+function buildPrompt(imageCount: number) {
+  const context = imageCount > 1
+    ? `You have been given ${imageCount} product images (main shot plus label/tag/angle shots).`
+    : "You have been given a product image.";
+  return `${context} Extract as much information as you can for a product sourcing form. Use all images together — labels and tags often reveal the brand, materials, certifications, or exact product name.
 
 Return ONLY a JSON object (no prose, no code fence) with these exact keys — leave a key as an empty string "" if you truly cannot determine it:
 {
@@ -40,6 +44,7 @@ Return ONLY a JSON object (no prose, no code fence) with these exact keys — le
   "targetMarket": "likely target market(s) e.g. US, UK, Australia",
   "audience": "primary target audience e.g. Parents of young children"
 }`;
+}
 
 type ImageSource =
   | { type: "base64"; media_type: string; data: string }
@@ -89,7 +94,7 @@ export async function POST(req: Request) {
     );
   }
 
-  let body: { imageData?: string };
+  let body: { imageData?: string; extraImages?: string[] };
   try {
     body = await req.json();
   } catch {
@@ -100,10 +105,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Missing imageData." }, { status: 400 });
   }
 
-  const block = imageBlock(body.imageData);
-  if (!block) {
+  const primaryBlock = imageBlock(body.imageData);
+  if (!primaryBlock) {
     return NextResponse.json({ ok: false, error: "Unsupported image format." }, { status: 415 });
   }
+
+  // Build a content array: all image blocks (primary + extras) then the prompt.
+  const extras = (body.extraImages ?? [])
+    .map(imageBlock)
+    .filter((b): b is NonNullable<typeof b> => b !== null)
+    .slice(0, 4); // cap at 4 extras to stay within token limits
+  const allBlocks = [primaryBlock, ...extras];
+  const prompt = buildPrompt(allBlocks.length);
 
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
@@ -118,7 +131,7 @@ export async function POST(req: Request) {
       messages: [
         {
           role: "user",
-          content: [block, { type: "text", text: PROMPT }],
+          content: [...allBlocks, { type: "text", text: prompt }],
         },
       ],
     }),
