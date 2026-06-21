@@ -45,6 +45,7 @@ export function Ideas({ go, resetSignal }: { go: Go; resetSignal: number }) {
 
   const stepTimer = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
   const imageUrlRef = useRef<string>("");
+  const extraImageUrlsRef = useRef<string[]>([]);
 
   const [recent, setRecent] = useState<ProductIdea[]>([]);
   const loadRecent = useCallback(() => {
@@ -81,7 +82,7 @@ export function Ideas({ go, resetSignal }: { go: Go; resetSignal: number }) {
     }, 3000);
   }
 
-  async function submit(payload: Record<string, string>) {
+  async function submit(payload: Record<string, unknown>) {
     setError(null);
     setStage("running");
     startStepAnimation();
@@ -173,7 +174,7 @@ export function Ideas({ go, resetSignal }: { go: Go; resetSignal: number }) {
       )}
 
       {stage === "form" && (
-        <SubmitForm imageUrlRef={imageUrlRef} onSubmit={submit} />
+        <SubmitForm imageUrlRef={imageUrlRef} extraImageUrlsRef={extraImageUrlsRef} onSubmit={submit} />
       )}
 
       {stage === "running" && idea && <RunningView idea={idea} activeStep={activeStep} />}
@@ -319,14 +320,21 @@ const EMPTY_FIELDS: IdeaFields = {
 
 function SubmitForm({
   imageUrlRef,
+  extraImageUrlsRef,
   onSubmit,
 }: {
   imageUrlRef: React.MutableRefObject<string>;
-  onSubmit: (payload: Record<string, string>) => void;
+  extraImageUrlsRef: React.MutableRefObject<string[]>;
+  onSubmit: (payload: Record<string, unknown>) => void;
 }) {
   const fileRef = useRef<HTMLInputElement>(null);
+  const extraFileRef = useRef<HTMLInputElement>(null);
   const uploadPromiseRef = useRef<Promise<string> | null>(null);
+  // Extra upload promises keyed by index — we await all before submit.
+  const extraUploadPromisesRef = useRef<Promise<string>[]>([]);
   const [imagePreview, setImagePreview] = useState("");
+  // Extra photos: { dataUrl (for preview), uploadedUrl (http when ready) }
+  const [extras, setExtras] = useState<{ dataUrl: string }[]>([]);
   const [autofill, setAutofill] = useState<AutofillState>("idle");
   const [fields, setFields] = useState<IdeaFields>(EMPTY_FIELDS);
   const [formError, setFormError] = useState<string | null>(null);
@@ -350,18 +358,17 @@ function SubmitForm({
     }
   }
 
-  async function analyseImage(dataUrl: string) {
+  async function analyseImage(primary: string, extraDataUrls: string[] = []) {
     setAutofill("loading");
     setFormError(null);
     try {
       const res = await fetch("/api/ideas/analyse-image", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ imageData: dataUrl }),
+        body: JSON.stringify({ imageData: primary, extraImages: extraDataUrls }),
       });
       const data = await res.json();
       if (!res.ok || !data.ok) {
-        // silently fall through to manual entry — not a hard error
         setAutofill("error");
         return;
       }
@@ -382,40 +389,92 @@ function SubmitForm({
     }
   }
 
-  function handleFile(file?: File) {
+  function readFileAsDataUrl(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ""));
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function handlePrimaryFile(file?: File) {
     setFormError(null);
     if (!file) return;
-    if (!file.type.startsWith("image/")) {
-      setFormError("Please choose an image file.");
-      return;
-    }
-    if (file.size > MAX_IMAGE_BYTES) {
-      setFormError("Image is too large (max 15 MB).");
-      return;
-    }
+    if (!file.type.startsWith("image/")) { setFormError("Please choose an image file."); return; }
+    if (file.size > MAX_IMAGE_BYTES) { setFormError("Image is too large (max 15 MB)."); return; }
     const reader = new FileReader();
     reader.onload = async () => {
       const raw = String(reader.result || "");
       setImagePreview(raw);
       const resized = await resizeImage(raw);
-      imageUrlRef.current = resized; // keep data URL for preview + analyse-image
-      // Upload to Storage in parallel; swap in the real URL when ready.
+      imageUrlRef.current = resized;
       uploadPromiseRef.current = uploadImage(resized);
       uploadPromiseRef.current.then((url) => {
         if (url?.startsWith("http")) imageUrlRef.current = url;
       });
-      analyseImage(resized);
+      // Re-analyse with primary + any already-loaded extras.
+      const extraDataUrls = extraImageUrlsRef.current.slice();
+      analyseImage(resized, extraDataUrls);
     };
     reader.readAsDataURL(file);
   }
 
-  function removeImage() {
+  async function handleExtraFiles(files: FileList | null) {
+    if (!files || files.length === 0) return;
+    const MAX_EXTRAS = 4;
+    const toAdd = Array.from(files).slice(0, MAX_EXTRAS - extras.length);
+    if (toAdd.length === 0) return;
+    const newEntries: { dataUrl: string }[] = [];
+    const newUploadPromises: Promise<string>[] = [];
+    for (const file of toAdd) {
+      if (!file.type.startsWith("image/")) continue;
+      try {
+        const raw = await readFileAsDataUrl(file);
+        const resized = await resizeImage(raw);
+        newEntries.push({ dataUrl: resized });
+        const p = uploadImage(resized);
+        newUploadPromises.push(p);
+        p.then((url) => {
+          if (url?.startsWith("http")) {
+            const idx = extraUploadPromisesRef.current.indexOf(p);
+            if (idx >= 0) extraImageUrlsRef.current[idx] = url;
+          }
+        });
+      } catch { /* skip bad files */ }
+    }
+    if (newEntries.length === 0) return;
+    const startIdx = extraUploadPromisesRef.current.length;
+    extraUploadPromisesRef.current.push(...newUploadPromises);
+    // Seed extraImageUrlsRef with data URLs for now (server will re-upload if needed).
+    for (let i = 0; i < newEntries.length; i++) {
+      extraImageUrlsRef.current[startIdx + i] = newEntries[i].dataUrl;
+    }
+    setExtras((prev) => [...prev, ...newEntries]);
+    // Re-analyse with primary + all extras so labels/tags get picked up.
+    if (imageUrlRef.current) {
+      const allExtras = [...extraImageUrlsRef.current.slice(0, startIdx), ...newEntries.map((e) => e.dataUrl)];
+      analyseImage(imageUrlRef.current, allExtras);
+    }
+  }
+
+  function removeExtra(idx: number) {
+    setExtras((prev) => prev.filter((_, i) => i !== idx));
+    extraImageUrlsRef.current.splice(idx, 1);
+    extraUploadPromisesRef.current.splice(idx, 1);
+  }
+
+  function removePrimary() {
     setImagePreview("");
     imageUrlRef.current = "";
     uploadPromiseRef.current = null;
+    setExtras([]);
+    extraImageUrlsRef.current = [];
+    extraUploadPromisesRef.current = [];
     setAutofill("idle");
     setFields(EMPTY_FIELDS);
     if (fileRef.current) fileRef.current.value = "";
+    if (extraFileRef.current) extraFileRef.current.value = "";
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -425,18 +484,24 @@ function SubmitForm({
       setFormError("Please give your product idea a title.");
       return;
     }
-    // Wait for the in-flight Storage upload so the real URL is ready.
+    // Await all in-flight uploads.
     if (uploadPromiseRef.current) {
       try {
         const url = await uploadPromiseRef.current;
         if (url?.startsWith("http")) imageUrlRef.current = url;
       } catch {}
     }
-    const payload: Record<string, string> = { ...fields };
-    // Always pass the image URL — HTTP URLs get persisted to the DB; data URLs
-    // are kept only in the in-process cache (stripped before DB insert) so the
-    // card still shows the image within the current session.
+    if (extraUploadPromisesRef.current.length) {
+      const resolved = await Promise.allSettled(extraUploadPromisesRef.current);
+      resolved.forEach((r, i) => {
+        if (r.status === "fulfilled" && r.value?.startsWith("http")) {
+          extraImageUrlsRef.current[i] = r.value;
+        }
+      });
+    }
+    const payload: Record<string, unknown> = { ...fields };
     if (imageUrlRef.current) payload.imageUrl = imageUrlRef.current;
+    if (extraImageUrlsRef.current.length) payload.imageUrls = [...extraImageUrlsRef.current];
     onSubmit(payload);
   }
 
@@ -444,13 +509,13 @@ function SubmitForm({
 
   return (
     <form className="panel idea-form" onSubmit={handleSubmit}>
-      {/* ── Image drop zone — primary input ── */}
+      {/* ── Primary image drop zone ── */}
       <div
         className={cc("idea-image-zone", imagePreview && "has-image")}
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => {
           e.preventDefault();
-          handleFile(e.dataTransfer.files?.[0]);
+          handlePrimaryFile(e.dataTransfer.files?.[0]);
         }}
       >
         {imagePreview ? (
@@ -473,7 +538,7 @@ function SubmitForm({
                   <Icons.alert size={12} /> Could not auto-fill &mdash; fill manually
                 </span>
               )}
-              <button type="button" className="idea-image-remove" onClick={removeImage}>
+              <button type="button" className="idea-image-remove" onClick={removePrimary}>
                 <Icons.x size={14} /> Change image
               </button>
             </div>
@@ -488,7 +553,7 @@ function SubmitForm({
               <Icons.box size={32} />
             </span>
             <span className="idea-image-drop-main">Drop a product photo to get started</span>
-            <span className="idea-image-drop-sub">AI fills the form for you · PNG/JPG up to 1.5 MB · or fill in manually below</span>
+            <span className="idea-image-drop-sub">AI fills the form for you · PNG/JPG up to 15 MB · or fill in manually below</span>
           </button>
         )}
         <input
@@ -496,9 +561,52 @@ function SubmitForm({
           type="file"
           accept="image/*"
           className="hidden-input"
-          onChange={(e) => handleFile(e.target.files?.[0])}
+          onChange={(e) => handlePrimaryFile(e.target.files?.[0])}
         />
       </div>
+
+      {/* ── Extra photos (labels, tags, angles) ── */}
+      {imagePreview && (
+        <div className="idea-extras">
+          <p className="idea-extras-label">
+            <Icons.image size={12} /> Additional shots
+            <span className="idea-extras-hint"> — labels, tags, different angles (up to 4)</span>
+          </p>
+          <div className="idea-extras-row">
+            {extras.map((ex, i) => (
+              <div key={i} className="idea-extra-thumb-wrap">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={ex.dataUrl} alt={`Extra ${i + 1}`} className="idea-extra-thumb" />
+                <button
+                  type="button"
+                  className="idea-extra-remove"
+                  onClick={() => removeExtra(i)}
+                  aria-label="Remove"
+                >
+                  <Icons.x size={10} />
+                </button>
+              </div>
+            ))}
+            {extras.length < 4 && (
+              <button
+                type="button"
+                className="idea-extra-add"
+                onClick={() => extraFileRef.current?.click()}
+              >
+                <Icons.plus size={16} />
+              </button>
+            )}
+          </div>
+          <input
+            ref={extraFileRef}
+            type="file"
+            accept="image/*"
+            multiple
+            className="hidden-input"
+            onChange={(e) => handleExtraFiles(e.target.files)}
+          />
+        </div>
+      )}
 
       {/* ── Fields — shown always, disabled while analysing ── */}
       <fieldset className="idea-fields" disabled={isAnalysing}>
@@ -651,11 +759,13 @@ function RunningView({ idea, activeStep }: { idea: ProductIdea; activeStep: numb
 
 function ImageCarousel({ idea, renderings }: { idea: ProductIdea; renderings?: import("@/lib/ideas/types").Rendering[] }) {
   const slides: { url: string; label: string }[] = [];
-  // Show the original photo whether it's a persisted http URL or an in-session
-  // data URL (Storage strips data URLs from the DB column, but the uploaded
-  // image is still available client-side during the session that created it).
   if (idea.imageUrl?.startsWith("http") || idea.imageUrl?.startsWith("data:"))
     slides.push({ url: idea.imageUrl, label: "Original" });
+  // Additional shots (labels, tags, angles) uploaded alongside the primary.
+  (idea.imageUrls ?? []).forEach((u, i) => {
+    if (u.startsWith("http") || u.startsWith("data:"))
+      slides.push({ url: u, label: `Shot ${i + 2}` });
+  });
   (renderings ?? []).forEach((r) => slides.push({ url: r.url, label: r.scene }));
 
   const [idx, setIdx] = useState(0);

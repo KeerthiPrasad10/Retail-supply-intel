@@ -15,6 +15,8 @@ export type ProductIdea = {
   priceTarget: string;
   features: string;
   imageUrl: string;
+  /** Additional product photos (labels, tags, alternate angles). Primary is imageUrl. */
+  imageUrls?: string[];
   submittedBy: string;
   status: IdeaStatus;
   research?: ResearchResult;
@@ -136,5 +138,6 @@ export type NewIdeaInput = {
   priceTarget?: string;
   features?: string;
   imageUrl?: string;
+  imageUrls?: string[];
   submittedBy?: string;
 };
