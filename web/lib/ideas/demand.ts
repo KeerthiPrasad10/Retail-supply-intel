@@ -140,12 +140,45 @@ function momentumOf(posts: number, engagement: number): DemandPulse["momentum"] 
   return "low";
 }
 
-/** Drop posts whose title+channel share no words with the query (actor may return off-topic results). */
-function isRelevant(post: DemandPost, query: string): boolean {
-  const words = query.toLowerCase().match(/[a-z0-9]{3,}/g) ?? [];
-  if (!words.length) return true;
-  const hay = `${post.title} ${post.channel}`.toLowerCase();
-  return words.some((w) => hay.includes(w));
+// Generic product modifiers / filler that carry no topical meaning — a post
+// matching only these is not actually about the product.
+const STOPWORDS = new Set([
+  "the", "and", "for", "with", "your", "you", "are", "our", "new", "best", "top",
+  "buy", "sale", "cheap", "mini", "max", "pro", "plus", "kit", "set", "pack",
+  "portable", "wireless", "device", "gadget", "accessory", "accessories",
+  "premium", "quality", "universal", "smart", "electronics", "product", "products",
+  "other", "uncategorised", "uncategorized", "misc",
+]);
+
+function tokens(s: string): string[] {
+  return s.toLowerCase().match(/[a-z0-9]{3,}/g) ?? [];
+}
+
+/** Distinctive product terms from the query (stopwords removed, deduped). */
+function queryTerms(query: string): string[] {
+  return [...new Set(tokens(query).filter((w) => !STOPWORDS.has(w)))];
+}
+
+/** Whole-word match, tolerant of singular/plural (prefix match, length-guarded
+ *  so short generic stems like "cat" don't bleed into "category"). */
+function wordMatch(term: string, titleWords: string[]): boolean {
+  return titleWords.some(
+    (w) => w === term || (term.length >= 4 && (w.startsWith(term) || term.startsWith(w)))
+  );
+}
+
+/**
+ * Keep a post only when its TITLE actually discusses the product's subject.
+ * Matches on whole words against the query's distinctive terms (the subreddit
+ * name is not evidence of topical relevance, so it's excluded). A single weak
+ * word is not enough: short queries must hit every term, longer ones at least
+ * two — so off-topic threads that share one generic word are dropped.
+ */
+function isRelevant(post: DemandPost, terms: string[]): boolean {
+  if (terms.length === 0) return true;
+  const titleWords = tokens(post.title);
+  const hits = terms.filter((t) => wordMatch(t, titleWords)).length;
+  return terms.length <= 2 ? hits === terms.length : hits >= 2;
 }
 
 /**
@@ -159,13 +192,16 @@ export async function demandPulse(query: string): Promise<DemandPulse> {
   const [hn, reddit] = await Promise.all([searchHackerNews(q, 10), searchReddit(q, 12)]);
 
   // Merge, dedupe by URL, filter to on-topic posts, rank by engagement.
+  // Off-topic threads are dropped entirely rather than shown to the reader —
+  // a misleading "demand signal" is worse than none.
+  const terms = queryTerms(q);
   const seen = new Set<string>();
   const posts = [...reddit, ...hn]
     .filter((p) => {
       const key = p.url.toLowerCase();
       if (seen.has(key)) return false;
       seen.add(key);
-      return isRelevant(p, q);
+      return isRelevant(p, terms);
     })
     .sort((a, b) => b.engagement - a.engagement)
     .slice(0, 12);
