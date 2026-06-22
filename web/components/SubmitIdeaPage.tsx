@@ -45,6 +45,11 @@ const EMPTY: IdeaFields = {
   submittedBy: "",
 };
 
+function isHttpUrl(s: string) {
+  try { const u = new URL(s); return u.protocol === "https:" || u.protocol === "http:"; }
+  catch { return false; }
+}
+
 type Stage = "form" | "submitting" | "done" | "error";
 
 export function SubmitIdeaPage() {
@@ -159,6 +164,8 @@ function FormView({
   const [autofill, setAutofill] = useState<AutofillState>("idle");
   const [fields, setFields] = useState<IdeaFields>(EMPTY);
   const [formError, setFormError] = useState<string | null>(null);
+  const [sourceUrl, setSourceUrl] = useState("");
+  const [urlAutofill, setUrlAutofill] = useState<AutofillState>("idle");
 
   function setField(key: keyof IdeaFields, value: string) {
     setFields((f) => ({ ...f, [key]: value }));
@@ -217,6 +224,45 @@ function FormView({
       setAutofill("done");
     } catch {
       setAutofill("error");
+    }
+  }
+
+  async function scrapeUrl(url: string) {
+    if (!isHttpUrl(url)) return;
+    setUrlAutofill("loading");
+    setFormError(null);
+    try {
+      const res = await fetch("/api/ideas/scrape-url", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) {
+        setUrlAutofill("error");
+        setFormError(data.error || "Could not read that page — fill in the fields manually.");
+        return;
+      }
+      const f = data.fields as Partial<IdeaFields & { imageUrl: string }>;
+      setFields((prev) => ({
+        title: f.title || prev.title,
+        description: f.description || prev.description,
+        category: f.category || prev.category,
+        features: f.features || prev.features,
+        priceTarget: f.priceTarget || prev.priceTarget,
+        targetMarket: f.targetMarket || prev.targetMarket,
+        audience: f.audience || prev.audience,
+        submittedBy: prev.submittedBy,
+      }));
+      // If the page had an og:image and no photo was uploaded yet, use it.
+      if (f.imageUrl && !imageUrlRef.current) {
+        imageUrlRef.current = f.imageUrl;
+        setImagePreview(f.imageUrl);
+      }
+      setUrlAutofill("done");
+    } catch {
+      setUrlAutofill("error");
+      setFormError("Could not reach that page — fill in the fields manually.");
     }
   }
 
@@ -336,6 +382,7 @@ function FormView({
     const payload: Record<string, unknown> = { ...fields };
     if (imageUrlRef.current) payload.imageUrl = imageUrlRef.current;
     if (extraImageUrlsRef.current.length) payload.imageUrls = [...extraImageUrlsRef.current];
+    if (sourceUrl && isHttpUrl(sourceUrl)) payload.sourceUrl = sourceUrl;
     onSubmit(payload);
   }
 
@@ -350,6 +397,43 @@ function FormView({
       </header>
 
       <form className="sp-form panel" onSubmit={handleSubmit} noValidate>
+        {/* ── URL scrape input ── */}
+        <div className="idea-url-row">
+          <label className="idea-url-label" htmlFor="sp-source-url">
+            <Icons.link size={13} />
+            Paste a product link
+          </label>
+          <div className="idea-url-field">
+            <input
+              id="sp-source-url"
+              type="url"
+              value={sourceUrl}
+              onChange={(e) => { setSourceUrl(e.target.value); setUrlAutofill("idle"); }}
+              onBlur={(e) => { if (isHttpUrl(e.target.value)) scrapeUrl(e.target.value); }}
+              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); if (isHttpUrl(sourceUrl)) scrapeUrl(sourceUrl); } }}
+              placeholder="https://www.amazon.com/dp/… or any product page"
+              className="nxb-input idea-url-input"
+              disabled={urlAutofill === "loading"}
+            />
+            {urlAutofill === "loading" && (
+              <span className="idea-url-status">
+                <span className="spinner" aria-hidden /> Reading page…
+              </span>
+            )}
+            {urlAutofill === "done" && (
+              <span className="idea-url-status done">
+                <Icons.check size={12} /> Fields filled
+              </span>
+            )}
+            {urlAutofill === "error" && (
+              <span className="idea-url-status warn">
+                <Icons.alert size={12} /> Could not read page
+              </span>
+            )}
+          </div>
+          <p className="idea-url-hint">AI fills the form from the product page. Or upload a photo below.</p>
+        </div>
+
         <div
           className={cc("idea-image-zone sp-zone", imagePreview && "has-image")}
           onDragOver={(e) => e.preventDefault()}
