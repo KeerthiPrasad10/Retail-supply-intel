@@ -146,6 +146,12 @@ export const Icons = {
       <path d="M14 14h3v3M21 14v7h-7M17.5 21h.01M21 17.5h.01" />
     </Ico>
   ),
+  expand: (p: IconProps) => (
+    <Ico {...p}>
+      <path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M3 16v3a2 2 0 0 0 2 2h3" />
+    </Ico>
+  ),
+  download: (p: IconProps) => <Ico {...p} d="M12 3v12M7 10l5 5 5-5M5 21h14" />,
 };
 
 export type IconName = keyof typeof Icons;

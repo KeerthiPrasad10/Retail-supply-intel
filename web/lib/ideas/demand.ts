@@ -184,19 +184,24 @@ function isRelevant(post: DemandPost, terms: string[]): boolean {
 /**
  * Run the demand pulse for a product. `query` should be the product class /
  * core subject (e.g. "insulated kids water bottle"), not the full idea title.
+ *
+ * `refine` is an optional post-capture relevance gate (an LLM judge lives in
+ * the agent layer). The cheap keyword filter below is just a pre-filter to keep
+ * the LLM input small; `refine` makes the final call on what's genuinely on
+ * topic. It returns the posts to keep, or null to keep the keyword-filtered set.
  */
-export async function demandPulse(query: string): Promise<DemandPulse> {
+export type DemandRefine = (posts: DemandPost[]) => Promise<DemandPost[] | null>;
+
+export async function demandPulse(query: string, refine?: DemandRefine): Promise<DemandPulse> {
   const q = query.trim();
   if (!q) return { posts: [], totalPosts: 0, totalEngagement: 0, channels: [], momentum: "quiet" };
 
   const [hn, reddit] = await Promise.all([searchHackerNews(q, 10), searchReddit(q, 12)]);
 
-  // Merge, dedupe by URL, filter to on-topic posts, rank by engagement.
-  // Off-topic threads are dropped entirely rather than shown to the reader —
-  // a misleading "demand signal" is worse than none.
+  // Merge, dedupe by URL, cheap keyword pre-filter, rank by engagement.
   const terms = queryTerms(q);
   const seen = new Set<string>();
-  const posts = [...reddit, ...hn]
+  let posts = [...reddit, ...hn]
     .filter((p) => {
       const key = p.url.toLowerCase();
       if (seen.has(key)) return false;
@@ -205,6 +210,19 @@ export async function demandPulse(query: string): Promise<DemandPulse> {
     })
     .sort((a, b) => b.engagement - a.engagement)
     .slice(0, 12);
+
+  // Post-capture relevance gate — drops keyword-coincidence false positives
+  // (e.g. an owl-biology post that merely contains "rain" and "waterproof").
+  // A misleading demand signal is worse than none, so when the judge runs we
+  // trust it; on failure we keep the keyword-filtered set.
+  if (refine && posts.length) {
+    try {
+      const kept = await refine(posts);
+      if (kept) posts = kept;
+    } catch {
+      /* keep keyword-filtered posts */
+    }
+  }
 
   const totalEngagement = posts.reduce((sum, p) => sum + p.engagement, 0);
 

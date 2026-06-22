@@ -667,18 +667,31 @@ textarea.nxb-input { resize: vertical; min-height: 60px; }
 .sp-cat { margin: 0; }
 .sp-reset-btn { margin-top: 8px; }
 
-/* Ideas — share / QR card */
-.ideas-share { display: flex; align-items: center; gap: 22px; }
-.ideas-share-qr { flex: 0 0 auto; width: 156px; height: 156px; background: #fff; border-radius: var(--radius-input); border: 0.5px solid var(--nxb-border-medium); display: flex; align-items: center; justify-content: center; }
-.ideas-share-qr-skeleton { width: 132px; height: 132px; border-radius: 6px; background: var(--nxb-overlay-light); animation: qr-skeleton 1.2s ease-in-out infinite; }
+/* Ideas — share / QR card (compact; tap the code to enlarge) */
+.ideas-share { display: flex; align-items: center; gap: 16px; padding: 14px 16px; }
+.ideas-share-qr { position: relative; flex: 0 0 auto; width: 84px; height: 84px; padding: 8px; background: #fff; border-radius: var(--radius-input); border: 0.5px solid var(--nxb-border-medium); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: border-color 120ms, box-shadow 120ms; }
+.ideas-share-qr:hover { border-color: var(--nxb-action-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--nxb-action-primary) 12%, transparent); }
+.ideas-share-qr:disabled { cursor: default; }
+.ideas-share-qr-hint { position: absolute; bottom: -6px; right: -6px; width: 20px; height: 20px; border-radius: 9999px; background: var(--nxb-text-primary); color: var(--nxb-text-inverse); display: flex; align-items: center; justify-content: center; border: 2px solid var(--nxb-surface-1); }
+.ideas-share-qr-skeleton { width: 68px; height: 68px; border-radius: 6px; background: var(--nxb-overlay-light); animation: qr-skeleton 1.2s ease-in-out infinite; }
 @keyframes qr-skeleton { 0%, 100% { opacity: .5; } 50% { opacity: .9; } }
-.ideas-share-body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
-.ideas-share-title { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; color: var(--nxb-text-primary); margin: 0; }
+.ideas-share-body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.ideas-share-title { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--nxb-text-primary); margin: 0; }
 .ideas-share-title svg { opacity: .75; }
-.ideas-share-sub { font-size: 13px; line-height: 1.5; color: var(--nxb-text-secondary); margin: 0; max-width: 460px; }
-.ideas-share-link { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+.ideas-share-sub { font-size: 12.5px; line-height: 1.45; color: var(--nxb-text-muted); margin: 0; max-width: 460px; }
+.ideas-share-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
 .ideas-share-url { font-family: var(--font-mono); font-size: 11.5px; color: var(--nxb-text-muted); background: var(--nxb-overlay-subtle); border: 0.5px solid var(--nxb-border-low); border-radius: var(--radius-badge); padding: 6px 10px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 @media (max-width: 640px) { .ideas-share { flex-direction: column; align-items: flex-start; } }
+
+/* Ideas — enlarged QR modal */
+.qr-modal { position: relative; max-width: 360px; text-align: center; }
+.qr-modal h3 { margin: 0 0 6px; }
+.qr-modal p { margin: 0 0 18px; }
+.qr-modal-close { position: absolute; top: 16px; right: 16px; width: 30px; height: 30px; border-radius: 9999px; border: 0; background: var(--nxb-action-secondary); color: var(--nxb-text-primary); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+.qr-modal-close:hover { background: var(--nxb-action-secondary-hover); }
+.qr-modal-code { display: inline-flex; padding: 16px; background: #fff; border-radius: var(--radius-input); border: 0.5px solid var(--nxb-border-medium); margin: 0 auto 16px; }
+.qr-modal-url { display: block; margin: 0 auto 18px; max-width: 100%; }
+.qr-modal-actions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
 
 /* Ideas — trending categories strip (market signal → "capture this fast") */
 .ideas-trending { display: flex; flex-direction: column; gap: 10px; }
@@ -700,6 +713,20 @@ textarea.nxb-input { resize: vertical; min-height: 60px; }
 .ideas-filter-trend { display: inline-flex; align-items: center; gap: 3px; font-family: var(--font-mono); font-size: 10px; color: var(--nxb-status-low); }
 .ideas-filter-chip.active .ideas-filter-trend { color: inherit; opacity: .85; }
 .ideas-filter-empty { font-size: 13px; color: var(--nxb-text-muted); padding: 32px 4px; margin: 0; }
+
+/* Ideas — "similar ideas already submitted" panel (shown on submit forms) */
+.similar-ideas { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: var(--nxb-overlay-subtle); border: 0.5px solid var(--nxb-border-low); border-radius: var(--radius-card); }
+.similar-ideas-head { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--nxb-text-primary); margin: 0; }
+.similar-ideas-head svg { opacity: .7; }
+.similar-ideas-count { font-family: var(--font-mono); font-size: 10px; color: var(--nxb-text-inverse); background: var(--nxb-text-primary); border-radius: var(--radius-pill); padding: 1px 7px; }
+.similar-ideas-sub { font-size: 12px; color: var(--nxb-text-muted); margin: 0 0 8px; }
+.similar-ideas-list { display: flex; flex-direction: column; gap: 8px; }
+.similar-card { display: flex; align-items: center; gap: 10px; padding: 8px; background: var(--nxb-surface-1); border: 0.5px solid var(--nxb-border-low); border-radius: var(--radius-input); }
+.similar-thumb { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 6px; overflow: hidden; background: var(--nxb-surface-3); display: flex; align-items: center; justify-content: center; color: var(--nxb-text-tertiary); }
+.similar-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.similar-body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.similar-title { font-size: 13px; font-weight: 500; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.similar-meta { font-size: 11.5px; color: var(--nxb-text-muted); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* Ideas board */
 .ideas-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
