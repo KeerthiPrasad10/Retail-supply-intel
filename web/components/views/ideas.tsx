@@ -55,9 +55,25 @@ export function Ideas({ go, resetSignal }: { go: Go; resetSignal: number }) {
       .then((d) => setRecent(Array.isArray(d?.ideas) ? d.ideas : []))
       .catch(() => {});
   }, []);
+  // Auto-refresh the board so newly submitted ideas (including from the public
+  // /submit QR page) and status changes (queued → researching → complete) show
+  // up without a manual reload. Polls only while the board is on screen, skips
+  // ticks when the tab is hidden, and refreshes immediately on entry/refocus.
   useEffect(() => {
+    if (stage !== "board") return;
     loadRecent();
-  }, [loadRecent]);
+    const timer = setInterval(() => {
+      if (typeof document === "undefined" || !document.hidden) loadRecent();
+    }, 5000);
+    const onVisible = () => {
+      if (!document.hidden) loadRecent();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      clearInterval(timer);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
+  }, [stage, loadRecent]);
 
   // Clicking "Product Ideas" in the nav always returns to the board.
   // Skip the first run so it doesn't clobber the initial mount.
@@ -173,7 +189,7 @@ export function Ideas({ go, resetSignal }: { go: Go; resetSignal: number }) {
       {stage === "board" && (
         <>
           <ShareSubmit />
-          <BoardView ideas={recent} onView={viewIdea} onAdd={() => setStage("form")} />
+          <BoardView ideas={recent} trends={trends} go={go} onView={viewIdea} onAdd={() => setStage("form")} />
         </>
       )}
 
@@ -265,6 +281,125 @@ const STATUS_BADGE: Record<ProductIdea["status"], { cls: string; label: string }
   error: { cls: "high", label: "error" },
 };
 
+/** Canonical category for an idea — research-derived if present, else the
+ *  submitter's pick, else a stable bucket so it can still be filtered. */
+function ideaCategory(idea: ProductIdea): string {
+  return (
+    idea.research?.classification?.category ||
+    idea.research?.enrichment?.suggestedCategory ||
+    idea.category ||
+    "Uncategorised"
+  );
+}
+
+/** Best-matching market trend for a category (token overlap on the trend's
+ *  category name), so a board category can carry a live demand signal. */
+function categorySignal(category: string, trends: Trend[]): Trend | null {
+  const tokens = category.toLowerCase().match(/[a-z0-9]{3,}/g) ?? [];
+  if (!tokens.length) return null;
+  let best: { score: number; t: Trend } | null = null;
+  for (const t of trends) {
+    const hay = t.cat.toLowerCase();
+    let score = 0;
+    for (const tok of tokens) if (hay.includes(tok)) score++;
+    if (score > 0 && (!best || score > best.score || (score === best.score && t.growth > best.t.growth))) {
+      best = { score, t };
+    }
+  }
+  return best?.t ?? null;
+}
+
+/** Distinct idea categories with counts, most-populated first. */
+function categoryCounts(ideas: ProductIdea[]): { cat: string; count: number }[] {
+  const m = new Map<string, number>();
+  for (const i of ideas) m.set(ideaCategory(i), (m.get(ideaCategory(i)) ?? 0) + 1);
+  return [...m.entries()]
+    .map(([cat, count]) => ({ cat, count }))
+    .sort((a, b) => b.count - a.count || a.cat.localeCompare(b.cat));
+}
+
+/** Trending market categories — top movers by momentum, deduped to one per
+ *  category. Surfaces "what to capture next" right on the ideas board. */
+function TrendingStrip({ trends, go }: { trends: Trend[]; go: Go }) {
+  const byCat = new Map<string, Trend>();
+  for (const t of trends) {
+    const cur = byCat.get(t.cat);
+    if (!cur || t.momentum > cur.momentum) byCat.set(t.cat, t);
+  }
+  const top = [...byCat.values()].sort((a, b) => b.momentum - a.momentum).slice(0, 6);
+  if (!top.length) return null;
+  return (
+    <section className="ideas-trending">
+      <p className="ideas-trending-head">
+        <Icons.trending size={13} /> Trending categories
+        <span className="ideas-trending-hint">Rising demand — capture these fast</span>
+      </p>
+      <div className="ideas-trending-row">
+        {top.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            className="ideas-trending-chip"
+            onClick={() => go("deepdive", t.id)}
+            title={`${t.cat} · ${t.market} — open market deep-dive`}
+          >
+            <Tier tier={t.tier} />
+            <span className="ideas-trending-cat">{t.cat}</span>
+            <span className={cc("growth", t.growth >= 0 ? "up" : "down")}>{fmtPct(t.growth)}</span>
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/** Category filter chips for the board — each annotated with its market demand
+ *  signal when the category maps to a rising trend. */
+function CategoryFilter({
+  cats,
+  trends,
+  active,
+  total,
+  onChange,
+}: {
+  cats: { cat: string; count: number }[];
+  trends: Trend[];
+  active: string | null;
+  total: number;
+  onChange: (cat: string | null) => void;
+}) {
+  if (cats.length <= 1) return null; // nothing to filter
+  return (
+    <div className="ideas-filter" role="tablist" aria-label="Filter ideas by category">
+      <button
+        type="button"
+        className={cc("ideas-filter-chip", active === null && "active")}
+        onClick={() => onChange(null)}
+      >
+        All <span className="ideas-filter-count">{total}</span>
+      </button>
+      {cats.map(({ cat, count }) => {
+        const sig = categorySignal(cat, trends);
+        return (
+          <button
+            key={cat}
+            type="button"
+            className={cc("ideas-filter-chip", active === cat && "active")}
+            onClick={() => onChange(active === cat ? null : cat)}
+          >
+            {cat} <span className="ideas-filter-count">{count}</span>
+            {sig && sig.growth > 0 && (
+              <span className="ideas-filter-trend" title={`Market demand ${fmtPct(sig.growth)} — trending`}>
+                <Icons.trending size={10} /> {fmtPct(sig.growth)}
+              </span>
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 function EmptyBoard({ onAdd }: { onAdd: () => void }) {
   return (
     <div className="ideas-board-empty">
@@ -321,14 +456,49 @@ function IdeaCard({ idea, onClick }: { idea: ProductIdea; onClick: () => void })
   );
 }
 
-function BoardView({ ideas, onView, onAdd }: { ideas: ProductIdea[]; onView: (i: ProductIdea) => void; onAdd: () => void }) {
-  if (!ideas.length) return <EmptyBoard onAdd={onAdd} />;
+function BoardView({
+  ideas,
+  trends,
+  go,
+  onView,
+  onAdd,
+}: {
+  ideas: ProductIdea[];
+  trends: Trend[];
+  go: Go;
+  onView: (i: ProductIdea) => void;
+  onAdd: () => void;
+}) {
+  const [cat, setCat] = useState<string | null>(null);
+
+  // Keep the active filter valid as the board polls in new data / changes.
+  const cats = categoryCounts(ideas);
+  const active = cat && cats.some((c) => c.cat === cat) ? cat : null;
+  const filtered = active ? ideas.filter((i) => ideaCategory(i) === active) : ideas;
+
+  if (!ideas.length) {
+    return (
+      <>
+        <TrendingStrip trends={trends} go={go} />
+        <EmptyBoard onAdd={onAdd} />
+      </>
+    );
+  }
+
   return (
-    <div className="ideas-board">
-      {ideas.map((idea) => (
-        <IdeaCard key={idea.id} idea={idea} onClick={() => idea.research && onView(idea)} />
-      ))}
-    </div>
+    <>
+      <TrendingStrip trends={trends} go={go} />
+      <CategoryFilter cats={cats} trends={trends} active={active} total={ideas.length} onChange={setCat} />
+      {filtered.length ? (
+        <div className="ideas-board">
+          {filtered.map((idea) => (
+            <IdeaCard key={idea.id} idea={idea} onClick={() => idea.research && onView(idea)} />
+          ))}
+        </div>
+      ) : (
+        <p className="ideas-filter-empty">No ideas in “{active}” yet.</p>
+      )}
+    </>
   );
 }
 

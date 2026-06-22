@@ -9,21 +9,30 @@ export function falEnabled(): boolean {
 // the product into the scene. Much sharper than bria/product-shot.
 const ENDPOINT = "https://fal.run/fal-ai/flux-pro/kontext";
 
+// Diffusion models love to "re-draw" any text on a product, turning labels and
+// logos into garbled gibberish. Kontext can preserve the subject if we tell it
+// to — append this to every scene prompt so only the background changes.
+const PRESERVE =
+  " Keep the product itself completely unchanged and pixel-identical to the input: same shape, colours, materials and proportions, and — critically — keep all existing label text, logos and typography exactly as in the original. Do NOT redraw, restyle, translate, add or invent any text or lettering on the product. Only change the surrounding scene and lighting.";
+
 const SCENES: Array<{ id: Rendering["scene"]; prompt: string }> = [
   {
     id: "shelf",
     prompt:
-      "Place this product on a clean retail shelf with soft studio lighting. Professional e-commerce photography, sharp focus on the product, neutral background.",
+      "Place this exact product on a clean retail shelf with soft studio lighting. Professional e-commerce photography, sharp focus on the product, neutral background." +
+      PRESERVE,
   },
   {
     id: "lifestyle",
     prompt:
-      "Place this product in a natural lifestyle setting with warm natural light. Aspirational photography, product prominently featured, realistic environment.",
+      "Place this exact product in a natural lifestyle setting with warm natural light. Aspirational photography, product prominently featured, realistic environment." +
+      PRESERVE,
   },
   {
     id: "hero",
     prompt:
-      "Hero product shot on a pure white background with dramatic studio lighting. Commercial photography, ultra-sharp, shadows underneath, product centred.",
+      "Hero shot of this exact product on a pure white background with dramatic studio lighting. Commercial photography, ultra-sharp, soft shadow underneath, product centred." +
+      PRESERVE,
   },
 ];
 
