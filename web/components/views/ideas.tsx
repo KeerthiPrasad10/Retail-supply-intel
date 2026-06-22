@@ -1200,162 +1200,177 @@ function Results({
       {/* 4. Product image carousel — original photo + AI renderings */}
       <ImageCarousel idea={idea} renderings={result.renderings} />
 
-      {/* 5. Related market trends — connective tissue to the trends dashboard */}
-      <section>
-        <p className="panel-h section-h">
-          <Icons.trending size={13} /> Related market trends
-        </p>
-        {related.length > 0 ? (
-          <div className="related-trends-grid">
-            {related.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                className="related-trend-card"
-                onClick={() => go("deepdive", t.id)}
-              >
-                <div className="related-trend-top">
-                  <Tier tier={t.tier} />
-                  <Icons.arrowUpRight size={13} />
-                </div>
-                <p className="related-trend-cat">{t.cat}</p>
-                <p className="related-trend-market">{t.market}</p>
-                <div className="related-trend-foot">
-                  <span className="related-trend-stat">
-                    Momentum <b>{Math.round(t.momentum)}</b>
-                  </span>
-                  <span className={cc("growth", t.growth >= 0 ? "up" : "down")}>
-                    {fmtPct(t.growth)}
-                  </span>
-                </div>
-              </button>
-            ))}
-          </div>
-        ) : (
-          <p className="analysis-text muted related-trend-empty">
-            Explore the live market-trends dashboard for category context.
-          </p>
-        )}
-        <button type="button" className="btn secondary sm related-trend-all" onClick={() => go("trending")}>
-          View all market trends <Icons.arrowUpRight size={13} />
-        </button>
-      </section>
+      {/* ── Group: Market demand ── */}
+      <div className="results-group">
+        <h2 className="results-group-title">Market demand</h2>
 
-      {/* 6. Demand signals — real community discussion (last 30 days) */}
-      {result.demand && result.demand.posts.length > 0 && (
-        <section>
-          <p className="panel-h section-h">
-            <Icons.pulse size={13} /> Demand signals
-            <span className="panel-meta">
-              {result.demand.momentum} momentum · {result.demand.channels.slice(0, 4).join(", ")}
-            </span>
-          </p>
-          <div className="demand-grid">
-            {result.demand.posts.slice(0, 4).map((p, i) => (
-              <a
-                key={i}
-                href={p.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="panel demand-card"
-              >
-                <div className="demand-card-top">
-                  <span className={cc("badge", p.source === "reddit" ? "med" : "")}>{p.channel}</span>
-                  <span className="demand-eng">
-                    <Icons.trending size={12} /> {p.engagement.toLocaleString()}
-                  </span>
-                </div>
-                <p className="demand-title">{p.title}</p>
-                <p className="demand-meta">
-                  {p.comments.toLocaleString()} comments · {new Date(p.createdAt).toLocaleDateString()}
-                  <Icons.arrowUpRight size={12} />
-                </p>
-              </a>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* 7. Market benchmark */}
-      <section>
-        <p className="panel-h section-h">
-          <Icons.trending size={13} /> Market benchmark
-        </p>
-        <BenchmarkTable competitors={result.benchmark.competitors} />
-      </section>
-
-      {/* 8a. Makers — who's making it */}
-      {result.makers?.length ? (
-        <section>
-          <p className="panel-h section-h">
-            <Icons.building size={13} /> Who&apos;s making it
-          </p>
-          <div className="maker-grid">
-            {result.makers.map((m) => (
-              <div key={m.name} className="panel maker-card">
-                <div className="maker-id">
-                  <p className="maker-name">{m.name}</p>
-                  <p className="maker-offers">
-                    {m.offers} listing{m.offers === 1 ? "" : "s"}
-                  </p>
-                </div>
-                {m.lowestPrice && <span className="maker-price">from {m.lowestPrice}</span>}
-              </div>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {/* 8b. Suppliers & manufacturers */}
-      {result.suppliers?.length ? (
-        <section>
-          <p className="panel-h section-h">
-            <Icons.factory size={13} /> Suppliers &amp; manufacturers
-          </p>
-          <div className="supplier-grid">
-            {result.suppliers.map((s, i) => {
-              const SRC_LABELS: Record<string, string> = {
-                alibaba: "Alibaba",
-                "made-in-china": "Made-in-China",
-                "global-sources": "Global Sources",
-                indiamart: "IndiaMART",
-                aliexpress: "AliExpress",
-                web: "Web",
-                firecrawl: "Web",
-              };
-              const srcBadge = s.source ? SRC_LABELS[s.source] ?? "Web" : null;
-              const isManufacturer =
-                s.source === "alibaba" || s.source === "made-in-china" || s.source === "global-sources";
-              return (
-                <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="panel supplier-card">
-                  <div className="supplier-top">
-                    <span className="supplier-name">
-                      {s.name}
-                      <Icons.arrowUpRight size={13} />
+        {/* Demand signals — real community discussion (last 30 days) */}
+        {result.demand && result.demand.posts.length > 0 && (
+          <section>
+            <p className="panel-h section-h">
+              <Icons.pulse size={13} /> Demand signals
+              <span className="panel-meta">
+                {result.demand.momentum} momentum · {result.demand.channels.slice(0, 4).join(", ")}
+              </span>
+            </p>
+            <div className="demand-grid">
+              {result.demand.posts.slice(0, 4).map((p, i) => (
+                <a
+                  key={i}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="panel demand-card"
+                >
+                  <div className="demand-card-top">
+                    <span className={cc("badge", p.source === "reddit" ? "med" : "")}>{p.channel}</span>
+                    <span className="demand-eng">
+                      <Icons.trending size={12} /> {p.engagement.toLocaleString()}
                     </span>
-                    {srcBadge && (
-                      <span className={cc("badge", isManufacturer ? "low" : "med")}>{srcBadge}</span>
-                    )}
                   </div>
-                  {s.store && (
-                    <p className="supplier-store">
-                      <Icons.building size={12} /> {s.store}
-                    </p>
-                  )}
-                  {(s.price || s.orders != null || s.rating != null || s.minOrder) && (
-                    <div className="supplier-meta">
-                      {s.price && <span className="supplier-price">{s.price}</span>}
-                      {s.minOrder && <span>MOQ {s.minOrder}</span>}
-                      {s.rating != null && <span>★ {s.rating}</span>}
-                      {s.orders != null && <span>{s.orders.toLocaleString()} orders</span>}
-                    </div>
-                  )}
-                  {s.snippet && <p className="supplier-snippet">{s.snippet}</p>}
+                  <p className="demand-title">{p.title}</p>
+                  <p className="demand-meta">
+                    {p.comments.toLocaleString()} comments · {new Date(p.createdAt).toLocaleDateString()}
+                    <Icons.arrowUpRight size={12} />
+                  </p>
                 </a>
-              );
-            })}
-          </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Related market trends — connective tissue to the trends dashboard */}
+        <section>
+          <p className="panel-h section-h">
+            <Icons.trending size={13} /> Related market trends
+          </p>
+          {related.length > 0 ? (
+            <div className="related-trends-grid">
+              {related.map((t) => (
+                <button
+                  key={t.id}
+                  type="button"
+                  className="related-trend-card"
+                  onClick={() => go("deepdive", t.id)}
+                >
+                  <div className="related-trend-top">
+                    <Tier tier={t.tier} />
+                    <Icons.arrowUpRight size={13} />
+                  </div>
+                  <p className="related-trend-cat">{t.cat}</p>
+                  <p className="related-trend-market">{t.market}</p>
+                  <div className="related-trend-foot">
+                    <span className="related-trend-stat">
+                      Momentum <b>{Math.round(t.momentum)}</b>
+                    </span>
+                    <span className={cc("growth", t.growth >= 0 ? "up" : "down")}>
+                      {fmtPct(t.growth)}
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <p className="analysis-text muted related-trend-empty">
+              Explore the live market-trends dashboard for category context.
+            </p>
+          )}
+          <button type="button" className="btn secondary sm related-trend-all" onClick={() => go("trending")}>
+            View all market trends <Icons.arrowUpRight size={13} />
+          </button>
         </section>
+      </div>
+
+      {/* ── Group: Competitors & pricing ── */}
+      <div className="results-group">
+        <h2 className="results-group-title">Competitors &amp; pricing</h2>
+        <section>
+          <p className="panel-h section-h">
+            <Icons.trending size={13} /> Market benchmark
+          </p>
+          <BenchmarkTable competitors={result.benchmark.competitors} />
+        </section>
+      </div>
+
+      {/* ── Group: Sourcing ── */}
+      {(result.makers?.length || result.suppliers?.length) ? (
+        <div className="results-group">
+          <h2 className="results-group-title">Sourcing</h2>
+
+          {/* Makers — who's making it */}
+          {result.makers?.length ? (
+            <section>
+              <p className="panel-h section-h">
+                <Icons.building size={13} /> Who&apos;s making it
+              </p>
+              <div className="maker-grid">
+                {result.makers.map((m) => (
+                  <div key={m.name} className="panel maker-card">
+                    <div className="maker-id">
+                      <p className="maker-name">{m.name}</p>
+                      <p className="maker-offers">
+                        {m.offers} listing{m.offers === 1 ? "" : "s"}
+                      </p>
+                    </div>
+                    {m.lowestPrice && <span className="maker-price">from {m.lowestPrice}</span>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {/* Suppliers & manufacturers */}
+          {result.suppliers?.length ? (
+            <section>
+              <p className="panel-h section-h">
+                <Icons.factory size={13} /> Suppliers &amp; manufacturers
+              </p>
+              <div className="supplier-grid">
+                {result.suppliers.map((s, i) => {
+                  const SRC_LABELS: Record<string, string> = {
+                    alibaba: "Alibaba",
+                    "made-in-china": "Made-in-China",
+                    "global-sources": "Global Sources",
+                    indiamart: "IndiaMART",
+                    aliexpress: "AliExpress",
+                    web: "Web",
+                    firecrawl: "Web",
+                  };
+                  const srcBadge = s.source ? SRC_LABELS[s.source] ?? "Web" : null;
+                  const isManufacturer =
+                    s.source === "alibaba" || s.source === "made-in-china" || s.source === "global-sources";
+                  return (
+                    <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="panel supplier-card">
+                      <div className="supplier-top">
+                        <span className="supplier-name">
+                          {s.name}
+                          <Icons.arrowUpRight size={13} />
+                        </span>
+                        {srcBadge && (
+                          <span className={cc("badge", isManufacturer ? "low" : "med")}>{srcBadge}</span>
+                        )}
+                      </div>
+                      {s.store && (
+                        <p className="supplier-store">
+                          <Icons.building size={12} /> {s.store}
+                        </p>
+                      )}
+                      {(s.price || s.orders != null || s.rating != null || s.minOrder) && (
+                        <div className="supplier-meta">
+                          {s.price && <span className="supplier-price">{s.price}</span>}
+                          {s.minOrder && <span>MOQ {s.minOrder}</span>}
+                          {s.rating != null && <span>★ {s.rating}</span>}
+                          {s.orders != null && <span>{s.orders.toLocaleString()} orders</span>}
+                        </div>
+                      )}
+                      {s.snippet && <p className="supplier-snippet">{s.snippet}</p>}
+                    </a>
+                  );
+                })}
+              </div>
+            </section>
+          ) : null}
+        </div>
       ) : null}
 
       {/* 9. Enrichment tags */}

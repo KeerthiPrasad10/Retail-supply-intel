@@ -528,6 +528,10 @@ textarea.nxb-input { resize: vertical; min-height: 60px; }
 
 /* Results */
 .ideas-results { display: flex; flex-direction: column; gap: 24px; }
+/* Group wrapper — chunks the long results stack into labelled zones so the page
+   reads as organised sections rather than one dense scroll. */
+.results-group { display: flex; flex-direction: column; gap: 18px; }
+.results-group-title { font-size: 13px; font-weight: 600; letter-spacing: -0.1px; color: var(--nxb-text-primary); margin: 0; padding-bottom: 10px; border-bottom: 0.5px solid var(--nxb-border-medium); }
 .section-h { margin: 0 0 12px; }
 .analysis-summary { font-size: 14.5px; line-height: 1.55; color: var(--nxb-text-secondary); margin: 0 0 18px; }
 .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; margin-bottom: 18px; }
