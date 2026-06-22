@@ -441,7 +441,8 @@ function SubmitForm({
         description: f.description || prev.description,
         category: f.category || prev.category,
         features: f.features || prev.features,
-        priceTarget: f.priceTarget || prev.priceTarget,
+        // Target price is never AI-guessed — keep whatever the submitter typed.
+        priceTarget: prev.priceTarget,
         targetMarket: f.targetMarket || prev.targetMarket,
         audience: f.audience || prev.audience,
         submittedBy: prev.submittedBy,

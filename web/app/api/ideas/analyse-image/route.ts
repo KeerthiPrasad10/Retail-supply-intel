@@ -4,7 +4,10 @@ import { NextResponse } from "next/server";
  * Vision endpoint for the Validate view's image-driven form.
  *
  * POST /api/ideas/analyse-image  { imageData: string }   (base64 data-URL or https URL)
- * → { title, description, category, features, priceTarget, targetMarket, audience }
+ * → { title, description, category, features, targetMarket, audience }
+ *
+ * Note: we deliberately do NOT ask the model to guess a price — target price is
+ * the submitter's call, so that field is left for them to fill in.
  *
  * With no API key returns 501; the form falls back to manual entry.
  */
@@ -40,7 +43,6 @@ Return ONLY a JSON object (no prose, no code fence) with these exact keys — le
   "description": "2-3 sentence description: what it is, who it's for, what makes it useful",
   "category": "best matching category from: ${CATEGORIES.join(", ")}",
   "features": "key product features, one per line",
-  "priceTarget": "estimated retail price range in USD e.g. $15–30 (leave blank if unclear)",
   "targetMarket": "likely target market(s) e.g. US, UK, Australia",
   "audience": "primary target audience e.g. Parents of young children"
 }`;
@@ -67,7 +69,6 @@ type AnalysisResult = {
   description?: string;
   category?: string;
   features?: string;
-  priceTarget?: string;
   targetMarket?: string;
   audience?: string;
 };
@@ -164,7 +165,6 @@ export async function POST(req: Request) {
       description: str(parsed.description),
       category: str(parsed.category),
       features: str(parsed.features),
-      priceTarget: str(parsed.priceTarget),
       targetMarket: str(parsed.targetMarket),
       audience: str(parsed.audience),
     },
