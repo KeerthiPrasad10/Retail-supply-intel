@@ -9,29 +9,31 @@ export function falEnabled(): boolean {
 // the product into the scene. Much sharper than bria/product-shot.
 const ENDPOINT = "https://fal.run/fal-ai/flux-pro/kontext";
 
-// Diffusion models love to "re-draw" any text on a product, turning labels and
-// logos into garbled gibberish. Kontext can preserve the subject if we tell it
-// to — append this to every scene prompt so only the background changes.
+// Two failure modes to guard against with Kontext:
+//  1. It invents a human model / mannequin wearing or holding the product.
+//  2. It "re-draws" label text and logos into garbled gibberish.
+// This clause — appended to every scene prompt — forbids both: product only,
+// pixel-identical, change the background only.
 const PRESERVE =
-  " Keep the product itself completely unchanged and pixel-identical to the input: same shape, colours, materials and proportions, and — critically — keep all existing label text, logos and typography exactly as in the original. Do NOT redraw, restyle, translate, add or invent any text or lettering on the product. Only change the surrounding scene and lighting.";
+  " Show ONLY the product itself — absolutely no people, no human model, no mannequin, no hands, no face or any body part. Keep the product pixel-identical to the input image: same shape, colour, material, texture and proportions, and keep any existing label text and logos exactly as in the original — do NOT redraw, restyle, translate, add or invent any text or lettering. Change only the background and lighting. Clean photorealistic commercial product photography of the product alone.";
 
 const SCENES: Array<{ id: Rendering["scene"]; prompt: string }> = [
   {
     id: "shelf",
     prompt:
-      "Place this exact product on a clean retail shelf with soft studio lighting. Professional e-commerce photography, sharp focus on the product, neutral background." +
+      "Photograph this exact product on its own, neatly placed on a clean modern retail store shelf. Soft even store lighting, neutral background." +
       PRESERVE,
   },
   {
     id: "lifestyle",
     prompt:
-      "Place this exact product in a natural lifestyle setting with warm natural light. Aspirational photography, product prominently featured, realistic environment." +
+      "Photograph this exact product on its own as a still life on a light wood or stone surface, soft natural daylight, gently blurred neutral background. Aspirational product still-life — the product alone, never worn or held." +
       PRESERVE,
   },
   {
     id: "hero",
     prompt:
-      "Hero shot of this exact product on a pure white background with dramatic studio lighting. Commercial photography, ultra-sharp, soft shadow underneath, product centred." +
+      "Studio hero photograph of this exact product on its own on a seamless pure white background, soft shadow beneath it, crisp even lighting, product centred." +
       PRESERVE,
   },
 ];
