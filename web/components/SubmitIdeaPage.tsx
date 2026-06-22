@@ -57,7 +57,7 @@ export function SubmitIdeaPage() {
     setError(null);
   }
 
-  async function handleSubmit(payload: Record<string, string>) {
+  async function handleSubmit(payload: Record<string, unknown>) {
     setError(null);
     setStage("submitting");
     try {
@@ -141,19 +141,35 @@ function FormView({
   error,
   onClearError,
 }: {
-  onSubmit: (payload: Record<string, string>) => void;
+  onSubmit: (payload: Record<string, unknown>) => void;
   error: string | null;
   onClearError: () => void;
 }) {
   const fileRef = useRef<HTMLInputElement>(null);
+  const extraFileRef = useRef<HTMLInputElement>(null);
   const imageUrlRef = useRef("");
+  const uploadPromiseRef = useRef<Promise<string> | null>(null);
+  // Additional shots (labels, tags, angles): URLs + their in-flight uploads,
+  // index-aligned so we can await all before submitting.
+  const extraImageUrlsRef = useRef<string[]>([]);
+  const extraUploadPromisesRef = useRef<Promise<string>[]>([]);
   const [imagePreview, setImagePreview] = useState("");
+  const [extras, setExtras] = useState<{ dataUrl: string }[]>([]);
   const [autofill, setAutofill] = useState<AutofillState>("idle");
   const [fields, setFields] = useState<IdeaFields>(EMPTY);
   const [formError, setFormError] = useState<string | null>(null);
 
   function setField(key: keyof IdeaFields, value: string) {
     setFields((f) => ({ ...f, [key]: value }));
+  }
+
+  function readFileAsDataUrl(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ""));
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   }
 
   async function uploadImage(dataUrl: string): Promise<string> {
@@ -171,14 +187,14 @@ function FormView({
     }
   }
 
-  async function analyseImage(dataUrl: string) {
+  async function analyseImage(primary: string, extraDataUrls: string[] = []) {
     setAutofill("loading");
     setFormError(null);
     try {
       const res = await fetch("/api/ideas/analyse-image", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ imageData: dataUrl }),
+        body: JSON.stringify({ imageData: primary, extraImages: extraDataUrls }),
       });
       const data = await res.json();
       if (!res.ok || !data.ok) {
@@ -191,7 +207,8 @@ function FormView({
         description: f.description || prev.description,
         category: f.category || prev.category,
         features: f.features || prev.features,
-        priceTarget: f.priceTarget || prev.priceTarget,
+        // Target price is never AI-guessed — keep whatever the submitter typed.
+        priceTarget: prev.priceTarget,
         targetMarket: f.targetMarket || prev.targetMarket,
         audience: f.audience || prev.audience,
         submittedBy: prev.submittedBy,
@@ -219,22 +236,76 @@ function FormView({
       setImagePreview(raw); // show full-res preview immediately
       const resized = await resizeImage(raw);
       imageUrlRef.current = resized; // set immediately so submit isn't blocked
-      // Upload to Storage in parallel with analysis; update ref when done.
-      uploadImage(resized).then((url) => { imageUrlRef.current = url; });
-      analyseImage(resized);
+      // Upload to Storage in parallel with analysis; await on submit.
+      uploadPromiseRef.current = uploadImage(resized);
+      uploadPromiseRef.current.then((url) => {
+        if (url?.startsWith("http")) imageUrlRef.current = url;
+      });
+      analyseImage(resized, extraImageUrlsRef.current.slice());
     };
     reader.readAsDataURL(file);
+  }
+
+  async function handleExtraFiles(files: FileList | null) {
+    if (!files || files.length === 0) return;
+    const MAX_EXTRAS = 4;
+    const toAdd = Array.from(files).slice(0, MAX_EXTRAS - extras.length);
+    if (toAdd.length === 0) return;
+    const newEntries: { dataUrl: string }[] = [];
+    const newUploadPromises: Promise<string>[] = [];
+    for (const file of toAdd) {
+      if (!file.type.startsWith("image/")) continue;
+      try {
+        const raw = await readFileAsDataUrl(file);
+        const resized = await resizeImage(raw);
+        newEntries.push({ dataUrl: resized });
+        const p = uploadImage(resized);
+        newUploadPromises.push(p);
+        p.then((url) => {
+          if (url?.startsWith("http")) {
+            const idx = extraUploadPromisesRef.current.indexOf(p);
+            if (idx >= 0) extraImageUrlsRef.current[idx] = url;
+          }
+        });
+      } catch {
+        /* skip bad files */
+      }
+    }
+    if (newEntries.length === 0) return;
+    const startIdx = extraUploadPromisesRef.current.length;
+    extraUploadPromisesRef.current.push(...newUploadPromises);
+    // Seed with data URLs for now (server re-uploads any that aren't yet hosted).
+    for (let i = 0; i < newEntries.length; i++) {
+      extraImageUrlsRef.current[startIdx + i] = newEntries[i].dataUrl;
+    }
+    setExtras((prev) => [...prev, ...newEntries]);
+    // Re-analyse with the primary + all extras so labels/tags get picked up.
+    if (imageUrlRef.current) {
+      const allExtras = [...extraImageUrlsRef.current.slice(0, startIdx), ...newEntries.map((e) => e.dataUrl)];
+      analyseImage(imageUrlRef.current, allExtras);
+    }
+  }
+
+  function removeExtra(idx: number) {
+    setExtras((prev) => prev.filter((_, i) => i !== idx));
+    extraImageUrlsRef.current.splice(idx, 1);
+    extraUploadPromisesRef.current.splice(idx, 1);
   }
 
   function removeImage() {
     setImagePreview("");
     imageUrlRef.current = "";
+    uploadPromiseRef.current = null;
+    setExtras([]);
+    extraImageUrlsRef.current = [];
+    extraUploadPromisesRef.current = [];
     setAutofill("idle");
     setFields(EMPTY);
     if (fileRef.current) fileRef.current.value = "";
+    if (extraFileRef.current) extraFileRef.current.value = "";
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setFormError(null);
     onClearError();
@@ -242,10 +313,28 @@ function FormView({
       setFormError("Please give your product idea a title.");
       return;
     }
-    // Include imageUrl only when it's a real HTTP URL (Storage upload succeeded).
-    const url = imageUrlRef.current;
-    const payload: Record<string, string> = { ...fields };
-    if (url && url.startsWith("http")) payload.imageUrl = url;
+    // Await any in-flight uploads so we send hosted URLs where possible. Data
+    // URLs that haven't finished uploading are still sent — createIdea uploads
+    // them server-side as a backstop, so an image is never silently dropped.
+    if (uploadPromiseRef.current) {
+      try {
+        const url = await uploadPromiseRef.current;
+        if (url?.startsWith("http")) imageUrlRef.current = url;
+      } catch {
+        /* keep the data URL fallback */
+      }
+    }
+    if (extraUploadPromisesRef.current.length) {
+      const resolved = await Promise.allSettled(extraUploadPromisesRef.current);
+      resolved.forEach((r, i) => {
+        if (r.status === "fulfilled" && r.value?.startsWith("http")) {
+          extraImageUrlsRef.current[i] = r.value;
+        }
+      });
+    }
+    const payload: Record<string, unknown> = { ...fields };
+    if (imageUrlRef.current) payload.imageUrl = imageUrlRef.current;
+    if (extraImageUrlsRef.current.length) payload.imageUrls = [...extraImageUrlsRef.current];
     onSubmit(payload);
   }
 
@@ -315,6 +404,49 @@ function FormView({
             onChange={(e) => handleFile(e.target.files?.[0])}
           />
         </div>
+
+        {/* Additional shots — labels, tags, different angles (up to 4) */}
+        {imagePreview && (
+          <div className="idea-extras">
+            <p className="idea-extras-label">
+              <Icons.image size={12} /> Additional shots
+              <span className="idea-extras-hint"> — labels, tags, different angles (up to 4)</span>
+            </p>
+            <div className="idea-extras-row">
+              {extras.map((ex, i) => (
+                <div key={i} className="idea-extra-thumb-wrap">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={ex.dataUrl} alt={`Extra ${i + 1}`} className="idea-extra-thumb" />
+                  <button
+                    type="button"
+                    className="idea-extra-remove"
+                    onClick={() => removeExtra(i)}
+                    aria-label="Remove"
+                  >
+                    <Icons.x size={10} />
+                  </button>
+                </div>
+              ))}
+              {extras.length < 4 && (
+                <button
+                  type="button"
+                  className="idea-extra-add"
+                  onClick={() => extraFileRef.current?.click()}
+                >
+                  <Icons.plus size={16} />
+                </button>
+              )}
+            </div>
+            <input
+              ref={extraFileRef}
+              type="file"
+              accept="image/*"
+              multiple
+              className="hidden-input"
+              onChange={(e) => handleExtraFiles(e.target.files)}
+            />
+          </div>
+        )}
 
         <fieldset className={cc("idea-fields sp-fields", isAnalysing && "sp-shimmer")} disabled={isAnalysing}>
           <label className="field">

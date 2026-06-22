@@ -138,6 +138,14 @@ export const Icons = {
       <path d="M21 15l-5-5L5 21" />
     </Ico>
   ),
+  qr: (p: IconProps) => (
+    <Ico {...p}>
+      <rect x="3" y="3" width="7" height="7" rx="1" />
+      <rect x="14" y="3" width="7" height="7" rx="1" />
+      <rect x="3" y="14" width="7" height="7" rx="1" />
+      <path d="M14 14h3v3M21 14v7h-7M17.5 21h.01M21 17.5h.01" />
+    </Ico>
+  ),
 };
 
 export type IconName = keyof typeof Icons;

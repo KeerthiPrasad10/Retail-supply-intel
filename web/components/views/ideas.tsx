@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { QRCodeSVG } from "qrcode.react";
 import type { ProductIdea, ResearchResult } from "@/lib/ideas/types";
 import type { Go, Trend } from "@/lib/types";
 import { resizeImage } from "@/lib/image";
@@ -54,9 +55,25 @@ export function Ideas({ go, resetSignal }: { go: Go; resetSignal: number }) {
       .then((d) => setRecent(Array.isArray(d?.ideas) ? d.ideas : []))
       .catch(() => {});
   }, []);
+  // Auto-refresh the board so newly submitted ideas (including from the public
+  // /submit QR page) and status changes (queued → researching → complete) show
+  // up without a manual reload. Polls only while the board is on screen, skips
+  // ticks when the tab is hidden, and refreshes immediately on entry/refocus.
   useEffect(() => {
+    if (stage !== "board") return;
     loadRecent();
-  }, [loadRecent]);
+    const timer = setInterval(() => {
+      if (typeof document === "undefined" || !document.hidden) loadRecent();
+    }, 5000);
+    const onVisible = () => {
+      if (!document.hidden) loadRecent();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      clearInterval(timer);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
+  }, [stage, loadRecent]);
 
   // Clicking "Product Ideas" in the nav always returns to the board.
   // Skip the first run so it doesn't clobber the initial mount.
@@ -170,7 +187,10 @@ export function Ideas({ go, resetSignal }: { go: Go; resetSignal: number }) {
       </header>
 
       {stage === "board" && (
-        <BoardView ideas={recent} onView={viewIdea} onAdd={() => setStage("form")} />
+        <>
+          <ShareSubmit />
+          <BoardView ideas={recent} trends={trends} go={go} onView={viewIdea} onAdd={() => setStage("form")} />
+        </>
       )}
 
       {stage === "form" && (
@@ -193,6 +213,65 @@ export function Ideas({ go, resetSignal }: { go: Go; resetSignal: number }) {
   );
 }
 
+/* ------------------------------ Share / QR ------------------------------ */
+
+// A scannable QR pointing at the public /submit form so anyone can add an idea
+// from their phone. Built from the live origin so it matches whichever
+// deployment is being viewed (prod or preview) — no hard-coded domain.
+function ShareSubmit() {
+  const [url, setUrl] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") setUrl(`${window.location.origin}/submit`);
+  }, []);
+
+  async function copy() {
+    if (!url) return;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      /* clipboard blocked — the link is shown for manual copy */
+    }
+  }
+
+  return (
+    <div className="panel ideas-share">
+      <div className="ideas-share-qr">
+        {url ? (
+          <QRCodeSVG value={url} size={132} level="M" marginSize={0} bgColor="#ffffff" fgColor="#090909" />
+        ) : (
+          <div className="ideas-share-qr-skeleton" aria-hidden />
+        )}
+      </div>
+      <div className="ideas-share-body">
+        <p className="ideas-share-title">
+          <Icons.qr size={15} /> Scan to submit an idea
+        </p>
+        <p className="ideas-share-sub">
+          Point a phone camera at the code — it opens the submission form. Share it with the team to collect ideas.
+        </p>
+        <div className="ideas-share-link">
+          <code className="ideas-share-url">{url || "Loading…"}</code>
+          <button type="button" className="btn secondary sm" onClick={copy} disabled={!url}>
+            {copied ? (
+              <>
+                <Icons.check size={13} /> Copied
+              </>
+            ) : (
+              <>
+                <Icons.send size={13} /> Copy link
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ------------------------------ Board view ------------------------------ */
 
 const STATUS_BADGE: Record<ProductIdea["status"], { cls: string; label: string }> = {
@@ -201,6 +280,125 @@ const STATUS_BADGE: Record<ProductIdea["status"], { cls: string; label: string }
   complete: { cls: "low", label: "complete" },
   error: { cls: "high", label: "error" },
 };
+
+/** Canonical category for an idea — research-derived if present, else the
+ *  submitter's pick, else a stable bucket so it can still be filtered. */
+function ideaCategory(idea: ProductIdea): string {
+  return (
+    idea.research?.classification?.category ||
+    idea.research?.enrichment?.suggestedCategory ||
+    idea.category ||
+    "Uncategorised"
+  );
+}
+
+/** Best-matching market trend for a category (token overlap on the trend's
+ *  category name), so a board category can carry a live demand signal. */
+function categorySignal(category: string, trends: Trend[]): Trend | null {
+  const tokens = category.toLowerCase().match(/[a-z0-9]{3,}/g) ?? [];
+  if (!tokens.length) return null;
+  let best: { score: number; t: Trend } | null = null;
+  for (const t of trends) {
+    const hay = t.cat.toLowerCase();
+    let score = 0;
+    for (const tok of tokens) if (hay.includes(tok)) score++;
+    if (score > 0 && (!best || score > best.score || (score === best.score && t.growth > best.t.growth))) {
+      best = { score, t };
+    }
+  }
+  return best?.t ?? null;
+}
+
+/** Distinct idea categories with counts, most-populated first. */
+function categoryCounts(ideas: ProductIdea[]): { cat: string; count: number }[] {
+  const m = new Map<string, number>();
+  for (const i of ideas) m.set(ideaCategory(i), (m.get(ideaCategory(i)) ?? 0) + 1);
+  return [...m.entries()]
+    .map(([cat, count]) => ({ cat, count }))
+    .sort((a, b) => b.count - a.count || a.cat.localeCompare(b.cat));
+}
+
+/** Trending market categories — top movers by momentum, deduped to one per
+ *  category. Surfaces "what to capture next" right on the ideas board. */
+function TrendingStrip({ trends, go }: { trends: Trend[]; go: Go }) {
+  const byCat = new Map<string, Trend>();
+  for (const t of trends) {
+    const cur = byCat.get(t.cat);
+    if (!cur || t.momentum > cur.momentum) byCat.set(t.cat, t);
+  }
+  const top = [...byCat.values()].sort((a, b) => b.momentum - a.momentum).slice(0, 6);
+  if (!top.length) return null;
+  return (
+    <section className="ideas-trending">
+      <p className="ideas-trending-head">
+        <Icons.trending size={13} /> Trending categories
+        <span className="ideas-trending-hint">Rising demand — capture these fast</span>
+      </p>
+      <div className="ideas-trending-row">
+        {top.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            className="ideas-trending-chip"
+            onClick={() => go("deepdive", t.id)}
+            title={`${t.cat} · ${t.market} — open market deep-dive`}
+          >
+            <Tier tier={t.tier} />
+            <span className="ideas-trending-cat">{t.cat}</span>
+            <span className={cc("growth", t.growth >= 0 ? "up" : "down")}>{fmtPct(t.growth)}</span>
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/** Category filter chips for the board — each annotated with its market demand
+ *  signal when the category maps to a rising trend. */
+function CategoryFilter({
+  cats,
+  trends,
+  active,
+  total,
+  onChange,
+}: {
+  cats: { cat: string; count: number }[];
+  trends: Trend[];
+  active: string | null;
+  total: number;
+  onChange: (cat: string | null) => void;
+}) {
+  if (cats.length <= 1) return null; // nothing to filter
+  return (
+    <div className="ideas-filter" role="tablist" aria-label="Filter ideas by category">
+      <button
+        type="button"
+        className={cc("ideas-filter-chip", active === null && "active")}
+        onClick={() => onChange(null)}
+      >
+        All <span className="ideas-filter-count">{total}</span>
+      </button>
+      {cats.map(({ cat, count }) => {
+        const sig = categorySignal(cat, trends);
+        return (
+          <button
+            key={cat}
+            type="button"
+            className={cc("ideas-filter-chip", active === cat && "active")}
+            onClick={() => onChange(active === cat ? null : cat)}
+          >
+            {cat} <span className="ideas-filter-count">{count}</span>
+            {sig && sig.growth > 0 && (
+              <span className="ideas-filter-trend" title={`Market demand ${fmtPct(sig.growth)} — trending`}>
+                <Icons.trending size={10} /> {fmtPct(sig.growth)}
+              </span>
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 function EmptyBoard({ onAdd }: { onAdd: () => void }) {
   return (
@@ -258,14 +456,49 @@ function IdeaCard({ idea, onClick }: { idea: ProductIdea; onClick: () => void })
   );
 }
 
-function BoardView({ ideas, onView, onAdd }: { ideas: ProductIdea[]; onView: (i: ProductIdea) => void; onAdd: () => void }) {
-  if (!ideas.length) return <EmptyBoard onAdd={onAdd} />;
+function BoardView({
+  ideas,
+  trends,
+  go,
+  onView,
+  onAdd,
+}: {
+  ideas: ProductIdea[];
+  trends: Trend[];
+  go: Go;
+  onView: (i: ProductIdea) => void;
+  onAdd: () => void;
+}) {
+  const [cat, setCat] = useState<string | null>(null);
+
+  // Keep the active filter valid as the board polls in new data / changes.
+  const cats = categoryCounts(ideas);
+  const active = cat && cats.some((c) => c.cat === cat) ? cat : null;
+  const filtered = active ? ideas.filter((i) => ideaCategory(i) === active) : ideas;
+
+  if (!ideas.length) {
+    return (
+      <>
+        <TrendingStrip trends={trends} go={go} />
+        <EmptyBoard onAdd={onAdd} />
+      </>
+    );
+  }
+
   return (
-    <div className="ideas-board">
-      {ideas.map((idea) => (
-        <IdeaCard key={idea.id} idea={idea} onClick={() => idea.research && onView(idea)} />
-      ))}
-    </div>
+    <>
+      <TrendingStrip trends={trends} go={go} />
+      <CategoryFilter cats={cats} trends={trends} active={active} total={ideas.length} onChange={setCat} />
+      {filtered.length ? (
+        <div className="ideas-board">
+          {filtered.map((idea) => (
+            <IdeaCard key={idea.id} idea={idea} onClick={() => idea.research && onView(idea)} />
+          ))}
+        </div>
+      ) : (
+        <p className="ideas-filter-empty">No ideas in “{active}” yet.</p>
+      )}
+    </>
   );
 }
 
@@ -378,7 +611,8 @@ function SubmitForm({
         description: f.description || prev.description,
         category: f.category || prev.category,
         features: f.features || prev.features,
-        priceTarget: f.priceTarget || prev.priceTarget,
+        // Target price is never AI-guessed — keep whatever the submitter typed.
+        priceTarget: prev.priceTarget,
         targetMarket: f.targetMarket || prev.targetMarket,
         audience: f.audience || prev.audience,
         submittedBy: prev.submittedBy,
@@ -966,162 +1200,177 @@ function Results({
       {/* 4. Product image carousel — original photo + AI renderings */}
       <ImageCarousel idea={idea} renderings={result.renderings} />
 
-      {/* 5. Related market trends — connective tissue to the trends dashboard */}
-      <section>
-        <p className="panel-h section-h">
-          <Icons.trending size={13} /> Related market trends
-        </p>
-        {related.length > 0 ? (
-          <div className="related-trends-grid">
-            {related.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                className="related-trend-card"
-                onClick={() => go("deepdive", t.id)}
-              >
-                <div className="related-trend-top">
-                  <Tier tier={t.tier} />
-                  <Icons.arrowUpRight size={13} />
-                </div>
-                <p className="related-trend-cat">{t.cat}</p>
-                <p className="related-trend-market">{t.market}</p>
-                <div className="related-trend-foot">
-                  <span className="related-trend-stat">
-                    Momentum <b>{Math.round(t.momentum)}</b>
-                  </span>
-                  <span className={cc("growth", t.growth >= 0 ? "up" : "down")}>
-                    {fmtPct(t.growth)}
-                  </span>
-                </div>
-              </button>
-            ))}
-          </div>
-        ) : (
-          <p className="analysis-text muted related-trend-empty">
-            Explore the live market-trends dashboard for category context.
-          </p>
-        )}
-        <button type="button" className="btn secondary sm related-trend-all" onClick={() => go("trending")}>
-          View all market trends <Icons.arrowUpRight size={13} />
-        </button>
-      </section>
+      {/* ── Group: Market demand ── */}
+      <div className="results-group">
+        <h2 className="results-group-title">Market demand</h2>
 
-      {/* 6. Demand signals — real community discussion (last 30 days) */}
-      {result.demand && result.demand.posts.length > 0 && (
-        <section>
-          <p className="panel-h section-h">
-            <Icons.pulse size={13} /> Demand signals
-            <span className="panel-meta">
-              {result.demand.momentum} momentum · {result.demand.channels.slice(0, 4).join(", ")}
-            </span>
-          </p>
-          <div className="demand-grid">
-            {result.demand.posts.slice(0, 4).map((p, i) => (
-              <a
-                key={i}
-                href={p.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="panel demand-card"
-              >
-                <div className="demand-card-top">
-                  <span className={cc("badge", p.source === "reddit" ? "med" : "")}>{p.channel}</span>
-                  <span className="demand-eng">
-                    <Icons.trending size={12} /> {p.engagement.toLocaleString()}
-                  </span>
-                </div>
-                <p className="demand-title">{p.title}</p>
-                <p className="demand-meta">
-                  {p.comments.toLocaleString()} comments · {new Date(p.createdAt).toLocaleDateString()}
-                  <Icons.arrowUpRight size={12} />
-                </p>
-              </a>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* 7. Market benchmark */}
-      <section>
-        <p className="panel-h section-h">
-          <Icons.trending size={13} /> Market benchmark
-        </p>
-        <BenchmarkTable competitors={result.benchmark.competitors} />
-      </section>
-
-      {/* 8a. Makers — who's making it */}
-      {result.makers?.length ? (
-        <section>
-          <p className="panel-h section-h">
-            <Icons.building size={13} /> Who&apos;s making it
-          </p>
-          <div className="maker-grid">
-            {result.makers.map((m) => (
-              <div key={m.name} className="panel maker-card">
-                <div className="maker-id">
-                  <p className="maker-name">{m.name}</p>
-                  <p className="maker-offers">
-                    {m.offers} listing{m.offers === 1 ? "" : "s"}
-                  </p>
-                </div>
-                {m.lowestPrice && <span className="maker-price">from {m.lowestPrice}</span>}
-              </div>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {/* 8b. Suppliers & manufacturers */}
-      {result.suppliers?.length ? (
-        <section>
-          <p className="panel-h section-h">
-            <Icons.factory size={13} /> Suppliers &amp; manufacturers
-          </p>
-          <div className="supplier-grid">
-            {result.suppliers.map((s, i) => {
-              const SRC_LABELS: Record<string, string> = {
-                alibaba: "Alibaba",
-                "made-in-china": "Made-in-China",
-                "global-sources": "Global Sources",
-                indiamart: "IndiaMART",
-                aliexpress: "AliExpress",
-                web: "Web",
-                firecrawl: "Web",
-              };
-              const srcBadge = s.source ? SRC_LABELS[s.source] ?? "Web" : null;
-              const isManufacturer =
-                s.source === "alibaba" || s.source === "made-in-china" || s.source === "global-sources";
-              return (
-                <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="panel supplier-card">
-                  <div className="supplier-top">
-                    <span className="supplier-name">
-                      {s.name}
-                      <Icons.arrowUpRight size={13} />
+        {/* Demand signals — real community discussion (last 30 days) */}
+        {result.demand && result.demand.posts.length > 0 && (
+          <section>
+            <p className="panel-h section-h">
+              <Icons.pulse size={13} /> Demand signals
+              <span className="panel-meta">
+                {result.demand.momentum} momentum · {result.demand.channels.slice(0, 4).join(", ")}
+              </span>
+            </p>
+            <div className="demand-grid">
+              {result.demand.posts.slice(0, 4).map((p, i) => (
+                <a
+                  key={i}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="panel demand-card"
+                >
+                  <div className="demand-card-top">
+                    <span className={cc("badge", p.source === "reddit" ? "med" : "")}>{p.channel}</span>
+                    <span className="demand-eng">
+                      <Icons.trending size={12} /> {p.engagement.toLocaleString()}
                     </span>
-                    {srcBadge && (
-                      <span className={cc("badge", isManufacturer ? "low" : "med")}>{srcBadge}</span>
-                    )}
                   </div>
-                  {s.store && (
-                    <p className="supplier-store">
-                      <Icons.building size={12} /> {s.store}
-                    </p>
-                  )}
-                  {(s.price || s.orders != null || s.rating != null || s.minOrder) && (
-                    <div className="supplier-meta">
-                      {s.price && <span className="supplier-price">{s.price}</span>}
-                      {s.minOrder && <span>MOQ {s.minOrder}</span>}
-                      {s.rating != null && <span>★ {s.rating}</span>}
-                      {s.orders != null && <span>{s.orders.toLocaleString()} orders</span>}
-                    </div>
-                  )}
-                  {s.snippet && <p className="supplier-snippet">{s.snippet}</p>}
+                  <p className="demand-title">{p.title}</p>
+                  <p className="demand-meta">
+                    {p.comments.toLocaleString()} comments · {new Date(p.createdAt).toLocaleDateString()}
+                    <Icons.arrowUpRight size={12} />
+                  </p>
                 </a>
-              );
-            })}
-          </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Related market trends — connective tissue to the trends dashboard */}
+        <section>
+          <p className="panel-h section-h">
+            <Icons.trending size={13} /> Related market trends
+          </p>
+          {related.length > 0 ? (
+            <div className="related-trends-grid">
+              {related.map((t) => (
+                <button
+                  key={t.id}
+                  type="button"
+                  className="related-trend-card"
+                  onClick={() => go("deepdive", t.id)}
+                >
+                  <div className="related-trend-top">
+                    <Tier tier={t.tier} />
+                    <Icons.arrowUpRight size={13} />
+                  </div>
+                  <p className="related-trend-cat">{t.cat}</p>
+                  <p className="related-trend-market">{t.market}</p>
+                  <div className="related-trend-foot">
+                    <span className="related-trend-stat">
+                      Momentum <b>{Math.round(t.momentum)}</b>
+                    </span>
+                    <span className={cc("growth", t.growth >= 0 ? "up" : "down")}>
+                      {fmtPct(t.growth)}
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <p className="analysis-text muted related-trend-empty">
+              Explore the live market-trends dashboard for category context.
+            </p>
+          )}
+          <button type="button" className="btn secondary sm related-trend-all" onClick={() => go("trending")}>
+            View all market trends <Icons.arrowUpRight size={13} />
+          </button>
         </section>
+      </div>
+
+      {/* ── Group: Competitors & pricing ── */}
+      <div className="results-group">
+        <h2 className="results-group-title">Competitors &amp; pricing</h2>
+        <section>
+          <p className="panel-h section-h">
+            <Icons.trending size={13} /> Market benchmark
+          </p>
+          <BenchmarkTable competitors={result.benchmark.competitors} />
+        </section>
+      </div>
+
+      {/* ── Group: Sourcing ── */}
+      {(result.makers?.length || result.suppliers?.length) ? (
+        <div className="results-group">
+          <h2 className="results-group-title">Sourcing</h2>
+
+          {/* Makers — who's making it */}
+          {result.makers?.length ? (
+            <section>
+              <p className="panel-h section-h">
+                <Icons.building size={13} /> Who&apos;s making it
+              </p>
+              <div className="maker-grid">
+                {result.makers.map((m) => (
+                  <div key={m.name} className="panel maker-card">
+                    <div className="maker-id">
+                      <p className="maker-name">{m.name}</p>
+                      <p className="maker-offers">
+                        {m.offers} listing{m.offers === 1 ? "" : "s"}
+                      </p>
+                    </div>
+                    {m.lowestPrice && <span className="maker-price">from {m.lowestPrice}</span>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {/* Suppliers & manufacturers */}
+          {result.suppliers?.length ? (
+            <section>
+              <p className="panel-h section-h">
+                <Icons.factory size={13} /> Suppliers &amp; manufacturers
+              </p>
+              <div className="supplier-grid">
+                {result.suppliers.map((s, i) => {
+                  const SRC_LABELS: Record<string, string> = {
+                    alibaba: "Alibaba",
+                    "made-in-china": "Made-in-China",
+                    "global-sources": "Global Sources",
+                    indiamart: "IndiaMART",
+                    aliexpress: "AliExpress",
+                    web: "Web",
+                    firecrawl: "Web",
+                  };
+                  const srcBadge = s.source ? SRC_LABELS[s.source] ?? "Web" : null;
+                  const isManufacturer =
+                    s.source === "alibaba" || s.source === "made-in-china" || s.source === "global-sources";
+                  return (
+                    <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="panel supplier-card">
+                      <div className="supplier-top">
+                        <span className="supplier-name">
+                          {s.name}
+                          <Icons.arrowUpRight size={13} />
+                        </span>
+                        {srcBadge && (
+                          <span className={cc("badge", isManufacturer ? "low" : "med")}>{srcBadge}</span>
+                        )}
+                      </div>
+                      {s.store && (
+                        <p className="supplier-store">
+                          <Icons.building size={12} /> {s.store}
+                        </p>
+                      )}
+                      {(s.price || s.orders != null || s.rating != null || s.minOrder) && (
+                        <div className="supplier-meta">
+                          {s.price && <span className="supplier-price">{s.price}</span>}
+                          {s.minOrder && <span>MOQ {s.minOrder}</span>}
+                          {s.rating != null && <span>★ {s.rating}</span>}
+                          {s.orders != null && <span>{s.orders.toLocaleString()} orders</span>}
+                        </div>
+                      )}
+                      {s.snippet && <p className="supplier-snippet">{s.snippet}</p>}
+                    </a>
+                  );
+                })}
+              </div>
+            </section>
+          ) : null}
+        </div>
       ) : null}
 
       {/* 9. Enrichment tags */}
