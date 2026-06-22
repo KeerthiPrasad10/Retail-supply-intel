@@ -76,7 +76,7 @@ export function Dashboard({ model }: { model: Model }) {
   const openSupplier = openSup ? (SUPPLIERS.find((x) => x.id === openSup) ?? null) : null;
 
   const crumbs: Record<View, string[]> = {
-    overview: ["Lidl · Buying", "Overview"],
+    overview: ["Lidl · Buying", "Market overview"],
     insights: ["Lidl · Buying", "Procurement insights"],
     trending: ["Lidl · Buying", "Trending"],
     deepdive: ["Trending", trend ? trend.cat : "—"],

@@ -663,6 +663,19 @@ textarea.nxb-input { resize: vertical; min-height: 60px; }
 .sp-cat { margin: 0; }
 .sp-reset-btn { margin-top: 8px; }
 
+/* Ideas — share / QR card */
+.ideas-share { display: flex; align-items: center; gap: 22px; }
+.ideas-share-qr { flex: 0 0 auto; width: 156px; height: 156px; background: #fff; border-radius: var(--radius-input); border: 0.5px solid var(--nxb-border-medium); display: flex; align-items: center; justify-content: center; }
+.ideas-share-qr-skeleton { width: 132px; height: 132px; border-radius: 6px; background: var(--nxb-overlay-light); animation: qr-skeleton 1.2s ease-in-out infinite; }
+@keyframes qr-skeleton { 0%, 100% { opacity: .5; } 50% { opacity: .9; } }
+.ideas-share-body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.ideas-share-title { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; color: var(--nxb-text-primary); margin: 0; }
+.ideas-share-title svg { opacity: .75; }
+.ideas-share-sub { font-size: 13px; line-height: 1.5; color: var(--nxb-text-secondary); margin: 0; max-width: 460px; }
+.ideas-share-link { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+.ideas-share-url { font-family: var(--font-mono); font-size: 11.5px; color: var(--nxb-text-muted); background: var(--nxb-overlay-subtle); border: 0.5px solid var(--nxb-border-low); border-radius: var(--radius-badge); padding: 6px 10px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 640px) { .ideas-share { flex-direction: column; align-items: flex-start; } }
+
 /* Ideas board */
 .ideas-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
 .idea-card { display: flex; flex-direction: column; background: var(--nxb-surface); border: 0.5px solid var(--nxb-border); border-radius: 12px; cursor: default; transition: border-color 0.15s, box-shadow 0.15s; overflow: hidden; }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { QRCodeSVG } from "qrcode.react";
 import type { ProductIdea, ResearchResult } from "@/lib/ideas/types";
 import type { Go, Trend } from "@/lib/types";
 import { resizeImage } from "@/lib/image";
@@ -170,7 +171,10 @@ export function Ideas({ go, resetSignal }: { go: Go; resetSignal: number }) {
       </header>
 
       {stage === "board" && (
-        <BoardView ideas={recent} onView={viewIdea} onAdd={() => setStage("form")} />
+        <>
+          <ShareSubmit />
+          <BoardView ideas={recent} onView={viewIdea} onAdd={() => setStage("form")} />
+        </>
       )}
 
       {stage === "form" && (
@@ -189,6 +193,65 @@ export function Ideas({ go, resetSignal }: { go: Go; resetSignal: number }) {
           <p>{error || "Research failed to complete. Please try again."}</p>
         </div>
       )}
+    </div>
+  );
+}
+
+/* ------------------------------ Share / QR ------------------------------ */
+
+// A scannable QR pointing at the public /submit form so anyone can add an idea
+// from their phone. Built from the live origin so it matches whichever
+// deployment is being viewed (prod or preview) — no hard-coded domain.
+function ShareSubmit() {
+  const [url, setUrl] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") setUrl(`${window.location.origin}/submit`);
+  }, []);
+
+  async function copy() {
+    if (!url) return;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      /* clipboard blocked — the link is shown for manual copy */
+    }
+  }
+
+  return (
+    <div className="panel ideas-share">
+      <div className="ideas-share-qr">
+        {url ? (
+          <QRCodeSVG value={url} size={132} level="M" marginSize={0} bgColor="#ffffff" fgColor="#090909" />
+        ) : (
+          <div className="ideas-share-qr-skeleton" aria-hidden />
+        )}
+      </div>
+      <div className="ideas-share-body">
+        <p className="ideas-share-title">
+          <Icons.qr size={15} /> Scan to submit an idea
+        </p>
+        <p className="ideas-share-sub">
+          Point a phone camera at the code — it opens the submission form. Share it with the team to collect ideas.
+        </p>
+        <div className="ideas-share-link">
+          <code className="ideas-share-url">{url || "Loading…"}</code>
+          <button type="button" className="btn secondary sm" onClick={copy} disabled={!url}>
+            {copied ? (
+              <>
+                <Icons.check size={13} /> Copied
+              </>
+            ) : (
+              <>
+                <Icons.send size={13} /> Copy link
+              </>
+            )}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

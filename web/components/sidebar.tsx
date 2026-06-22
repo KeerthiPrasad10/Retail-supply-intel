@@ -94,13 +94,14 @@ export function Sidebar({ view, go, shortlistCount }: { view: View; go: Go; shor
         NxB<span className="slash">/Sourcing</span>
       </div>
       <div className="nav-group">
-        <NavItem id="overview" label="Overview" icon="grid" view={view} go={go} />
-        <NavItem id="insights" label="Insights" icon="spark" badge={insights.length} view={view} go={go} />
+        {/* Ordered as the workflow runs: idea → research → suppliers → shortlist. */}
+        <NavItem id="ideas" label="Product Ideas" icon="box" view={view} go={go} />
+        <NavItem id="overview" label="Market overview" icon="grid" view={view} go={go} />
         <NavItem id="trending" label="Trending" icon="trending" badge={trends.length} view={view} go={go} />
+        <NavItem id="insights" label="Insights" icon="spark" badge={insights.length} view={view} go={go} />
         <NavItem id="map" label="Map" icon="globe" view={view} go={go} />
         <NavItem id="suppliers" label="Suppliers" icon="factory" badge={SUPPLIERS.length} view={view} go={go} />
         <NavItem id="shortlist" label="Shortlist" icon="bookmark" badge={shortlistCount || null} view={view} go={go} />
-        <NavItem id="ideas" label="Product Ideas" icon="box" view={view} go={go} />
       </div>
       <SignalSources sources={signalSources} />
       <div className="nav-section">Markets</div>
