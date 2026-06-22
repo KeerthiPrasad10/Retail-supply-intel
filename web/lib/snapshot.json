@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-17T05:04:21.705533+00:00",
+  "generated_at": "2026-06-22T11:36:16.872619+00:00",
   "countries": [
     {
       "code": "AT",
@@ -268,6 +268,11 @@
   ],
   "categories": [
     {
+      "id": 16,
+      "name": "Apparel & Fashion",
+      "hs_code": null
+    },
+    {
       "id": 10,
       "name": "Audio & Earbuds",
       "hs_code": "8518"
@@ -288,9 +293,19 @@
       "hs_code": "0901"
     },
     {
+      "id": 14,
+      "name": "Drinkware & Kitchen",
+      "hs_code": null
+    },
+    {
       "id": 8,
       "name": "Drinkware & Tumblers",
       "hs_code": "9617"
+    },
+    {
+      "id": 18,
+      "name": "Electronics & Accessories",
+      "hs_code": null
     },
     {
       "id": 4,
@@ -303,6 +318,16 @@
       "hs_code": "6110"
     },
     {
+      "id": 17,
+      "name": "Other",
+      "hs_code": null
+    },
+    {
+      "id": 15,
+      "name": "Packaging & Shipping Supplies",
+      "hs_code": null
+    },
+    {
       "id": 11,
       "name": "Pet Care",
       "hs_code": "2309"
@@ -311,6 +336,11 @@
       "id": 7,
       "name": "Small Kitchen Appliances",
       "hs_code": "8516"
+    },
+    {
+      "id": 19,
+      "name": "Sports & Outdoors",
+      "hs_code": null
     },
     {
       "id": 2,
@@ -1106,6 +1136,7 @@
     }
   ],
   "sources": {
+    "16": [],
     "10": [
       {
         "partner_code": "CN",
@@ -1408,6 +1439,7 @@
         "emerging": false
       }
     ],
+    "14": [],
     "8": [
       {
         "partner_code": "CN",
@@ -1487,6 +1519,7 @@
         "emerging": false
       }
     ],
+    "18": [],
     "4": [
       {
         "partner_code": "VN",
@@ -1645,6 +1678,8 @@
         "emerging": false
       }
     ],
+    "17": [],
+    "15": [],
     "11": [
       {
         "partner_code": "TH",
@@ -1803,6 +1838,7 @@
         "emerging": false
       }
     ],
+    "19": [],
     "2": [
       {
         "partner_code": "JP",
@@ -1957,7 +1993,7 @@
   },
   "triggers": [
     {
-      "id": 193,
+      "id": 229,
       "score": 126.5738,
       "market_code": null,
       "market": "Global",
@@ -1967,7 +2003,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Toys & Collectibles is rising in Global (momentum 126.57, +1000%). Top origins: China (86%, -26%), Vietnam (8%, -22%), Indonesia (3%, -20%), Thailand (1%, -18%), India (1%, -13%). Competitors already sourcing there: Ahold Delhaize, Tesco, Walmart.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816248+00:00",
+      "created_at": "2026-06-22T11:35:05.111244+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2017,7 +2053,7 @@
       }
     },
     {
-      "id": 194,
+      "id": 230,
       "score": 76.1081,
       "market_code": null,
       "market": "Global",
@@ -2027,7 +2063,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Drinkware & Tumblers is rising in Global (momentum 76.11, +839%). Top origins: China (99%, -5%), Thailand (1%, +38%), Japan (0%, -59%), India (0%, +24%), Vietnam (0%, -21%). Competitors already sourcing there: Tesco.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816255+00:00",
+      "created_at": "2026-06-22T11:35:05.111250+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2075,7 +2111,7 @@
       }
     },
     {
-      "id": 195,
+      "id": 231,
       "score": 38.0326,
       "market_code": null,
       "market": "Global",
@@ -2085,7 +2121,7 @@
       "focus_partner_name": "Indonesia",
       "rationale": "Demand for Pet Care is rising in Global (momentum 34.74, +389%). Top origins: Thailand (51%, -35%), China (26%, -31%), Indonesia (10%, +19%), Vietnam (5%, -38%), Cambodia (4%, +3%). Emerging: Indonesia (10%, +19%). Competitors already sourcing there: Rewe.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816256+00:00",
+      "created_at": "2026-06-22T11:35:05.111251+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2141,7 +2177,7 @@
       }
     },
     {
-      "id": 196,
+      "id": 232,
       "score": 27.3624,
       "market_code": null,
       "market": "Global",
@@ -2151,7 +2187,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Small Kitchen Appliances is rising in Global (momentum 27.36, +323%). Top origins: China (83%, -14%), Thailand (6%, -22%), South Korea (3%, -20%), Indonesia (2%, -25%), Turkey (2%, -6%). Competitors already sourcing there: Aldi, Edeka, Walmart.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816257+00:00",
+      "created_at": "2026-06-22T11:35:05.111252+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2201,7 +2237,7 @@
       }
     },
     {
-      "id": 197,
+      "id": 233,
       "score": 21.4713,
       "market_code": null,
       "market": "Global",
@@ -2211,7 +2247,7 @@
       "focus_partner_name": "South Korea",
       "rationale": "Demand for Beauty & Cosmetics is rising in Global (momentum 14.31, +108%). Top origins: South Korea (45%, +100%), China (35%, +100%), Japan (12%, +100%), India (3%, +100%), Turkey (3%, +100%). Emerging: South Korea (45%, +100%), China (35%, +100%), Japan (12%, +100%), India (3%, +100%), Turkey (3%, +100%). Competitors already sourcing there: Edeka.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816259+00:00",
+      "created_at": "2026-06-22T11:35:05.111254+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2295,7 +2331,7 @@
       }
     },
     {
-      "id": 198,
+      "id": 234,
       "score": 17.2866,
       "market_code": null,
       "market": "Global",
@@ -2305,7 +2341,7 @@
       "focus_partner_name": "Indonesia",
       "rationale": "Demand for Pet Care is rising in Global (momentum 15.79, +277%). Top origins: Thailand (51%, -35%), China (26%, -31%), Indonesia (10%, +19%), Vietnam (5%, -38%), Cambodia (4%, +3%). Emerging: Indonesia (10%, +19%). Competitors already sourcing there: Rewe.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816260+00:00",
+      "created_at": "2026-06-22T11:35:05.111255+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2361,7 +2397,7 @@
       }
     },
     {
-      "id": 199,
+      "id": 235,
       "score": 12.7358,
       "market_code": null,
       "market": "Global",
@@ -2371,7 +2407,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Knitwear & Apparel is rising in Global (momentum 12.74, +277%). Top origins: China (32%, -23%), Vietnam (21%, -31%), Bangladesh (14%, -20%), Cambodia (9%, -15%), Indonesia (7%, -34%). Competitors already sourcing there: Aldi, Auchan, Sainsbury's, Tesco.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816261+00:00",
+      "created_at": "2026-06-22T11:35:05.111255+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2422,7 +2458,7 @@
       }
     },
     {
-      "id": 200,
+      "id": 236,
       "score": 11.7279,
       "market_code": null,
       "market": "Global",
@@ -2432,7 +2468,7 @@
       "focus_partner_name": "South Korea",
       "rationale": "Demand for Beauty & Cosmetics is rising in Global (momentum 7.82, +218%). Top origins: South Korea (45%, +100%), China (35%, +100%), Japan (12%, +100%), India (3%, +100%), Turkey (3%, +100%). Emerging: South Korea (45%, +100%), China (35%, +100%), Japan (12%, +100%), India (3%, +100%), Turkey (3%, +100%). Competitors already sourcing there: Edeka.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816262+00:00",
+      "created_at": "2026-06-22T11:35:05.111256+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2516,7 +2552,7 @@
       }
     },
     {
-      "id": 201,
+      "id": 237,
       "score": 7.4781,
       "market_code": null,
       "market": "Global",
@@ -2526,7 +2562,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Knitwear & Apparel is rising in Global (momentum 7.48, +129%). Top origins: China (32%, -23%), Vietnam (21%, -31%), Bangladesh (14%, -20%), Cambodia (9%, -15%), Indonesia (7%, -34%). Competitors already sourcing there: Aldi, Auchan, Sainsbury's, Tesco.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816263+00:00",
+      "created_at": "2026-06-22T11:35:05.111257+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2577,7 +2613,7 @@
       }
     },
     {
-      "id": 202,
+      "id": 238,
       "score": 5.7139,
       "market_code": null,
       "market": "Global",
@@ -2587,7 +2623,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Footwear is rising in Global (momentum 5.71, +43%). Top origins: Vietnam (44%, -34%), China (42%, -36%), Indonesia (9%, -43%), Cambodia (3%, -37%), Bangladesh (1%, -41%). Competitors already sourcing there: Aldi, Auchan, Carrefour, Mercadona, Tesco, Walmart.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816263+00:00",
+      "created_at": "2026-06-22T11:35:05.111258+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2640,7 +2676,7 @@
       }
     },
     {
-      "id": 203,
+      "id": 239,
       "score": 2.6142,
       "market_code": null,
       "market": "Global",
@@ -2650,7 +2686,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Audio & Earbuds is rising in Global (momentum 2.61, +20%). Top origins: China (62%, -13%), Vietnam (33%, -19%), Thailand (3%, -19%), Japan (1%, -28%), Indonesia (1%, -24%). Competitors already sourcing there: Ahold Delhaize, Aldi.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816264+00:00",
+      "created_at": "2026-06-22T11:35:05.111258+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2699,7 +2735,65 @@
       }
     },
     {
-      "id": 204,
+      "id": 240,
+      "score": 1.9692,
+      "market_code": "DE",
+      "market": "Germany",
+      "category_id": 8,
+      "category": "Drinkware & Tumblers",
+      "focus_partner": "CN",
+      "focus_partner_name": "China",
+      "rationale": "Demand for Drinkware & Tumblers is rising in Germany (momentum 1.97, +14%). Top origins: China (99%, -5%), Thailand (1%, +38%), Japan (0%, -59%), India (0%, +24%), Vietnam (0%, -21%). Competitors already sourcing there: Tesco.",
+      "status": "new",
+      "created_at": "2026-06-22T11:35:05.111258+00:00",
+      "payload": {
+        "top_sources": [
+          {
+            "partner_code": "CN",
+            "value": 1435927242.062,
+            "share": 0.9907111505716364,
+            "growth": -0.05287492829157416,
+            "emerging": false
+          },
+          {
+            "partner_code": "TH",
+            "value": 10238131.013,
+            "share": 0.007063749651428669,
+            "growth": 0.3814858214292268,
+            "emerging": false
+          },
+          {
+            "partner_code": "JP",
+            "value": 1229378.668,
+            "share": 0.0008482039472372634,
+            "growth": -0.5865100441828209,
+            "emerging": false
+          },
+          {
+            "partner_code": "IN",
+            "value": 1128879.1060000001,
+            "share": 0.0007788647538683933,
+            "growth": 0.23714042724405843,
+            "emerging": false
+          },
+          {
+            "partner_code": "VN",
+            "value": 346690.747,
+            "share": 0.00023919762700489236,
+            "growth": -0.2054695173567846,
+            "emerging": false
+          }
+        ],
+        "emerging_suppliers": [],
+        "competitors": [
+          "Tesco"
+        ],
+        "demand_momentum": 1.96916111012342,
+        "demand_growth": 0.144768053142739
+      }
+    },
+    {
+      "id": 241,
       "score": 1.9692,
       "market_code": "DE",
       "market": "Germany",
@@ -2709,7 +2803,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Small Kitchen Appliances is rising in Germany (momentum 1.97, +14%). Top origins: China (83%, -14%), Thailand (6%, -22%), South Korea (3%, -20%), Indonesia (2%, -25%), Turkey (2%, -6%). Competitors already sourcing there: Aldi, Edeka, Walmart.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816264+00:00",
+      "created_at": "2026-06-22T11:35:05.111259+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2759,65 +2853,7 @@
       }
     },
     {
-      "id": 205,
-      "score": 1.9692,
-      "market_code": "DE",
-      "market": "Germany",
-      "category_id": 8,
-      "category": "Drinkware & Tumblers",
-      "focus_partner": "CN",
-      "focus_partner_name": "China",
-      "rationale": "Demand for Drinkware & Tumblers is rising in Germany (momentum 1.97, +14%). Top origins: China (99%, -5%), Thailand (1%, +38%), Japan (0%, -59%), India (0%, +24%), Vietnam (0%, -21%). Competitors already sourcing there: Tesco.",
-      "status": "new",
-      "created_at": "2026-06-17T05:03:09.816265+00:00",
-      "payload": {
-        "top_sources": [
-          {
-            "partner_code": "CN",
-            "value": 1435927242.062,
-            "share": 0.9907111505716364,
-            "growth": -0.05287492829157416,
-            "emerging": false
-          },
-          {
-            "partner_code": "TH",
-            "value": 10238131.013,
-            "share": 0.007063749651428669,
-            "growth": 0.3814858214292268,
-            "emerging": false
-          },
-          {
-            "partner_code": "JP",
-            "value": 1229378.668,
-            "share": 0.0008482039472372634,
-            "growth": -0.5865100441828209,
-            "emerging": false
-          },
-          {
-            "partner_code": "IN",
-            "value": 1128879.1060000001,
-            "share": 0.0007788647538683933,
-            "growth": 0.23714042724405843,
-            "emerging": false
-          },
-          {
-            "partner_code": "VN",
-            "value": 346690.747,
-            "share": 0.00023919762700489236,
-            "growth": -0.2054695173567846,
-            "emerging": false
-          }
-        ],
-        "emerging_suppliers": [],
-        "competitors": [
-          "Tesco"
-        ],
-        "demand_momentum": 1.96916111012342,
-        "demand_growth": 0.144768053142739
-      }
-    },
-    {
-      "id": 206,
+      "id": 242,
       "score": 1.9078,
       "market_code": null,
       "market": "Global",
@@ -2827,7 +2863,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Coffee is rising in Global (momentum 1.91, +43%). Top origins: Vietnam (62%, +7%), Indonesia (24%, -13%), India (12%, -5%), China (1%, -71%), Turkey (0%, +47%). Competitors already sourcing there: Rewe.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816265+00:00",
+      "created_at": "2026-06-22T11:35:05.111259+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2875,7 +2911,7 @@
       }
     },
     {
-      "id": 207,
+      "id": 243,
       "score": 1.7616,
       "market_code": null,
       "market": "Global",
@@ -2885,7 +2921,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Coffee is rising in Global (momentum 1.76, +15%). Top origins: Vietnam (62%, +7%), Indonesia (24%, -13%), India (12%, -5%), China (1%, -71%), Turkey (0%, +47%). Competitors already sourcing there: Rewe.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816265+00:00",
+      "created_at": "2026-06-22T11:35:05.111260+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2933,7 +2969,7 @@
       }
     },
     {
-      "id": 208,
+      "id": 244,
       "score": 0.97,
       "market_code": "DE",
       "market": "Germany",
@@ -2943,7 +2979,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Knitwear & Apparel is rising in Germany (momentum 0.97, +7%). Top origins: China (32%, -23%), Vietnam (21%, -31%), Bangladesh (14%, -20%), Cambodia (9%, -15%), Indonesia (7%, -34%). Competitors already sourcing there: Aldi, Auchan, Sainsbury's, Tesco.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816266+00:00",
+      "created_at": "2026-06-22T11:35:05.111260+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2994,7 +3030,7 @@
       }
     },
     {
-      "id": 209,
+      "id": 245,
       "score": 0.4804,
       "market_code": null,
       "market": "Global",
@@ -3004,7 +3040,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Coffee is rising in Global (momentum 0.48, +3%). Top origins: Vietnam (62%, +7%), Indonesia (24%, -13%), India (12%, -5%), China (1%, -71%), Turkey (0%, +47%). Competitors already sourcing there: Rewe.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816266+00:00",
+      "created_at": "2026-06-22T11:35:05.111261+00:00",
       "payload": {
         "top_sources": [
           {
@@ -3052,7 +3088,7 @@
       }
     },
     {
-      "id": 210,
+      "id": 246,
       "score": 0.2995,
       "market_code": "DE",
       "market": "Germany",
@@ -3062,7 +3098,7 @@
       "focus_partner_name": "South Korea",
       "rationale": "Demand for Beauty & Cosmetics is rising in Germany (momentum 0.20, +1%). Top origins: South Korea (45%, +100%), China (35%, +100%), Japan (12%, +100%), India (3%, +100%), Turkey (3%, +100%). Emerging: South Korea (45%, +100%), China (35%, +100%), Japan (12%, +100%), India (3%, +100%), Turkey (3%, +100%). Competitors already sourcing there: Edeka.",
       "status": "new",
-      "created_at": "2026-06-17T05:03:09.816267+00:00",
+      "created_at": "2026-06-22T11:35:05.111261+00:00",
       "payload": {
         "top_sources": [
           {
@@ -8178,6 +8214,34 @@
   ],
   "competitors": [
     {
+      "id": 114,
+      "name": "2B2C",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 107,
+      "name": "33,000ft",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 99,
+      "name": "A ALPS",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 115,
+      "name": "AEEKCARS",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
       "id": 8,
       "name": "Ahold Delhaize",
       "home_country": "NL",
@@ -8198,6 +8262,13 @@
           "source": "research"
         }
       ]
+    },
+    {
+      "id": 112,
+      "name": "Airfrex",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
     },
     {
       "id": 1,
@@ -8236,6 +8307,34 @@
       ]
     },
     {
+      "id": 118,
+      "name": "Amazon Essentials",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 79,
+      "name": "Amcupider",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 50,
+      "name": "AOZITA",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 122,
+      "name": "Arthas",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
       "id": 6,
       "name": "Auchan",
       "home_country": "FR",
@@ -8256,6 +8355,48 @@
           "source": "research"
         }
       ]
+    },
+    {
+      "id": 120,
+      "name": "Avoogue",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 28,
+      "name": "Bambaw",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 39,
+      "name": "BJPKPK",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 42,
+      "name": "BlenderBottle",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 56,
+      "name": "BUZIO",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 44,
+      "name": "CamelBak",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
     },
     {
       "id": 3,
@@ -8287,6 +8428,48 @@
       ]
     },
     {
+      "id": 45,
+      "name": "CIVAGO",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 123,
+      "name": "Columbia",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 24,
+      "name": "Contigo",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 94,
+      "name": "CORXEFXEF",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 84,
+      "name": "DAWEI",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 64,
+      "name": "DYSANKY",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
       "id": 5,
       "name": "Edeka",
       "home_country": "DE",
@@ -8309,6 +8492,125 @@
       ]
     },
     {
+      "id": 116,
+      "name": "esinkin",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 17,
+      "name": "Fijinhom",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 95,
+      "name": "FILIEKEU",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 81,
+      "name": "Fort Workwear",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 80,
+      "name": "Game Technical Apparel",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 121,
+      "name": "Hount",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 23,
+      "name": "HYDRO CELL",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 18,
+      "name": "Hydro Flask",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 47,
+      "name": "HydroJug",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 29,
+      "name": "IRON \u00b0FLASK",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 91,
+      "name": "Junywell",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 61,
+      "name": "Kerilyn",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 85,
+      "name": "LAUNCH",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 96,
+      "name": "LIMIGE",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 117,
+      "name": "LOMON",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 98,
+      "name": "Meliya",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 16,
+      "name": "Meoky",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
       "id": 7,
       "name": "Mercadona",
       "home_country": "ES",
@@ -8329,6 +8631,97 @@
           "source": "research"
         }
       ]
+    },
+    {
+      "id": 100,
+      "name": "MOERDENG",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 89,
+      "name": "mountova",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 97,
+      "name": "MYHOYI",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 106,
+      "name": "NexGen",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 110,
+      "name": "OiDiPi",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 14,
+      "name": "Owala",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 124,
+      "name": "Patagonia",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 111,
+      "name": "PinPure",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 102,
+      "name": "Pioneer",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 49,
+      "name": "Pogo",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 15,
+      "name": "POWCAN",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 108,
+      "name": "RainRider",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 104,
+      "name": "Regatta",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
     },
     {
       "id": 4,
@@ -8360,6 +8753,13 @@
       ]
     },
     {
+      "id": 19,
+      "name": "RUBYFLASK",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
       "id": 9,
       "name": "Sainsbury's",
       "home_country": "GB",
@@ -8380,6 +8780,62 @@
           "source": "research"
         }
       ]
+    },
+    {
+      "id": 119,
+      "name": "SaphiRose",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 86,
+      "name": "SEBLINRC",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 83,
+      "name": "Smxrfitk",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 88,
+      "name": "SOGRACE",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 87,
+      "name": "Sunica",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 101,
+      "name": "SWISSWELL",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 27,
+      "name": "Takeya",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 93,
+      "name": "TenCloud",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
     },
     {
       "id": 2,
@@ -8418,6 +8874,62 @@
       ]
     },
     {
+      "id": 43,
+      "name": "ThermoFlask",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 77,
+      "name": "TIHEEN",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 34,
+      "name": "TOURIT",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 109,
+      "name": "Twelve South",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 51,
+      "name": "Ucanpack",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 113,
+      "name": "UGREEN",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 78,
+      "name": "Uposiut",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 92,
+      "name": "VMQIPNS",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
       "id": 10,
       "name": "Walmart",
       "home_country": "US",
@@ -8445,9 +8957,269 @@
           "source": "research"
         }
       ]
+    },
+    {
+      "id": 22,
+      "name": "WATERSY",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 25,
+      "name": "Y TOP PRODUCTS",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 26,
+      "name": "YETI",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 82,
+      "name": "ZITY",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
+    },
+    {
+      "id": 90,
+      "name": "Zopsc",
+      "home_country": null,
+      "home_market": null,
+      "sourcing": []
     }
   ],
   "suppliers": [
+    {
+      "id": 83,
+      "name": "\u2728 \u200c6/12/24PCS Bulk Empty Plastic Reusable Juice /Water Bottles as Smoothie Bottles for Sensory Crafts and Calming Bottles 400m",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 85,
+      "name": "100pcs Mini Plastic Storage Bags Resealable Self Sealing Zipper Clear Plastic Pouch For Small Business Jewelry Storage Packaging",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 15,
+      "category": "Packaging & Shipping Supplies",
+      "source": "aliexpress"
+    },
+    {
+      "id": 95,
+      "name": "160ml 304 Stainless Steel Insulated Cup Mini Pocket Cup Portable Travel Cup For Outdoor Camping Hiking Thermos Bottle",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 82,
+      "name": "16OZ DIY Snowglobe Tumbler with Pre Drilled Hole Reusable Plastic Water Bottles Break-Resistant Mason Jar Cups for Holiday Gifts",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 49,
+      "name": "200ML/300ML Mini Insulated Cup Stainless Steel Pocket Cup Car Vacuum Flasks Coffee Cup Portable Leak-proof Thermal Water Bottle",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 71,
+      "name": "200ML/350ML Mini Thermos Cup Small Capacity Vacuum Flask Stainless Steel Pocket Cup Coffee Mug Kids Insulated Hot Water Bottle",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 90,
+      "name": "20PCS Pink Love Bubble Bag Bubble Film Bubble Envelope Small Card Cover Gift Packaging Bag Shockproof and Waterproof",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 15,
+      "category": "Packaging & Shipping Supplies",
+      "source": "aliexpress"
+    },
+    {
+      "id": 53,
+      "name": "2L/ 67.63oz Large Capacity Stainless Steel Insulated Tumbler with Handle, Ice-Keeping and Thermal Straw, Sports Water Bottle",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 97,
+      "name": "2pcs Hooded Coat & Pant Rain Suit For Women Men Outdoor Waterproof Rain Gear With Reflective Strip Motocycle Riding Raincoat",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "aliexpress"
+    },
+    {
+      "id": 122,
+      "name": "3.5mm Audio Jack Bluetooth Audio Transmitter (BD",
+      "country_code": null,
+      "country": null,
+      "category_id": 18,
+      "category": "Electronics & Accessories",
+      "source": "made-in-china"
+    },
+    {
+      "id": 123,
+      "name": "3.5mm Jack Bluetooth Receiver Transmitter Adapter for Car Audio ...",
+      "country_code": null,
+      "country": null,
+      "category_id": 18,
+      "category": "Electronics & Accessories",
+      "source": "made-in-china"
+    },
+    {
+      "id": 120,
+      "name": "3.5mm Jack Wireless Transmitter Suppliers, Manufacturer ...",
+      "country_code": null,
+      "country": null,
+      "category_id": 18,
+      "category": "Electronics & Accessories",
+      "source": "alibaba"
+    },
+    {
+      "id": 56,
+      "name": "304 Stainless Steel Thermos Bottle Portable Double Wall Travel Mug Vacuum Flask Insulated Tumbler Water Bottle 600/800/1000ML",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 78,
+      "name": "350/550/800/ml Children's School Water Bottle Transparent Water Bottle Reusable Leak Proof Durable Water Bottle with DrinkingCap",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 58,
+      "name": "380/510ML Reise Edelstahl Kaffee Tasse Thermische Becher Auslaufsicher Thermos Flasche Tee Kaffee Becher Isolierflasche isolierte Tassen Hei\u00dfer",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 96,
+      "name": "380ml 510ml Stainless Steel Coffee Cup Thermal Mug Garrafa Termica Cafe Copo Termico Caneca Non-slip Travel Car Insulated Bottle",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 75,
+      "name": "40oz Candy Coated Insulated Stainless Steel Water Bottle | HYD Traveler Flip Straw Tumbler with Handle",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 74,
+      "name": "40oz Cream Insulated Stainless Steel Water Bottle | HYD Traveler Flip Straw Tumbler with Handle",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 73,
+      "name": "40oz Era Dark Aura Insulated Stainless Steel Tumbler with Handle",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 63,
+      "name": "500 ml Temperaturanzeige Thermoskanne Tasse Edelstahl geteilte Thermosflasche Outdoor Vakuumisolierte Tasse Vatertagsgeschenk",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 59,
+      "name": "500/750/1000 ml Edelstahl-Wasserflasche, einwandig, gro\u00dfes Fassungsverm\u00f6gen, gro\u00dfe Mund-Vakuumflaschen mit Deckel, Radfahren, Trinkgeschirr, Sport",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 93,
+      "name": "500/750/1000ml Stainless Steel Water Bottle Single Wall Large Capacity Big Mouth Vacuum Flasks with Lid Cycling Drinkware Sports",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 86,
+      "name": "500Pcs 4*8inch Polyethylene Bubble Mailers, Waterproof Envelopes, Suitable for Shipping, Packaging, and Mailing Purposes Black Thickened Bubble Envelopes with Self-Sealing Design",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 15,
+      "category": "Packaging & Shipping Supplies",
+      "source": "aliexpress"
+    },
+    {
+      "id": 91,
+      "name": "50PCS 100PCS White Multifunctional Bubble Mailing Envelope SelfAdhesive Sealed Express Packaging Suitable For Multiple Scenarios",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 15,
+      "category": "Packaging & Shipping Supplies",
+      "source": "aliexpress"
+    },
+    {
+      "id": 51,
+      "name": "720ML Stainless Steel Thermos Cup with Straw & Handle Ice Coffee Drink Vacuum Insulated Cup Car Travel Outdoor Water Bottle",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
     {
       "id": 37,
       "name": "A-One Toys",
@@ -8503,6 +9275,60 @@
       "source": "research"
     },
     {
+      "id": 116,
+      "name": "Bluetooth music receiver",
+      "country_code": null,
+      "country": null,
+      "category_id": 18,
+      "category": "Electronics & Accessories",
+      "source": "web"
+    },
+    {
+      "id": 124,
+      "name": "Bluetooth Receiver 5.0 Aux Adapter Dongle Audio Wireless Adapter ...",
+      "country_code": null,
+      "country": null,
+      "category_id": 18,
+      "category": "Electronics & Accessories",
+      "source": "made-in-china"
+    },
+    {
+      "id": 121,
+      "name": "Bluetooth Transmitter 3.5mm Guide: How to Choose Wisely",
+      "country_code": null,
+      "country": null,
+      "category_id": 18,
+      "category": "Electronics & Accessories",
+      "source": "alibaba"
+    },
+    {
+      "id": 119,
+      "name": "bluetooth transmitter for 3.5mm jack suppliers",
+      "country_code": null,
+      "country": null,
+      "category_id": 18,
+      "category": "Electronics & Accessories",
+      "source": "alibaba"
+    },
+    {
+      "id": 130,
+      "name": "Bulk",
+      "country_code": null,
+      "country": null,
+      "category_id": 19,
+      "category": "Sports & Outdoors",
+      "source": "made-in-china"
+    },
+    {
+      "id": 77,
+      "name": "Cartoon Figure Water Bottle, Portable Outdoor Straw Cup for Kids-Girls\u2019 Summer Sports Leakproof Cute",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
       "id": 30,
       "name": "Charoen Pokphand Foods",
       "country_code": "TH",
@@ -8530,6 +9356,15 @@
       "source": "research"
     },
     {
+      "id": 106,
+      "name": "Custom Rain Jackets Manufacturer & Wholesale Supplier",
+      "country_code": null,
+      "country": null,
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "web"
+    },
+    {
       "id": 38,
       "name": "D King Group",
       "country_code": "CN",
@@ -8546,6 +9381,24 @@
       "category_id": 5,
       "category": "Knitwear & Apparel",
       "source": "research"
+    },
+    {
+      "id": 52,
+      "name": "Double Wall Stainless Steel Insulated Tumbler Customizable Thermos Water Bottle with Vacuum Sealed Lid for Hot And Cold Beverage",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 57,
+      "name": "FEIJIAN Edelstahl-Thermosflasche, 1000 ml, Sportflasche, vakuumisolierte Wasserflasche, auslaufsicher, BPA-frei",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
     },
     {
       "id": 11,
@@ -8593,6 +9446,24 @@
       "source": "research"
     },
     {
+      "id": 118,
+      "name": "good morning world. Make Any Device Wireless BCC19 Bluetooth ...",
+      "country_code": null,
+      "country": null,
+      "category_id": 18,
+      "category": "Electronics & Accessories",
+      "source": "web"
+    },
+    {
+      "id": 79,
+      "name": "Gradient Water Bottle - 1000ml/500ml/650ml/750ml Capacity Outdoor Camping Drinking Travel Portable Gym Fitness Jugs",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
       "id": 22,
       "name": "Guangdong Xinbao",
       "country_code": "CN",
@@ -8609,6 +9480,15 @@
       "category_id": 8,
       "category": "Drinkware & Tumblers",
       "source": "research"
+    },
+    {
+      "id": 105,
+      "name": "Heavy Duty Raincoat Suppliers",
+      "country_code": null,
+      "country": null,
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "made-in-china"
     },
     {
       "id": 26,
@@ -8647,6 +9527,24 @@
       "source": "research"
     },
     {
+      "id": 94,
+      "name": "KEITH Titanium Ti3105 Vacuum Bottle Insulated Stainless Steel Water Bottle Double Wall Vacuum Flask for Hot And Cold Beverages",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 112,
+      "name": "Kids Colorful Windproof Waterproof Rain Jacket and Bib Pants Set ...",
+      "country_code": null,
+      "country": null,
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "made-in-china"
+    },
+    {
       "id": 39,
       "name": "KingStar",
       "country_code": "CN",
@@ -8674,6 +9572,24 @@
       "source": "research"
     },
     {
+      "id": 99,
+      "name": "Loose Fit Waterproof Rain Jacket & Pants \u2013 Hooded EVA Rain Suit for Women, Commuting, Scooter, Walking",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "aliexpress"
+    },
+    {
+      "id": 88,
+      "name": "Lot custom box logo pink color Paperboard Folding paper box Magnetic available packaging hair wigs cosmetic gift box",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 15,
+      "category": "Packaging & Shipping Supplies",
+      "source": "aliexpress"
+    },
+    {
       "id": 28,
       "name": "Luxshare",
       "country_code": "CN",
@@ -8681,6 +9597,24 @@
       "category_id": 10,
       "category": "Audio & Earbuds",
       "source": "research"
+    },
+    {
+      "id": 61,
+      "name": "Magic Edelstahl-Gefrier-Thermosbecher mit Strohhalm, Eis, Kaffee, Getr\u00e4nk, vakuumisolierte Flasche, Auto, Reisen, Outdoor, Bergbecher",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 111,
+      "name": "Manufacturer Custom High Quality Baby Boys Girls PU Recycled ...",
+      "country_code": null,
+      "country": null,
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "alibaba"
     },
     {
       "id": 5,
@@ -8701,6 +9635,15 @@
       "source": "research"
     },
     {
+      "id": 80,
+      "name": "Metal Portable Water Bottle Leakproof Reusable Outdoor Sports Cup for Cycling Hiking Gym Halloween Gift Christmas Gift Travel",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
       "id": 42,
       "name": "MIC Exports",
       "country_code": "IN",
@@ -8719,6 +9662,24 @@
       "source": "research"
     },
     {
+      "id": 115,
+      "name": "Mini Bluetooth Receiver Bluetooth Audio Transmitte Suppliers ...",
+      "country_code": null,
+      "country": null,
+      "category_id": 18,
+      "category": "Electronics & Accessories",
+      "source": "alibaba"
+    },
+    {
+      "id": 62,
+      "name": "Neue 500ML-1Liter Edelstahl-Thermoskanne mit LED-Temperaturanzeige Sus304 Tee-Wasserflasche Vakuumflasche Tragbare Becher",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
       "id": 36,
       "name": "NR Group",
       "country_code": "BD",
@@ -8728,6 +9689,87 @@
       "source": "research"
     },
     {
+      "id": 104,
+      "name": "Outdoor 3 In 1 Raincoat Hooded Sleeve Waterproof Rain Poncho Motorcycle Rain Cover Camping Hiking Travel Portable Rainwear Tent",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "aliexpress"
+    },
+    {
+      "id": 98,
+      "name": "Outdoor Jacket Pants Men Sets Thermal Waterproof Windproof Hooded Jackets Hiking Military Trip Mountain Camping Clothes",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "aliexpress"
+    },
+    {
+      "id": 84,
+      "name": "Outdoor Sports Silicone Foldable Water Bottle For Camouflage Creative Travel Reusable Leakproof Water Bottle With Carabiner",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 70,
+      "name": "Outdoor Thermos Portable 304 Stainless Steel Thermal Mug Tumbler Vacuum Flasks Cold and Hot Sports Water Bottle with Straw",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 100,
+      "name": "Outdoor Trekking Hiking Jacket and Pants Women Autumn Thermal Waterproof Windproof Hooded Jackets Trip Mountain Camping Sets",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "aliexpress"
+    },
+    {
+      "id": 55,
+      "name": "Owalaa nightlight ghost 32oz/945ml stainless steel insulated water bottle with straw,for daily sports outdoor,perfect gift",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 131,
+      "name": "Packable Rain Jacket Women Lightweight Waterproof Raincoat with ...",
+      "country_code": null,
+      "country": null,
+      "category_id": 19,
+      "category": "Sports & Outdoors",
+      "source": "made-in-china"
+    },
+    {
+      "id": 92,
+      "name": "paper box Custom boxes  gift box bag Corrugated paper shipping mailer boxes Printed logo Packaging Clothes shirt Box 100PCS/lot",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 15,
+      "category": "Packaging & Shipping Supplies",
+      "source": "aliexpress"
+    },
+    {
+      "id": 89,
+      "name": "Poly Mailers 14.5x19 500 Pcs Bulk Shipping Bags/Shipping Envelopes White Packaging Bags for Shipping Non-Padded Polymailers, Se",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 15,
+      "category": "Packaging & Shipping Supplies",
+      "source": "aliexpress"
+    },
+    {
       "id": 17,
       "name": "Pop Mart",
       "country_code": "CN",
@@ -8735,6 +9777,33 @@
       "category_id": 6,
       "category": "Toys & Collectibles",
       "source": "research"
+    },
+    {
+      "id": 69,
+      "name": "Portable 600ml Thermos Cup 304 Stainless Steel Coffee Mug Thermal Leak-proof Water Bottle with Straw Insulated Bottle Drinkware",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 117,
+      "name": "Portable Bluetooth Music Receiver",
+      "country_code": null,
+      "country": null,
+      "category_id": 18,
+      "category": "Electronics & Accessories",
+      "source": "made-in-china"
+    },
+    {
+      "id": 81,
+      "name": "Portable Transparent Kawaii Water Bottle Sports Water Cup Plastic Handy Cup Outdoor Travel Office Essential Water Bottle ]Cup",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
     },
     {
       "id": 10,
@@ -8764,6 +9833,78 @@
       "source": "research"
     },
     {
+      "id": 129,
+      "name": "rain coats wholesale suppliers",
+      "country_code": null,
+      "country": null,
+      "category_id": 19,
+      "category": "Sports & Outdoors",
+      "source": "alibaba"
+    },
+    {
+      "id": 127,
+      "name": "Rain Jacket Manufacturers China Trade,Buy China Direct From Rain ...",
+      "country_code": null,
+      "country": null,
+      "category_id": 19,
+      "category": "Sports & Outdoors",
+      "source": "alibaba"
+    },
+    {
+      "id": 113,
+      "name": "Rain Jacket Pant Sets Waterproof Breathable Rain Suit Gear Raincoat",
+      "country_code": null,
+      "country": null,
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "made-in-china"
+    },
+    {
+      "id": 114,
+      "name": "Rain Overall",
+      "country_code": null,
+      "country": null,
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "made-in-china"
+    },
+    {
+      "id": 109,
+      "name": "Raincoat Manufacturer OEM Industrial Waterproof Rain Jacket & Bib ...",
+      "country_code": null,
+      "country": null,
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "alibaba"
+    },
+    {
+      "id": 128,
+      "name": "Raincoat Manufacturers Women Thicken Polyester Long Raincoat ...",
+      "country_code": null,
+      "country": null,
+      "category_id": 19,
+      "category": "Sports & Outdoors",
+      "source": "alibaba"
+    },
+    {
+      "id": 102,
+      "name": "Raincoat men's and women's black raincoat coat waterproof raincoat poncho waterproof hooded raincoat rainpants set",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "aliexpress"
+    },
+    {
+      "id": 101,
+      "name": "Raincoat Set Disposable 2 Pack Plus Size Adult Rain Ponchos with Hood Rain Coats Emergency Waterproof Rainpants Suit",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "aliexpress"
+    },
+    {
       "id": 41,
       "name": "Saehan Cosmetics",
       "country_code": "KR",
@@ -8791,6 +9932,24 @@
       "source": "research"
     },
     {
+      "id": 67,
+      "name": "Stainless Steel Insulated Cup Double-Wall Vacuum Cup 320/460ML Leak-Proof Thermal Water Bottle With Straw For Home Outdoor Sport",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 54,
+      "name": "Stainless Steel Stanl Cup Water Bottle Vacuum Flasks Termos Tumbler Thermal Cold Hot Vacuum-flasks-&-thermoses Thermo & Dining",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
       "id": 24,
       "name": "Sup Drinkware",
       "country_code": "CN",
@@ -8798,6 +9957,15 @@
       "category_id": 8,
       "category": "Drinkware & Tumblers",
       "source": "research"
+    },
+    {
+      "id": 65,
+      "name": "SUS316 Stainless Steel Thermos Water Bottle 500ml/600ml Insulated Bottle With Handle Thermo for Hot Cold Drinks for Outdoor",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
     },
     {
       "id": 32,
@@ -8809,6 +9977,42 @@
       "source": "research"
     },
     {
+      "id": 72,
+      "name": "Thermos Water Bottle With Straw Handle Cup 316 Stainless Steel Flask Large Capacity Vacuum Insulated Tumbler",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 60,
+      "name": "Thermos-Wasserflasche mit Strohhalmgriff, Becher aus Edelstahl 316, gro\u00dfes Fassungsverm\u00f6gen, vakuumisolierter Becher",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 64,
+      "name": "Thermosflasche, Edelstahl, Thermo-Wasserflasche, Tasse, Thermo-Kaffeetasse, isolierter Vakuumbecher, Gummifarbe, Sportkessel",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 87,
+      "name": "Transparent Self-sealing Jewelry Accessories Candy OPP Self-adhesive Bag Packaging Resealable Gift Cookie Packaging Bag",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 15,
+      "category": "Packaging & Shipping Supplies",
+      "source": "aliexpress"
+    },
+    {
       "id": 7,
       "name": "Trung Nguyen",
       "country_code": "VN",
@@ -8816,6 +10020,15 @@
       "category_id": 3,
       "category": "Coffee",
       "source": "research"
+    },
+    {
+      "id": 66,
+      "name": "TYESO Thermos Bottle Car Insulated Flask Water Tumbler for Outdoor Sports Travel Vacuum Flasks Stainless Steel Thermal Cup",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
     },
     {
       "id": 8,
@@ -8827,6 +10040,69 @@
       "source": "research"
     },
     {
+      "id": 108,
+      "name": "Waterproof Rain Jacket Supplier",
+      "country_code": null,
+      "country": null,
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "alibaba"
+    },
+    {
+      "id": 68,
+      "name": "WATERSY 500ml Insulated Water Bottle, Stainless Steel Thermal Leakproof Flask, BPA-Free Double Walled Vacuum Bottle for Sports",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 50,
+      "name": "WATERSY 500ml Stainless Steel Water Bottle Insulated Vacuum Flask Double Wall Thermal Cup Keep Cold Hot Sports Kettle",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
+    },
+    {
+      "id": 110,
+      "name": "Wholesale Polyester Pongee Rain Suit Waterproof Outdoor Rain ...",
+      "country_code": null,
+      "country": null,
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "alibaba"
+    },
+    {
+      "id": 126,
+      "name": "Wholesale PU Rain Jackets, Bulk Custom Polyurethane Raincoats ...",
+      "country_code": null,
+      "country": null,
+      "category_id": 19,
+      "category": "Sports & Outdoors",
+      "source": "web"
+    },
+    {
+      "id": 107,
+      "name": "Wholesale Rain Jackets: Bulk Raincoat Manufacturers",
+      "country_code": null,
+      "country": null,
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "web"
+    },
+    {
+      "id": 125,
+      "name": "Wholesale Waterproof Rain Jacket",
+      "country_code": null,
+      "country": null,
+      "category_id": 19,
+      "category": "Sports & Outdoors",
+      "source": "made-in-china"
+    },
+    {
       "id": 19,
       "name": "Winning Crown",
       "country_code": "CN",
@@ -8834,6 +10110,24 @@
       "category_id": 6,
       "category": "Toys & Collectibles",
       "source": "research"
+    },
+    {
+      "id": 103,
+      "name": "Women Men Outdoor Waterproof Rain Gear with Reflective Strip Hooded Coat & Pant Rain Suit",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 16,
+      "category": "Apparel & Fashion",
+      "source": "aliexpress"
+    },
+    {
+      "id": 76,
+      "name": "YETll 20 oz Thermal Water Bottle Keep Cold and Hot Water Bottle Thermos for Water Tea Coffee Vacuum Flasks Stainless Steel",
+      "country_code": "CN",
+      "country": "China",
+      "category_id": 14,
+      "category": "Drinkware & Kitchen",
+      "source": "aliexpress"
     },
     {
       "id": 3,
@@ -8990,7 +10284,7 @@
   ],
   "insights": [
     {
-      "id": 144,
+      "id": 157,
       "category_id": 11,
       "category": "Pet Care",
       "market_code": "DE",
@@ -8999,7 +10293,7 @@
       "score": 100.0,
       "confidence": 0.625,
       "headline": "PROCURE: Pet Care \u2014 source from Indonesia (emerging origin)",
-      "narrative": "**Prioritise sourcing Pet Care products from Indonesia, where supply-side growth of +19.0% contrasts sharply with contraction across all other active origins (Thailand \u201335.2%, China \u201330.9%, Vietnam \u201338.1%).** Demand signals are mixed but warrant a targeted entry: AliExpress shows strong momentum (34.7) and growth (3.9), and Pinterest acceleration (+0.79) suggests emerging consumer interest, while only 1 of 4 rising sources is currently active \u2014 indicating early-stage opportunity rather than saturated demand. Indonesia's current 9.6% supply share signals meaningful but undercrowded capacity, and sourcing from there directly differentiates Lidl from Rewe, which is already anchored to Thailand \u2014 an origin in visible decline.",
+      "narrative": "**Prioritise sourcing Pet Care products from Indonesia, allocating incremental volume away from Thailand and China.** Indonesia is the only origin showing positive supply growth (+19.0%) among the top origins, and with only a 9.6% current share it offers meaningful headroom to scale without concentration risk. Demand signals on AliExpress show strong momentum (34.7) and growth (3.9), indicating rising consumer interest in value-channel pet care, while established competitors such as Rewe are anchored to Thailand \u2014 an origin whose supply is contracting (-35.2%) \u2014 giving Lidl a differentiation and supply security advantage by moving early on Indonesia.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -9104,7 +10398,7 @@
       "status": "new"
     },
     {
-      "id": 145,
+      "id": 158,
       "category_id": 5,
       "category": "Knitwear & Apparel",
       "market_code": "DE",
@@ -9113,7 +10407,7 @@
       "score": 88.0,
       "confidence": 0.583,
       "headline": "PROCURE: Knitwear & Apparel \u2014 source from China",
-      "narrative": "**Procure Knitwear & Apparel now from China as primary origin, with Vietnam and Bangladesh as secondary sources.** Demand signals are strongest on Pinterest (momentum 12.7, acceleration 0.85) and Instagram (momentum 7.5), indicating a clear and accelerating trend in the German market that warrants immediate inventory build. China holds the largest supply share (31.9%) among all origins, providing the broadest sourcing base, while Vietnam (20.6%) and Bangladesh (14.0%) offer meaningful volume diversification \u2014 and sourcing from Bangladesh additionally differentiates Lidl from key competitors (Aldi, Tesco, Auchan, Sainsbury's) who already rely on Bangladesh, reducing direct cost-benchmark exposure. Note that all origins show declining import growth, so volumes should be sized against confirmed trend momentum rather than speculative upside.",
+      "narrative": "**Procure Knitwear & Apparel now from China as primary origin, with Vietnam and Bangladesh as secondary sources.** Demand signals are strong and accelerating on Pinterest (momentum 12.7, acceleration 0.85) and growing on Instagram, indicating genuine consumer pull in Germany, while China retains the largest supply share (31.9%) despite a contracting import volume \u2014 making it the most capacity-rich option among all origins. Diversifying into Vietnam (20.6% share) and Bangladesh (14.0% share) provides cost and risk spread, and strategically differentiates Lidl from key competitors Aldi, Tesco, Auchan, and Sainsbury's, who are concentrated in Bangladesh alone.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -9234,7 +10528,7 @@
       "status": "new"
     },
     {
-      "id": 146,
+      "id": 159,
       "category_id": 4,
       "category": "Footwear",
       "market_code": "DE",
@@ -9243,7 +10537,7 @@
       "score": 74.28,
       "confidence": 0.417,
       "headline": "PROCURE: Footwear \u2014 source from Vietnam",
-      "narrative": "**Procure footwear primarily from Vietnam (44.1% supply share), with supplementary volumes from China (42.0%) and Indonesia (9.2%).** Demand is driven by a strong TikTok signal (momentum: 5.7, acceleration: 0.58) \u2014 the sole rising source among three active platforms \u2014 indicating an emerging social-commerce-led trend in Germany that warrants a measured but proactive buy. Vietnam is the preferred lead origin as it holds the largest supply share and is the sourcing choice of the majority of key competitors (Aldi, Carrefour, Mercadona, Walmart), reducing supply risk and benchmarking Lidl against established market practice, while China and Indonesia provide volume flexibility given their combined 51%+ share across recommended origins.",
+      "narrative": "**Procure footwear primarily from Vietnam (44.1% supply share), with a secondary allocation from China (42.0%) and a smaller volume from Indonesia (9.2%).** Demand is being driven by strong TikTok momentum (5.71) with positive acceleration (0.58), making Vietnam the strategically sound lead origin as it is already the preferred sourcing base for four of the six tracked competitors \u2014 Aldi, Carrefour, Mercadona, and Walmart \u2014 signalling proven supply chain viability at scale. While all three recommended origins show declining supply growth, Vietnam's marginally superior share position and dominant competitor alignment make it the lowest-risk primary source, with China and Indonesia providing volume diversification against concentration risk.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -9364,7 +10658,7 @@
       "status": "new"
     },
     {
-      "id": 147,
+      "id": 160,
       "category_id": 3,
       "category": "Coffee",
       "market_code": "DE",
@@ -9373,7 +10667,7 @@
       "score": 71.21,
       "confidence": 0.583,
       "headline": "PROCURE: Coffee \u2014 source from Vietnam",
-      "narrative": "**Prioritise Vietnam as the primary coffee origin, allocating the majority of volume there, with Indonesia as a secondary source.**\n\nVietnam holds a dominant 62.4% supply share and is the only major origin showing positive supply growth (+7.2%), making it the most reliable and scalable sourcing option; Indonesia (23.8% share) provides a meaningful volume buffer despite slight share decline. Demand signals support this move, with Pinterest showing strong momentum (1.91) and the highest acceleration (1.02), and AliExpress also posting positive momentum (1.76) and growth \u2014 indicating a building consumer interest trend in Germany that Lidl should position ahead of, particularly given competitor Rewe is already sourced from Vietnam.",
+      "narrative": "**Procure coffee primarily from Vietnam, with secondary volumes from Indonesia and India.** Vietnam dominates supply with a 62% share and is the only major origin showing positive supply growth (+7.2%), while Indonesia and India \u2014 though experiencing modest share declines \u2014 remain recommended origins that together account for a further ~36% of available supply, providing meaningful diversification. Demand signals support this action, with Pinterest and AliExpress both showing positive momentum and acceleration, and Pinterest in particular exhibiting strong acceleration (1.02), indicating building consumer interest; note that Amazon's negative momentum warrants monitoring but does not outweigh the broader positive trend across 2 of 3 rising sources.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -9474,7 +10768,7 @@
       "status": "new"
     },
     {
-      "id": 148,
+      "id": 161,
       "category_id": 1,
       "category": "Beauty & Cosmetics",
       "market_code": "DE",
@@ -9483,7 +10777,7 @@
       "score": 71.18,
       "confidence": 0.517,
       "headline": "PROCURE: Beauty & Cosmetics \u2014 source from South Korea (emerging origin)",
-      "narrative": "**Prioritise sourcing Beauty & Cosmetics from South Korea as the primary origin, with China as a secondary supplier, targeting the German market now.**\n\nSouth Korea holds the largest supply share (45.4%) among all recommended origins and is classified as an emerging source with positive growth, while demand signals on AliExpress (momentum: 14.3, growth: 1.08) and Instagram (momentum: 7.8, growth: 2.18) confirm active and expanding consumer interest in the category in Germany. Competitor Edeka is already sourcing from South Korea, making it urgent for Lidl to establish its own South Korean supply lines to avoid ceding further ground, with China (34.6% share) recommended as a volume backstop given its comparable growth profile and broader product range availability.",
+      "narrative": "**Prioritise sourcing Beauty & Cosmetics from South Korea as the primary origin, supplemented by China as a secondary source.**\n\nSouth Korea holds the largest supply share at 45.4% and is flagged as an emerging origin with full growth momentum, making it the strongest procurement anchor; China's 34.6% share provides meaningful volume backup at comparable growth dynamics. Demand signals on AliExpress (momentum: 14.3) and Instagram (momentum: 7.8, growth: 2.2) confirm active consumer interest in the German market, while the presence of competitor Edeka already sourcing from South Korea signals validated category traction that Lidl must match to remain competitive.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -9586,7 +10880,7 @@
       "status": "new"
     },
     {
-      "id": 149,
+      "id": 162,
       "category_id": 10,
       "category": "Audio & Earbuds",
       "market_code": "DE",
@@ -9595,7 +10889,7 @@
       "score": 63.13,
       "confidence": 0.417,
       "headline": "PROCURE: Audio & Earbuds \u2014 source from China",
-      "narrative": "**Procure Audio & Earbuds now from China as the primary origin, with Vietnam as a secondary source.** TikTok is the sole rising demand signal, posting meaningful momentum (2.61) and a strong acceleration of 1.02, indicating an emerging consumer trend in Germany that warrants timely inventory commitment before peak demand materialises. China dominates the supply mix with a 61.8% import share and is already the sourcing origin for key competitors Aldi and Ahold Delhaize, confirming its reliability and competitive parity; Vietnam's 33.0% share provides a credible complementary source to mitigate concentration risk, though both origins show moderate volume decline (-13.5% and -18.7% respectively), so initial order volumes should be calibrated conservatively against the TikTok-driven upside rather than committed at full scale.",
+      "narrative": "**Procure Audio & Earbuds now from China as the primary origin, with Vietnam as a secondary source.** TikTok is the sole platform showing meaningful positive momentum (2.61) with strong acceleration (1.02), signalling a genuine demand upswing in Germany that warrants immediate stock commitment before the trend peaks. China dominates the supply landscape with a 61.8% import share and is the established sourcing origin for both key competitors (Aldi and Ahold Delhaize), making it the lowest-risk, highest-availability choice; Vietnam's 33.0% share provides a credible volume buffer to reduce single-origin dependency, though both origins are experiencing modest share decline (-13.5% and -18.7% respectively), so procurement volumes should be sized against the TikTok-driven demand signal rather than broad category growth assumptions.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -9700,7 +10994,7 @@
       "status": "new"
     },
     {
-      "id": 150,
+      "id": 163,
       "category_id": 2,
       "category": "Tea & Matcha",
       "market_code": "DE",
@@ -9709,7 +11003,7 @@
       "score": 39.17,
       "confidence": 0.4,
       "headline": "WATCH: Tea & Matcha \u2014 source from Japan (emerging origin)",
-      "narrative": "**Prioritise sourcing Tea & Matcha from Japan, with a secondary allocation from Pakistan, while reducing reliance on China and India.** Japan holds the largest supply share (34.7%) among recommended origins and is the only top-tier origin showing positive supply growth (+26.4%), making it the strongest near-term procurement anchor; Pakistan, though small in share (3.1%), also shows comparable positive growth (+24.0%) and offers meaningful diversification. Demand signals are broadly declining across all tracked platforms, so procurement volumes should be kept conservative, but differentiating on Japanese origin provides a clear competitive angle \u2014 neither Rewe (China) nor Sainsbury's (India) is positioned there \u2014 while avoiding origins where supply growth is contracting, specifically China (\u221227.9%) and Indonesia (\u221234.1%).",
+      "narrative": "**Prioritise sourcing Tea & Matcha from Japan, with a supplementary allocation from Pakistan, while reducing reliance on China and India.** Japan holds the largest supply share (34.7%) among recommended origins and is the only top-tier origin posting positive supply growth (+26.4%), making it the strongest available option despite broad demand contraction across all measured platforms. Pakistan offers a secondary opportunity as an emerging origin with comparable growth momentum (+24.0%) at a much smaller base share (3.1%), providing diversification upside; avoiding China and India is further supported by their declining supply growth (-27.9% and -14.4% respectively) and the fact that direct competitors Rewe and Sainsbury's already occupy those origins, limiting Lidl's differentiation potential.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -9813,7 +11107,7 @@
       "status": "new"
     },
     {
-      "id": 151,
+      "id": 164,
       "category_id": 6,
       "category": "Toys & Collectibles",
       "market_code": "DE",
@@ -9822,7 +11116,7 @@
       "score": 28.0,
       "confidence": 0.15,
       "headline": "WATCH: Toys & Collectibles \u2014 source from China",
-      "narrative": "**Maintain procurement of Toys & Collectibles primarily from China (86% supply share), with selective supplementary volumes from Vietnam and Indonesia as a hedge against supply concentration risk.**\n\nDemand signals are mixed \u2014 AliExpress shows strong marketplace momentum (126.6) with 10% growth, suggesting active price-sensitive consumer purchasing, but social discovery channels (TikTok, Instagram, Pinterest) are all in decline, indicating weakening organic trend pull in Germany. All three recommended origins (China, Vietnam, Indonesia) are contracting in supply growth, though Indonesia (\u221220.3%) and India (\u221212.9%) are declining least steeply, and China remains the dominant, competitively validated source used by Tesco, Ahold Delhaize, and Walmart alike.",
+      "narrative": "**Maintain China as the primary procurement origin for Toys & Collectibles in Germany, while holding current volume levels rather than expanding commitments.** China dominates supply with an 86% share, and all tracked competitors (Tesco, Ahold Delhaize, Walmart) are sourcing from the same origin, confirming it as the structural backbone of this category \u2014 however, China's supply growth is contracting at -26%, signalling tightening availability or margin pressure that warrants close monitoring. Demand signals are broadly weak across Amazon, Pinterest, Instagram, and TikTok, with only AliExpress showing strong momentum (126.6), suggesting category interest is concentrated in value/discount channels, which aligns with Lidl's positioning but does not justify aggressive volume scaling at this stage.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -9931,7 +11225,7 @@
       "status": "new"
     },
     {
-      "id": 152,
+      "id": 165,
       "category_id": 9,
       "category": "Candles & Home Fragrance",
       "market_code": "DE",
@@ -9940,7 +11234,7 @@
       "score": 15.61,
       "confidence": 0.15,
       "headline": "WATCH: Candles & Home Fragrance \u2014 source from Vietnam",
-      "narrative": "**Prioritise Vietnam as the primary sourcing origin for Candles & Home Fragrance, allocating the majority of volume there given its dominant 69.3% import share and the shallowest supply-side decline (-3.4%) among all origins.** As a secondary hedge, consider a limited allocation from Thailand, which holds a smaller share but is the only origin showing positive supply growth (+5.5%), offering a buffer against further Vietnam-side tightening. Avoid expanding from China, India, or Turkey at this stage: China and India show steep supply contractions (-22.3% and -25.2% respectively), and demand signals across TikTok and Instagram in Germany are currently negative with no rising demand sources detected, warranting a cautious, volume-controlled procurement posture rather than broad supplier diversification.",
+      "narrative": "**Prioritise Vietnam as the primary sourcing origin for Candles & Home Fragrance, allocating the majority of volume there given its dominant 69% import share and relatively contained decline of -3.4% \u2014 far more stable than China (-22.3%) and India (-25.2%).** A secondary, opportunistic allocation to Thailand is worth monitoring, as it is the only origin showing positive growth (+5.5%) despite its small current share. Demand signals are weak across social platforms (negative momentum on both Instagram and TikTok) with no rising demand sources, so procurement volumes should be kept lean and focused on replenishment rather than expansion, avoiding the deeper supply-side erosion visible in China and India where Carrefour is already active.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -10035,7 +11329,117 @@
       "status": "new"
     },
     {
-      "id": 153,
+      "id": 167,
+      "category_id": 8,
+      "category": "Drinkware & Tumblers",
+      "market_code": "DE",
+      "market": "Germany",
+      "action": "HOLD",
+      "score": 8.0,
+      "confidence": 0.0,
+      "headline": "HOLD: Drinkware & Tumblers \u2014 source from China",
+      "narrative": "**Maintain current procurement volumes for Drinkware & Tumblers, sourcing primarily from China.** China dominates supply with a 99.1% share and, while its growth rate is marginally negative (-5.3%), no alternative origin offers sufficient scale to justify a shift \u2014 Thailand holds just 0.7% share despite positive growth (38.2%), and Japan's share is negligible at 0.08% with sharply declining growth (-58.7%). Demand signals support a cautious hold rather than expansion: AliExpress shows strong momentum (76.1) and solid growth (8.4), but social platforms (TikTok, Instagram, Pinterest) are all contracting with zero rising sources across the category, indicating the trend has plateaued and does not warrant increased commitment at this time.",
+      "narrator": "llm",
+      "evidence": {
+        "demand": [
+          {
+            "growth": 8.3933,
+            "momentum": 76.1081,
+            "platform": "aliexpress",
+            "acceleration": 0.0
+          },
+          {
+            "growth": 0.1448,
+            "momentum": 1.9692,
+            "platform": "amazon",
+            "acceleration": 0.0
+          },
+          {
+            "growth": -0.8671,
+            "momentum": -3.4092,
+            "platform": "pinterest",
+            "acceleration": -0.1147
+          },
+          {
+            "growth": -0.9298,
+            "momentum": -5.4808,
+            "platform": "instagram",
+            "acceleration": 0.0
+          },
+          {
+            "growth": -0.9768,
+            "momentum": -13.1999,
+            "platform": "tiktok",
+            "acceleration": -5.4372
+          }
+        ],
+        "market": "Germany",
+        "category": "Drinkware & Tumblers",
+        "competitors": [
+          {
+            "origin": "China",
+            "competitor": "Tesco"
+          }
+        ],
+        "marketplace": [
+          {
+            "growth": 8.3933,
+            "momentum": 76.1081,
+            "platform": "aliexpress",
+            "acceleration": 0.0
+          },
+          {
+            "growth": 0.1448,
+            "momentum": 1.9692,
+            "platform": "amazon",
+            "acceleration": 0.0
+          }
+        ],
+        "top_origins": [
+          {
+            "share": 0.9907,
+            "growth": -0.0529,
+            "origin": "China",
+            "emerging": false
+          },
+          {
+            "share": 0.0071,
+            "growth": 0.3815,
+            "origin": "Thailand",
+            "emerging": false
+          },
+          {
+            "share": 0.0008,
+            "growth": -0.5865,
+            "origin": "Japan",
+            "emerging": false
+          },
+          {
+            "share": 0.0008,
+            "growth": 0.2371,
+            "origin": "India",
+            "emerging": false
+          },
+          {
+            "share": 0.0002,
+            "growth": -0.2055,
+            "origin": "Vietnam",
+            "emerging": false
+          }
+        ],
+        "total_sources": 3,
+        "rising_sources": 0,
+        "max_acceleration": 0.0,
+        "recommended_origins": [
+          "China",
+          "Thailand",
+          "Japan"
+        ]
+      },
+      "status": "new"
+    },
+    {
+      "id": 166,
       "category_id": 7,
       "category": "Small Kitchen Appliances",
       "market_code": "DE",
@@ -10044,7 +11448,7 @@
       "score": 8.0,
       "confidence": 0.0,
       "headline": "HOLD: Small Kitchen Appliances \u2014 source from China",
-      "narrative": "**Maintain current procurement volumes for Small Kitchen Appliances from China, but do not expand commitments at this time.** China remains the dominant supply origin with an 83.3% share and no viable alternative has emerged \u2014 Thailand, South Korea, and Indonesia all show steeper supply-side declines than China's \u201313.9% growth \u2014 making a sourcing shift unjustified. While marketplace momentum on AliExpress and Amazon remains positive, zero acceleration across all sources combined with declining demand signals on TikTok (momentum \u20137.69, acceleration \u20131.05) and Pinterest indicate the category is plateauing rather than growing, warranting a hold rather than a scale-up.",
+      "narrative": "**Maintain current procurement volumes for Small Kitchen Appliances from China, but do not expand commitments at this time.** China remains the dominant and only pragmatic origin at 83.3% supply share, with no emerging alternatives identified, but its supply growth is contracting (-13.9%) and zero supply sources are currently rising across the three tracked origins. Demand signals reinforce caution: social momentum is declining sharply on TikTok (momentum -7.69, acceleration -1.05) and Pinterest, with zero acceleration across all platforms, indicating no near-term demand uplift that would justify increased stock exposure.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -10148,116 +11552,6 @@
           "China",
           "Thailand",
           "South Korea"
-        ]
-      },
-      "status": "new"
-    },
-    {
-      "id": 154,
-      "category_id": 8,
-      "category": "Drinkware & Tumblers",
-      "market_code": "DE",
-      "market": "Germany",
-      "action": "HOLD",
-      "score": 8.0,
-      "confidence": 0.0,
-      "headline": "HOLD: Drinkware & Tumblers \u2014 source from China",
-      "narrative": "**Maintain current procurement volumes for Drinkware & Tumblers, sourcing primarily from China.** China dominates supply with a 99.1% import share and, despite a marginal volume decline (-5.3% growth), remains the only viable primary origin at scale, with no alternative origin holding more than 0.7% share. Demand signals are mixed \u2014 AliExpress shows strong momentum (76.1) and growth (8.4), but social channels (TikTok, Instagram, Pinterest) are all contracting with negative acceleration, indicating the category is plateauing rather than breaking out, which supports a hold rather than an expansion of positions.",
-      "narrator": "llm",
-      "evidence": {
-        "demand": [
-          {
-            "growth": 8.3933,
-            "momentum": 76.1081,
-            "platform": "aliexpress",
-            "acceleration": 0.0
-          },
-          {
-            "growth": 0.1448,
-            "momentum": 1.9692,
-            "platform": "amazon",
-            "acceleration": 0.0
-          },
-          {
-            "growth": -0.8671,
-            "momentum": -3.4092,
-            "platform": "pinterest",
-            "acceleration": -0.1147
-          },
-          {
-            "growth": -0.9298,
-            "momentum": -5.4808,
-            "platform": "instagram",
-            "acceleration": 0.0
-          },
-          {
-            "growth": -0.9768,
-            "momentum": -13.1999,
-            "platform": "tiktok",
-            "acceleration": -5.4372
-          }
-        ],
-        "market": "Germany",
-        "category": "Drinkware & Tumblers",
-        "competitors": [
-          {
-            "origin": "China",
-            "competitor": "Tesco"
-          }
-        ],
-        "marketplace": [
-          {
-            "growth": 8.3933,
-            "momentum": 76.1081,
-            "platform": "aliexpress",
-            "acceleration": 0.0
-          },
-          {
-            "growth": 0.1448,
-            "momentum": 1.9692,
-            "platform": "amazon",
-            "acceleration": 0.0
-          }
-        ],
-        "top_origins": [
-          {
-            "share": 0.9907,
-            "growth": -0.0529,
-            "origin": "China",
-            "emerging": false
-          },
-          {
-            "share": 0.0071,
-            "growth": 0.3815,
-            "origin": "Thailand",
-            "emerging": false
-          },
-          {
-            "share": 0.0008,
-            "growth": -0.5865,
-            "origin": "Japan",
-            "emerging": false
-          },
-          {
-            "share": 0.0008,
-            "growth": 0.2371,
-            "origin": "India",
-            "emerging": false
-          },
-          {
-            "share": 0.0002,
-            "growth": -0.2055,
-            "origin": "Vietnam",
-            "emerging": false
-          }
-        ],
-        "total_sources": 3,
-        "rising_sources": 0,
-        "max_acceleration": 0.0,
-        "recommended_origins": [
-          "China",
-          "Thailand",
-          "Japan"
         ]
       },
       "status": "new"
