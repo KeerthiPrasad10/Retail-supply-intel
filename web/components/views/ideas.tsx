@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { QRCodeSVG } from "qrcode.react";
+import { QRCodeCanvas, QRCodeSVG } from "qrcode.react";
 import type { ProductIdea, ResearchResult } from "@/lib/ideas/types";
 import type { Go, Trend } from "@/lib/types";
 import { resizeImage } from "@/lib/image";
@@ -219,9 +219,12 @@ export function Ideas({ go, resetSignal }: { go: Go; resetSignal: number }) {
 // A scannable QR pointing at the public /submit form so anyone can add an idea
 // from their phone. Built from the live origin so it matches whichever
 // deployment is being viewed (prod or preview) — no hard-coded domain.
+// Compact by default; tap the code to enlarge it for scanning, share the link,
+// or download the QR as an image.
 function ShareSubmit() {
   const [url, setUrl] = useState("");
   const [copied, setCopied] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") setUrl(`${window.location.origin}/submit`);
@@ -238,36 +241,155 @@ function ShareSubmit() {
     }
   }
 
+  async function share() {
+    if (!url) return;
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try {
+        await navigator.share({
+          title: "Submit a product idea",
+          text: "Submit a product idea — AI researches the live market for you.",
+          url,
+        });
+        return;
+      } catch {
+        /* user cancelled or share unsupported — fall back to copy */
+      }
+    }
+    copy();
+  }
+
   return (
-    <div className="panel ideas-share">
-      <div className="ideas-share-qr">
-        {url ? (
-          <QRCodeSVG value={url} size={132} level="M" marginSize={0} bgColor="#ffffff" fgColor="#090909" />
-        ) : (
-          <div className="ideas-share-qr-skeleton" aria-hidden />
-        )}
+    <>
+      <div className="panel ideas-share">
+        <button
+          type="button"
+          className="ideas-share-qr"
+          onClick={() => setOpen(true)}
+          disabled={!url}
+          aria-label="Enlarge QR code"
+        >
+          {url ? (
+            <QRCodeSVG value={url} size={68} level="M" marginSize={0} bgColor="#ffffff" fgColor="#090909" />
+          ) : (
+            <div className="ideas-share-qr-skeleton" aria-hidden />
+          )}
+          <span className="ideas-share-qr-hint" aria-hidden>
+            <Icons.expand size={11} />
+          </span>
+        </button>
+        <div className="ideas-share-body">
+          <p className="ideas-share-title">
+            <Icons.qr size={14} /> Scan to submit an idea
+          </p>
+          <p className="ideas-share-sub">
+            Tap the code to enlarge and scan it, or share the link with the team.
+          </p>
+          <div className="ideas-share-actions">
+            <button type="button" className="btn secondary sm" onClick={() => setOpen(true)} disabled={!url}>
+              <Icons.expand size={13} /> Enlarge
+            </button>
+            <button type="button" className="btn secondary sm" onClick={share} disabled={!url}>
+              <Icons.send size={13} /> Share
+            </button>
+            <button type="button" className="btn ghost sm" onClick={copy} disabled={!url}>
+              {copied ? (
+                <>
+                  <Icons.check size={13} /> Copied
+                </>
+              ) : (
+                "Copy link"
+              )}
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="ideas-share-body">
-        <p className="ideas-share-title">
-          <Icons.qr size={15} /> Scan to submit an idea
-        </p>
-        <p className="ideas-share-sub">
-          Point a phone camera at the code — it opens the submission form. Share it with the team to collect ideas.
-        </p>
-        <div className="ideas-share-link">
-          <code className="ideas-share-url">{url || "Loading…"}</code>
-          <button type="button" className="btn secondary sm" onClick={copy} disabled={!url}>
+      {open && url && (
+        <QrModal url={url} copied={copied} onClose={() => setOpen(false)} onShare={share} onCopy={copy} />
+      )}
+    </>
+  );
+}
+
+// Enlarged, shareable QR. Big SVG for scanning + a hidden hi-res canvas used to
+// export a PNG for download / sharing as an image.
+function QrModal({
+  url,
+  copied,
+  onClose,
+  onShare,
+  onCopy,
+}: {
+  url: string;
+  copied: boolean;
+  onClose: () => void;
+  onShare: () => void;
+  onCopy: () => void;
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  function download() {
+    const c = canvasRef.current;
+    if (!c) return;
+    const a = document.createElement("a");
+    a.href = c.toDataURL("image/png");
+    a.download = "submit-idea-qr.png";
+    a.click();
+  }
+
+  return (
+    <div className="modal-scrim" onClick={onClose}>
+      <div
+        className="modal qr-modal"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label="QR code to submit an idea"
+      >
+        <button type="button" className="qr-modal-close" onClick={onClose} aria-label="Close">
+          <Icons.x size={16} />
+        </button>
+        <h3>Scan to submit an idea</h3>
+        <p>Point a phone camera at the code to open the submission form.</p>
+        <div className="qr-modal-code">
+          <QRCodeSVG value={url} size={248} level="M" marginSize={1} bgColor="#ffffff" fgColor="#090909" />
+        </div>
+        <code className="ideas-share-url qr-modal-url">{url}</code>
+        <div className="qr-modal-actions">
+          <button type="button" className="btn primary sm" onClick={onShare}>
+            <Icons.send size={14} /> Share
+          </button>
+          <button type="button" className="btn secondary sm" onClick={download}>
+            <Icons.download size={14} /> Download
+          </button>
+          <button type="button" className="btn secondary sm" onClick={onCopy}>
             {copied ? (
               <>
-                <Icons.check size={13} /> Copied
+                <Icons.check size={14} /> Copied
               </>
             ) : (
-              <>
-                <Icons.send size={13} /> Copy link
-              </>
+              "Copy link"
             )}
           </button>
         </div>
+        {/* Hidden hi-res canvas — source for the PNG download. */}
+        <QRCodeCanvas
+          ref={canvasRef}
+          value={url}
+          size={512}
+          level="M"
+          marginSize={2}
+          bgColor="#ffffff"
+          fgColor="#090909"
+          style={{ display: "none" }}
+        />
       </div>
     </div>
   );
