@@ -10,6 +10,7 @@ import { Icons } from "../icons";
 import { useModel } from "../model-context";
 import { Tier } from "../primitives";
 import { IdeaComments } from "./idea-comments";
+import { SimilarIdeas } from "../SimilarIdeas";
 import { StatTile } from "./shared";
 
 const CATEGORIES = [
@@ -925,6 +926,13 @@ function SubmitForm({
           />
         </Field>
       </fieldset>
+
+      <SimilarIdeas
+        title={fields.title}
+        category={fields.category}
+        features={fields.features}
+        description={fields.description}
+      />
 
       {formError && (
         <div className="callout warn">

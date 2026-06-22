@@ -176,3 +176,79 @@ export async function updateIdea(
   mem.set(id, next);
   return next;
 }
+
+/* ---------- Similar-idea discovery ---------- */
+
+/** Lightweight shape returned to the submit form — no research payload. */
+export type SimilarIdea = {
+  id: string;
+  title: string;
+  category: string;
+  imageUrl: string;
+  submittedBy: string;
+  status: ProductIdea["status"];
+  createdAt: string;
+  hasResearch: boolean;
+};
+
+export type SimilarInput = {
+  title?: string;
+  category?: string;
+  features?: string;
+  description?: string;
+};
+
+function simTokens(...parts: (string | undefined)[]): Set<string> {
+  const out = new Set<string>();
+  for (const p of parts) {
+    if (!p) continue;
+    for (const w of p.toLowerCase().split(/[^a-z0-9]+/)) if (w.length >= 3) out.add(w);
+  }
+  return out;
+}
+
+/** Best available category label for an idea (research-derived first). */
+function candidateCategory(i: ProductIdea): string {
+  return (
+    i.research?.classification?.category ||
+    i.research?.enrichment?.suggestedCategory ||
+    i.category ||
+    ""
+  );
+}
+
+/** Overlap score between a draft and an existing idea. Word overlap on
+ *  title/features/description plus a strong boost when categories align. */
+function similarityScore(draft: SimilarInput, cand: ProductIdea): number {
+  const dt = simTokens(draft.title, draft.features, draft.description);
+  const ct = simTokens(cand.title, cand.features, cand.description, candidateCategory(cand));
+  let score = 0;
+  for (const t of dt) if (ct.has(t)) score += 1;
+  const dc = (draft.category || "").toLowerCase().trim();
+  const cc = candidateCategory(cand).toLowerCase().trim();
+  if (dc && cc && (dc === cc || cc.includes(dc) || dc.includes(cc))) score += 3;
+  return score;
+}
+
+/**
+ * Find existing ideas similar to a draft so the submitter can see what the team
+ * has already proposed. Ranks by overlap; ties broken by most-recent.
+ */
+export async function findSimilarIdeas(draft: SimilarInput, limit = 4): Promise<SimilarIdea[]> {
+  const all = await listIdeas();
+  return all
+    .map((i) => ({ i, score: similarityScore(draft, i) }))
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score || b.i.createdAt.localeCompare(a.i.createdAt))
+    .slice(0, limit)
+    .map(({ i }) => ({
+      id: i.id,
+      title: i.title,
+      category: candidateCategory(i),
+      imageUrl: i.imageUrl,
+      submittedBy: i.submittedBy,
+      status: i.status,
+      createdAt: i.createdAt,
+      hasResearch: Boolean(i.research),
+    }));
+}

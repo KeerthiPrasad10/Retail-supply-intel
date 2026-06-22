@@ -5,6 +5,7 @@ import type { ProductIdea } from "@/lib/ideas/types";
 import { resizeImage } from "@/lib/image";
 import { cc } from "@/lib/util";
 import { Icons } from "./icons";
+import { SimilarIdeas } from "./SimilarIdeas";
 
 
 const CATEGORIES = [
@@ -555,6 +556,13 @@ function FormView({
             </div>
           </label>
         </fieldset>
+
+        <SimilarIdeas
+          title={fields.title}
+          category={fields.category}
+          features={fields.features}
+          description={fields.description}
+        />
 
         {(formError || error) && (
           <div className="callout warn">
