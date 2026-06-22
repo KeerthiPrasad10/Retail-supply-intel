@@ -12,7 +12,7 @@ import type {
 import { extractProduct, firecrawlEnabled, search, type SearchResult } from "./firecrawl";
 import { amazonSearch, aliexpressSuppliers, alibabaSuppliers, madeInChinaSuppliers, apifyEnabled } from "./apify";
 import { demandPulse } from "./demand";
-import { analyzeWithClaude, classifyProduct, llmEnabled } from "./llm";
+import { analyzeWithClaude, classifyProduct, filterRelevantDemandPosts, llmEnabled } from "./llm";
 import { generateRenderings, falEnabled } from "./renderings";
 import { parsePrice, priceRangeOf } from "./price";
 import { updateIdea } from "./store";
@@ -293,7 +293,20 @@ export async function runResearch(idea: ProductIdea): Promise<ResearchResult> {
     apifyEnabled() ? alibabaSuppliers(productClass, 6) : Promise.resolve<Supplier[]>([]),
     apifyEnabled() ? madeInChinaSuppliers(productClass, 6) : Promise.resolve<Supplier[]>([]),
     firecrawlEnabled() ? findWebSuppliers(productClass) : Promise.resolve<Supplier[]>([]),
-    demandPulse(productClass),
+    demandPulse(productClass, async (posts) => {
+      // Post-capture LLM relevance judge — drops keyword-coincidence matches.
+      const keep = await filterRelevantDemandPosts(
+        {
+          title: workingIdea.title,
+          productClass: classification?.productClass,
+          category: classification?.category || workingIdea.category,
+          description: workingIdea.description,
+        },
+        posts.map((p) => ({ title: p.title, channel: p.channel }))
+      );
+      if (keep === null) return null; // LLM unavailable/failed → keep keyword set
+      return keep.map((i) => posts[i]).filter(Boolean);
+    }),
   ]);
   agents.push(demandAgentInfo(demand));
 

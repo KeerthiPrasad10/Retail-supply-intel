@@ -145,6 +145,62 @@ export async function classifyProduct(idea: ProductIdea): Promise<Classification
   return parsed;
 }
 
+const RELEVANCE_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    relevant: {
+      type: "array",
+      items: { type: "integer" },
+      description:
+        "Zero-based indices of ONLY the posts genuinely about this product, products like it, its product category, or real buyer interest/complaints/requests for it.",
+    },
+  },
+  required: ["relevant"],
+};
+
+/**
+ * Post-capture relevance judge for demand signals. Keyword matching can't tell
+ * "rain jacket the product" from "rain in an owl fact" — so after fetching
+ * candidate posts we ask Claude which are genuinely about the product and drop
+ * the rest. Returns the indices to keep, or null when the LLM is unavailable /
+ * fails (caller then keeps the keyword-filtered set).
+ */
+export async function filterRelevantDemandPosts(
+  ctx: { title: string; productClass?: string; category?: string; description?: string },
+  posts: { title: string; channel: string }[]
+): Promise<number[] | null> {
+  if (!llmEnabled() || posts.length === 0) return null;
+  const list = posts.map((p, i) => `${i}. [${p.channel}] ${p.title}`).join("\n");
+  const text = [
+    "You curate a product's DEMAND-SIGNAL panel. Decide which community posts are genuinely relevant to the product below.",
+    "",
+    "PRODUCT",
+    `Title: ${ctx.title}`,
+    `Product class: ${ctx.productClass || ctx.category || "(unspecified)"}`,
+    `Category: ${ctx.category || "(unspecified)"}`,
+    ctx.description ? `Description: ${ctx.description}` : "",
+    "",
+    "CANDIDATE POSTS",
+    list,
+    "",
+    "Keep ONLY posts that are actually about this product, products like it, its category, or real buyer interest/complaints/requests for it. " +
+      "A post that merely shares a word (e.g. 'rain', 'waterproof', 'audio') but is really about an unrelated subject — animals, memes, software, news, jokes — is NOT relevant; exclude it. " +
+      "Return the indices to keep; if none qualify, return an empty list.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const parsed = await structuredCall<{ relevant: number[] }>(
+    [{ type: "text", text }],
+    "select_relevant_posts",
+    RELEVANCE_SCHEMA,
+    500
+  );
+  if (!parsed || !Array.isArray(parsed.relevant)) return null;
+  return parsed.relevant.filter((n) => Number.isInteger(n) && n >= 0 && n < posts.length);
+}
+
 function buildAnalysisPrompt(
   idea: ProductIdea,
   competitors: Competitor[],
