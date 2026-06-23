@@ -3,7 +3,7 @@ import "./tokens.css";
 import "./app.css";
 
 export const metadata: Metadata = {
-  title: "Retail Supply Intel · NxB Sourcing",
+  title: "productScope · Lidl Product Scouting",
   description:
     "Spot trending products and the suppliers who can make them — demand momentum meets the supply chain, for Lidl's buying team.",
 };
