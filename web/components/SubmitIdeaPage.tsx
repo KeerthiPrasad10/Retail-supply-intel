@@ -392,7 +392,7 @@ function FormView({
   return (
     <div className="sp-shell">
       <header className="sp-header">
-        <span className="sp-logo">RSI</span>
+        <span className="sp-logo">productScope</span>
         <p className="sp-header-sub">Submit a product idea</p>
       </header>
 
