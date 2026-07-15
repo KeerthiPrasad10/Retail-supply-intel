@@ -91,7 +91,7 @@ export function Sidebar({ view, go, shortlistCount }: { view: View; go: Go; shor
   return (
     <aside className="sidebar">
       <div className="logo-mark">
-        NxB<span className="slash">/Sourcing</span>
+        product<span className="slash">Scope</span>
       </div>
       <div className="nav-group">
         {/* Ordered as the workflow runs: idea → research → suppliers → shortlist. */}

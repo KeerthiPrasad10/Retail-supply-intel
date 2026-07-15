@@ -17,6 +17,8 @@ export type ProductIdea = {
   imageUrl: string;
   /** Additional product photos (labels, tags, alternate angles). Primary is imageUrl. */
   imageUrls?: string[];
+  /** Original product page URL the submitter scraped from (optional). */
+  sourceUrl?: string;
   submittedBy: string;
   status: IdeaStatus;
   research?: ResearchResult;
@@ -139,5 +141,6 @@ export type NewIdeaInput = {
   features?: string;
   imageUrl?: string;
   imageUrls?: string[];
+  sourceUrl?: string;
   submittedBy?: string;
 };
