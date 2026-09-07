@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T12:11:01.720887+00:00",
+  "generated_at": "2026-09-07T11:04:33.041112+00:00",
   "countries": [
     {
       "code": "AT",
@@ -563,30 +563,17 @@
       "rank": 16
     },
     {
-      "term": "Audio & Earbuds (amazon DE)",
+      "term": "Candles & Home Fragrance (amazon DE)",
       "platform": "amazon",
-      "category_id": 10,
-      "category": "Audio & Earbuds",
+      "category_id": 9,
+      "category": "Candles & Home Fragrance",
       "country_code": "DE",
       "country": "Germany",
       "momentum": 0.0,
       "growth": 0.0,
       "volume": 0.0,
       "acceleration": 0.0,
-      "rank": 3
-    },
-    {
-      "term": "women's rain jacket (aliexpress)",
-      "platform": "aliexpress",
-      "category_id": 19,
-      "category": "Sports & Outdoors",
-      "country_code": null,
-      "country": "Global",
-      "momentum": 0.0,
-      "growth": 0.0,
-      "volume": 25584.0,
-      "acceleration": 0.0,
-      "rank": 24
+      "rank": 2
     },
     {
       "term": "minimalist smartwatch (aliexpress)",
@@ -693,17 +680,30 @@
       "rank": 1
     },
     {
-      "term": "Candles & Home Fragrance (amazon DE)",
+      "term": "women's rain jacket (aliexpress)",
+      "platform": "aliexpress",
+      "category_id": 19,
+      "category": "Sports & Outdoors",
+      "country_code": null,
+      "country": "Global",
+      "momentum": 0.0,
+      "growth": 0.0,
+      "volume": 25584.0,
+      "acceleration": 0.0,
+      "rank": 24
+    },
+    {
+      "term": "Audio & Earbuds (amazon DE)",
       "platform": "amazon",
-      "category_id": 9,
-      "category": "Candles & Home Fragrance",
+      "category_id": 10,
+      "category": "Audio & Earbuds",
       "country_code": "DE",
       "country": "Germany",
       "momentum": 0.0,
       "growth": 0.0,
       "volume": 0.0,
       "acceleration": 0.0,
-      "rank": 2
+      "rank": 3
     },
     {
       "term": "minimalist smartwatch (pinterest)",
@@ -992,19 +992,6 @@
       "rank": 40
     },
     {
-      "term": "Tea & Matcha (amazon DE)",
-      "platform": "amazon",
-      "category_id": 2,
-      "category": "Tea & Matcha",
-      "country_code": "DE",
-      "country": "Germany",
-      "momentum": -1.768,
-      "growth": -0.1522,
-      "volume": 111035.5,
-      "acceleration": 0.0,
-      "rank": 10
-    },
-    {
       "term": "Coffee (amazon DE)",
       "platform": "amazon",
       "category_id": 3,
@@ -1016,6 +1003,19 @@
       "volume": 111035.5,
       "acceleration": 0.0,
       "rank": 11
+    },
+    {
+      "term": "Tea & Matcha (amazon DE)",
+      "platform": "amazon",
+      "category_id": 2,
+      "category": "Tea & Matcha",
+      "country_code": "DE",
+      "country": "Germany",
+      "momentum": -1.768,
+      "growth": -0.1522,
+      "volume": 111035.5,
+      "acceleration": 0.0,
+      "rank": 10
     },
     {
       "term": "#matcha",
@@ -2292,7 +2292,7 @@
   },
   "triggers": [
     {
-      "id": 389,
+      "id": 403,
       "score": 46.4919,
       "market_code": null,
       "market": "Global",
@@ -2302,7 +2302,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Knitwear & Apparel is rising in Global (momentum 46.49, +1000%). Top origins: China (32%, -23%), Vietnam (21%, -31%), Bangladesh (14%, -20%), Cambodia (9%, -15%), Indonesia (7%, -34%). Competitors already sourcing there: Aldi, Auchan, Sainsbury's, Tesco.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894922+00:00",
+      "created_at": "2026-09-07T11:02:06.354541+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2353,7 +2353,7 @@
       }
     },
     {
-      "id": 390,
+      "id": 404,
       "score": 38.3065,
       "market_code": null,
       "market": "Global",
@@ -2363,7 +2363,7 @@
       "focus_partner_name": "Indonesia",
       "rationale": "Demand for Pet Care is rising in Global (momentum 34.99, +608%). Top origins: Thailand (51%, -35%), China (26%, -31%), Indonesia (10%, +19%), Vietnam (5%, -38%), Cambodia (4%, +3%). Emerging: Indonesia (10%, +19%). Competitors already sourcing there: Rewe.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894929+00:00",
+      "created_at": "2026-09-07T11:02:06.354548+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2419,7 +2419,7 @@
       }
     },
     {
-      "id": 391,
+      "id": 405,
       "score": 38.0326,
       "market_code": null,
       "market": "Global",
@@ -2429,7 +2429,7 @@
       "focus_partner_name": "Indonesia",
       "rationale": "Demand for Pet Care is rising in Global (momentum 34.74, +389%). Top origins: Thailand (51%, -35%), China (26%, -31%), Indonesia (10%, +19%), Vietnam (5%, -38%), Cambodia (4%, +3%). Emerging: Indonesia (10%, +19%). Competitors already sourcing there: Rewe.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894930+00:00",
+      "created_at": "2026-09-07T11:02:06.354548+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2485,7 +2485,7 @@
       }
     },
     {
-      "id": 392,
+      "id": 406,
       "score": 37.3387,
       "market_code": null,
       "market": "Global",
@@ -2495,7 +2495,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Drinkware & Tumblers is rising in Global (momentum 37.34, +487%). Top origins: China (99%, -5%), Thailand (1%, +38%), Japan (0%, -59%), India (0%, +24%), Vietnam (0%, -21%). Competitors already sourcing there: Tesco.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894930+00:00",
+      "created_at": "2026-09-07T11:02:06.354549+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2543,7 +2543,7 @@
       }
     },
     {
-      "id": 393,
+      "id": 407,
       "score": 25.1873,
       "market_code": null,
       "market": "Global",
@@ -2553,7 +2553,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Small Kitchen Appliances is rising in Global (momentum 25.19, +258%). Top origins: China (83%, -14%), Thailand (6%, -22%), South Korea (3%, -20%), Indonesia (2%, -25%), Turkey (2%, -6%). Competitors already sourcing there: Aldi, Edeka, Walmart.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894932+00:00",
+      "created_at": "2026-09-07T11:02:06.354552+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2603,7 +2603,7 @@
       }
     },
     {
-      "id": 394,
+      "id": 408,
       "score": 24.2635,
       "market_code": null,
       "market": "Global",
@@ -2613,7 +2613,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Knitwear & Apparel is rising in Global (momentum 24.26, +387%). Top origins: China (32%, -23%), Vietnam (21%, -31%), Bangladesh (14%, -20%), Cambodia (9%, -15%), Indonesia (7%, -34%). Competitors already sourcing there: Aldi, Auchan, Sainsbury's, Tesco.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894933+00:00",
+      "created_at": "2026-09-07T11:02:06.354553+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2664,7 +2664,7 @@
       }
     },
     {
-      "id": 395,
+      "id": 409,
       "score": 16.2952,
       "market_code": null,
       "market": "Global",
@@ -2674,7 +2674,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Small Kitchen Appliances is rising in Global (momentum 16.30, +274%). Top origins: China (83%, -14%), Thailand (6%, -22%), South Korea (3%, -20%), Indonesia (2%, -25%), Turkey (2%, -6%). Competitors already sourcing there: Aldi, Edeka, Walmart.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894933+00:00",
+      "created_at": "2026-09-07T11:02:06.354553+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2724,7 +2724,7 @@
       }
     },
     {
-      "id": 396,
+      "id": 410,
       "score": 11.6373,
       "market_code": null,
       "market": "Global",
@@ -2734,7 +2734,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Footwear is rising in Global (momentum 11.64, +216%). Top origins: Vietnam (44%, -34%), China (42%, -36%), Indonesia (9%, -43%), Cambodia (3%, -37%), Bangladesh (1%, -41%). Competitors already sourcing there: Aldi, Auchan, Carrefour, Mercadona, Tesco, Walmart.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894934+00:00",
+      "created_at": "2026-09-07T11:02:06.354554+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2787,7 +2787,7 @@
       }
     },
     {
-      "id": 397,
+      "id": 411,
       "score": 7.4247,
       "market_code": null,
       "market": "Global",
@@ -2797,7 +2797,7 @@
       "focus_partner_name": "South Korea",
       "rationale": "Demand for Beauty & Cosmetics is rising in Global (momentum 4.95, +90%). Top origins: South Korea (45%, +100%), China (35%, +100%), Japan (12%, +100%), India (3%, +100%), Turkey (3%, +100%). Emerging: South Korea (45%, +100%), China (35%, +100%), Japan (12%, +100%), India (3%, +100%), Turkey (3%, +100%). Competitors already sourcing there: Edeka.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894935+00:00",
+      "created_at": "2026-09-07T11:02:06.354555+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2881,7 +2881,7 @@
       }
     },
     {
-      "id": 398,
+      "id": 412,
       "score": 5.4053,
       "market_code": null,
       "market": "Global",
@@ -2891,7 +2891,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Toys & Collectibles is rising in Global (momentum 5.41, +84%). Top origins: China (86%, -26%), Vietnam (8%, -22%), Indonesia (3%, -20%), Thailand (1%, -18%), India (1%, -13%). Competitors already sourcing there: Ahold Delhaize, Tesco, Walmart.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894935+00:00",
+      "created_at": "2026-09-07T11:02:06.354556+00:00",
       "payload": {
         "top_sources": [
           {
@@ -2941,7 +2941,7 @@
       }
     },
     {
-      "id": 399,
+      "id": 413,
       "score": 5.2348,
       "market_code": null,
       "market": "Global",
@@ -2951,7 +2951,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Small Kitchen Appliances is rising in Global (momentum 5.23, +158%). Top origins: China (83%, -14%), Thailand (6%, -22%), South Korea (3%, -20%), Indonesia (2%, -25%), Turkey (2%, -6%). Competitors already sourcing there: Aldi, Edeka, Walmart.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894935+00:00",
+      "created_at": "2026-09-07T11:02:06.354556+00:00",
       "payload": {
         "top_sources": [
           {
@@ -3001,7 +3001,7 @@
       }
     },
     {
-      "id": 400,
+      "id": 414,
       "score": 3.6529,
       "market_code": null,
       "market": "Global",
@@ -3011,7 +3011,7 @@
       "focus_partner_name": "South Korea",
       "rationale": "Demand for Beauty & Cosmetics is rising in Global (momentum 2.44, +67%). Top origins: South Korea (45%, +100%), China (35%, +100%), Japan (12%, +100%), India (3%, +100%), Turkey (3%, +100%). Emerging: South Korea (45%, +100%), China (35%, +100%), Japan (12%, +100%), India (3%, +100%), Turkey (3%, +100%). Competitors already sourcing there: Edeka.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894936+00:00",
+      "created_at": "2026-09-07T11:02:06.354557+00:00",
       "payload": {
         "top_sources": [
           {
@@ -3095,7 +3095,7 @@
       }
     },
     {
-      "id": 401,
+      "id": 415,
       "score": 3.6474,
       "market_code": null,
       "market": "Global",
@@ -3105,7 +3105,7 @@
       "focus_partner_name": "Vietnam",
       "rationale": "Demand for Coffee is rising in Global (momentum 3.65, +31%). Top origins: Vietnam (62%, +7%), Indonesia (24%, -13%), India (12%, -5%), China (1%, -71%), Turkey (0%, +47%). Competitors already sourcing there: Rewe.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894936+00:00",
+      "created_at": "2026-09-07T11:02:06.354558+00:00",
       "payload": {
         "top_sources": [
           {
@@ -3153,7 +3153,7 @@
       }
     },
     {
-      "id": 402,
+      "id": 416,
       "score": 0.4376,
       "market_code": null,
       "market": "Global",
@@ -3163,7 +3163,7 @@
       "focus_partner_name": "China",
       "rationale": "Demand for Audio & Earbuds is rising in Global (momentum 0.44, +12%). Top origins: China (62%, -13%), Vietnam (33%, -19%), Thailand (3%, -19%), Japan (1%, -28%), Indonesia (1%, -24%). Competitors already sourcing there: Ahold Delhaize, Aldi.",
       "status": "new",
-      "created_at": "2026-08-31T12:09:05.894936+00:00",
+      "created_at": "2026-09-07T11:02:06.354558+00:00",
       "payload": {
         "top_sources": [
           {
@@ -10570,7 +10570,7 @@
   ],
   "insights": [
     {
-      "id": 338,
+      "id": 355,
       "category_id": 11,
       "category": "Pet Care",
       "market_code": "DE",
@@ -10579,7 +10579,7 @@
       "score": 99.79,
       "confidence": 0.625,
       "headline": "PROCURE: Pet Care \u2014 source from Indonesia (emerging origin)",
-      "narrative": "**Increase Pet Care procurement from Indonesia, prioritising it as a growth origin to diversify away from Thailand and China.** Indonesia is the only top origin showing positive supply growth (+18.97%) and is classified as emerging, while the two dominant origins \u2014 Thailand (51.3% share, -35.2% growth) and China (26.2% share, -30.9% growth) \u2014 are both contracting, signalling tightening availability from established sources. Demand signals support a targeted, selective buy: Instagram and AliExpress show strong positive momentum (34.99 and 34.74 respectively), though TikTok and Google Trends are declining, so procurement volumes should be sized for steady baseline demand rather than a speculative uplift, with Indonesia's growing share (9.6%) used to reduce concentration risk and differentiate from Rewe, which is sourcing from Thailand.",
+      "narrative": "**Increase Pet Care procurement from Indonesia, allocating a greater share of volume to this emerging origin while reducing reliance on Thailand and China.**\n\nIndonesia is the only top origin showing positive supply growth (+18.97%) and is classified as emerging, making it a strategically differentiated source compared to the dominant origins Thailand (-35.22%) and China (-30.93%), both of which are in decline. Demand signals support a selective but proactive move: Instagram and AliExpress show strong momentum (34.99 and 34.74 respectively) with solid growth, and Pinterest is the only platform showing positive acceleration (+0.49), suggesting nascent but real consumer interest building in Germany. With competitor Rewe already anchored in Thailand, sourcing from Indonesia offers Lidl a distinct supply chain position and insulation from the contraction affecting the two largest origin markets.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -10684,7 +10684,7 @@
       "status": "new"
     },
     {
-      "id": 339,
+      "id": 356,
       "category_id": 1,
       "category": "Beauty & Cosmetics",
       "market_code": "DE",
@@ -10693,7 +10693,7 @@
       "score": 96.1,
       "confidence": 0.833,
       "headline": "PROCURE: Beauty & Cosmetics \u2014 source from South Korea (emerging origin)",
-      "narrative": "**Prioritise sourcing Beauty & Cosmetics from South Korea, with a secondary allocation from China and Japan.** South Korea holds the largest supply share at 45.4% and is an emerging origin with full growth momentum, making it the strongest single sourcing anchor; China (34.6% share) and Japan (11.7% share) provide meaningful volume diversification across similarly high-growth emerging origins. Demand signals on Pinterest \u2014 the highest-momentum platform at 4.95 with strong acceleration of 1.51 \u2014 confirm that aspirational beauty discovery is actively driving consumer interest in the German market, justifying a proactive procurement commitment ahead of the curve, while noting that TikTok momentum is sharply negative (-10.58), suggesting the trend is social-platform-specific and should be monitored closely. Acting now on South Korean sourcing is further supported by the competitive signal that Edeka is already active in this origin, making it commercially urgent for Lidl to secure supply before this lane becomes contested.",
+      "narrative": "**Prioritise sourcing Beauty & Cosmetics from South Korea as the primary origin, supplemented by China and Japan as secondary origins.** South Korea holds the largest supply share (45.4%) among recommended origins and is already being tapped by competitor Edeka, making it strategically urgent for Lidl to establish its own sourcing position there before the window closes. Demand signals support this move, with Pinterest showing strong momentum (4.9) and the highest acceleration (1.51) in the category within Germany, indicating that visually-driven K-beauty trends are actively building consumer pull \u2014 though the TikTok decline warrants monitoring to ensure the trend has longevity beyond short-form virality.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -10796,7 +10796,7 @@
       "status": "new"
     },
     {
-      "id": 340,
+      "id": 357,
       "category_id": 5,
       "category": "Knitwear & Apparel",
       "market_code": "DE",
@@ -10805,7 +10805,7 @@
       "score": 88.0,
       "confidence": 0.583,
       "headline": "PROCURE: Knitwear & Apparel \u2014 source from China",
-      "narrative": "**Procure Knitwear & Apparel now, prioritising China as primary origin, with Vietnam and Bangladesh as secondary sources.** Demand signals justify immediate action: Pinterest shows strong momentum (46.5) with accelerating growth (+10.8), and 2 of 3 rising sources confirm broadening consumer interest in the German market, despite softer signals on transactional platforms. China holds the largest import share (31.9%) among all origins and offers the most established supply base, while Vietnam (20.6% share) and Bangladesh (14.0% share) provide meaningful volume diversification \u2014 notably, sourcing from Bangladesh also differentiates Lidl from key competitors (Aldi, Tesco, Auchan, Sainsbury's) who already rely on it, so weight allocations should reflect that risk. All origins show negative supply-side growth, signalling potential tightening, which reinforces the case for locking in volumes across multiple origins promptly.",
+      "narrative": "**Procure Knitwear & Apparel now, prioritising China as primary origin, with Vietnam and Bangladesh as complementary sources.** Pinterest is driving strong consumer momentum (46.5, accelerating at +10.8) and Instagram shows positive growth, confirming a genuine demand build in the German market that warrants immediate stock commitment. China holds the largest supply share (31.9%) and, despite a volume decline, remains the most established and highest-capacity origin among all options, while Vietnam (20.6%) and Bangladesh (14.0%) provide cost-competitive diversification and reduce single-origin dependency. Sourcing from Bangladesh in particular also offers a competitive differentiation opportunity, as Aldi, Tesco, Auchan, and Sainsbury's are already concentrated there \u2014 leaning into China and Vietnam avoids direct origin overlap with the majority of key rivals.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -10926,7 +10926,7 @@
       "status": "new"
     },
     {
-      "id": 341,
+      "id": 358,
       "category_id": 7,
       "category": "Small Kitchen Appliances",
       "market_code": "DE",
@@ -10935,7 +10935,7 @@
       "score": 88.0,
       "confidence": 0.583,
       "headline": "PROCURE: Small Kitchen Appliances \u2014 source from China",
-      "narrative": "**Prioritise sourcing Small Kitchen Appliances from China, with a secondary allocation from Thailand and South Korea.** China dominates supply with an 83.3% import share and is the confirmed origin for all identified competitors (Aldi, Edeka, Walmart), making it the indispensable primary source to remain cost- and range-competitive in the German market. Demand signals support a procurement commitment: AliExpress shows strong momentum (25.2) with positive growth (2.6), Instagram is similarly positive (momentum 16.3, growth 2.7), and Pinterest is accelerating (acceleration 2.5)\u2014offsetting softness on TikTok and Amazon\u2014while Thailand and South Korea offer meaningful supplementary volume (6.5% and 2.8% share respectively) as risk-diversification options despite their current volume decline.",
+      "narrative": "**Procure Small Kitchen Appliances primarily from China, with supplementary volumes from Thailand and South Korea.** China commands an overwhelming 83.3% supply share and is the confirmed sourcing origin for all identified competitors (Aldi, Edeka, Walmart), making it the operationally essential anchor source; Thailand (6.5% share) and South Korea (2.8% share) are recommended as secondary origins to provide modest supply diversification. Demand signals support the procurement action, with AliExpress showing the strongest momentum (25.2) and growth (2.6) among all tracked platforms, and Pinterest registering the highest acceleration (2.5), indicating building consumer interest \u2014 offset TikTok's negative momentum (-3.5) by skewing range towards the visually discoverable, lifestyle-oriented SKUs that are gaining traction on discovery platforms.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -11044,7 +11044,7 @@
       "status": "new"
     },
     {
-      "id": 342,
+      "id": 359,
       "category_id": 4,
       "category": "Footwear",
       "market_code": "DE",
@@ -11053,7 +11053,7 @@
       "score": 85.66,
       "confidence": 0.417,
       "headline": "PROCURE: Footwear \u2014 source from Vietnam",
-      "narrative": "**Procure Footwear from Vietnam as the primary origin, with China and Indonesia as secondary sources.**\n\nVietnam holds the largest supply share (44.1%) among all origins and carries the least severe volume decline (-34.3% growth) relative to China (-36.1%) and Indonesia (-43.3%), making it the most resilient sourcing base available. Demand signals support action: Instagram shows strong positive momentum (11.6) with continued growth (2.2), and Vietnam is already the chosen origin for four of the six tracked competitors\u2014Aldi, Carrefour, Mercadona, and Walmart\u2014indicating validated, scalable supply chains at this origin. Complement Vietnam with selective volumes from China (42.0% share) and Indonesia (9.2% share) to maintain supply diversification, while avoiding over-reliance on either given their steeper declines.",
+      "narrative": "**Procure Footwear primarily from Vietnam, with supplementary volumes from China and Indonesia.**\n\nVietnam holds the largest supply share (44.1%) among all origins and is the preferred sourcing base for four of the five benchmarked competitors (Aldi, Carrefour, Mercadona, Walmart), signalling both established supply chain maturity and competitive alignment. While all origins show declining supply growth, Vietnam's contraction (-34.3%) is the least severe, making it the most resilient choice; China (42.0% share) and Indonesia (9.2% share) should serve as secondary sources to maintain diversification and volume flexibility. Demand signals are mixed \u2014 Instagram shows meaningful positive momentum (+11.6) while TikTok is sharply negative (-10.0) \u2014 so procurement volumes should be sized conservatively, weighted toward proven sell-through formats rather than trend-driven expansion.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -11174,7 +11174,7 @@
       "status": "new"
     },
     {
-      "id": 343,
+      "id": 360,
       "category_id": 17,
       "category": "Other",
       "market_code": null,
@@ -11183,7 +11183,7 @@
       "score": 80.0,
       "confidence": 0.417,
       "headline": "WATCH: Other",
-      "narrative": "## Procurement Recommendation: WATCH \u2013 Other Category\n\n**Hold procurement and do not initiate new volume commitments for this category at this time.** The demand signal is highly mixed: Instagram shows meaningful positive momentum (43.9), but TikTok is declining sharply (momentum \u20138.5, acceleration \u20130.94), Pinterest is marginally negative, and AliExpress shows zero activity across all metrics \u2014 collectively indicating no broad-based or sustained consumer pull. With no top origins, no recommended origins, and no competitor benchmarks provided in the evidence, there is insufficient grounding to justify sourcing from any specific geography or supplier. Monitor Instagram momentum over the next 2\u20134 weeks; only if growth accelerates across a second platform should the buying team revisit with a targeted, small-volume test buy.",
+      "narrative": "**Hold procurement for this \"Other\" watch category and do not commit to new volume at this time.** Demand signals are deeply mixed and largely negative: TikTok shows meaningful declining momentum (\u22128.49) with negative acceleration, Pinterest is marginally negative, and AliExpress registers zero activity across all metrics \u2014 only Instagram shows positive momentum, but with zero acceleration, suggesting that growth has plateaued rather than building. No recommended origins, top origins, or competitor benchmarks are available in the evidence, making it impossible to responsibly direct sourcing to any specific supply base.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -11232,7 +11232,7 @@
       "status": "new"
     },
     {
-      "id": 344,
+      "id": 361,
       "category_id": 8,
       "category": "Drinkware & Tumblers",
       "market_code": "DE",
@@ -11241,7 +11241,7 @@
       "score": 68.0,
       "confidence": 0.267,
       "headline": "PROCURE: Drinkware & Tumblers \u2014 source from China",
-      "narrative": "**Procure Drinkware & Tumblers now, sourcing primarily from China with a supplementary allocation from Thailand.** China dominates the supply base with a 99.1% import share and established sourcing infrastructure, making it the only viable primary origin at scale, despite a marginal volume decline (-5.3% growth); Thailand warrants a small supplementary order given its strong 38.2% supply growth, offering a meaningful diversification hedge. Demand signals are mixed \u2014 Instagram shows solid momentum (37.3) with positive growth (+4.9), justifying a targeted procurement volume \u2014 but weakness across TikTok, Pinterest, and AliExpress calls for a measured, not aggressive, position.",
+      "narrative": "**Procure Drinkware & Tumblers now, sourcing primarily from China with a supplementary allocation from Thailand.**\n\nChina dominates the supply base with a 99.1% import share and established production capacity, making it the essential primary origin despite a modest volume decline (-5.3% growth), while Thailand offers the strongest growth trajectory among alternatives (+38.2%) and warrants a small diversification stake. Demand is driven by strong Instagram momentum (37.3, +4.9% growth) as the sole rising signal, justifying a focused procurement volume calibrated to social-led demand rather than broad market expansion, given that TikTok, Pinterest, and marketplace channels (Amazon, AliExpress) all show negative momentum.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -11342,7 +11342,7 @@
       "status": "new"
     },
     {
-      "id": 345,
+      "id": 362,
       "category_id": 14,
       "category": "Drinkware & Kitchen",
       "market_code": null,
@@ -11351,7 +11351,7 @@
       "score": 63.34,
       "confidence": 0.5,
       "headline": "WATCH: Drinkware & Kitchen",
-      "narrative": "## Procurement Recommendation: Drinkware & Kitchen\n\n**Proceed with cautious, opportunistic procurement of Drinkware & Kitchen items, prioritising Instagram-driven hero SKUs, but defer major volume commitments until supply origin data is confirmed.** Instagram signals are strongly positive (momentum +4.7, acceleration +10.88), indicating a genuine and accelerating consumer trend worth acting on; however, TikTok momentum is negative (\u22126.2), suggesting the trend is platform-specific and not yet broad-based. No supplier origins, competitor activity, or marketplace traction are available in the current evidence, so volume and sourcing decisions must be validated against Lidl's existing vendor base before committing to range expansion.",
+      "narrative": "## Procurement Recommendation: Drinkware & Kitchen\n\n**Proceed with cautious, modest procurement of Drinkware & Kitchen products, holding volume commitments until origin and supplier data can be confirmed.** Instagram signals show meaningful positive momentum (4.70) with strong acceleration (10.88), indicating genuine emerging consumer interest worth acting on; however, TikTok momentum is negative (-6.22), suggesting the trend is platform-specific rather than broadly viral, warranting restraint on volume. No top origins, recommended suppliers, or competitor benchmarks are present in the evidence, making it impossible to specify sourcing origins at this stage \u2014 buying decisions on provenance must be deferred until supply-side data is available.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -11394,7 +11394,7 @@
       "status": "new"
     },
     {
-      "id": 346,
+      "id": 363,
       "category_id": 6,
       "category": "Toys & Collectibles",
       "market_code": "DE",
@@ -11403,7 +11403,7 @@
       "score": 59.39,
       "confidence": 0.417,
       "headline": "PROCURE: Toys & Collectibles \u2014 source from China",
-      "narrative": "**Proceed with a China-led procurement strategy for Toys & Collectibles, supplemented by selective volumes from Vietnam and Indonesia as secondary origins.** China commands an 86.25% supply share and is the established sourcing base for all identified competitors (Tesco, Ahold Delhaize, Walmart), making it the only origin with the scale and infrastructure to meet Lidl's volume requirements. While overall demand signals are predominantly negative across TikTok, AliExpress, and Amazon, Instagram remains the sole rising platform with meaningful positive momentum (5.41), suggesting targeted procurement of socially visible, trend-driven SKUs rather than broad category expansion, and the slight Pinterest acceleration (0.149) warrants monitoring for early recovery signals. Vietnam and Indonesia should be included as limited, risk-diversifying sources given their marginally shallower supply contraction rates (-21.9% and -20.3% respectively versus China's -26.1%), but neither has sufficient share to serve as a primary origin at this stage.",
+      "narrative": "**Procure Toys & Collectibles now, prioritising China as the primary origin (86.3% supply share), with Vietnam and Indonesia as secondary sources to diversify supply risk.** Demand signals are mixed \u2014 Instagram shows meaningful positive momentum (5.4) with growth of 0.84, indicating genuine social-driven consumer interest in Germany \u2014 but TikTok and AliExpress momentum are sharply negative, suggesting the category is not broadly accelerating and volumes should be calibrated conservatively. China remains the dominant and competitively validated sourcing origin, with Tesco, Ahold Delhaize, and Walmart all sourcing from there, though all listed origins are currently contracting in growth (-26.1% for China), making Vietnam (-21.9%) and Indonesia (-20.3%) worth developing as partial hedges given their comparatively shallower declines.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -11512,7 +11512,7 @@
       "status": "new"
     },
     {
-      "id": 347,
+      "id": 364,
       "category_id": 3,
       "category": "Coffee",
       "market_code": "DE",
@@ -11521,7 +11521,7 @@
       "score": 28.0,
       "confidence": 0.15,
       "headline": "WATCH: Coffee \u2014 source from Vietnam",
-      "narrative": "**Prioritise procurement of coffee from Vietnam, with Indonesia as a secondary source.**\n\nVietnam dominates the available supply base with a 62% share and is the only top origin showing positive supply growth (+7.2%), making it the most reliable and scalable sourcing option; Indonesia warrants a secondary allocation given its substantial 24% share, despite marginal share decline. Demand signals are broadly weak across most platforms \u2014 with TikTok and Pinterest in sharp decline \u2014 but Instagram's strong acceleration (+3.80) suggests an emerging consumer interest worth supporting cautiously, while AliExpress momentum (+3.65) and growth (+30.8%) indicate active marketplace purchasing that Lidl should be positioned to fulfil competitively, particularly given Rewe is already sourcing from Vietnam and must not be ceded this positioning advantage.",
+      "narrative": "**Prioritise sourcing coffee from Vietnam, with Indonesia and India as secondary origins.** Vietnam dominates the supply mix with a 62% share and is the only major origin showing positive supply growth (+7.2%), making it the most reliable and competitively advantaged source \u2014 notably also the current origin used by competitor Rewe. Indonesia and India should be retained as diversification backstops given their meaningful shares (24% and 12% respectively), despite their modest negative growth trends.\n\nDemand signals are mixed but not alarming: AliExpress shows the strongest positive momentum and growth across platforms, while Instagram is exhibiting sharp acceleration (+3.80), suggesting an emerging consumer interest that may convert to retail demand. TikTok and Pinterest show declining signals, so Lidl should size procurement conservatively in the near term while positioning Vietnam-origin coffee as the hero offer to match and differentiate against Rewe's existing proposition.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -11622,7 +11622,7 @@
       "status": "new"
     },
     {
-      "id": 348,
+      "id": 365,
       "category_id": 10,
       "category": "Audio & Earbuds",
       "market_code": "DE",
@@ -11631,7 +11631,7 @@
       "score": 26.53,
       "confidence": 0.267,
       "headline": "WATCH: Audio & Earbuds \u2014 source from China",
-      "narrative": "**Procure Audio & Earbuds primarily from China, with a secondary allocation from Vietnam, and avoid over-indexing on Thailand given its minimal supply share (2.95%).** China dominates the supply base at 61.8% share and is the established origin for key competitors Aldi and Ahold Delhaize, making it the lowest-risk anchor source despite a -13.5% growth decline in its share; Vietnam warrants a meaningful secondary position at 33.0% share to provide diversification, though its supply growth is also contracting (-18.7%). Demand signals are broadly weak \u2014 TikTok and AliExpress show sharply negative momentum, and only Instagram posts modest positive growth (0.12) with decelerating acceleration \u2014 so procurement volumes should be kept conservative and closely tied to confirmed promotional sell-through rather than speculative stock-building.",
+      "narrative": "**Procure Audio & Earbuds primarily from China, with a secondary allocation from Vietnam, keeping volumes conservative given broad demand deterioration across channels.**\n\nChina is the dominant supply origin with a 61.8% share and remains the most established sourcing base, aligned with competitor practice (Aldi, Ahold Delhaize both source from China); Vietnam provides a meaningful secondary option at 33.0% share and should be used to diversify concentration risk. However, demand signals are largely negative \u2014 TikTok and AliExpress show steep momentum declines, Pinterest is accelerating downward, and only Instagram shows modest positive growth (momentum 0.44, growth +12%) with decelerating acceleration \u2014 indicating category softness that warrants lean inventory commitments rather than volume expansion.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -11736,7 +11736,7 @@
       "status": "new"
     },
     {
-      "id": 349,
+      "id": 366,
       "category_id": 2,
       "category": "Tea & Matcha",
       "market_code": "DE",
@@ -11745,7 +11745,7 @@
       "score": 20.0,
       "confidence": 0.25,
       "headline": "HOLD: Tea & Matcha \u2014 source from Japan (emerging origin)",
-      "narrative": "**Maintain current Tea & Matcha procurement volumes but shift origin mix toward Japan and monitor Pakistan as a secondary emerging source.** Japan holds the largest origin share (34.7%) and is the only major origin posting positive supply growth (+26.4%), making it the most defensible sourcing position despite category-wide demand weakness across all five tracked platforms. Allocate a smaller exploratory volume to Pakistan, which also shows emerging status and positive growth (+24.0%) at low share, while reducing exposure to India and China \u2014 both declining in growth and already covered by key competitors Rewe and Sainsbury's respectively.",
+      "narrative": "**Maintain current Tea & Matcha inventory levels without expanding procurement commitments, but selectively build a modest position in Japanese-origin tea to capitalise on its emerging supply advantage.** Japan holds the largest origin share (34.7%) and is the only top-tier origin showing positive supply growth (+26.4%), making it the sole high-share source worth prioritising; Pakistan also shows emerging positive growth (+24.0%) but commands a negligible share (3.1%) and should be monitored rather than acted upon now. Demand signals across all five tracked platforms are uniformly negative \u2014 with particularly sharp deterioration on TikTok and Pinterest \u2014 and zero rising sources are recorded, meaning any procurement increase would risk overstocking in a contracting category.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -11849,7 +11849,7 @@
       "status": "new"
     },
     {
-      "id": 350,
+      "id": 367,
       "category_id": 15,
       "category": "Packaging & Shipping Supplies",
       "market_code": null,
@@ -11858,7 +11858,7 @@
       "score": 14.19,
       "confidence": 0.15,
       "headline": "HOLD: Packaging & Shipping Supplies",
-      "narrative": "**Maintain current procurement volumes for Packaging & Shipping Supplies without new commitments or origin diversification at this time.** Demand signals are uniformly weak to negative across all measured platforms \u2014 TikTok shows particularly sharp negative momentum (\u22129.16) and declining acceleration (\u22121.15), while Pinterest also trends downward \u2014 with zero rising sources out of three tracked, providing no basis to expand orders. No preferred origins or competitor activity are identified in the evidence, so procurement should focus on fulfilling only existing contracted volumes until a clear demand recovery signal emerges.",
+      "narrative": "**Maintain current procurement volumes for Packaging & Shipping Supplies without new commitments or origin diversification at this time.** Demand signals are uniformly weak to negative across all measured platforms, with TikTok showing particularly sharp negative momentum (\u22129.16) and negative acceleration (\u22121.15), while Pinterest also trends downward; no rising demand sources are recorded out of three tracked. No recommended or top origins are identified in the data, and marketplace signals on AliExpress are flat, providing no basis to justify expanding sourcing from any specific geography or supplier.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -11907,7 +11907,7 @@
       "status": "new"
     },
     {
-      "id": 351,
+      "id": 368,
       "category_id": 9,
       "category": "Candles & Home Fragrance",
       "market_code": "DE",
@@ -11916,7 +11916,7 @@
       "score": 8.0,
       "confidence": 0.0,
       "headline": "HOLD: Candles & Home Fragrance \u2014 source from Vietnam",
-      "narrative": "**Maintain current procurement volumes for Candles & Home Fragrance, sourcing primarily from Vietnam.** Vietnam holds a dominant 69% supply share with the most contained decline in growth (-3.4%) among all origins, making it the most stable and defensible sourcing base in a category showing broad demand deterioration across TikTok, Instagram, and AliExpress. Avoid increasing exposure to China or India, as both show sharper supply-side contraction (-22% and -25% growth respectively), and while Turkey and Thailand show marginal positive growth, their combined share is negligible and insufficient to anchor meaningful volume.",
+      "narrative": "**Maintain current Vietnam-sourced volumes for Candles & Home Fragrance without expanding commitments, while monitoring for demand recovery before adjusting positions.** Demand signals are broadly negative across all active platforms \u2014 TikTok and AliExpress show the steepest momentum declines \u2014 and zero rising sources out of two tracked indicate no near-term growth catalyst justifies increasing inventory exposure. Vietnam remains the clear primary origin, holding a dominant 69% supply share with the smallest volume contraction (-3.4%) among all origins, making it the most defensible sourcing base in a softening market.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -12011,7 +12011,7 @@
       "status": "new"
     },
     {
-      "id": 352,
+      "id": 369,
       "category_id": 19,
       "category": "Sports & Outdoors",
       "market_code": null,
@@ -12020,7 +12020,7 @@
       "score": 4.15,
       "confidence": 0.15,
       "headline": "HOLD: Sports & Outdoors",
-      "narrative": "**Maintain current inventory levels for Sports & Outdoors and initiate no new procurement commitments at this time.** Demand signals are uniformly negative across all tracked platforms\u2014TikTok, Google Trends, and Instagram all show negative momentum and growth, with TikTok registering the sharpest decline (momentum: -9.303, growth: -75.5%)\u2014indicating broad, accelerating category softness rather than an isolated channel dip. No rising demand sources, no recommended origins, and flat AliExpress marketplace data provide no evidence to justify incremental stock builds, and any procurement action ahead of a demand recovery would risk excess inventory exposure.",
+      "narrative": "**Hold all new procurement commitments for Sports & Outdoors and focus on depleting existing inventory before considering any replenishment.** Demand signals are uniformly negative across every measured platform \u2014 TikTok, Google Trends, and Instagram all show negative momentum and growth, with TikTok registering the sharpest decline (momentum: -9.303, acceleration: -0.9472) and Google Trends confirming a sustained downward trend \u2014 with zero out of three sources showing positive momentum. No recommended or top origins are identified in the evidence, and no competitor or marketplace uplift is present to justify new sourcing activity at this time.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -12069,7 +12069,7 @@
       "status": "new"
     },
     {
-      "id": 353,
+      "id": 370,
       "category_id": 16,
       "category": "Apparel & Fashion",
       "market_code": null,
@@ -12078,7 +12078,7 @@
       "score": 0.0,
       "confidence": 0.0,
       "headline": "HOLD: Apparel & Fashion",
-      "narrative": "**Maintain current Apparel & Fashion procurement volumes without expanding commitments or placing new forward orders at this time.** Demand signals are uniformly weak or negative across all monitored platforms \u2014 TikTok shows active decline (momentum \u20136.97, growth \u20130.86, acceleration \u20130.16), Instagram is contracting (growth \u20131.0), and AliExpress is flat across all metrics \u2014 with zero rising sources out of two tracked. No preferred origins have been identified in the evidence, making it impossible to justify a geographic sourcing shift or new supplier engagement.",
+      "narrative": "**Maintain current procurement volumes for Apparel & Fashion and avoid committing to new or expanded sourcing contracts at this time.** Demand signals are uniformly weak to negative across all monitored platforms \u2014 TikTok shows active deceleration (momentum: -6.97, acceleration: -0.16) and Instagram is in decline (-1.0 growth), with zero rising sources out of two tracked \u2014 indicating no consumer pull to justify incremental stock build. No recommended origins or competitor activity are present in the data, leaving insufficient market intelligence to support a directional sourcing shift.",
       "narrator": "llm",
       "evidence": {
         "demand": [
@@ -12121,7 +12121,7 @@
       "status": "new"
     },
     {
-      "id": 354,
+      "id": 371,
       "category_id": 18,
       "category": "Electronics & Accessories",
       "market_code": null,
@@ -12130,7 +12130,7 @@
       "score": 0.0,
       "confidence": 0.0,
       "headline": "HOLD: Electronics & Accessories",
-      "narrative": "**Maintain current Electronics & Accessories inventory levels without initiating new procurement commitments at this time.** Demand signals are uniformly negative across all active platforms \u2014 TikTok, Google Trends, Instagram, and Pinterest all show significant negative momentum and growth (TikTok momentum at -6.63, Google Trends at -1.45), with zero rising sources out of four tracked \u2014 indicating broad, cross-channel consumer interest decline. No recommended origins or competitor benchmarks are available in the evidence to justify a sourcing pivot, so procurement should remain on hold until a meaningful demand recovery is signalled.",
+      "narrative": "**Maintain current Electronics & Accessories inventory levels without initiating new procurement commitments at this time.** Demand signals are uniformly negative across all measured platforms\u2014TikTok, Google Trends, Instagram, and Pinterest all show declining momentum and growth, with TikTok registering the sharpest contraction (momentum: -6.63, growth: -99.6%)\u2014indicating broad-based consumer disengagement across the EU. No rising demand sources, recommended origins, or competitive intelligence are present in the data to justify expanding supply, and AliExpress marketplace signals are flat, offering no offsetting upside.",
       "narrator": "llm",
       "evidence": {
         "demand": [
