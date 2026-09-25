@@ -1,44 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useModel } from "./model-context";
 import { Icons } from "./icons";
 
-/** Header control that lets a user demand a fresh pull of signals without
- *  leaving the dashboard. Posts to the server route which dispatches the
- *  pipeline; surfaces the outcome through the existing toast. */
+/** Freshness indicator in the header. The dashboard snapshot is refreshed
+ *  automatically once a day by the `refresh.yml` GitHub Action (free demand +
+ *  trade-flow connectors), so there is no on-demand pull to trigger from the
+ *  browser. Clicking surfaces when the data was last updated and the daily
+ *  cadence — it never calls the server, so it can't error. */
 export function RefreshButton({ notify }: { notify: (msg: string) => void }) {
-  const [pending, setPending] = useState(false);
+  const { snapshotLabel } = useModel();
 
-  async function run() {
-    if (pending) return;
-    setPending(true);
-    try {
-      const res = await fetch("/api/refresh", { method: "POST" });
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
-      if (res.ok && data.ok) {
-        notify("Refresh started — pulling the latest signals");
-      } else if (res.status === 501) {
-        notify("Refresh isn’t configured yet");
-      } else {
-        notify(data.error ? `Refresh failed: ${data.error}` : "Refresh failed");
-      }
-    } catch {
-      notify("Refresh failed — please retry");
-    } finally {
-      setPending(false);
-    }
+  function explain() {
+    notify(
+      `Signals refresh automatically every day (~06:00 UTC). Last updated ${snapshotLabel}.`,
+    );
   }
 
   return (
     <button
       className="btn secondary sm"
-      onClick={run}
-      disabled={pending}
-      aria-label="refresh signals"
-      title="Pull the latest signals"
+      onClick={explain}
+      aria-label="data freshness"
+      title="Signals refresh automatically every day (~06:00 UTC)"
     >
-      <Icons.refresh size={14} style={pending ? { animation: "spin 0.9s linear infinite" } : undefined} />
-      {pending ? "Refreshing…" : "Refresh"}
+      <Icons.refresh size={14} />
+      Updated {snapshotLabel}
     </button>
   );
 }
