@@ -152,6 +152,9 @@ export const Icons = {
     </Ico>
   ),
   download: (p: IconProps) => <Ico {...p} d="M12 3v12M7 10l5 5 5-5M5 21h14" />,
+  link: (p: IconProps) => (
+    <Ico {...p} d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+  ),
 };
 
 export type IconName = keyof typeof Icons;

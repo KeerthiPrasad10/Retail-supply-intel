@@ -22,6 +22,7 @@ function newIdea(input: NewIdeaInput): ProductIdea {
     features: (input.features || "").trim(),
     imageUrl: (input.imageUrl || "").trim(),
     imageUrls: input.imageUrls ?? [],
+    sourceUrl: (input.sourceUrl || "").trim() || undefined,
     submittedBy: (input.submittedBy || "").trim(),
     status: "queued",
   };
@@ -46,6 +47,7 @@ function rowToIdea(row: Record<string, unknown>): ProductIdea {
     features: String(row.features ?? ""),
     imageUrl: String(row.image_url ?? ""),
     imageUrls,
+    sourceUrl: row.source_url ? String(row.source_url) : undefined,
     submittedBy: String(row.submitted_by ?? ""),
     status: (row.status as ProductIdea["status"]) ?? "queued",
     research: (row.research as ProductIdea["research"]) ?? undefined,
@@ -69,6 +71,7 @@ function ideaToRow(idea: ProductIdea): Record<string, unknown> {
     audience: idea.audience || null,
     features: idea.features || null,
     submitted_by: idea.submittedBy || null,
+    source_url: idea.sourceUrl || null,
     status: idea.status,
     research: idea.research ?? null,
   };
