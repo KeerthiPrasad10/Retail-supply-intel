@@ -4,14 +4,15 @@ name: Refresh data snapshot
 # commits the updated dashboard snapshot (which triggers a Vercel redeploy).
 # If the RSI_DATABASE_URL secret is set, the same run also writes to Supabase.
 #
-# The weekly cron recomputes against existing demand series and trade flows. The paid Apify social/marketplace
-# feeds are OPT-IN per run: trigger manually via "Run workflow" with the
-# `apify` box checked (consumes Apify credits; ~1-2h, one actor run/category
-# across 5 connectors). They never run on the schedule.
+# The daily cron ingests the FREE connectors (Google Trends + UN Comtrade),
+# then recomputes scores/triggers and republishes — no credit spend. The paid
+# Apify social/marketplace feeds are OPT-IN per run: trigger manually via
+# "Run workflow" with the `apify` box checked (consumes Apify credits; ~1-2h,
+# one actor run/category across 5 connectors). They never run on the schedule.
 
 on:
   schedule:
-    - cron: "0 6 * * 1" # Mondays 06:00 UTC
+    - cron: "0 6 * * *" # daily 06:00 UTC
   workflow_dispatch:
     inputs:
       apify:
@@ -52,16 +53,17 @@ jobs:
         # `export` publishes the snapshot row to Supabase when RSI_DATABASE_URL
         # is set.
         #
-        # Demand comes from search + social (consumer-demand signals). The
-        # social feeds are paid (Apify), so they run only on manual dispatch
+        # A plain `rsi ingest` pulls the FREE demand (Google Trends) + supply
+        # (UN Comtrade) connectors — this is what the daily cron runs, no spend.
+        # The paid social/marketplace feeds (Apify) run only on manual dispatch
         # with `apify=true`.
-        # A plain run (the weekly cron) just recomputes scores/triggers against
-        # the data already in the store and republishes — no ingest, no spend.
         run: |
           uv run rsi db init
+          # Free demand + trade-flow connectors — run every day, no spend.
+          uv run rsi ingest --days 60
           if [ "${{ inputs.apify }}" = "true" ]; then
             echo "::notice::Apify feeds requested — ingesting paid demand connectors"
-            uv run rsi ingest google_trends tiktok instagram pinterest amazon aliexpress --days 60
+            uv run rsi ingest tiktok instagram pinterest amazon aliexpress --days 60
           fi
           uv run rsi score
           uv run rsi correlate
