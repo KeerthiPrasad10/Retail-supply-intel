@@ -39,6 +39,8 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    # Hard cap: a stalled connector must never block the snapshot for 6h.
+    timeout-minutes: 150
     env:
       # Optional secrets — unset => SQLite + Comtrade preview endpoint + the
       # deterministic insight narrative (no LLM) + Apify connectors no-op.
@@ -65,17 +67,17 @@ jobs:
         run: |
           uv run rsi db init
           # UN Comtrade (trade flows) is fast + free — refresh every day.
-          uv run rsi ingest comtrade --days 60 || true
+          timeout 10m uv run rsi ingest comtrade --days 60 || echo "::warning::comtrade ingest failed or timed out — continuing"
           # Google Trends runs through the Apify actor (reliable from CI but slow
           # + a few credits), so refresh it weekly (Mondays) or on demand only.
           if [ "$(date -u +%u)" = "1" ] || [ "${{ inputs.trends }}" = "true" ]; then
             echo "::notice::Refreshing Google Trends via the Apify actor (slow)"
-            uv run rsi ingest google_trends --days 60 || true
+            timeout 20m uv run rsi ingest google_trends --days 60 || echo "::warning::google_trends ingest failed or timed out — continuing"
           fi
           # Paid social/marketplace feeds — manual dispatch with apify=true only.
           if [ "${{ inputs.apify }}" = "true" ]; then
             echo "::notice::Ingesting paid Apify social/marketplace feeds"
-            uv run rsi ingest tiktok instagram pinterest amazon aliexpress --days 60 || true
+            timeout 90m uv run rsi ingest tiktok instagram pinterest amazon aliexpress --days 60 || echo "::warning::apify ingest failed or timed out — continuing"
           fi
           uv run rsi score
           uv run rsi correlate
