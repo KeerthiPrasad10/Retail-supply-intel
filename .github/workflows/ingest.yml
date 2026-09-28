@@ -1,0 +1,77 @@
+name: Ingest data sources
+
+# Pulls fresh demand + trade-flow data into the store. Runs separately from
+# refresh.yml so a slow or hanging source never blocks the dashboard snapshot;
+# refresh.yml (06:00 UTC) recomputes from whatever this job wrote.
+#   * Daily 05:00 UTC: UN Comtrade (free).
+#   * Mondays, or manual with `trends`: Google Trends via the Apify actor
+#     (reliable from CI but slow, uses a few Apify credits).
+#   * Manual with `apify`: paid social/marketplace feeds.
+# Every source has a hard time limit and failures don't fail the others.
+
+on:
+  schedule:
+    - cron: "0 5 * * *" # daily 05:00 UTC, an hour before refresh.yml
+  workflow_dispatch:
+    inputs:
+      trends:
+        description: "Include Google Trends (slow, a few Apify credits)"
+        type: boolean
+        default: false
+      apify:
+        description: "Include paid Apify social/marketplace feeds (TikTok/Instagram/Pinterest/Amazon/AliExpress)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: data-ingest
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    env:
+      RSI_DATABASE_URL: ${{ secrets.RSI_DATABASE_URL }}
+      RSI_COMTRADE_API_KEY: ${{ secrets.RSI_COMTRADE_API_KEY }}
+      RSI_APIFY_TOKEN: ${{ secrets.RSI_APIFY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Sync dependencies
+        working-directory: pipelines
+        run: uv sync --extra postgres
+
+      - name: Init schema
+        working-directory: pipelines
+        run: uv run rsi db init
+
+      - name: UN Comtrade
+        working-directory: pipelines
+        timeout-minutes: 15
+        continue-on-error: true
+        run: uv run rsi ingest comtrade --days 60
+
+      - name: Google Trends
+        if: ${{ github.event_name == 'schedule' || inputs.trends }}
+        working-directory: pipelines
+        timeout-minutes: 30
+        continue-on-error: true
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$(date -u +%u)" != "1" ]; then
+            echo "Not Monday — skipping Google Trends on the schedule."; exit 0
+          fi
+          uv run rsi ingest google_trends --days 60
+
+      - name: Apify social/marketplace feeds
+        if: ${{ inputs.apify }}
+        working-directory: pipelines
+        timeout-minutes: 90
+        continue-on-error: true
+        run: uv run rsi ingest tiktok instagram pinterest amazon aliexpress --days 60

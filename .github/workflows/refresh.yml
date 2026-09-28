@@ -1,33 +1,15 @@
 name: Refresh data snapshot
 
-# Recomputes scores/triggers and commits the updated dashboard snapshot (which
-# triggers a Vercel redeploy). If the RSI_DATABASE_URL secret is set, the same
-# run also writes to Supabase.
-#
-# Cadence is tiered by how fast/cheap each source is to refresh from CI:
-#   * DAILY (fast, free): UN Comtrade trade flows + recompute + republish. Keeps
-#     the dashboard's "Updated" date and trade signals current every day.
-#   * WEEKLY (Mondays): also refresh Google Trends. It goes through the Apify
-#     google-trends-scraper actor (reliable from CI datacenter IPs, but ~20-30
-#     min and a few Apify credits per run), so it is NOT run every day.
-#   * OPT-IN per run: the paid Apify social/marketplace feeds (TikTok/Instagram/
-#     Pinterest/Amazon/AliExpress) — only via manual dispatch with `apify=true`.
-# Manual "Run workflow" is fast by default; tick `trends` to also refresh Google
-# Trends on demand.
+# Recomputes scores/triggers from the data already in the store and commits
+# the updated dashboard snapshot (which triggers a Vercel redeploy). No
+# external fetches here, so it can't be blocked by a slow/hanging source —
+# ingestion runs separately in ingest.yml (an hour earlier) and this job
+# picks up whatever it wrote.
 
 on:
   schedule:
-    - cron: "0 6 * * *" # daily 06:00 UTC — fast: Comtrade + recompute
+    - cron: "0 6 * * *" # daily 06:00 UTC
   workflow_dispatch:
-    inputs:
-      trends:
-        description: "Also refresh Google Trends (slower ~20-30 min, uses a few Apify credits)"
-        type: boolean
-        default: false
-      apify:
-        description: "Also ingest paid Apify social/marketplace feeds (TikTok/Instagram/Pinterest/Amazon/AliExpress) — consumes credits"
-        type: boolean
-        default: false
 
 permissions:
   contents: write
@@ -39,15 +21,12 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    # Hard cap: a stalled connector must never block the snapshot for 6h.
-    timeout-minutes: 150
+    timeout-minutes: 30
     env:
-      # Optional secrets — unset => SQLite + Comtrade preview endpoint + the
-      # deterministic insight narrative (no LLM) + Apify connectors no-op.
+      # Optional secrets — unset => SQLite + the deterministic insight
+      # narrative (no LLM).
       RSI_DATABASE_URL: ${{ secrets.RSI_DATABASE_URL }}
-      RSI_COMTRADE_API_KEY: ${{ secrets.RSI_COMTRADE_API_KEY }}
       RSI_ANTHROPIC_API_KEY: ${{ secrets.RSI_ANTHROPIC_API_KEY }}
-      RSI_APIFY_TOKEN: ${{ secrets.RSI_APIFY_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -58,27 +37,12 @@ jobs:
         working-directory: pipelines
         run: uv sync --extra postgres --extra llm
 
-      - name: Run pipeline (refresh demand -> recompute -> publish)
+      - name: Recompute and publish
         working-directory: pipelines
-        # `db init` is idempotent (create_all) and ensures the schema exists.
-        # `export` publishes the snapshot row to Supabase when RSI_DATABASE_URL
-        # is set. Each connector degrades gracefully (`|| true`) so one flaky
-        # source never aborts the run.
+        # `db init` is idempotent (create_all). `export` also publishes the
+        # snapshot row to Supabase when RSI_DATABASE_URL is set.
         run: |
           uv run rsi db init
-          # UN Comtrade (trade flows) is fast + free — refresh every day.
-          timeout 10m uv run rsi ingest comtrade --days 60 || echo "::warning::comtrade ingest failed or timed out — continuing"
-          # Google Trends runs through the Apify actor (reliable from CI but slow
-          # + a few credits), so refresh it weekly (Mondays) or on demand only.
-          if [ "$(date -u +%u)" = "1" ] || [ "${{ inputs.trends }}" = "true" ]; then
-            echo "::notice::Refreshing Google Trends via the Apify actor (slow)"
-            timeout 20m uv run rsi ingest google_trends --days 60 || echo "::warning::google_trends ingest failed or timed out — continuing"
-          fi
-          # Paid social/marketplace feeds — manual dispatch with apify=true only.
-          if [ "${{ inputs.apify }}" = "true" ]; then
-            echo "::notice::Ingesting paid Apify social/marketplace feeds"
-            timeout 90m uv run rsi ingest tiktok instagram pinterest amazon aliexpress --days 60 || echo "::warning::apify ingest failed or timed out — continuing"
-          fi
           uv run rsi score
           uv run rsi correlate
           uv run rsi insights
