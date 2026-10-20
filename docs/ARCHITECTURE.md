@@ -79,6 +79,17 @@ Four layers (see `models.py` / `supabase/migrations/0001_initial_schema.sql`):
    `status='new'` triggers so human triage survives.
 4. **Export** (`rsi export`) — writes `web/lib/snapshot.json`.
 
+## Monitor engine
+
+`rsi.monitor.collect(terms, markets, platforms, history)` scores demand for *any* user-chosen
+terms in chosen markets: it runs the connectors above in a throwaway in-memory database (one
+category per term), so neither the main database nor the snapshot changes, and scores each
+(term, platform, market) series with `series_momentum`. Google Trends is the per-market source
+(through Apify when `RSI_APIFY_TOKEN` is set, else pytrends); TikTok, Instagram, Pinterest and
+AliExpress are global. The caller keeps each series between runs and passes it back as `history`,
+so snapshot-style sources build momentum run over run. The supplier map's trend monitors
+(lka-supplier-map, `monitors.py`) call it from a scheduled job.
+
 ## Storage strategy
 
 The SQLAlchemy models run unchanged on **SQLite** (zero-config local dev,
