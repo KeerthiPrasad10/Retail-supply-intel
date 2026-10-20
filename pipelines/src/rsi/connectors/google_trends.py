@@ -63,11 +63,15 @@ class GoogleTrendsConnector:
         **_: object,
     ) -> int:
         if get_settings().apify_token:
-            return self._run_apify(session, get_settings().apify_token, timeframe)
+            return self._run_apify(session, get_settings().apify_token, timeframe, geos)
         return self._run_pytrends(session, geos, timeframe, pause)
 
     # --- Apify backend (reliable from CI) --------------------------------- #
-    def _run_apify(self, session: Session, token: str, timeframe: str) -> int:
+    def _run_apify(
+        self, session: Session, token: str, timeframe: str, geos: list[str] | None = None
+    ) -> int:
+        """Worldwide interest per category keyword, or per country when ``geos`` is given (the
+        monitor engine passes its markets; the scheduled pipeline passes none: worldwide)."""
         from .apify_base import apify_client, parse_dt, run_actor_items, write_daily
 
         # One keyword per category; batch them so the (slow) actor runs a few
@@ -88,24 +92,26 @@ class GoogleTrendsConnector:
         written = 0
         batch_size = 5
         with apify_client() as client:
-            for start in range(0, len(terms), batch_size):
-                batch = terms[start : start + batch_size]
-                items = run_actor_items(
-                    client,
-                    _APIFY_ACTOR,
-                    token,
-                    {"searchTerms": batch, "timeRange": timeframe, "geo": ""},
-                )
-                for it in items:
-                    term = it.get("searchTerm") or ""
-                    cat = by_keyword.get(term.lower())
-                    if cat is None:
-                        continue
-                    points = _interest_points([it], parse_dt)
-                    if not points:
-                        continue
-                    trend = get_or_create_trend(session, f"{term} (trends)", self.name, cat.id)
-                    written += write_daily(session, trend.id, self.name, None, points)
+            for geo in geos or [None]:
+                for start in range(0, len(terms), batch_size):
+                    batch = terms[start : start + batch_size]
+                    items = run_actor_items(
+                        client,
+                        _APIFY_ACTOR,
+                        token,
+                        {"searchTerms": batch, "timeRange": timeframe, "geo": geo or ""},
+                    )
+                    for it in items:
+                        term = it.get("searchTerm") or ""
+                        cat = by_keyword.get(term.lower())
+                        if cat is None:
+                            continue
+                        points = _interest_points([it], parse_dt)
+                        if not points:
+                            continue
+                        label = f"{term} ({geo})" if geo else f"{term} (trends)"
+                        trend = get_or_create_trend(session, label, self.name, cat.id)
+                        written += write_daily(session, trend.id, self.name, geo, points)
         return written
 
     # --- pytrends backend (local / no token) ------------------------------ #
