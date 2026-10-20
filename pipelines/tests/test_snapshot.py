@@ -24,6 +24,10 @@ def test_snapshot_has_market_intelligence_sections(db_ready):
     assert by_code["DE"]["is_origin"] is False
     assert by_code["VN"]["lat"] is not None
 
+    # Categories carry the keywords that map free text onto them (the supplier map's trend report).
+    by_cat = {c["name"]: c for c in snap["categories"]}
+    assert "matcha" in by_cat["Tea & Matcha"]["keywords"]
+
     # New keys always exist.
     assert "flows" in snap and "leading_indicators" in snap
 

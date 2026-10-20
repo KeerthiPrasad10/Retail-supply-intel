@@ -289,7 +289,7 @@ def build_snapshot(session: Session, top_trends: int = 200) -> dict:
         for c in session.scalars(select(Country).order_by(Country.name))
     ]
     categories = [
-        {"id": c.id, "name": c.name, "hs_code": c.hs_code}
+        {"id": c.id, "name": c.name, "hs_code": c.hs_code, "keywords": c.keywords or []}
         for c in session.scalars(select(ProductCategory).order_by(ProductCategory.name))
     ]
 
